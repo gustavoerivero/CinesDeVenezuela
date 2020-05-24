@@ -34,14 +34,15 @@ Project corresponding to the subject Laboratory I of Computer Engineering of the
 
 * [NetBeans 8.2 IDE](https://netbeans.org/downloads/8.2/rc/) - IDE used to make the application.
 
-## DataBase PostgreSQL:
+## PostgreSQL DataBase:
+
 * [PostgreSQL](https://www.postgresql.org/download/) - PostgreSQL Download
 
 ## Instructions:
 
 * Explanations for the code are in the form of comments in the same project.
 
-## Authors
+## Authors:
 
 * *Gustavo Rivero.* [@gustavoerivero](https://github.com/gustavoerivero)
 * *Marihec Miranda.*
