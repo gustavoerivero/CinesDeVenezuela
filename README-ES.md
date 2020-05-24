@@ -9,7 +9,7 @@
 </table>
 
 
-Proyecto que corresponde a la asignatura Laboratorio I de Ingeniería en Informática de la Universidad Centroccidental "Lisandro Alvarado". Una Aplicación de Escritorio usando el patrón de diseño MVC (Modelo-Vista-Controlador) que consiste en la gestión de una empresa con distintas sucursales en el país.
+Proyecto que corresponde a la asignatura Laboratorio I de Ingeniería en Informática de la Universidad Centroccidental "Lisandro Alvarado". Una Aplicación de Escritorio usando el patrón de diseño MVC (Modelo-Vista-Controlador) que consiste en la gestión de una empresa de cine con distintas sucursales en el país.
 
 ## Características:
 
