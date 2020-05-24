@@ -17,10 +17,10 @@ Project corresponding to the subject Laboratory I of Computer Engineering of the
 * The sale of tickets and sweets is done through personalized tickets.
 * The customer with the most visits in a month in a branch has a discount promotion on the purchase of tickets.
 * Ticket sales are managed for both tickets and sweets.
+* Various types of reports are displayed.
 
 ## Built with:
 
-* Various types of reports are displayed.
 * The MVC pattern is used.
 * The application was made in Java language.
 * The application uses PostgreSQL as a database handler.
