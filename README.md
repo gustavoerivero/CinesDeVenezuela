@@ -45,7 +45,7 @@ Project corresponding to the subject Laboratory I of Computer Engineering of the
 ## Authors:
 
 * *Gustavo Rivero.* [@gustavoerivero](https://github.com/gustavoerivero)
-* *Marihec Miranda.*
+* *Marihec Miranda.* [@MarihecMiranda](https://github.com/MarihecMiranda)
 * *Michael Montero.* [@Damurq](https://github.com/Damurq)
 * *Yurisbellys Brizuela.* [@yurisjbc23](https://github.com/yurisjbc23)
 * *Luis Torrealba.* [@luisdavidwww](https://github.com/luisdavidwww)
