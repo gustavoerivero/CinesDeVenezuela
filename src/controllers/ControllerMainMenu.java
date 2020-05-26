@@ -44,50 +44,39 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
         
         // Menú Lateral -> Inicio
         else if(evt.getSource() == mainPage.btnOptionLateral1){
-            mainPage.panContent.removeAll();
-            mainPage.panContent.add(mainPage.panOption1);
-            mainPage.panContent.repaint();
-            mainPage.panContent.revalidate();
+            mainPage.cardSelection(mainPage.panContent, mainPage.panOption1);
+            
         } 
 
         // Menú Lateral -> Ventas
         else if(evt.getSource() == mainPage.btnOptionLateral2){
-            mainPage.panContent.removeAll();
-            mainPage.panContent.add(mainPage.panOption2);
-            mainPage.panContent.repaint();
-            mainPage.panContent.revalidate();
+            mainPage.cardSelection(mainPage.panContent, mainPage.panOption2);
+            mainPage.cardSelection(mainPage.panOption2, mainPage.panDecisionOption2);
+            
         }
         
         // Menú Lateral -> Reportes
         else if(evt.getSource() == mainPage.btnOptionLateral3){
-            mainPage.panContent.removeAll();
-            mainPage.panContent.add(mainPage.panOption3);
-            mainPage.panContent.repaint();
-            mainPage.panContent.revalidate();
+            mainPage.cardSelection(mainPage.panContent, mainPage.panOption3);
+            
         }
         
         // Menú Lateral -> Empleados
         else if(evt.getSource() == mainPage.btnOptionLateral4){
-            mainPage.panContent.removeAll();
-            mainPage.panContent.add(mainPage.panOption4);
-            mainPage.panContent.repaint();
-            mainPage.panContent.revalidate();
+            mainPage.cardSelection(mainPage.panContent, mainPage.panOption4);
+            
         }
         
         // Menú Lateral -> Sucursales
         else if(evt.getSource() == mainPage.btnOptionLateral5){
-            mainPage.panContent.removeAll();
-            mainPage.panContent.add(mainPage.panOption5);
-            mainPage.panContent.repaint();
-            mainPage.panContent.revalidate();
+            mainPage.cardSelection(mainPage.panContent, mainPage.panOption5);
+            
         }
         
         // Menú Lateral -> Configuración
         else if(evt.getSource() == mainPage.btnOptionLateral6){
-            mainPage.panContent.removeAll();
-            mainPage.panContent.add(mainPage.panOption6);
-            mainPage.panContent.repaint();
-            mainPage.panContent.revalidate();
+            mainPage.cardSelection(mainPage.panContent, mainPage.panOption6);
+            
         }
         
         //</editor-fold>
@@ -97,52 +86,90 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
         // Opción 2 -> Ventas
         else if(evt.getSource() == mainPage.btnBodyOption2){
             mainPage.panBodyOption2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239,232,244)));
-            mainPage.panContent.removeAll();
-            mainPage.panContent.add(mainPage.panOption2);
-            mainPage.panContent.repaint();
-            mainPage.panContent.revalidate();
+           
+            mainPage.cardSelection(mainPage.panContent, mainPage.panOption2);
+            mainPage.cardSelection(mainPage.panOption2, mainPage.panDecisionOption2);
+                        
         }
         
         // Opción 3 -> Reportes
         else if(evt.getSource() == mainPage.btnBodyOption3){
             mainPage.panBodyOption3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239,232,244)));
-            mainPage.panContent.removeAll();
-            mainPage.panContent.add(mainPage.panOption3);
-            mainPage.panContent.repaint();
-            mainPage.panContent.revalidate();
+            
+            mainPage.cardSelection(mainPage.panContent, mainPage.panOption3);
+            
         }
         
         // Opción 4 -> Empleados
         else if(evt.getSource() == mainPage.btnBodyOption4){
             mainPage.panBodyOption4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239,232,244)));
-            mainPage.panContent.removeAll();
-            mainPage.panContent.add(mainPage.panOption4);
-            mainPage.panContent.repaint();
-            mainPage.panContent.revalidate();
+            
+            mainPage.cardSelection(mainPage.panContent, mainPage.panOption4);
+            
         }
         
         // Opción 5 -> Sucursales
         else if(evt.getSource() == mainPage.btnBodyOption5){
             mainPage.panBodyOption5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239,232,244)));
-            mainPage.panContent.removeAll();
-            mainPage.panContent.add(mainPage.panOption5);
-            mainPage.panContent.repaint();
-            mainPage.panContent.revalidate();
+            
+            mainPage.cardSelection(mainPage.panContent, mainPage.panOption5);
+            
         }
         
         // Opción 6 -> Configuración
         else if(evt.getSource() == mainPage.btnBodyOption6){
             mainPage.panBodyOption6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239,232,244)));
-            mainPage.panContent.removeAll();
-            mainPage.panContent.add(mainPage.panOption6);
-            mainPage.panContent.repaint();
-            mainPage.panContent.revalidate();
+            
+            mainPage.cardSelection(mainPage.panContent, mainPage.panOption6);
+            
         }
         
         //</editor-fold>
         
         //<editor-fold defaultstate="collapsed" desc=" Botones del MainPage Option 2 ">
         
+        //<editor-fold defaultstate="collapsed" desc=" Decisión en la Opción 2 ">
+        
+        // Tickets de Golosinas
+        else if(evt.getSource() == mainPage.btnCandyDecision){
+            mainPage.panCapsuleCandyDecision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239,232,244)));
+        
+            mainPage.cardSelection(mainPage.panOption2, mainPage.panCandySell);
+            
+        }
+        
+        //<editor-fold defaultstate="collapsed" desc=" Venta de tickets para golosinas ">
+        
+        // Volver para la sección anterior
+        else if(evt.getSource() == mainPage.btnBackToTicketDecision1){
+            mainPage.btnBackToTicketDecision1.setBackground(new java.awt.Color(249,249,249));
+            
+            mainPage.cardSelection(mainPage.panOption2, mainPage.panDecisionOption2);
+            
+        }
+        
+        //</editor-fold>
+        
+        // Tickets de funciones
+        else if(evt.getSource() == mainPage.btnCinemaDecision){
+            mainPage.panCapsuleCinemaDecision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239,232,244)));
+        
+            mainPage.cardSelection(mainPage.panOption2, mainPage.panCinemaSell);
+        }
+        
+        //<editor-fold defaultstate="collapsed" desc=" Venta de tickets para funciones ">
+        
+        // Volver para la sección anterior
+        else if(evt.getSource() == mainPage.btnBackToTicketDecision2){
+            mainPage.btnBackToTicketDecision2.setBackground(new java.awt.Color(249,249,249));
+            
+            mainPage.cardSelection(mainPage.panOption2, mainPage.panDecisionOption2);
+            
+        }
+        
+        //</editor-fold>
+        
+        //</editor-fold>
         
         //</editor-fold>
         
