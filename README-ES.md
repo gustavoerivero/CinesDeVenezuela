@@ -45,7 +45,7 @@ Proyecto que corresponde a la asignatura Laboratorio I de Ingenier√≠a en Inform√
 ## Autores:
 
 * *Gustavo Rivero.* [@gustavoerivero](https://github.com/gustavoerivero)
-* *Marihec Miranda.*
+* *Marihec Miranda.* [@MarihecMiranda](https://github.com/MarihecMiranda)
 * *Michael Montero.* [@Damurq](https://github.com/Damurq)
 * *Yurisbellys Brizuela.* [@yurisjbc23](https://github.com/yurisjbc23)
 * *Luis Torrealba.* [@luisdavidwww](https://github.com/luisdavidwww)
