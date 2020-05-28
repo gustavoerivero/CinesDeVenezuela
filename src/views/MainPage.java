@@ -1,5 +1,7 @@
 package views;
 
+import lib.SuportFunctions;
+
 /**
  *
  * @author Gustavo
@@ -9,10 +11,14 @@ public class MainPage extends javax.swing.JFrame {
     // Variables de apoyo para conocer la ubicación de la aplicación.
     int xx = 0, xy = 0;
     
+    private SuportFunctions sf;
+    
     public MainPage() {
         
         // Inicializa todas las variables (o mejor dicho componentes) que usa el JFrame.
         initComponents();
+        
+        sf = new SuportFunctions();
         
         // Ubica el JFrame en el centro de la pantalla.
         setLocationRelativeTo(null);
@@ -24,7 +30,7 @@ public class MainPage extends javax.swing.JFrame {
         this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("images/CDV-icon.png")).getImage());
         
         // Iniciar la aplicación en la opción 1 (Home).
-        cardSelection(panContent, panOption1);
+        sf.cardSelection(panContent, panOption1);
                 
     }
     
@@ -40,8 +46,8 @@ public class MainPage extends javax.swing.JFrame {
     
     public void addEvents(java.awt.event.ActionListener evt){
         // Eventos de los botones de la barra superior.
-        btnMin.addActionListener(evt);
-        btnExit.addActionListener(evt);
+        btnMin.addActionListener(evt);  // -> Minimizar
+        btnExit.addActionListener(evt); // -> Cerrar app
         
         // Eventos de los botones del menú lateral.
         btnOptionLateral1.addActionListener(evt); // -> Inicio
@@ -60,24 +66,25 @@ public class MainPage extends javax.swing.JFrame {
         
         // Eventos de los botones de la opción 2 -> Ventas.
         // Decision: (Candy or Cinema)
-        btnCandyDecision.addActionListener(evt);
-        btnCinemaDecision.addActionListener(evt);
-            //Back to decision ticket.
-            btnBackToTicketDecision1.addActionListener(evt);
-            btnBackToTicketDecision2.addActionListener(evt);
+        btnCandyDecision.addActionListener(evt);    // -> Venta de tickets para golosinas
+        btnCinemaDecision.addActionListener(evt);   // -> Venta de tickets para funciones
         
+            //Back to decision ticket.
+            btnBackToTicketDecision1.addActionListener(evt); // -> Volver a la interfaz anterior
+            btnBackToTicketDecision2.addActionListener(evt); // -> Volver a la interfaz anterior
+            
+            // -> Candy Ticket Sell
+            btnChangeSucursalCandySell.addActionListener(evt);  // -> Cambiar de Sucursal
+            btnSearchClientCandySell.addActionListener(evt);    // -> Buscar Cliente
+            btnAddCandySell.addActionListener(evt);             // -> Añadir golosina
+            btnCandySellClear.addActionListener(evt);           // -> Limpiar formulario
+            btnCandySell.addActionListener(evt);                // -> Vender golosinas
+            
+            // -> Cinema Ticket Sell
         
         
     }
 
-    // Método para utilizar de manera cómoda el cardLayout.
-    public void cardSelection(javax.swing.JPanel base, javax.swing.JPanel opc){
-        base.removeAll(); // Elimina el contenido del JPanel principal.
-        base.add(opc); // Añade el segundo JPanel al JPanel principal.
-        base.repaint(); // Actualiza el contenido del JPanel principal.
-        base.revalidate(); // Validar el contenido del JPanel principal.
-    }
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -147,6 +154,31 @@ public class MainPage extends javax.swing.JFrame {
         btnBackToTicketDecision1 = new javax.swing.JButton();
         sepCandySellTittle = new javax.swing.JSeparator();
         lblCandySellTittle = new javax.swing.JLabel();
+        lblSucursalNameCandySell = new javax.swing.JLabel();
+        txtIdClientCandySell = new javax.swing.JTextField();
+        lblCandySeller = new javax.swing.JLabel();
+        cmbCandySeller = new javax.swing.JComboBox<>();
+        lblCandySelection = new javax.swing.JLabel();
+        cmbCandySelection = new javax.swing.JComboBox<>();
+        scpCandySell = new javax.swing.JScrollPane();
+        tblCandySell = new javax.swing.JTable();
+        lblSubTotalCandySell = new javax.swing.JLabel();
+        lblIVACandySell = new javax.swing.JLabel();
+        lblTotalCandySell = new javax.swing.JLabel();
+        lblCantCandySell = new javax.swing.JLabel();
+        spnCantCandySell = new javax.swing.JSpinner();
+        lblCandySelection2 = new javax.swing.JLabel();
+        panChangeSucursalCandySell = new javax.swing.JPanel();
+        btnChangeSucursalCandySell = new javax.swing.JButton();
+        panSearchClientCandySell = new javax.swing.JPanel();
+        btnSearchClientCandySell = new javax.swing.JButton();
+        panAddCandySell = new javax.swing.JPanel();
+        btnAddCandySell = new javax.swing.JButton();
+        panCandySellClear = new javax.swing.JPanel();
+        btnCandySellClear = new javax.swing.JButton();
+        panButtonCandySell = new javax.swing.JPanel();
+        btnCandySell = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
         panCinemaSell = new javax.swing.JPanel();
         btnBackToTicketDecision2 = new javax.swing.JButton();
         sepCinemaSellTittle = new javax.swing.JSeparator();
@@ -910,7 +942,7 @@ public class MainPage extends javax.swing.JFrame {
                 .addComponent(sepTittleOption1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scpBodyOption1, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         panContent.add(panOption1, "card2");
@@ -1043,13 +1075,16 @@ public class MainPage extends javax.swing.JFrame {
                 .addComponent(panCapsuleCinemaDecision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(sepCinemaDecision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(351, Short.MAX_VALUE))
+                .addContainerGap(391, Short.MAX_VALUE))
         );
 
         panOption2.add(panDecisionOption2, "card2");
 
         panCandySell.setBackground(new java.awt.Color(249, 249, 249));
         panCandySell.setForeground(new java.awt.Color(239, 232, 244));
+        panCandySell.setMaximumSize(new java.awt.Dimension(685, 580));
+        panCandySell.setMinimumSize(new java.awt.Dimension(685, 580));
+        panCandySell.setPreferredSize(new java.awt.Dimension(685, 580));
 
         btnBackToTicketDecision1.setBackground(new java.awt.Color(249, 249, 249));
         btnBackToTicketDecision1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -1061,6 +1096,7 @@ public class MainPage extends javax.swing.JFrame {
         btnBackToTicketDecision1.setFocusPainted(false);
         btnBackToTicketDecision1.setIconTextGap(25);
         btnBackToTicketDecision1.setOpaque(true);
+        btnBackToTicketDecision1.setPreferredSize(null);
         btnBackToTicketDecision1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 btnBackToTicketDecision1MouseMoved(evt);
@@ -1080,27 +1116,355 @@ public class MainPage extends javax.swing.JFrame {
         lblCandySellTittle.setText("Ventas de tickets para golosinas");
         lblCandySellTittle.setToolTipText("");
 
+        lblSucursalNameCandySell.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblSucursalNameCandySell.setText("Sucursal ");
+
+        txtIdClientCandySell.setBackground(new java.awt.Color(249, 249, 249));
+        txtIdClientCandySell.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtIdClientCandySell.setText("Cédula del cliente");
+        txtIdClientCandySell.setBorder(null);
+
+        lblCandySeller.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblCandySeller.setText("Vendedor:");
+
+        cmbCandySeller.setBackground(new java.awt.Color(249, 249, 249));
+        cmbCandySeller.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        cmbCandySeller.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " - Seleccionar - " }));
+        cmbCandySeller.setBorder(null);
+        cmbCandySeller.setLightWeightPopupEnabled(false);
+
+        lblCandySelection.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblCandySelection.setText("Golosina:");
+
+        cmbCandySelection.setBackground(new java.awt.Color(249, 249, 249));
+        cmbCandySelection.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        cmbCandySelection.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " - Seleccionar - " }));
+        cmbCandySelection.setBorder(null);
+
+        tblCandySell.setSelectionBackground(new java.awt.Color(239, 232, 244));
+        scpCandySell.setViewportView(tblCandySell);
+
+        lblSubTotalCandySell.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblSubTotalCandySell.setText("Subtotal: ");
+
+        lblIVACandySell.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblIVACandySell.setText("IVA (16%): ");
+
+        lblTotalCandySell.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblTotalCandySell.setText("Total: ");
+
+        lblCantCandySell.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblCantCandySell.setText("Cantidad:");
+
+        spnCantCandySell.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        spnCantCandySell.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        spnCantCandySell.setAutoscrolls(true);
+        spnCantCandySell.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        spnCantCandySell.setEditor(new javax.swing.JSpinner.NumberEditor(spnCantCandySell, ""));
+        spnCantCandySell.setOpaque(false);
+
+        lblCandySelection2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblCandySelection2.setText("Lista de golosinas:");
+
+        panChangeSucursalCandySell.setBackground(new java.awt.Color(249, 249, 249));
+        panChangeSucursalCandySell.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249, 249, 249)));
+
+        btnChangeSucursalCandySell.setBackground(new java.awt.Color(249, 249, 249));
+        btnChangeSucursalCandySell.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/shopIcon.png"))); // NOI18N
+        btnChangeSucursalCandySell.setToolTipText("Cambiar Sucursal");
+        btnChangeSucursalCandySell.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(249, 249, 249), 1, true));
+        btnChangeSucursalCandySell.setBorderPainted(false);
+        btnChangeSucursalCandySell.setContentAreaFilled(false);
+        btnChangeSucursalCandySell.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnChangeSucursalCandySell.setFocusPainted(false);
+        btnChangeSucursalCandySell.setPreferredSize(new java.awt.Dimension(50, 50));
+        btnChangeSucursalCandySell.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnChangeSucursalCandySellMouseMoved(evt);
+            }
+        });
+        btnChangeSucursalCandySell.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnChangeSucursalCandySellMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panChangeSucursalCandySellLayout = new javax.swing.GroupLayout(panChangeSucursalCandySell);
+        panChangeSucursalCandySell.setLayout(panChangeSucursalCandySellLayout);
+        panChangeSucursalCandySellLayout.setHorizontalGroup(
+            panChangeSucursalCandySellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panChangeSucursalCandySellLayout.createSequentialGroup()
+                .addComponent(btnChangeSucursalCandySell, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        panChangeSucursalCandySellLayout.setVerticalGroup(
+            panChangeSucursalCandySellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btnChangeSucursalCandySell, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        panSearchClientCandySell.setBackground(new java.awt.Color(249, 249, 249));
+        panSearchClientCandySell.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249, 249, 249)));
+        panSearchClientCandySell.setMaximumSize(new java.awt.Dimension(52, 52));
+        panSearchClientCandySell.setMinimumSize(new java.awt.Dimension(0, 50));
+        panSearchClientCandySell.setPreferredSize(new java.awt.Dimension(52, 52));
+
+        btnSearchClientCandySell.setBackground(new java.awt.Color(249, 249, 249));
+        btnSearchClientCandySell.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/findUserIcon.png"))); // NOI18N
+        btnSearchClientCandySell.setToolTipText(" Buscar");
+        btnSearchClientCandySell.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(249, 249, 249), 1, true));
+        btnSearchClientCandySell.setBorderPainted(false);
+        btnSearchClientCandySell.setContentAreaFilled(false);
+        btnSearchClientCandySell.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSearchClientCandySell.setFocusPainted(false);
+        btnSearchClientCandySell.setPreferredSize(new java.awt.Dimension(50, 50));
+        btnSearchClientCandySell.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnSearchClientCandySellMouseMoved(evt);
+            }
+        });
+        btnSearchClientCandySell.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnSearchClientCandySellMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panSearchClientCandySellLayout = new javax.swing.GroupLayout(panSearchClientCandySell);
+        panSearchClientCandySell.setLayout(panSearchClientCandySellLayout);
+        panSearchClientCandySellLayout.setHorizontalGroup(
+            panSearchClientCandySellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panSearchClientCandySellLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnSearchClientCandySell, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        panSearchClientCandySellLayout.setVerticalGroup(
+            panSearchClientCandySellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panSearchClientCandySellLayout.createSequentialGroup()
+                .addComponent(btnSearchClientCandySell, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        panAddCandySell.setBackground(new java.awt.Color(249, 249, 249));
+        panAddCandySell.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249, 249, 249)));
+
+        btnAddCandySell.setBackground(new java.awt.Color(249, 249, 249));
+        btnAddCandySell.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/addIcon.png"))); // NOI18N
+        btnAddCandySell.setToolTipText("Agregar");
+        btnAddCandySell.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(249, 249, 249), 1, true));
+        btnAddCandySell.setBorderPainted(false);
+        btnAddCandySell.setContentAreaFilled(false);
+        btnAddCandySell.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAddCandySell.setFocusPainted(false);
+        btnAddCandySell.setPreferredSize(new java.awt.Dimension(50, 50));
+        btnAddCandySell.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnAddCandySellMouseMoved(evt);
+            }
+        });
+        btnAddCandySell.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnAddCandySellMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panAddCandySellLayout = new javax.swing.GroupLayout(panAddCandySell);
+        panAddCandySell.setLayout(panAddCandySellLayout);
+        panAddCandySellLayout.setHorizontalGroup(
+            panAddCandySellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panAddCandySellLayout.createSequentialGroup()
+                .addComponent(btnAddCandySell, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        panAddCandySellLayout.setVerticalGroup(
+            panAddCandySellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btnAddCandySell, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        panCandySellClear.setBackground(new java.awt.Color(239, 232, 244));
+        panCandySellClear.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249, 249, 249)));
+
+        btnCandySellClear.setBackground(new java.awt.Color(245, 245, 245));
+        btnCandySellClear.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnCandySellClear.setForeground(new java.awt.Color(0, 0, 0));
+        btnCandySellClear.setText("Limpiar");
+        btnCandySellClear.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnCandySellClear.setBorderPainted(false);
+        btnCandySellClear.setContentAreaFilled(false);
+        btnCandySellClear.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCandySellClear.setFocusPainted(false);
+        btnCandySellClear.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnCandySellClearMouseMoved(evt);
+            }
+        });
+        btnCandySellClear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCandySellClearMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panCandySellClearLayout = new javax.swing.GroupLayout(panCandySellClear);
+        panCandySellClear.setLayout(panCandySellClearLayout);
+        panCandySellClearLayout.setHorizontalGroup(
+            panCandySellClearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panCandySellClearLayout.createSequentialGroup()
+                .addComponent(btnCandySellClear, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        panCandySellClearLayout.setVerticalGroup(
+            panCandySellClearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panCandySellClearLayout.createSequentialGroup()
+                .addComponent(btnCandySellClear, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        panButtonCandySell.setBackground(new java.awt.Color(239, 232, 244));
+        panButtonCandySell.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249, 249, 249)));
+        panButtonCandySell.setForeground(new java.awt.Color(255, 255, 255));
+
+        btnCandySell.setBackground(new java.awt.Color(245, 245, 245));
+        btnCandySell.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnCandySell.setForeground(new java.awt.Color(0, 0, 0));
+        btnCandySell.setText("Vender");
+        btnCandySell.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnCandySell.setBorderPainted(false);
+        btnCandySell.setContentAreaFilled(false);
+        btnCandySell.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCandySell.setFocusPainted(false);
+        btnCandySell.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnCandySellMouseMoved(evt);
+            }
+        });
+        btnCandySell.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCandySellMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panButtonCandySellLayout = new javax.swing.GroupLayout(panButtonCandySell);
+        panButtonCandySell.setLayout(panButtonCandySellLayout);
+        panButtonCandySellLayout.setHorizontalGroup(
+            panButtonCandySellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panButtonCandySellLayout.createSequentialGroup()
+                .addComponent(btnCandySell, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        panButtonCandySellLayout.setVerticalGroup(
+            panButtonCandySellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panButtonCandySellLayout.createSequentialGroup()
+                .addComponent(btnCandySell, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        jSeparator1.setBackground(new java.awt.Color(249, 249, 249));
+        jSeparator1.setForeground(new java.awt.Color(75, 0, 145));
+
         javax.swing.GroupLayout panCandySellLayout = new javax.swing.GroupLayout(panCandySell);
         panCandySell.setLayout(panCandySellLayout);
         panCandySellLayout.setHorizontalGroup(
             panCandySellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(sepCandySellTittle)
             .addGroup(panCandySellLayout.createSequentialGroup()
-                .addComponent(btnBackToTicketDecision1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblCandySellTittle, javax.swing.GroupLayout.DEFAULT_SIZE, 641, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(panCandySellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panCandySellLayout.createSequentialGroup()
+                        .addComponent(btnBackToTicketDecision1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblCandySellTittle, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblSucursalNameCandySell, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(panChangeSucursalCandySell, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4))
+                    .addGroup(panCandySellLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(panCandySellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panCandySellLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(panCandySellClear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(panButtonCandySell, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panCandySellLayout.createSequentialGroup()
+                                .addComponent(lblCandySelection, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cmbCandySelection, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(panCandySellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lblCantCandySell, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
+                                    .addComponent(lblCandySeller, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(panCandySellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cmbCandySeller, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(panCandySellLayout.createSequentialGroup()
+                                        .addComponent(spnCantCandySell, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(panAddCandySell, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(panCandySellLayout.createSequentialGroup()
+                                .addGroup(panCandySellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(panCandySellLayout.createSequentialGroup()
+                                        .addGap(1, 1, 1)
+                                        .addComponent(lblSubTotalCandySell, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(19, 19, 19)
+                                        .addComponent(lblIVACandySell, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(lblTotalCandySell, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(lblCandySelection2)
+                                    .addComponent(scpCandySell, javax.swing.GroupLayout.PREFERRED_SIZE, 636, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(panCandySellLayout.createSequentialGroup()
+                                        .addGroup(panCandySellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtIdClientCandySell, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(panSearchClientCandySell, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(356, 356, 356)))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addGap(19, 19, 19))
+            .addComponent(sepCandySellTittle)
         );
         panCandySellLayout.setVerticalGroup(
             panCandySellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panCandySellLayout.createSequentialGroup()
-                .addGroup(panCandySellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblCandySellTittle, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
-                    .addComponent(btnBackToTicketDecision1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(panCandySellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panChangeSucursalCandySell, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panCandySellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(btnBackToTicketDecision1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblCandySellTittle, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE))
+                    .addComponent(lblSucursalNameCandySell, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sepCandySellTittle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(527, Short.MAX_VALUE))
+                .addComponent(sepCandySellTittle, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panCandySellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panCandySellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(panSearchClientCandySell, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panCandySellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(cmbCandySeller, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
+                        .addComponent(txtIdClientCandySell, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lblCandySeller, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addGroup(panCandySellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panCandySellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblCantCandySell)
+                        .addComponent(cmbCandySelection, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblCandySelection, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(spnCantCandySell, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(panAddCandySell, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
+                .addComponent(lblCandySelection2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(scpCandySell, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(panCandySellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblSubTotalCandySell, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTotalCandySell, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblIVACandySell, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addGroup(panCandySellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panCandySellClear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panButtonCandySell, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17))
         );
+
+        panSearchClientCandySell.getAccessibleContext().setAccessibleName("");
+        panCandySellClear.getAccessibleContext().setAccessibleName("");
 
         panOption2.add(panCandySell, "card2");
 
@@ -1142,9 +1506,9 @@ public class MainPage extends javax.swing.JFrame {
             panCinemaSellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(sepCinemaSellTittle)
             .addGroup(panCinemaSellLayout.createSequentialGroup()
-                .addComponent(btnBackToTicketDecision2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnBackToTicketDecision2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblCinemaSellTittle1, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)
+                .addComponent(lblCinemaSellTittle1, javax.swing.GroupLayout.DEFAULT_SIZE, 629, Short.MAX_VALUE)
                 .addContainerGap())
         );
         panCinemaSellLayout.setVerticalGroup(
@@ -1155,7 +1519,7 @@ public class MainPage extends javax.swing.JFrame {
                     .addComponent(btnBackToTicketDecision2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(sepCinemaSellTittle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(527, Short.MAX_VALUE))
+                .addContainerGap(567, Short.MAX_VALUE))
         );
 
         panOption2.add(panCinemaSell, "card2");
@@ -1576,9 +1940,59 @@ public class MainPage extends javax.swing.JFrame {
 
     //</editor-fold>
     
-    //<editor-fold defaultstate="collapsed" desc=" Option 2 -> Candy Sell ">
+    //<editor-fold defaultstate="collapsed" desc=" Option 2 -> Candy Sell "> 
     
-    
+    private void btnChangeSucursalCandySellMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChangeSucursalCandySellMouseMoved
+        panChangeSucursalCandySell.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
+        
+    }//GEN-LAST:event_btnChangeSucursalCandySellMouseMoved
+
+    private void btnChangeSucursalCandySellMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChangeSucursalCandySellMouseExited
+        panChangeSucursalCandySell.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
+    }//GEN-LAST:event_btnChangeSucursalCandySellMouseExited
+
+    private void btnSearchClientCandySellMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchClientCandySellMouseMoved
+        panSearchClientCandySell.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
+    }//GEN-LAST:event_btnSearchClientCandySellMouseMoved
+
+    private void btnSearchClientCandySellMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchClientCandySellMouseExited
+        panSearchClientCandySell.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
+    }//GEN-LAST:event_btnSearchClientCandySellMouseExited
+
+    private void btnAddCandySellMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddCandySellMouseMoved
+        panAddCandySell.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
+    }//GEN-LAST:event_btnAddCandySellMouseMoved
+
+    private void btnAddCandySellMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddCandySellMouseExited
+        panAddCandySell.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
+    }//GEN-LAST:event_btnAddCandySellMouseExited
+
+    private void btnCandySellClearMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCandySellClearMouseMoved
+        panCandySellClear.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
+        btnCandySellClear.setForeground(new java.awt.Color(255,255,255));
+        panCandySellClear.setBackground(new java.awt.Color(66,0,124));
+    }//GEN-LAST:event_btnCandySellClearMouseMoved
+
+    private void btnCandySellClearMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCandySellClearMouseExited
+        panCandySellClear.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
+        btnCandySellClear.setForeground(new java.awt.Color(0,0,0));
+        panCandySellClear.setBackground(new java.awt.Color(239,232,244));
+    }//GEN-LAST:event_btnCandySellClearMouseExited
+
+    private void btnCandySellMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCandySellMouseMoved
+        panButtonCandySell.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
+        btnCandySell.setForeground(new java.awt.Color(255,255,255));
+        panButtonCandySell.setBackground(new java.awt.Color(66,0,124));
+    }//GEN-LAST:event_btnCandySellMouseMoved
+
+    private void btnCandySellMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCandySellMouseExited
+        panButtonCandySell.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
+        btnCandySell.setForeground(new java.awt.Color(0,0,0));
+        panButtonCandySell.setBackground(new java.awt.Color(239,232,244));
+    }//GEN-LAST:event_btnCandySellMouseExited
+
+
+        
     
     //</editor-fold>
     
@@ -1590,6 +2004,7 @@ public class MainPage extends javax.swing.JFrame {
 
     //<editor-fold defaultstate="collapsed" desc=" Declaración de Variables ">
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddCandySell;
     public javax.swing.JButton btnBackToTicketDecision1;
     public javax.swing.JButton btnBackToTicketDecision2;
     public javax.swing.JButton btnBodyOption1;
@@ -1600,6 +2015,9 @@ public class MainPage extends javax.swing.JFrame {
     public javax.swing.JButton btnBodyOption6;
     public javax.swing.JButton btnBodyOption7;
     public javax.swing.JButton btnCandyDecision;
+    private javax.swing.JButton btnCandySell;
+    private javax.swing.JButton btnCandySellClear;
+    private javax.swing.JButton btnChangeSucursalCandySell;
     public javax.swing.JButton btnCinemaDecision;
     public javax.swing.JButton btnExit;
     public javax.swing.JButton btnMin;
@@ -1609,16 +2027,29 @@ public class MainPage extends javax.swing.JFrame {
     public javax.swing.JButton btnOptionLateral4;
     public javax.swing.JButton btnOptionLateral5;
     public javax.swing.JButton btnOptionLateral6;
+    private javax.swing.JButton btnSearchClientCandySell;
+    private javax.swing.JComboBox<String> cmbCandySelection;
+    private javax.swing.JComboBox<String> cmbCandySeller;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblADCmark;
     private javax.swing.JLabel lblCDVlogo;
+    private javax.swing.JLabel lblCandySelection;
+    private javax.swing.JLabel lblCandySelection2;
     private javax.swing.JLabel lblCandySellTittle;
+    private javax.swing.JLabel lblCandySeller;
+    private javax.swing.JLabel lblCantCandySell;
     private javax.swing.JLabel lblCinemaSellTittle1;
+    private javax.swing.JLabel lblIVACandySell;
+    private javax.swing.JLabel lblSubTotalCandySell;
+    private javax.swing.JLabel lblSucursalNameCandySell;
     private javax.swing.JLabel lblTittleOption1;
     private javax.swing.JLabel lblTittleOption2;
     private javax.swing.JLabel lblTittleOption3;
     private javax.swing.JLabel lblTittleOption4;
     private javax.swing.JLabel lblTittleOption5;
     private javax.swing.JLabel lblTittleOption6;
+    private javax.swing.JLabel lblTotalCandySell;
+    private javax.swing.JPanel panAddCandySell;
     public javax.swing.JPanel panBodyOption1;
     public javax.swing.JPanel panBodyOption2;
     public javax.swing.JPanel panBodyOption3;
@@ -1627,10 +2058,13 @@ public class MainPage extends javax.swing.JFrame {
     public javax.swing.JPanel panBodyOption6;
     public javax.swing.JPanel panBodyOption7;
     public javax.swing.JPanel panBodyOptions1;
+    private javax.swing.JPanel panButtonCandySell;
     private javax.swing.JPanel panButtonsTopBar;
     public javax.swing.JPanel panCandySell;
+    private javax.swing.JPanel panCandySellClear;
     public javax.swing.JPanel panCapsuleCandyDecision;
     public javax.swing.JPanel panCapsuleCinemaDecision;
+    private javax.swing.JPanel panChangeSucursalCandySell;
     public javax.swing.JPanel panCinemaSell;
     public javax.swing.JPanel panContent;
     public javax.swing.JPanel panDecisionOption2;
@@ -1644,9 +2078,11 @@ public class MainPage extends javax.swing.JFrame {
     public javax.swing.JPanel panOption4;
     public javax.swing.JPanel panOption5;
     public javax.swing.JPanel panOption6;
+    private javax.swing.JPanel panSearchClientCandySell;
     private javax.swing.JPanel panTopBar;
     private javax.swing.JPanel panTopBarLateralMenu;
     private javax.swing.JScrollPane scpBodyOption1;
+    private javax.swing.JScrollPane scpCandySell;
     private javax.swing.JSeparator sepBodyOption1;
     private javax.swing.JSeparator sepBodyOption2;
     private javax.swing.JSeparator sepBodyOption3;
@@ -1666,6 +2102,9 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JSeparator sepTittleOption4;
     private javax.swing.JSeparator sepTittleOption5;
     private javax.swing.JSeparator sepTittleOption6;
+    private javax.swing.JSpinner spnCantCandySell;
+    private javax.swing.JTable tblCandySell;
+    private javax.swing.JTextField txtIdClientCandySell;
     // End of variables declaration//GEN-END:variables
     //</editor-fold>
 }

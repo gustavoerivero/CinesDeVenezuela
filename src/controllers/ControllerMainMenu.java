@@ -1,7 +1,7 @@
 package controllers;
 
 import views.MainPage;
-
+import lib.SuportFunctions;
 /**
  *
  * @author Gustavo
@@ -10,13 +10,16 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
     
     // Instanciar las clases necesarias para el funcionamiento.
     private MainPage mainPage;
+    private SuportFunctions sf;
         
     public ControllerMainMenu(){
-        // Declarar la variable de la clase instanciada.
+        // Declarar la variable de las clases instanciadas.
         mainPage = new MainPage();
+        sf = new SuportFunctions();
         
         // Activamos los eventos provocados por los botones.
         mainPage.addEvents(this);
+        
     }
 
     /*
@@ -44,38 +47,38 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
         
         // Menú Lateral -> Inicio
         else if(evt.getSource() == mainPage.btnOptionLateral1){
-            mainPage.cardSelection(mainPage.panContent, mainPage.panOption1);
+            sf.cardSelection(mainPage.panContent, mainPage.panOption1);
             
         } 
 
         // Menú Lateral -> Ventas
         else if(evt.getSource() == mainPage.btnOptionLateral2){
-            mainPage.cardSelection(mainPage.panContent, mainPage.panOption2);
-            mainPage.cardSelection(mainPage.panOption2, mainPage.panDecisionOption2);
+            sf.cardSelection(mainPage.panContent, mainPage.panOption2);
+            sf.cardSelection(mainPage.panOption2, mainPage.panDecisionOption2);
             
         }
         
         // Menú Lateral -> Reportes
         else if(evt.getSource() == mainPage.btnOptionLateral3){
-            mainPage.cardSelection(mainPage.panContent, mainPage.panOption3);
+            sf.cardSelection(mainPage.panContent, mainPage.panOption3);
             
         }
         
         // Menú Lateral -> Empleados
         else if(evt.getSource() == mainPage.btnOptionLateral4){
-            mainPage.cardSelection(mainPage.panContent, mainPage.panOption4);
+            sf.cardSelection(mainPage.panContent, mainPage.panOption4);
             
         }
         
         // Menú Lateral -> Sucursales
         else if(evt.getSource() == mainPage.btnOptionLateral5){
-            mainPage.cardSelection(mainPage.panContent, mainPage.panOption5);
+            sf.cardSelection(mainPage.panContent, mainPage.panOption5);
             
         }
         
         // Menú Lateral -> Configuración
         else if(evt.getSource() == mainPage.btnOptionLateral6){
-            mainPage.cardSelection(mainPage.panContent, mainPage.panOption6);
+            sf.cardSelection(mainPage.panContent, mainPage.panOption6);
             
         }
         
@@ -87,8 +90,8 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
         else if(evt.getSource() == mainPage.btnBodyOption2){
             mainPage.panBodyOption2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239,232,244)));
            
-            mainPage.cardSelection(mainPage.panContent, mainPage.panOption2);
-            mainPage.cardSelection(mainPage.panOption2, mainPage.panDecisionOption2);
+            sf.cardSelection(mainPage.panContent, mainPage.panOption2);
+            sf.cardSelection(mainPage.panOption2, mainPage.panDecisionOption2);
                         
         }
         
@@ -96,7 +99,7 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
         else if(evt.getSource() == mainPage.btnBodyOption3){
             mainPage.panBodyOption3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239,232,244)));
             
-            mainPage.cardSelection(mainPage.panContent, mainPage.panOption3);
+            sf.cardSelection(mainPage.panContent, mainPage.panOption3);
             
         }
         
@@ -104,7 +107,7 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
         else if(evt.getSource() == mainPage.btnBodyOption4){
             mainPage.panBodyOption4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239,232,244)));
             
-            mainPage.cardSelection(mainPage.panContent, mainPage.panOption4);
+            sf.cardSelection(mainPage.panContent, mainPage.panOption4);
             
         }
         
@@ -112,7 +115,7 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
         else if(evt.getSource() == mainPage.btnBodyOption5){
             mainPage.panBodyOption5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239,232,244)));
             
-            mainPage.cardSelection(mainPage.panContent, mainPage.panOption5);
+            sf.cardSelection(mainPage.panContent, mainPage.panOption5);
             
         }
         
@@ -120,7 +123,7 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
         else if(evt.getSource() == mainPage.btnBodyOption6){
             mainPage.panBodyOption6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239,232,244)));
             
-            mainPage.cardSelection(mainPage.panContent, mainPage.panOption6);
+            sf.cardSelection(mainPage.panContent, mainPage.panOption6);
             
         }
         
@@ -134,7 +137,7 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
         else if(evt.getSource() == mainPage.btnCandyDecision){
             mainPage.panCapsuleCandyDecision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239,232,244)));
         
-            mainPage.cardSelection(mainPage.panOption2, mainPage.panCandySell);
+            sf.cardSelection(mainPage.panOption2, mainPage.panCandySell);
             
         }
         
@@ -144,7 +147,7 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
         else if(evt.getSource() == mainPage.btnBackToTicketDecision1){
             mainPage.btnBackToTicketDecision1.setBackground(new java.awt.Color(249,249,249));
             
-            mainPage.cardSelection(mainPage.panOption2, mainPage.panDecisionOption2);
+            sf.cardSelection(mainPage.panOption2, mainPage.panDecisionOption2);
             
         }
         
@@ -154,7 +157,7 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
         else if(evt.getSource() == mainPage.btnCinemaDecision){
             mainPage.panCapsuleCinemaDecision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239,232,244)));
         
-            mainPage.cardSelection(mainPage.panOption2, mainPage.panCinemaSell);
+            sf.cardSelection(mainPage.panOption2, mainPage.panCinemaSell);
         }
         
         //<editor-fold defaultstate="collapsed" desc=" Venta de tickets para funciones ">
@@ -163,7 +166,7 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
         else if(evt.getSource() == mainPage.btnBackToTicketDecision2){
             mainPage.btnBackToTicketDecision2.setBackground(new java.awt.Color(249,249,249));
             
-            mainPage.cardSelection(mainPage.panOption2, mainPage.panDecisionOption2);
+            sf.cardSelection(mainPage.panOption2, mainPage.panDecisionOption2);
             
         }
         
