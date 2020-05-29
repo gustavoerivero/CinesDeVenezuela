@@ -10,7 +10,10 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
     
     // Instanciar las clases necesarias para el funcionamiento.
     private MainPage mainPage;
+    private ControllerSelectSucursal cSelectSucursal;
     private SuportFunctions sf;
+    
+    public String idSucursal;
         
     public ControllerMainMenu(){
         // Declarar la variable de las clases instanciadas.
@@ -19,6 +22,9 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
         
         // Activamos los eventos provocados por los botones.
         mainPage.addEvents(this);
+        
+        // Se inicializan las variables;
+        idSucursal = "";
         
     }
 
@@ -148,6 +154,15 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
             mainPage.btnBackToTicketDecision1.setBackground(new java.awt.Color(249,249,249));
             
             sf.cardSelection(mainPage.panOption2, mainPage.panDecisionOption2);
+            
+        }
+        
+        // Cambiar de sucursal a gestionar
+        else if(evt.getSource() == mainPage.btnChangeSucursalCandySell){
+            
+            // Instanciar la clase
+            cSelectSucursal = new ControllerSelectSucursal();
+            
             
         }
         

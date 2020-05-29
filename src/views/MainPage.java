@@ -1306,15 +1306,13 @@ public class MainPage extends javax.swing.JFrame {
         panCandySellClear.setLayout(panCandySellClearLayout);
         panCandySellClearLayout.setHorizontalGroup(
             panCandySellClearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panCandySellClearLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panCandySellClearLayout.createSequentialGroup()
                 .addComponent(btnCandySellClear, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         panCandySellClearLayout.setVerticalGroup(
             panCandySellClearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panCandySellClearLayout.createSequentialGroup()
-                .addComponent(btnCandySellClear, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(btnCandySellClear, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         panButtonCandySell.setBackground(new java.awt.Color(239, 232, 244));
@@ -1437,9 +1435,9 @@ public class MainPage extends javax.swing.JFrame {
                         .addComponent(panSearchClientCandySell, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panCandySellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(cmbCandySeller, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
-                        .addComponent(txtIdClientCandySell, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(lblCandySeller, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                        .addComponent(lblCandySeller, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtIdClientCandySell, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panCandySellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panCandySellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lblCantCandySell)
@@ -1456,11 +1454,11 @@ public class MainPage extends javax.swing.JFrame {
                     .addComponent(lblSubTotalCandySell, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblTotalCandySell, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblIVACandySell, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
-                .addGroup(panCandySellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panCandySellClear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panButtonCandySell, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(17, 17, 17))
+                .addGap(18, 18, 18)
+                .addGroup(panCandySellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(panButtonCandySell, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panCandySellClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(44, 44, 44))
         );
 
         panSearchClientCandySell.getAccessibleContext().setAccessibleName("");
@@ -2004,7 +2002,7 @@ public class MainPage extends javax.swing.JFrame {
 
     //<editor-fold defaultstate="collapsed" desc=" Declaración de Variables ">
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAddCandySell;
+    public javax.swing.JButton btnAddCandySell;
     public javax.swing.JButton btnBackToTicketDecision1;
     public javax.swing.JButton btnBackToTicketDecision2;
     public javax.swing.JButton btnBodyOption1;
@@ -2015,9 +2013,9 @@ public class MainPage extends javax.swing.JFrame {
     public javax.swing.JButton btnBodyOption6;
     public javax.swing.JButton btnBodyOption7;
     public javax.swing.JButton btnCandyDecision;
-    private javax.swing.JButton btnCandySell;
-    private javax.swing.JButton btnCandySellClear;
-    private javax.swing.JButton btnChangeSucursalCandySell;
+    public javax.swing.JButton btnCandySell;
+    public javax.swing.JButton btnCandySellClear;
+    public javax.swing.JButton btnChangeSucursalCandySell;
     public javax.swing.JButton btnCinemaDecision;
     public javax.swing.JButton btnExit;
     public javax.swing.JButton btnMin;
@@ -2061,7 +2059,7 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JPanel panButtonCandySell;
     private javax.swing.JPanel panButtonsTopBar;
     public javax.swing.JPanel panCandySell;
-    private javax.swing.JPanel panCandySellClear;
+    public javax.swing.JPanel panCandySellClear;
     public javax.swing.JPanel panCapsuleCandyDecision;
     public javax.swing.JPanel panCapsuleCinemaDecision;
     private javax.swing.JPanel panChangeSucursalCandySell;
@@ -2078,7 +2076,7 @@ public class MainPage extends javax.swing.JFrame {
     public javax.swing.JPanel panOption4;
     public javax.swing.JPanel panOption5;
     public javax.swing.JPanel panOption6;
-    private javax.swing.JPanel panSearchClientCandySell;
+    public javax.swing.JPanel panSearchClientCandySell;
     private javax.swing.JPanel panTopBar;
     private javax.swing.JPanel panTopBarLateralMenu;
     private javax.swing.JScrollPane scpBodyOption1;
