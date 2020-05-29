@@ -1,7 +1,9 @@
 package controllers;
 
 import views.MainPage;
+import views.PopupMessage;
 import lib.SuportFunctions;
+
 /**
  *
  * @author Gustavo
@@ -9,12 +11,11 @@ import lib.SuportFunctions;
 public class ControllerMainMenu implements java.awt.event.ActionListener{
     
     // Instanciar las clases necesarias para el funcionamiento.
-    private MainPage mainPage;
+    public MainPage mainPage;
     private ControllerSelectSucursal cSelectSucursal;
     private SuportFunctions sf;
-    
-    public String idSucursal;
-        
+    private PopupMessage popup;
+                
     public ControllerMainMenu(){
         // Declarar la variable de las clases instanciadas.
         mainPage = new MainPage();
@@ -23,8 +24,6 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
         // Activamos los eventos provocados por los botones.
         mainPage.addEvents(this);
         
-        // Se inicializan las variables;
-        idSucursal = "";
         
     }
 

@@ -7,6 +7,8 @@ package views;
  */
 public class SelectSucursal extends javax.swing.JFrame {
 
+    int xx = 0, xy = 0;
+    
     public SelectSucursal() {
         initComponents();
         
@@ -47,6 +49,19 @@ public class SelectSucursal extends javax.swing.JFrame {
 
         panSelectSucursal.setBackground(new java.awt.Color(249, 249, 249));
         panSelectSucursal.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(75, 0, 145), 1, true));
+        panSelectSucursal.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                panSelectSucursalMouseDragged(evt);
+            }
+        });
+        panSelectSucursal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                panSelectSucursalMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                panSelectSucursalMouseReleased(evt);
+            }
+        });
 
         lblSelectSucursalSelect.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblSelectSucursalSelect.setForeground(new java.awt.Color(75, 0, 145));
@@ -248,6 +263,53 @@ public class SelectSucursal extends javax.swing.JFrame {
         btnOkSelectSucursal.setForeground(new java.awt.Color(0,0,0));
         panOkSelectSucursal.setBackground(new java.awt.Color(239,232,244));
     }//GEN-LAST:event_btnOkSelectSucursalMouseExited
+
+    // Si se mantiene el click pulsado en la barra superior.
+    private void panSelectSucursalMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panSelectSucursalMousePressed
+        //<editor-fold defaultstate="collapsed" desc=" Explicación sobre el método ">
+        /*
+         * Este método posee dos características:
+         *      1) La opacidad de la aplicación disminuye un 20%.
+         *      2) Se obtiene la ubicación del Mouse en el momento.
+         */
+        
+        // Se coloca la opacidad de la aplicación en 80%.
+        //</editor-fold>
+        setOpacity((float)0.8);
+        
+        // Se obtiene la ubicación del Mouse en el momento.
+        xx = evt.getX(); // Ubicación con respecto al eje X.
+        xy = evt.getY(); // Ubicación con respecto al eje Y.
+    }//GEN-LAST:event_panSelectSucursalMousePressed
+
+    // Si se deja de presionar el click sobre la barra superior.
+    private void panSelectSucursalMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panSelectSucursalMouseReleased
+        //<editor-fold defaultstate="collapsed" desc=" Explicación sobre el método ">
+        /*
+         * Este método devuelve la opacidad de la aplicación a su valor base.
+         */
+        
+        // Se coloca la opacidad de la aplicación en 100%.
+        //</editor-fold>
+        setOpacity((float)1.0);
+    }//GEN-LAST:event_panSelectSucursalMouseReleased
+
+    // Si se mantiene el click pulsado y se mueve a través de la pantalla.
+    private void panSelectSucursalMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panSelectSucursalMouseDragged
+        //<editor-fold defaultstate="collapsed" desc=" Explicación sobre el método ">
+        /*
+         * Este método permite mover la aplicación por toda la pantalla del
+         * computador del usuario.
+         */
+        
+        // Se declaran las variables que obtienen la ubicación de la aplicación.
+        //</editor-fold>
+        int x = evt.getXOnScreen(); // Ubicación con respecto al eje X.
+        int y = evt.getYOnScreen(); // Ubicación con respecto al eje Y.
+        
+        // Se ubica la aplicación en la nueva ubicación.
+        this.setLocation(x - xx, y - xy);
+    }//GEN-LAST:event_panSelectSucursalMouseDragged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

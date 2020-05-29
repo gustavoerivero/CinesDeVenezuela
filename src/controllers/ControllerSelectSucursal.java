@@ -13,17 +13,18 @@ public class ControllerSelectSucursal implements java.awt.event.ActionListener{
     
     // Instancian las clases a utilizar.
     private SelectSucursal selectSucursal;
-    private ControllerMainMenu controllerMainMenu;
     private PopupMessage popup;
+    
+    String sucursal;
     
     public ControllerSelectSucursal(){
         
         // Se declaran las variables.
         selectSucursal = new SelectSucursal();
-        
+                        
         // Se activan los eventos de la interfaz.
         selectSucursal.addEvents(this);
-        
+                      
     }
     
     /*
@@ -40,20 +41,21 @@ public class ControllerSelectSucursal implements java.awt.event.ActionListener{
         // Botón de aceptar.
         else if(evt.getSource() == selectSucursal.btnOkSelectSucursal){
             
-            if(selectSucursal.cmbSelectSucursal.getSelectedIndex() != 0 ||
-                   selectSucursal.cmbSelectCity.getSelectedIndex() != 0  ){
+            //if(selectSucursal.cmbSelectSucursal.getSelectedIndex() != 0 ||
+            //       selectSucursal.cmbSelectCity.getSelectedIndex() != 0  ){
                 
-                // Se envía la sucursal seleccionada al Controlador del MainMenu
-                controllerMainMenu.idSucursal = (String) selectSucursal.cmbSelectSucursal.getSelectedItem();
+                sucursal = (String) selectSucursal.cmbSelectSucursal.getSelectedItem();
+                
                 
                 // Se cierra la interfaz
                 selectSucursal.dispose();
-                
+              /*  
             } else{
                 
-                popup = new PopupMessage(3, "Faltan datos por seleccionar");
+                // Si no se ha seleccionado algún dato (Ciudad o Sucursal)
+                popup = new PopupMessage(1, "Faltan datos por seleccionar");
                 
-            }
+            }*/
         }
         
         // Si se selecciona un elemento del combobox de ciudad.

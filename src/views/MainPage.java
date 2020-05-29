@@ -2039,7 +2039,7 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JLabel lblCinemaSellTittle1;
     private javax.swing.JLabel lblIVACandySell;
     private javax.swing.JLabel lblSubTotalCandySell;
-    private javax.swing.JLabel lblSucursalNameCandySell;
+    public javax.swing.JLabel lblSucursalNameCandySell;
     private javax.swing.JLabel lblTittleOption1;
     private javax.swing.JLabel lblTittleOption2;
     private javax.swing.JLabel lblTittleOption3;
