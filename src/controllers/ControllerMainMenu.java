@@ -3,6 +3,11 @@ package controllers;
 import views.MainPage;
 import views.PopupMessage;
 import lib.SuportFunctions;
+import lib.PDFGenerator;
+
+import java.io.*;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfWriter;
 
 /**
  *
@@ -170,6 +175,53 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
             
             // Aplicar método que retorna los componentes a sus valores iniciales
             mainPage.clearCandySell();
+            
+        }
+        
+        // Realizar la venta de golosinas
+        else if(evt.getSource() == mainPage.btnCandySell){
+            
+            // Se genera un JFileChooser para obtener la ruta en donde se va a guardar los archivos.
+            javax.swing.JFileChooser FileChooser = new javax.swing.JFileChooser();
+            
+            // Se crea una variable para mostrar el JFileChooser
+            int option = FileChooser.showSaveDialog(mainPage);
+            
+            // Cuando se aprueba la ubicación, se obtiene la ruta de guardado
+            if(option == javax.swing.JFileChooser.APPROVE_OPTION){
+                File file = FileChooser.getSelectedFile();
+                
+                // Se transforma la ruta en una variable de tipo String
+                String path = file.toString();
+                
+                try {
+                    
+                    // Se instancia la clase
+                    PDFGenerator g = new PDFGenerator();
+                       
+                    /* 
+                     * Se llama el método generador de ticket para golosinas pasándole
+                     * los parámetros correspondientes.
+                     */
+                    g.pdfCandyTicket(mainPage.txtIdClientCandySell.getText(),
+                            mainPage.cmbCandySeller.getSelectedItem().toString(),
+                            "Sucursal XYZ", 
+                            path + ".pdf",
+                            (int) java.lang.Math.random(),
+                            mainPage.cmbCandySelection.getSelectedItem().toString() + 
+                            " (x" + mainPage.spnCantCandySell.getValue() + ")");
+                    
+                    // Se muestra un mensaje de que la venta fue generada con éxito.
+                    popup = new PopupMessage(4, "La venta se ha realizado exitosamente");
+                    
+                    
+                } catch (Exception e) {
+                    // De producirse un error, se muestra en consola.
+                    System.out.print("Error: " + e);
+                }
+                
+            }
+            
             
         }
         

@@ -5,7 +5,7 @@
             <url>src/controllers/ControllerMainMenu.java</url>
             <bookmark id="1">
                 <name/>
-                <line>8</line>
+                <line>13</line>
                 <key/>
             </bookmark>
         </file>
@@ -14,6 +14,8 @@
         <group>
             <file>file:/C:/Users/Gustavo/Documents/NetBeansProjects/CinesDeVenezuela/src/views/MainPage.java</file>
             <file>file:/C:/Users/Gustavo/Documents/NetBeansProjects/CinesDeVenezuela/src/controllers/ControllerMainMenu.java</file>
+            <file>file:/C:/Users/Gustavo/Documents/NetBeansProjects/CinesDeVenezuela/src/views/PopupMessage.java</file>
+            <file>file:/C:/Users/Gustavo/Documents/NetBeansProjects/CinesDeVenezuela/src/lib/PDFGenerator.java</file>
         </group>
     </open-files>
 </project-private>

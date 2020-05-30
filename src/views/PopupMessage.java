@@ -25,6 +25,9 @@ public class PopupMessage extends javax.swing.JFrame {
             case 3:
                 lblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("images/helpIcon.png")));
                 break;
+            // type == 4 -> Ok
+            case 4:
+                lblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("images/okIcon.png")));
         }
         
         // Colocar el mensaje pasado por parámetro en el JFrame
@@ -185,7 +188,7 @@ public class PopupMessage extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnOkSelectSucursalActionPerformed
 
-    // Si se mantiene el click pulsado en la barra superior.
+    // Si se mantiene el click pulsado en el JPanel.
     private void panPopupMessageMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panPopupMessageMousePressed
         //<editor-fold defaultstate="collapsed" desc=" Explicación sobre el método ">
         /*
@@ -203,7 +206,7 @@ public class PopupMessage extends javax.swing.JFrame {
         xy = evt.getY(); // Ubicación con respecto al eje Y.
     }//GEN-LAST:event_panPopupMessageMousePressed
 
-    // Si se deja de presionar el click sobre la barra superior.
+    // Si se deja de presionar el click sobre el JPanel.
     private void panPopupMessageMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panPopupMessageMouseReleased
         //<editor-fold defaultstate="collapsed" desc=" Explicación sobre el método ">
         /*

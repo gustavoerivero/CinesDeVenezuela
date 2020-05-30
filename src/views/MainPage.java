@@ -1152,7 +1152,7 @@ public class MainPage extends javax.swing.JFrame {
 
         cmbCandySeller.setBackground(new java.awt.Color(249, 249, 249));
         cmbCandySeller.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        cmbCandySeller.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " - Seleccionar - " }));
+        cmbCandySeller.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " - Seleccionar - ", "Esteban Dido", "Ana Tomía", "Armando Casas", " " }));
         cmbCandySeller.setBorder(null);
         cmbCandySeller.setLightWeightPopupEnabled(false);
 
@@ -1161,7 +1161,7 @@ public class MainPage extends javax.swing.JFrame {
 
         cmbCandySelection.setBackground(new java.awt.Color(249, 249, 249));
         cmbCandySelection.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        cmbCandySelection.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " - Seleccionar - " }));
+        cmbCandySelection.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " - Seleccionar - ", "Flips 200g", "Chocolate Savoy 50g", "Perico 5g" }));
         cmbCandySelection.setBorder(null);
 
         tblCandySell.setSelectionBackground(new java.awt.Color(239, 232, 244));
@@ -2060,8 +2060,8 @@ public class MainPage extends javax.swing.JFrame {
     public javax.swing.JButton btnOptionLateral5;
     public javax.swing.JButton btnOptionLateral6;
     private javax.swing.JButton btnSearchClientCandySell;
-    private javax.swing.JComboBox<String> cmbCandySelection;
-    private javax.swing.JComboBox<String> cmbCandySeller;
+    public javax.swing.JComboBox<String> cmbCandySelection;
+    public javax.swing.JComboBox<String> cmbCandySeller;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblADCmark;
     private javax.swing.JLabel lblCDVlogo;
@@ -2134,9 +2134,9 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JSeparator sepTittleOption4;
     private javax.swing.JSeparator sepTittleOption5;
     private javax.swing.JSeparator sepTittleOption6;
-    private javax.swing.JSpinner spnCantCandySell;
+    public javax.swing.JSpinner spnCantCandySell;
     private javax.swing.JTable tblCandySell;
-    private javax.swing.JTextField txtIdClientCandySell;
+    public javax.swing.JTextField txtIdClientCandySell;
     // End of variables declaration//GEN-END:variables
     //</editor-fold>
 }

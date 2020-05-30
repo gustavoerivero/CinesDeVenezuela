@@ -1868,6 +1868,9 @@
                             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtIdClientCandySellMouseClicked"/>
                             <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtIdClientCandySellKeyTyped"/>
                           </Events>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                          </AuxValues>
                         </Component>
                         <Component class="javax.swing.JLabel" name="lblCandySeller">
                           <Properties>
@@ -1886,8 +1889,12 @@
                               <Font name="Arial" size="14" style="0"/>
                             </Property>
                             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                              <StringArray count="1">
+                              <StringArray count="5">
                                 <StringItem index="0" value=" - Seleccionar - "/>
+                                <StringItem index="1" value="Esteban Dido"/>
+                                <StringItem index="2" value="Ana Tom&#xed;a"/>
+                                <StringItem index="3" value="Armando Casas"/>
+                                <StringItem index="4" value=" "/>
                               </StringArray>
                             </Property>
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -1897,6 +1904,7 @@
                           </Properties>
                           <AuxValues>
                             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                           </AuxValues>
                         </Component>
                         <Component class="javax.swing.JLabel" name="lblCandySelection">
@@ -1916,8 +1924,11 @@
                               <Font name="Arial" size="14" style="0"/>
                             </Property>
                             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                              <StringArray count="1">
+                              <StringArray count="4">
                                 <StringItem index="0" value=" - Seleccionar - "/>
+                                <StringItem index="1" value="Flips 200g"/>
+                                <StringItem index="2" value="Chocolate Savoy 50g"/>
+                                <StringItem index="3" value="Perico 5g"/>
                               </StringArray>
                             </Property>
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -1926,6 +1937,7 @@
                           </Properties>
                           <AuxValues>
                             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                           </AuxValues>
                         </Component>
                         <Container class="javax.swing.JScrollPane" name="scpCandySell">
@@ -1995,6 +2007,9 @@
                             </Property>
                             <Property name="opaque" type="boolean" value="false"/>
                           </Properties>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                          </AuxValues>
                         </Component>
                         <Component class="javax.swing.JLabel" name="lblCandySelection2">
                           <Properties>
