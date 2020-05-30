@@ -173,8 +173,6 @@ public class MainPage extends javax.swing.JFrame {
         cmbCandySeller = new javax.swing.JComboBox<>();
         lblCandySelection = new javax.swing.JLabel();
         cmbCandySelection = new javax.swing.JComboBox<>();
-        scpCandySell = new javax.swing.JScrollPane();
-        tblCandySell = new javax.swing.JTable();
         lblSubTotalCandySell = new javax.swing.JLabel();
         lblIVACandySell = new javax.swing.JLabel();
         lblTotalCandySell = new javax.swing.JLabel();
@@ -192,6 +190,8 @@ public class MainPage extends javax.swing.JFrame {
         panButtonCandySell = new javax.swing.JPanel();
         btnCandySell = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
+        scpCandyTable = new javax.swing.JScrollPane();
+        tblCandy = new javax.swing.JTable();
         panCinemaSell = new javax.swing.JPanel();
         btnBackToTicketDecision2 = new javax.swing.JButton();
         sepCinemaSellTittle = new javax.swing.JSeparator();
@@ -1164,9 +1164,6 @@ public class MainPage extends javax.swing.JFrame {
         cmbCandySelection.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " - Seleccionar - ", "Flips 200g", "Chocolate Savoy 50g", "Perico 5g" }));
         cmbCandySelection.setBorder(null);
 
-        tblCandySell.setSelectionBackground(new java.awt.Color(239, 232, 244));
-        scpCandySell.setViewportView(tblCandySell);
-
         lblSubTotalCandySell.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblSubTotalCandySell.setText("Subtotal: ");
 
@@ -1380,6 +1377,27 @@ public class MainPage extends javax.swing.JFrame {
         jSeparator1.setBackground(new java.awt.Color(249, 249, 249));
         jSeparator1.setForeground(new java.awt.Color(75, 0, 145));
 
+        scpCandyTable.setBackground(new java.awt.Color(249, 249, 249));
+
+        tblCandy.setBackground(new java.awt.Color(249, 249, 249));
+        tblCandy.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        scpCandyTable.setViewportView(tblCandy);
+
         javax.swing.GroupLayout panCandySellLayout = new javax.swing.GroupLayout(panCandySell);
         panCandySell.setLayout(panCandySellLayout);
         panCandySellLayout.setHorizontalGroup(
@@ -1428,14 +1446,14 @@ public class MainPage extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)
                                         .addComponent(lblTotalCandySell, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(lblCandySelection2)
-                                    .addComponent(scpCandySell, javax.swing.GroupLayout.PREFERRED_SIZE, 636, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(panCandySellLayout.createSequentialGroup()
                                         .addGroup(panCandySellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(txtIdClientCandySell, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(panSearchClientCandySell, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(356, 356, 356)))
+                                        .addGap(356, 356, 356))
+                                    .addComponent(scpCandyTable))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(19, 19, 19))
             .addComponent(sepCandySellTittle)
@@ -1471,8 +1489,8 @@ public class MainPage extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addComponent(lblCandySelection2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scpCandySell, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(scpCandyTable, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panCandySellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSubTotalCandySell, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblTotalCandySell, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2114,7 +2132,7 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JPanel panTopBar;
     private javax.swing.JPanel panTopBarLateralMenu;
     private javax.swing.JScrollPane scpBodyOption1;
-    private javax.swing.JScrollPane scpCandySell;
+    private javax.swing.JScrollPane scpCandyTable;
     private javax.swing.JSeparator sepBodyOption1;
     private javax.swing.JSeparator sepBodyOption2;
     private javax.swing.JSeparator sepBodyOption3;
@@ -2135,7 +2153,7 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JSeparator sepTittleOption5;
     private javax.swing.JSeparator sepTittleOption6;
     public javax.swing.JSpinner spnCantCandySell;
-    private javax.swing.JTable tblCandySell;
+    private javax.swing.JTable tblCandy;
     public javax.swing.JTextField txtIdClientCandySell;
     // End of variables declaration//GEN-END:variables
     //</editor-fold>
