@@ -18,5 +18,29 @@ public class SuportFunctions {
         base.repaint(); // Actualiza el contenido del JPanel principal.
         base.revalidate(); // Validar el contenido del JPanel principal.
     }
+    
+    //<editor-fold defaultstate="collapsed" desc=" Métodos de validación ">
 
+    // Método para validar números enteros y positivos.
+    public void integerPositiveKeyTyped(java.awt.event.KeyEvent evt){
+        // Se trae el caracter ingresado en el campo de texto correspondiente.
+        char numbers = evt.getKeyChar();
+        // Se aplica la condición para que se elimine o no el caracter.
+        if(numbers < '0' || numbers > '9')
+            // Si cumple la condición, el caracter se elimina.
+            evt.consume();
+    }
+    
+    // Método para validar letras mayúsculas y minúsculas.
+    public void alphabetKeyTiped(java.awt.event.KeyEvent evt){
+        // Se trae el caracter ingresado en el campo de texto correspondiente.
+        char letters = evt.getKeyChar();
+        // Se aplica la condición para que se elimine o no el caracter.
+        if((letters < 'a' || letters > 'z') && (letters < 'A' || letters > 'Z') && (letters != ' '))
+            // Si cumple la condición, el caracter se elimina.
+            evt.consume();
+    }
+    
+    
+    //</editor-fold>
 }

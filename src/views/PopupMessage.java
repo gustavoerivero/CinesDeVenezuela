@@ -1,7 +1,5 @@
 package views;
 
-import lib.SuportFunctions;
-
 /**
  *
  * @author Gustavo
@@ -10,26 +8,22 @@ public class PopupMessage extends javax.swing.JFrame {
     
     int xx = 0, xy = 0;
     
-    private SuportFunctions sf;
-    
     public PopupMessage(int type, String message) {
         initComponents();
                       
-        sf = new SuportFunctions();
-        
         // Identificar el tipo de mensaje
         switch(type){
             // type == 1 -> Error
             case 1:
-                sf.cardSelection(panIcon, panIcon_Error);
+                lblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("images/errorIcon.png")));
                 break;
             // type == 2 -> High Priority
             case 2:
-                sf.cardSelection(panIcon, panIcon_HighPriority);
+                lblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("images/highPriorityIcon.png")));
                 break;
             // type == 3 -> Help
             case 3:
-                sf.cardSelection(panIcon, panIcon_Help);
+                lblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("images/helpIcon.png")));
                 break;
         }
         
@@ -56,13 +50,7 @@ public class PopupMessage extends javax.swing.JFrame {
         lblMessage = new javax.swing.JLabel();
         panOkSelectSucursal = new javax.swing.JPanel();
         btnOkSelectSucursal = new javax.swing.JButton();
-        panIcon = new javax.swing.JPanel();
-        panIcon_Error = new javax.swing.JPanel();
-        lblIcon_Error = new javax.swing.JLabel();
-        panIcon_HighPriority = new javax.swing.JPanel();
-        lblIcon_HighPriority = new javax.swing.JLabel();
-        panIcon_Help = new javax.swing.JPanel();
-        lblIcon_Help = new javax.swing.JLabel();
+        lblIcon = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -133,115 +121,33 @@ public class PopupMessage extends javax.swing.JFrame {
                 .addComponent(btnOkSelectSucursal, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE))
         );
 
-        panIcon.setBackground(new java.awt.Color(249, 249, 249));
-        panIcon.setMinimumSize(new java.awt.Dimension(314, 88));
-        panIcon.setPreferredSize(new java.awt.Dimension(314, 88));
-        panIcon.setLayout(new java.awt.CardLayout());
-
-        panIcon_Error.setBackground(new java.awt.Color(249, 249, 249));
-
-        lblIcon_Error.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblIcon_Error.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/errorIcon.png"))); // NOI18N
-
-        javax.swing.GroupLayout panIcon_ErrorLayout = new javax.swing.GroupLayout(panIcon_Error);
-        panIcon_Error.setLayout(panIcon_ErrorLayout);
-        panIcon_ErrorLayout.setHorizontalGroup(
-            panIcon_ErrorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 314, Short.MAX_VALUE)
-            .addGroup(panIcon_ErrorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(panIcon_ErrorLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(lblIcon_Error, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
-                    .addContainerGap()))
-        );
-        panIcon_ErrorLayout.setVerticalGroup(
-            panIcon_ErrorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 62, Short.MAX_VALUE)
-            .addGroup(panIcon_ErrorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(panIcon_ErrorLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(lblIcon_Error, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
-        );
-
-        panIcon.add(panIcon_Error, "card2");
-
-        panIcon_HighPriority.setBackground(new java.awt.Color(249, 249, 249));
-
-        lblIcon_HighPriority.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblIcon_HighPriority.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/highPriorityIcon.png"))); // NOI18N
-
-        javax.swing.GroupLayout panIcon_HighPriorityLayout = new javax.swing.GroupLayout(panIcon_HighPriority);
-        panIcon_HighPriority.setLayout(panIcon_HighPriorityLayout);
-        panIcon_HighPriorityLayout.setHorizontalGroup(
-            panIcon_HighPriorityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 314, Short.MAX_VALUE)
-            .addGroup(panIcon_HighPriorityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(panIcon_HighPriorityLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(lblIcon_HighPriority, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
-                    .addContainerGap()))
-        );
-        panIcon_HighPriorityLayout.setVerticalGroup(
-            panIcon_HighPriorityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 62, Short.MAX_VALUE)
-            .addGroup(panIcon_HighPriorityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(panIcon_HighPriorityLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(lblIcon_HighPriority, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
-        );
-
-        panIcon.add(panIcon_HighPriority, "card2");
-
-        panIcon_Help.setBackground(new java.awt.Color(249, 249, 249));
-
-        lblIcon_Help.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblIcon_Help.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/helpIcon.png"))); // NOI18N
-
-        javax.swing.GroupLayout panIcon_HelpLayout = new javax.swing.GroupLayout(panIcon_Help);
-        panIcon_Help.setLayout(panIcon_HelpLayout);
-        panIcon_HelpLayout.setHorizontalGroup(
-            panIcon_HelpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 314, Short.MAX_VALUE)
-            .addGroup(panIcon_HelpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(panIcon_HelpLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(lblIcon_Help, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
-                    .addContainerGap()))
-        );
-        panIcon_HelpLayout.setVerticalGroup(
-            panIcon_HelpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 62, Short.MAX_VALUE)
-            .addGroup(panIcon_HelpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(panIcon_HelpLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(lblIcon_Help, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
-        );
-
-        panIcon.add(panIcon_Help, "card2");
+        lblIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout panPopupMessageLayout = new javax.swing.GroupLayout(panPopupMessage);
         panPopupMessage.setLayout(panPopupMessageLayout);
         panPopupMessageLayout.setHorizontalGroup(
             panPopupMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(panPopupMessageLayout.createSequentialGroup()
                 .addGroup(panPopupMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panPopupMessageLayout.createSequentialGroup()
-                        .addGap(80, 80, 80)
-                        .addComponent(panOkSelectSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panPopupMessageLayout.createSequentialGroup()
+                        .addGroup(panPopupMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panPopupMessageLayout.createSequentialGroup()
+                                .addGap(80, 80, 80)
+                                .addComponent(panOkSelectSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panPopupMessageLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(lblMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panPopupMessageLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(lblMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(lblIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         panPopupMessageLayout.setVerticalGroup(
             panPopupMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panPopupMessageLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addComponent(panIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -332,14 +238,8 @@ public class PopupMessage extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnOkSelectSucursal;
-    private javax.swing.JLabel lblIcon_Error;
-    private javax.swing.JLabel lblIcon_Help;
-    private javax.swing.JLabel lblIcon_HighPriority;
+    private javax.swing.JLabel lblIcon;
     private javax.swing.JLabel lblMessage;
-    private javax.swing.JPanel panIcon;
-    private javax.swing.JPanel panIcon_Error;
-    private javax.swing.JPanel panIcon_Help;
-    private javax.swing.JPanel panIcon_HighPriority;
     public javax.swing.JPanel panOkSelectSucursal;
     private javax.swing.JPanel panPopupMessage;
     // End of variables declaration//GEN-END:variables

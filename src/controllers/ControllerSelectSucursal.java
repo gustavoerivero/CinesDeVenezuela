@@ -41,21 +41,20 @@ public class ControllerSelectSucursal implements java.awt.event.ActionListener{
         // Botón de aceptar.
         else if(evt.getSource() == selectSucursal.btnOkSelectSucursal){
             
-            //if(selectSucursal.cmbSelectSucursal.getSelectedIndex() != 0 ||
-            //       selectSucursal.cmbSelectCity.getSelectedIndex() != 0  ){
+            if(selectSucursal.cmbSelectSucursal.getSelectedIndex() != 0 ||
+                   selectSucursal.cmbSelectCity.getSelectedIndex() != 0  ){
                 
-                sucursal = (String) selectSucursal.cmbSelectSucursal.getSelectedItem();
-                
+                //sucursal = (String) selectSucursal.cmbSelectSucursal.getSelectedItem();
                 
                 // Se cierra la interfaz
                 selectSucursal.dispose();
-              /*  
+                
             } else{
                 
                 // Si no se ha seleccionado algún dato (Ciudad o Sucursal)
                 popup = new PopupMessage(1, "Faltan datos por seleccionar");
                 
-            }*/
+            }
         }
         
         // Si se selecciona un elemento del combobox de ciudad.

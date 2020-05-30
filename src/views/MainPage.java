@@ -11,14 +11,14 @@ public class MainPage extends javax.swing.JFrame {
     // Variables de apoyo para conocer la ubicación de la aplicación.
     int xx = 0, xy = 0;
     
-    private SuportFunctions sf;
+    private SuportFunctions suport;
     
     public MainPage() {
         
         // Inicializa todas las variables (o mejor dicho componentes) que usa el JFrame.
         initComponents();
         
-        sf = new SuportFunctions();
+        suport = new SuportFunctions();
         
         // Ubica el JFrame en el centro de la pantalla.
         setLocationRelativeTo(null);
@@ -30,7 +30,7 @@ public class MainPage extends javax.swing.JFrame {
         this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("images/CDV-icon.png")).getImage());
         
         // Iniciar la aplicación en la opción 1 (Home).
-        sf.cardSelection(panContent, panOption1);
+        suport.cardSelection(panContent, panOption1);
                 
     }
     
@@ -85,6 +85,19 @@ public class MainPage extends javax.swing.JFrame {
         
     }
 
+    // Método que retorna los valores iniciales de los componentes de JPanel de Candy Sell
+    public void clearCandySell(){
+        
+        txtIdClientCandySell.setText("Cédula del cliente");
+        cmbCandySeller.setSelectedIndex(0);
+        cmbCandySelection.setSelectedIndex(0);
+        spnCantCandySell.setValue(0);
+        lblSubTotalCandySell.setText("Subtotal: ");
+        lblIVACandySell.setText("IVA (16%): ");
+        lblTotalCandySell.setText("Total: ");
+        
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -1123,6 +1136,16 @@ public class MainPage extends javax.swing.JFrame {
         txtIdClientCandySell.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtIdClientCandySell.setText("Cédula del cliente");
         txtIdClientCandySell.setBorder(null);
+        txtIdClientCandySell.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtIdClientCandySellMouseClicked(evt);
+            }
+        });
+        txtIdClientCandySell.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtIdClientCandySellKeyTyped(evt);
+            }
+        });
 
         lblCandySeller.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblCandySeller.setText("Vendedor:");
@@ -1988,6 +2011,17 @@ public class MainPage extends javax.swing.JFrame {
         btnCandySell.setForeground(new java.awt.Color(0,0,0));
         panButtonCandySell.setBackground(new java.awt.Color(239,232,244));
     }//GEN-LAST:event_btnCandySellMouseExited
+
+    private void txtIdClientCandySellMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtIdClientCandySellMouseClicked
+        txtIdClientCandySell.setText("");
+    }//GEN-LAST:event_txtIdClientCandySellMouseClicked
+
+    private void txtIdClientCandySellKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdClientCandySellKeyTyped
+        if(txtIdClientCandySell.getText().length() < 10)
+            suport.integerPositiveKeyTyped(evt);
+        else
+            evt.consume();
+    }//GEN-LAST:event_txtIdClientCandySellKeyTyped
 
 
         
