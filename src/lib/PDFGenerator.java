@@ -6,7 +6,7 @@ import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.draw.DottedLineSeparator;
 import java.io.*;
-import java.util.Calendar;
+import java.util.*;
 
 /**
  *
@@ -112,7 +112,8 @@ public class PDFGenerator {
         
     // Método para crear el ticket de golosinas
     public void pdfCandyTicket(String name, String seller, String branch, 
-                               String path, int id, String product){
+                               String path, int id, ArrayList<String> product_names,
+                               ArrayList<Integer> product_cants){
         
         // Se crea una variable con la fecha actual del sistema.
         Calendar fecha = new java.util.GregorianCalendar();
@@ -149,7 +150,7 @@ public class PDFGenerator {
             doc.add(setText("NO FISCAL", fontNormal, Element.ALIGN_CENTER));
             doc.add(setText("NO FISCAL:    " + id, fontNormal, Element.ALIGN_JUSTIFIED_ALL));
             doc.add(setText(dma + "   " + hms, fontNormal, Element.ALIGN_JUSTIFIED_ALL));
-            doc.add(new Paragraph("")); // -> Línea en blanco.
+            doc.add(Chunk.NEWLINE); // -> Línea en blanco.
                   
             // Se elabora un DottedLineSeparator con el propósito de dividir el documento con una línea
             DottedLineSeparator dottedline = new DottedLineSeparator();
@@ -159,9 +160,14 @@ public class PDFGenerator {
             // Sección que muestra los productos comprados con su cantidad.
             doc.add(dottedline);
             doc.add(setText("NO FISCAL", fontBold, Element.ALIGN_CENTER));
-            doc.add(setText(product, fontBold, Element.ALIGN_LEFT));
+            for(int i = 0; i < product_names.size(); i++){
+                String product = product_names.get(i) + " (x" + 
+                                 product_cants.get(i) + ")"; 
+                doc.add(setText(product, fontBold, Element.ALIGN_LEFT));
+            }
+            
+            doc.add(Chunk.NEWLINE); // -> Línea en blanco.
             doc.add(dottedline);
-            doc.add(new Paragraph("")); // -> Línea en blanco.
             
             // Footer del documento.
             doc.add(setText("NO FISCAL", fontBold, Element.ALIGN_CENTER));

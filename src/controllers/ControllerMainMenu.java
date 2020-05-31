@@ -1,13 +1,20 @@
+
 package controllers;
 
+// Se importan las views que se van a utilizar
 import views.MainPage;
 import views.PopupMessage;
+
+// Se importan los models que se van a utilizar
+import models.*;
+
+// Se importan las clases de soporte a utilizar
 import lib.SuportFunctions;
 import lib.PDFGenerator;
 
+// Se importan las librerías a utilizar
 import java.io.*;
-import com.itextpdf.text.*;
-import com.itextpdf.text.pdf.PdfWriter;
+import java.util.ArrayList;
 
 /**
  *
@@ -21,6 +28,12 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
     private SuportFunctions suport;
     private PopupMessage popup;
                 
+    ArrayList<Ticket_Candy> candy_list = new ArrayList<Ticket_Candy>();
+    ArrayList<Candy> candies_list = new ArrayList<Candy>();
+    
+    ArrayList<String> names_list = new ArrayList<String>();
+    ArrayList<Integer> cants_list = new ArrayList<Integer>();    
+    
     public ControllerMainMenu(){
         // Declarar la variable de las clases instanciadas.
         mainPage = new MainPage();
@@ -142,12 +155,16 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
         //<editor-fold defaultstate="collapsed" desc=" Botones del MainPage Option 2 ">
         
         //<editor-fold defaultstate="collapsed" desc=" Decisión en la Opción 2 ">
-        
+                
         // Tickets de Golosinas
         else if(evt.getSource() == mainPage.btnCandyDecision){
             mainPage.panCapsuleCandyDecision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239,232,244)));
         
             suport.cardSelection(mainPage.panOption2, mainPage.panCandySell);
+            
+            mainPage.clearCandySell();
+            
+            candy_list.clear();
             
         }
         
@@ -167,6 +184,47 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
             // Instanciar la clase
             cSelectSucursal = new ControllerSelectSucursal();
             
+            
+        }
+        
+        // Agregar golosinas
+        else if(evt.getSource() == mainPage.btnAddCandySell){
+            
+            // Si no se ha seleccionado alguna golosina a agregar.
+            if(mainPage.cmbCandySelection.getSelectedIndex() == 0)
+                // Se muestra un mensaje de que la venta fue generada con éxito.
+                popup = new PopupMessage(1, "Ingrese alguna cantidad de golosinas.");
+            
+            // Si no se ha indicado una cantidad de golosina a agregar.
+            else if((int) mainPage.spnCantCandySell.getValue() == 0)
+                // Se muestra un mensaje de que la venta fue generada con éxito.
+                popup = new PopupMessage(1, "Ingrese alguna cantidad de golosinas.");
+            
+            // Si se seleccionó una golosina y se indicó la cantidad a agregar.
+            else{
+                
+                // Se debe restructurar esta sección con métodos y datos obtenidos de la BD
+                
+                String id = "";
+                int cant = (int) mainPage.spnCantCandySell.getValue();
+                char type_Ticket = '1', estatus = '1';
+                double mount = 5000;
+                
+                String id_candies = mainPage.cmbCandySelection.getSelectedItem().toString();
+                
+                Ticket_Candy ticket_candy = new Ticket_Candy(id, type_Ticket, estatus, id_candies, cant);
+                
+                Candy candy = new Candy(id, id_candies, id, 99, mount, estatus);
+                                
+                candy_list.add(ticket_candy);
+                candies_list.add(candy);
+                
+                mainPage.cmbCandySelection.setSelectedIndex(0);
+                mainPage.spnCantCandySell.setValue((int) 0);
+                                                         
+                showCandiesOnTicket(names_list, cants_list);
+                                
+            }
             
         }
         
@@ -208,8 +266,7 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
                             "Sucursal XYZ", 
                             path + ".pdf",
                             (int) java.lang.Math.random(),
-                            mainPage.cmbCandySelection.getSelectedItem().toString() + 
-                            " (x" + mainPage.spnCantCandySell.getValue() + ")");
+                            names_list, cants_list);
                     
                     // Se muestra un mensaje de que la venta fue generada con éxito.
                     popup = new PopupMessage(4, "La venta se ha realizado exitosamente");
@@ -251,5 +308,84 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
         //</editor-fold>
         
     }
+    
+    // Método para mostrar en la tabla las golosinas seleccionadas.
+    public void showCandiesOnTicket(ArrayList<String> names, ArrayList<Integer> cants){
+        
+        /*
+         * Se crea la matriz que se mostrará en la tabla; las filas corresponden 
+         * a la cantidad de elementos de la lista mientras que las columnas serán 
+         * las 7 por defecto.
+         */
+        String[][] matriz_candy = new String[candy_list.size()][7];
+        
+        // Se crean las variables acumuladoras que mostrarán los montos correspondientes
+        double acum_Sub = 0, acum_IVA = 0, acum_Total = 0;
+        
+        // Se crea un índice 'j'
+        int j = 0;
+        
+        // Se limpian los arrays que se utilizarán para la elaboración del ticket y factura
+        names.clear();
+        cants.clear();
+                
+        for (int i = 0; i < candy_list.size(); i++){
+            
+            // Se inicializa el índice 'j'
+            j = 0;
+            
+            // Se busca el precio del producto
+            while(!candies_list.get(j).getName().equals(candy_list.get(i).getId_candies()))
+                j++;
+            
+            // Se dan valores a los elementos de la matriz
+            matriz_candy[i][0] = candy_list.get(i).getId_candies();
+            matriz_candy[i][1] = String.valueOf(candy_list.get(i).getCant());
+            matriz_candy[i][2] = String.valueOf(candies_list.get(j).getPrice());
+            matriz_candy[i][3] = String.valueOf(candies_list.get(j).getPrice() * 0.16);
+            matriz_candy[i][4] = String.valueOf(candies_list.get(j).getPrice() * 1.16);
+            matriz_candy[i][5] = String.valueOf(candies_list.get(j).getPrice() * 1.16 * candy_list.get(i).getCant());
+            matriz_candy[i][6] = "Botón eliminar";
+            
+            // Los acumuladores son llenados
+            acum_Sub    += candies_list.get(j).getPrice() * candy_list.get(i).getCant();
+            acum_IVA    += candies_list.get(j).getPrice() * 0.16 * candy_list.get(i).getCant();
+            acum_Total  += candies_list.get(j).getPrice() * 1.16 * candy_list.get(i).getCant();
+            
+            // Los arrays son llenados
+            names.add(candy_list.get(i).getId_candies());
+            cants.add(candy_list.get(i).getCant());
+                                        
+        }
+           
+        // La tabla adquiere el formato indicado
+        mainPage.tblCandy.setModel(new javax.swing.table.DefaultTableModel(
+            // Las celdas son llenadas por la información que posee la matriz
+            matriz_candy, 
+            
+            // Se indican las columnas por defecto
+            new String [] {
+                "Golosina", "Cantidad", "Precio (Unidad)", "IVA (Unidad)",
+                "Monto (Unidad)", "Total", "Acción"
+            }){
+                // Ningún campo es editable
+                boolean[] canEdit = new boolean [] {
+                    false, false, false, false, false, false, false
+                };
+                
+                // Se aplican los cambios de celdas editables
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return canEdit [columnIndex];
+                }
+        });
+                       
+        // Se muestran en pantalla la información de los acumuladores
+        mainPage.txtSubTotalCandy.setText(String.valueOf(acum_Sub));
+        mainPage.txtIVACandy.setText(String.valueOf(acum_IVA));
+        mainPage.txtTotalCandy.setText(String.valueOf(acum_Total));
+        
+    
+    }
+    
     
 }

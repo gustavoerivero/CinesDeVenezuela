@@ -92,9 +92,41 @@ public class MainPage extends javax.swing.JFrame {
         cmbCandySeller.setSelectedIndex(0);
         cmbCandySelection.setSelectedIndex(0);
         spnCantCandySell.setValue(0);
-        lblSubTotalCandySell.setText("Subtotal: ");
-        lblIVACandySell.setText("IVA (16%): ");
-        lblTotalCandySell.setText("Total: ");
+        txtSubTotalCandy.setText("");
+        txtIVACandy.setText("");
+        txtTotalCandy.setText("");
+        clearCandyTable(tblCandy);
+        
+    }
+    
+    // Método que retorna a los valores iniciales que posee la tabla de golosinas
+    public void clearCandyTable(javax.swing.JTable table){
+        
+        table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                    {null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null}
+                },
+                new String [] {
+                    "Golosina", "Cantidad", "Precio (Unidad)", "IVA (Unidad)", 
+                    "Monto (Unidad)", "Total", "Acción"
+                }
+            )   {
+                    boolean[] canEdit = new boolean [] {
+                        false, false, false, false, false, false
+                    };
+
+                    public boolean isCellEditable(int rowIndex, int columnIndex) {
+                        return canEdit [columnIndex];
+                    }
+        });
         
     }
     
@@ -192,6 +224,9 @@ public class MainPage extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         scpCandyTable = new javax.swing.JScrollPane();
         tblCandy = new javax.swing.JTable();
+        txtSubTotalCandy = new javax.swing.JTextField();
+        txtIVACandy = new javax.swing.JTextField();
+        txtTotalCandy = new javax.swing.JTextField();
         panCinemaSell = new javax.swing.JPanel();
         btnBackToTicketDecision2 = new javax.swing.JButton();
         sepCinemaSellTittle = new javax.swing.JSeparator();
@@ -1152,7 +1187,7 @@ public class MainPage extends javax.swing.JFrame {
 
         cmbCandySeller.setBackground(new java.awt.Color(249, 249, 249));
         cmbCandySeller.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        cmbCandySeller.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " - Seleccionar - ", "Esteban Dido", "Ana Tomía", "Armando Casas", " " }));
+        cmbCandySeller.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " - Seleccionar - ", "Esteban Dido", "Ana Tomía", "Armando Casas" }));
         cmbCandySeller.setBorder(null);
         cmbCandySeller.setLightWeightPopupEnabled(false);
 
@@ -1382,21 +1417,46 @@ public class MainPage extends javax.swing.JFrame {
         tblCandy.setBackground(new java.awt.Color(249, 249, 249));
         tblCandy.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Golosina", "Cantidad", "Precio (Unidad)", "IVA (Unidad)", "Monto (Unidad)", "Total", "Acción"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblCandy.setSelectionBackground(new java.awt.Color(75, 0, 145));
+        tblCandy.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         scpCandyTable.setViewportView(tblCandy);
+
+        txtSubTotalCandy.setEditable(false);
+        txtSubTotalCandy.setBackground(new java.awt.Color(249, 249, 249));
+        txtSubTotalCandy.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtSubTotalCandy.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+        txtIVACandy.setEditable(false);
+        txtIVACandy.setBackground(new java.awt.Color(249, 249, 249));
+        txtIVACandy.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtIVACandy.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+        txtTotalCandy.setEditable(false);
+        txtTotalCandy.setBackground(new java.awt.Color(249, 249, 249));
+        txtTotalCandy.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtTotalCandy.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         javax.swing.GroupLayout panCandySellLayout = new javax.swing.GroupLayout(panCandySell);
         panCandySell.setLayout(panCandySellLayout);
@@ -1440,11 +1500,17 @@ public class MainPage extends javax.swing.JFrame {
                                 .addGroup(panCandySellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(panCandySellLayout.createSequentialGroup()
                                         .addGap(1, 1, 1)
-                                        .addComponent(lblSubTotalCandySell, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(19, 19, 19)
-                                        .addComponent(lblIVACandySell, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(lblTotalCandySell, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(lblSubTotalCandySell)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtSubTotalCandy, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lblIVACandySell)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtIVACandy, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lblTotalCandySell)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtTotalCandy))
                                     .addComponent(lblCandySelection2)
                                     .addGroup(panCandySellLayout.createSequentialGroup()
                                         .addGroup(panCandySellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1478,7 +1544,7 @@ public class MainPage extends javax.swing.JFrame {
                         .addComponent(cmbCandySeller, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
                         .addComponent(lblCandySeller, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtIdClientCandySell, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panCandySellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panCandySellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lblCantCandySell)
@@ -1491,10 +1557,14 @@ public class MainPage extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scpCandyTable, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panCandySellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSubTotalCandySell, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblTotalCandySell, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblIVACandySell, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panCandySellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtSubTotalCandy, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panCandySellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblSubTotalCandySell, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblTotalCandySell, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblIVACandySell, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtIVACandy, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtTotalCandy, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(panCandySellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(panButtonCandySell, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -2089,8 +2159,8 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JLabel lblCandySeller;
     private javax.swing.JLabel lblCantCandySell;
     private javax.swing.JLabel lblCinemaSellTittle1;
-    private javax.swing.JLabel lblIVACandySell;
-    private javax.swing.JLabel lblSubTotalCandySell;
+    public javax.swing.JLabel lblIVACandySell;
+    public javax.swing.JLabel lblSubTotalCandySell;
     public javax.swing.JLabel lblSucursalNameCandySell;
     private javax.swing.JLabel lblTittleOption1;
     private javax.swing.JLabel lblTittleOption2;
@@ -2098,7 +2168,7 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JLabel lblTittleOption4;
     private javax.swing.JLabel lblTittleOption5;
     private javax.swing.JLabel lblTittleOption6;
-    private javax.swing.JLabel lblTotalCandySell;
+    public javax.swing.JLabel lblTotalCandySell;
     private javax.swing.JPanel panAddCandySell;
     public javax.swing.JPanel panBodyOption1;
     public javax.swing.JPanel panBodyOption2;
@@ -2153,8 +2223,11 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JSeparator sepTittleOption5;
     private javax.swing.JSeparator sepTittleOption6;
     public javax.swing.JSpinner spnCantCandySell;
-    private javax.swing.JTable tblCandy;
+    public javax.swing.JTable tblCandy;
+    public javax.swing.JTextField txtIVACandy;
     public javax.swing.JTextField txtIdClientCandySell;
+    public javax.swing.JTextField txtSubTotalCandy;
+    public javax.swing.JTextField txtTotalCandy;
     // End of variables declaration//GEN-END:variables
     //</editor-fold>
 }
