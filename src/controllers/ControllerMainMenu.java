@@ -208,7 +208,7 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
                 String id = "";
                 int cant = (int) mainPage.spnCantCandySell.getValue();
                 char type_Ticket = '1', estatus = '1';
-                double mount = 5000;
+                double mount = ((int) (Math.random() * 5) + 1) * 2500;
                 
                 String id_candies = mainPage.cmbCandySelection.getSelectedItem().toString();
                 
@@ -242,15 +242,17 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
             // Se genera un JFileChooser para obtener la ruta en donde se va a guardar los archivos.
             javax.swing.JFileChooser FileChooser = new javax.swing.JFileChooser();
             
+            // Se configura el JFileChooser para que solo obtenga la ruta donde se desea guardar los archivos.
+            FileChooser.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
+            
             // Se crea una variable para mostrar el JFileChooser
             int option = FileChooser.showSaveDialog(mainPage);
             
             // Cuando se aprueba la ubicación, se obtiene la ruta de guardado
             if(option == javax.swing.JFileChooser.APPROVE_OPTION){
-                File file = FileChooser.getSelectedFile();
-                
-                // Se transforma la ruta en una variable de tipo String
-                String path = file.toString();
+                String path = FileChooser.getSelectedFile().getPath();
+                         
+            path += "/0001"; // -> Colocar el id del ticket o factura.
                 
                 try {
                     
@@ -264,8 +266,8 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
                     g.pdfCandyTicket(mainPage.txtIdClientCandySell.getText(),
                             mainPage.cmbCandySeller.getSelectedItem().toString(),
                             "Sucursal XYZ", 
-                            path + ".pdf",
-                            (int) java.lang.Math.random(),
+                            path,
+                            (int) java.lang.Math.random() * 5000,
                             names_list, cants_list);
                     
                     // Se muestra un mensaje de que la venta fue generada con éxito.
@@ -338,19 +340,22 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
             while(!candies_list.get(j).getName().equals(candy_list.get(i).getId_candies()))
                 j++;
             
+            double price = suport.numberDecimalFormat(candies_list.get(j).getPrice(), 2);
+            int cant = candy_list.get(i).getCant();
+            
             // Se dan valores a los elementos de la matriz
             matriz_candy[i][0] = candy_list.get(i).getId_candies();
-            matriz_candy[i][1] = String.valueOf(candy_list.get(i).getCant());
-            matriz_candy[i][2] = String.valueOf(candies_list.get(j).getPrice());
-            matriz_candy[i][3] = String.valueOf(candies_list.get(j).getPrice() * 0.16);
-            matriz_candy[i][4] = String.valueOf(candies_list.get(j).getPrice() * 1.16);
-            matriz_candy[i][5] = String.valueOf(candies_list.get(j).getPrice() * 1.16 * candy_list.get(i).getCant());
+            matriz_candy[i][1] = String.valueOf(cant);
+            matriz_candy[i][2] = String.valueOf(price);
+            matriz_candy[i][3] = String.valueOf(suport.numberDecimalFormat(price * 0.16, 2));
+            matriz_candy[i][4] = String.valueOf(suport.numberDecimalFormat(price * 1.16, 2));
+            matriz_candy[i][5] = String.valueOf(suport.numberDecimalFormat(price * 1.16 * cant, 2));
             matriz_candy[i][6] = "Botón eliminar";
             
             // Los acumuladores son llenados
-            acum_Sub    += candies_list.get(j).getPrice() * candy_list.get(i).getCant();
-            acum_IVA    += candies_list.get(j).getPrice() * 0.16 * candy_list.get(i).getCant();
-            acum_Total  += candies_list.get(j).getPrice() * 1.16 * candy_list.get(i).getCant();
+            acum_Sub    += suport.numberDecimalFormat(price * cant, 2);
+            acum_IVA    += suport.numberDecimalFormat(price * cant * 0.16, 2);
+            acum_Total  += suport.numberDecimalFormat(price * 1.16 * cant, 2);
             
             // Los arrays son llenados
             names.add(candy_list.get(i).getId_candies());

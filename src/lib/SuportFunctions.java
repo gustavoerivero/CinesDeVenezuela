@@ -43,4 +43,12 @@ public class SuportFunctions {
     
     
     //</editor-fold>
+    
+    // Métodos para dar formato a números.
+    
+    // Método para dar cantidad de decimales a un número.
+    public Double numberDecimalFormat(Double number, Integer decimal){
+        return Math.round(number * Math.pow(10, decimal)) / Math.pow(10, decimal);
+    }
+    
 }

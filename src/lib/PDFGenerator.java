@@ -136,7 +136,7 @@ public class PDFGenerator {
             Document doc = new Document(PageSize.B7, 14, 14, 8, 8);
             
             // Indica la ubicación en donde se guardará el documento.
-            PdfWriter.getInstance(doc, new FileOutputStream(path));
+            PdfWriter.getInstance(doc, new FileOutputStream(path + " Ticket.pdf"));
             
             // Se abre el documento para comenzar con su creación.
             doc.open();
@@ -171,6 +171,151 @@ public class PDFGenerator {
             
             // Footer del documento.
             doc.add(setText("NO FISCAL", fontBold, Element.ALIGN_CENTER));
+            
+            // Se cierra la creación del documento.
+            doc.close();
+            
+        } catch (Exception e) {
+            
+            // Si existe algún error en la creación del documento, se muestra en consola.
+            System.out.print("Error: " + e);
+            
+        }
+        
+    }
+    
+    // Método para crear facturas
+    public void pdfInvoice( ArrayList<String> data_enterprise, ArrayList<String> data_seller, 
+                            ArrayList<String> data_client, ArrayList<String> id_ticket, 
+                            char type_ticket, String id_invoice, ArrayList<String> product_names, 
+                            ArrayList<Integer> product_cants, ArrayList<Double> product_amounts, 
+                            String path){
+        
+        // Se crea una variable con la fecha actual del sistema.
+        Calendar fecha = new java.util.GregorianCalendar();
+            
+        // Se fragmentan los elementos de fecha.
+        int año = fecha.get(Calendar.YEAR);
+        int mes = fecha.get(Calendar.MONTH);
+        int dia = fecha.get(Calendar.DAY_OF_MONTH);
+        int hora = fecha.get(Calendar.HOUR_OF_DAY);
+        int minuto = fecha.get(Calendar.MINUTE);
+        int segundo = fecha.get(Calendar.SECOND);
+            
+        // Se crean las variables de tipo String con los datos de la fecha.
+        String dma = "FECHA: " + dia + "/" + mes + "/" + año;
+        String hms = "HORA: " + hora + ":" + minuto + ":" + segundo;
+        
+        try {
+            
+            // Se crea el documento con las dimensiones y márgenes indicados.
+            Document doc = new Document(PageSize.B7, 14, 14, 8, 8);
+            
+            // Indica la ubicación en donde se guardará el documento.
+            PdfWriter.getInstance(doc, new FileOutputStream(path + " Invoice.pdf"));
+            
+            // Se abre el documento para comenzar con su creación.
+            doc.open();
+            
+            // Se añade la información.
+            doc.add(setText("SENIAT", fontLittleBold, Element.ALIGN_CENTER));
+            
+            // Se indica el id de la Empresa.
+            doc.add(setText(data_enterprise.get(0), fontLittleBold, Element.ALIGN_CENTER));
+            
+            // Se añaden los demás datos de la Sucursal
+            for(int i = 1; i < data_enterprise.size(); i++)
+                doc.add(setText(data_enterprise.get(i), fontLittleNormal, Element.ALIGN_CENTER));
+            
+            // Se añaden los datos del vendedor.
+            for(int i = 0; i < data_seller.size(); i++)
+                doc.add(setText(data_seller.get(i), fontLittleNormal, Element.ALIGN_LEFT));
+            
+            // Se añaden los datos del cliente.
+            for(int i = 0; i < data_client.size(); i++)
+                doc.add(setText(data_client.get(i), fontLittleNormal, Element.ALIGN_LEFT));
+            
+            // Si el ticket es de tipo '1' se imprime una factura de golosinas.
+            if(type_ticket == '1')
+                doc.add(setText("Ticket de golosinas N°: " + id_ticket.get(0), fontLittleNormal, Element.ALIGN_LEFT));
+            // Si el ticket es de tipo '2' se imprime una factura de funciones
+            else
+                doc.add(setText("Ticket de funciones", fontLittleNormal, Element.ALIGN_LEFT));
+                    
+            // Se añaden los datos de factura y del momento en el que se hizo el pago
+            doc.add(setText("FACTURA", fontLittleNormal, Element.ALIGN_CENTER));
+            doc.add(setText("FACTURA:    " + id_invoice, fontLittleNormal, Element.ALIGN_JUSTIFIED_ALL));
+            doc.add(setText(dma + "   " + hms, fontLittleNormal, Element.ALIGN_JUSTIFIED_ALL));
+            
+            doc.add(Chunk.NEWLINE); // -> Línea en blanco.
+                  
+            // Se elabora un DottedLineSeparator con el propósito de dividir el documento con una línea
+            DottedLineSeparator dottedline = new DottedLineSeparator();
+            dottedline.setOffset(-2);
+            dottedline.setGap(2f);
+            
+            // Sección que muestra los productos comprados con su cantidad.
+            doc.add(dottedline);
+            
+            // Se crean variables para mostrar montos.
+            double amount = 0, amount_ajust = 0, total = 0;
+            
+            // Si el ticket es de tipo '1' se muestra el detalle de las golosinas compradas.
+            if(type_ticket == '1'){
+                
+                // Se inicia un ciclo para mostrar todas las golosinas compradas.
+                for(int i = 0; i < product_names.size(); i++){
+                    
+                    // Se hace el cálculo de precio por cantidad del producto.
+                    amount = product_amounts.get(i) * product_cants.get(i);
+                    
+                    // Se ajusta el monto para que muestre solo dos decimales.
+                    amount_ajust = Math.round(amount * Math.pow(10, 2)) / Math.pow(10, 2);
+                    
+                    // Se acumula el monto.
+                    total += amount_ajust;
+                    
+                    // Se crea la variable String a mostrar.
+                    String product =    product_names.get(i) + " (x" + product_cants.get(i) + ") Bs "
+                                         + String.valueOf(amount_ajust); 
+                    
+                    // Se muestra la variable String.
+                    doc.add(setText(product, fontLittleNormal, Element.ALIGN_LEFT));
+                    
+                }
+            }
+            // Si el ticket es de tipo '2' se muestra el detalle de los tickets de funciones comprados.
+            else{
+                
+                // Se inicia un ciclo para mostrar los tickets de funciones comprados.
+                for(int i = 0; i < product_names.size(); i++){
+                    
+                    // Se obtiene el monto del ticket.
+                    amount = product_amounts.get(i);
+                    
+                    // Se ajusta el monto para que muestre solo dos decimales.
+                    amount_ajust = Math.round(amount * Math.pow(10, 2)) / Math.pow(10, 2);
+                    
+                    // Se acumula el monto.
+                    total += amount_ajust;
+                    
+                    // Se crea la variable String a mostrar.
+                    String product =    product_names.get(i) + " " + id_ticket.get(i) + 
+                                        " Bs " + String.valueOf(amount_ajust); 
+                    
+                    // Se muestra la variable String.
+                    doc.add(setText(product, fontLittleNormal, Element.ALIGN_LEFT));
+                    
+                }
+                
+            }
+                          
+            doc.add(Chunk.NEWLINE); // -> Línea en blanco.
+            doc.add(dottedline);
+                                        
+            // Footer del documento.
+            doc.add(setText("TOTAL: Bs" + String.valueOf(total), fontBold, Element.ALIGN_JUSTIFIED_ALL));
+            
             
             // Se cierra la creación del documento.
             doc.close();
