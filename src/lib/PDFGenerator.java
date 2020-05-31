@@ -120,7 +120,7 @@ public class PDFGenerator {
             
         // Se fragmentan los elementos de fecha.
         int año = fecha.get(Calendar.YEAR);
-        int mes = fecha.get(Calendar.MONTH);
+        int mes = fecha.get(Calendar.MONTH) + 1; // Se suma un valor puesto que el mes es un vector que inicia en '0'
         int dia = fecha.get(Calendar.DAY_OF_MONTH);
         int hora = fecha.get(Calendar.HOUR_OF_DAY);
         int minuto = fecha.get(Calendar.MINUTE);
@@ -196,7 +196,7 @@ public class PDFGenerator {
             
         // Se fragmentan los elementos de fecha.
         int año = fecha.get(Calendar.YEAR);
-        int mes = fecha.get(Calendar.MONTH);
+        int mes = fecha.get(Calendar.MONTH) + 1; // Se suma un valor puesto que el mes es un vector que inicia en '0'
         int dia = fecha.get(Calendar.DAY_OF_MONTH);
         int hora = fecha.get(Calendar.HOUR_OF_DAY);
         int minuto = fecha.get(Calendar.MINUTE);
@@ -216,7 +216,7 @@ public class PDFGenerator {
             
             // Se abre el documento para comenzar con su creación.
             doc.open();
-            
+                        
             // Se añade la información.
             doc.add(setText("SENIAT", fontLittleBold, Element.ALIGN_CENTER));
             
@@ -314,7 +314,7 @@ public class PDFGenerator {
             doc.add(dottedline);
                                         
             // Footer del documento.
-            doc.add(setText("TOTAL: Bs" + String.valueOf(total), fontBold, Element.ALIGN_JUSTIFIED_ALL));
+            doc.add(setText("TOTAL: Bs" + String.valueOf(total), fontLittleBold, Element.ALIGN_JUSTIFIED_ALL));
             
             
             // Se cierra la creación del documento.

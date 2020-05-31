@@ -31,8 +31,15 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
     ArrayList<Ticket_Candy> candy_list = new ArrayList<Ticket_Candy>();
     ArrayList<Candy> candies_list = new ArrayList<Candy>();
     
+    ArrayList<String> enterprise_data = new ArrayList<String>();
+    ArrayList<String> seller_list = new ArrayList<String>();
+    ArrayList<String> client_data = new ArrayList<String>();
+    
+    ArrayList<String> id_tickets = new ArrayList<String>();
+    
     ArrayList<String> names_list = new ArrayList<String>();
-    ArrayList<Integer> cants_list = new ArrayList<Integer>();    
+    ArrayList<Integer> cants_list = new ArrayList<Integer>(); 
+    ArrayList<Double> amounts_list = new ArrayList<Double>();
     
     public ControllerMainMenu(){
         // Declarar la variable de las clases instanciadas.
@@ -222,7 +229,7 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
                 mainPage.cmbCandySelection.setSelectedIndex(0);
                 mainPage.spnCantCandySell.setValue((int) 0);
                                                          
-                showCandiesOnTicket(names_list, cants_list);
+                showCandiesOnTicket(names_list, cants_list, amounts_list);
                                 
             }
             
@@ -270,6 +277,39 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
                             (int) java.lang.Math.random() * 5000,
                             names_list, cants_list);
                     
+                    // Valores de prueba (Se debe borrar y sustituir por valores de la BD
+                    
+                    enterprise_data.add("J-31476980");
+                    enterprise_data.add("CINES DE VENEZUELA, C.A.");
+                    enterprise_data.add("AV. YATUSABE CON AV. WATAGATAPITUSBERRY");
+                    enterprise_data.add("TOSCANA, ITALIA");
+                    enterprise_data.add("TELEFONO: 02512611243");
+                    enterprise_data.add("Correo: cinesdevenezuela@gmail.com");
+                    
+                    seller_list.add("Vendedor: " + 
+                                    mainPage.cmbCandySeller.getSelectedItem().toString());
+                    seller_list.add("C.I./R.I.F. : v-7559054");
+                    
+                    client_data.add("Cliente: Analiza Meltrozo");
+                    client_data.add("C.I./R.I.F. : v-" + 
+                                    mainPage.txtIdClientCandySell.getText());
+                    client_data.add("Dirc: urb. Pandemonium");
+                    client_data.add("Tlf: 04149561231");
+                    
+                    id_tickets.add(String.valueOf((int) java.lang.Math.random() * 5000));
+                    
+                    
+                    
+                    g.pdfInvoice(   enterprise_data, 
+                                    seller_list, 
+                                    client_data, 
+                                    id_tickets, 
+                                    '1', String.valueOf((int) java.lang.Math.random() * 5000), 
+                                    names_list, 
+                                    cants_list, 
+                                    amounts_list, 
+                                    path);
+                    
                     // Se muestra un mensaje de que la venta fue generada con éxito.
                     popup = new PopupMessage(4, "La venta se ha realizado exitosamente");
                     
@@ -312,7 +352,8 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
     }
     
     // Método para mostrar en la tabla las golosinas seleccionadas.
-    public void showCandiesOnTicket(ArrayList<String> names, ArrayList<Integer> cants){
+    public void showCandiesOnTicket(ArrayList<String> names, ArrayList<Integer> cants,
+                                    ArrayList<Double> amounts){
         
         /*
          * Se crea la matriz que se mostrará en la tabla; las filas corresponden 
@@ -330,6 +371,7 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
         // Se limpian los arrays que se utilizarán para la elaboración del ticket y factura
         names.clear();
         cants.clear();
+        amounts.clear();        
                 
         for (int i = 0; i < candy_list.size(); i++){
             
@@ -359,7 +401,8 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
             
             // Los arrays son llenados
             names.add(candy_list.get(i).getId_candies());
-            cants.add(candy_list.get(i).getCant());
+            cants.add(cant);
+            amounts.add(suport.numberDecimalFormat(price * 1.16, 2));
                                         
         }
            
