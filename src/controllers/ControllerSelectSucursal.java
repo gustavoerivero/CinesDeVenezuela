@@ -15,7 +15,7 @@ public class ControllerSelectSucursal implements java.awt.event.ActionListener{
     private SelectSucursal selectSucursal;
     private PopupMessage popup;
     
-    String sucursal;
+    public String sucursal;
     
     public ControllerSelectSucursal(){
         
@@ -24,7 +24,22 @@ public class ControllerSelectSucursal implements java.awt.event.ActionListener{
                         
         // Se activan los eventos de la interfaz.
         selectSucursal.addEvents(this);
-                      
+        
+        selectSucursal.cmbSelectCity.setSelectedIndex(0);
+        selectSucursal.cmbSelectSucursal.setSelectedIndex(0);
+        
+        sucursal = "";
+                              
+    }
+    
+    // Agregar el nombre de la sucursal a la variable.
+    public void setId_Sucursal(String id){
+        this.sucursal = id;
+    }
+    
+    // Obteneer el nombre de la sucursal.
+    public String getId_Sucursal(){
+        return sucursal;
     }
     
     /*
@@ -44,15 +59,16 @@ public class ControllerSelectSucursal implements java.awt.event.ActionListener{
             if(selectSucursal.cmbSelectSucursal.getSelectedIndex() != 0 ||
                    selectSucursal.cmbSelectCity.getSelectedIndex() != 0  ){
                 
-                //sucursal = (String) selectSucursal.cmbSelectSucursal.getSelectedItem();
-                
+                setId_Sucursal((String) selectSucursal.cmbSelectSucursal.getSelectedItem());
+                                
                 // Se cierra la interfaz
                 selectSucursal.dispose();
                 
             } else{
                 
                 // Si no se ha seleccionado algún dato (Ciudad o Sucursal)
-                popup = new PopupMessage(1, "Faltan datos por seleccionar");
+                popup = new PopupMessage(selectSucursal, true, 
+                                         1, "Faltan datos por seleccionar");
                 
             }
         }

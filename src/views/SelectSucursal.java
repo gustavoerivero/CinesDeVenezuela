@@ -1,4 +1,8 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package views;
 
 /**
@@ -10,6 +14,7 @@ public class SelectSucursal extends javax.swing.JFrame {
     int xx = 0, xy = 0;
     
     public SelectSucursal() {
+                
         initComponents();
         
         // Ubica el JFrame en el centro de la pantalla.
@@ -20,6 +25,13 @@ public class SelectSucursal extends javax.swing.JFrame {
         
         // Cambia el ícono del JFrame.
         this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("images/CDV-icon.png")).getImage());
+        
+    }
+
+    public void addEvents(java.awt.event.ActionListener evt){
+        
+        btnCloseSelectSucursal.addActionListener(evt);
+        btnOkSelectSucursal.addActionListener(evt);
         
     }
     
@@ -70,7 +82,7 @@ public class SelectSucursal extends javax.swing.JFrame {
 
         cmbSelectCity.setBackground(new java.awt.Color(249, 249, 249));
         cmbSelectCity.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        cmbSelectCity.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " - Seleccionar - " }));
+        cmbSelectCity.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " - Seleccionar - ", "Toscana", "Venecia", "Florencia" }));
         cmbSelectCity.setBorder(null);
         cmbSelectCity.setLightWeightPopupEnabled(false);
 
@@ -82,7 +94,7 @@ public class SelectSucursal extends javax.swing.JFrame {
 
         cmbSelectSucursal.setBackground(new java.awt.Color(249, 249, 249));
         cmbSelectSucursal.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        cmbSelectSucursal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " - Seleccionar - " }));
+        cmbSelectSucursal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " - Seleccionar - ", "Cines de Venezuela. Toscana", "Cines de Venezuela. Venecia" }));
         cmbSelectSucursal.setBorder(null);
         cmbSelectSucursal.setLightWeightPopupEnabled(false);
 
@@ -184,7 +196,7 @@ public class SelectSucursal extends javax.swing.JFrame {
                             .addComponent(lblSelectSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(cmbSelectSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
         panSelectSucursalLayout.setVerticalGroup(
             panSelectSucursalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,14 +215,14 @@ public class SelectSucursal extends javax.swing.JFrame {
                 .addGroup(panSelectSucursalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(panCloseSelectSucursal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panOkSelectSucursal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panSelectSucursal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panSelectSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,96 +232,77 @@ public class SelectSucursal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    //<editor-fold defaultstate="collapsed" desc=" Explicación sobre el Método ">
-    /*
-     * ========================================================================
-     * addEvents es un método que se activa al realizar una acción (presionar 
-     * click sobre algún componente) añadiendo este evento a una lista que será
-     * manejada con mayor profundidad en el Controlador correspondiente.
-     * ========================================================================
-     */
-    //</editor-fold>
-    
-    public void addEvents(java.awt.event.ActionListener evt){
-        btnCloseSelectSucursal.addActionListener(evt);
-        btnOkSelectSucursal.addActionListener(evt);    
-        cmbSelectCity.addActionListener(evt);
-    }
-    
-    // Si el Mouse se sitúa en el botón de cerrar.
     private void btnCloseSelectSucursalMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseSelectSucursalMouseMoved
         panCloseSelectSucursal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
         btnCloseSelectSucursal.setForeground(new java.awt.Color(255,255,255));
         panCloseSelectSucursal.setBackground(new java.awt.Color(66,0,124));
     }//GEN-LAST:event_btnCloseSelectSucursalMouseMoved
 
-    // Si el Mouse sale del área del botón de cerrar.
     private void btnCloseSelectSucursalMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseSelectSucursalMouseExited
         panCloseSelectSucursal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
         btnCloseSelectSucursal.setForeground(new java.awt.Color(0,0,0));
         panCloseSelectSucursal.setBackground(new java.awt.Color(239,232,244));
     }//GEN-LAST:event_btnCloseSelectSucursalMouseExited
 
-    // Si el Mouse se sitúa en el botón de Aceptar.
     private void btnOkSelectSucursalMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOkSelectSucursalMouseMoved
         panOkSelectSucursal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
         btnOkSelectSucursal.setForeground(new java.awt.Color(255,255,255));
         panOkSelectSucursal.setBackground(new java.awt.Color(66,0,124));
     }//GEN-LAST:event_btnOkSelectSucursalMouseMoved
 
-    // Si el Mouse sale del área del botón de Aceptar.
     private void btnOkSelectSucursalMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOkSelectSucursalMouseExited
         panOkSelectSucursal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
         btnOkSelectSucursal.setForeground(new java.awt.Color(0,0,0));
         panOkSelectSucursal.setBackground(new java.awt.Color(239,232,244));
     }//GEN-LAST:event_btnOkSelectSucursalMouseExited
 
-    // Si se mantiene el click pulsado en la barra superior.
+    private void panSelectSucursalMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panSelectSucursalMouseDragged
+        //<editor-fold defaultstate="collapsed" desc=" Explicación sobre el método ">
+        /*
+        * Este método permite mover la aplicación por toda la pantalla del
+        * computador del usuario.
+        */
+
+        // Se declaran las variables que obtienen la ubicación de la aplicación.
+        //</editor-fold>
+        int x = evt.getXOnScreen(); // Ubicación con respecto al eje X.
+        int y = evt.getYOnScreen(); // Ubicación con respecto al eje Y.
+
+        // Se ubica la aplicación en la nueva ubicación.
+        this.setLocation(x - xx, y - xy);
+    }//GEN-LAST:event_panSelectSucursalMouseDragged
+
     private void panSelectSucursalMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panSelectSucursalMousePressed
         //<editor-fold defaultstate="collapsed" desc=" Explicación sobre el método ">
         /*
-         * Este método posee dos características:
-         *      1) La opacidad de la aplicación disminuye un 20%.
-         *      2) Se obtiene la ubicación del Mouse en el momento.
-         */
-        
+        * Este método posee dos características:
+        *      1) La opacidad de la aplicación disminuye un 20%.
+        *      2) Se obtiene la ubicación del Mouse en el momento.
+        */
+
         // Se coloca la opacidad de la aplicación en 80%.
         //</editor-fold>
         setOpacity((float)0.8);
-        
+
         // Se obtiene la ubicación del Mouse en el momento.
         xx = evt.getX(); // Ubicación con respecto al eje X.
         xy = evt.getY(); // Ubicación con respecto al eje Y.
     }//GEN-LAST:event_panSelectSucursalMousePressed
 
-    // Si se deja de presionar el click sobre la barra superior.
     private void panSelectSucursalMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panSelectSucursalMouseReleased
         //<editor-fold defaultstate="collapsed" desc=" Explicación sobre el método ">
         /*
-         * Este método devuelve la opacidad de la aplicación a su valor base.
-         */
-        
+        * Este método devuelve la opacidad de la aplicación a su valor base.
+        */
+
         // Se coloca la opacidad de la aplicación en 100%.
         //</editor-fold>
         setOpacity((float)1.0);
     }//GEN-LAST:event_panSelectSucursalMouseReleased
 
-    // Si se mantiene el click pulsado y se mueve a través de la pantalla.
-    private void panSelectSucursalMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panSelectSucursalMouseDragged
-        //<editor-fold defaultstate="collapsed" desc=" Explicación sobre el método ">
-        /*
-         * Este método permite mover la aplicación por toda la pantalla del
-         * computador del usuario.
-         */
-        
-        // Se declaran las variables que obtienen la ubicación de la aplicación.
-        //</editor-fold>
-        int x = evt.getXOnScreen(); // Ubicación con respecto al eje X.
-        int y = evt.getYOnScreen(); // Ubicación con respecto al eje Y.
-        
-        // Se ubica la aplicación en la nueva ubicación.
-        this.setLocation(x - xx, y - xy);
-    }//GEN-LAST:event_panSelectSucursalMouseDragged
+    /**
+     * @param args the command line arguments
+     */
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

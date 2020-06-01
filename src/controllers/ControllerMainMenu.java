@@ -13,7 +13,6 @@ import lib.SuportFunctions;
 import lib.PDFGenerator;
 
 // Se importan las librerías a utilizar
-import java.io.*;
 import java.util.ArrayList;
 
 /**
@@ -24,9 +23,9 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
     
     // Instanciar las clases necesarias para el funcionamiento.
     public MainPage mainPage;
+    private PopupMessage popup;
     private ControllerSelectSucursal cSelectSucursal;
     private SuportFunctions suport;
-    private PopupMessage popup;
                 
     ArrayList<Ticket_Candy> candy_list = new ArrayList<Ticket_Candy>();
     ArrayList<Candy> candies_list = new ArrayList<Candy>();
@@ -40,6 +39,8 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
     ArrayList<String> names_list = new ArrayList<String>();
     ArrayList<Integer> cants_list = new ArrayList<Integer>(); 
     ArrayList<Double> amounts_list = new ArrayList<Double>();
+    
+    public String id_sucursal = "";
     
     public ControllerMainMenu(){
         // Declarar la variable de las clases instanciadas.
@@ -191,6 +192,9 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
             // Instanciar la clase
             cSelectSucursal = new ControllerSelectSucursal();
             
+            // Se supone (No funciona) que devuelva el valor de la sucursal obtenida.
+            mainPage.lblSucursalNameCandySell.setText(cSelectSucursal.getId_Sucursal());
+            
             
         }
         
@@ -200,12 +204,14 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
             // Si no se ha seleccionado alguna golosina a agregar.
             if(mainPage.cmbCandySelection.getSelectedIndex() == 0)
                 // Se muestra un mensaje de que la venta fue generada con éxito.
-                popup = new PopupMessage(1, "Ingrese alguna cantidad de golosinas.");
+                popup = new PopupMessage(mainPage, true,
+                                         1, "Ingrese alguna cantidad de golosinas.");
             
             // Si no se ha indicado una cantidad de golosina a agregar.
             else if((int) mainPage.spnCantCandySell.getValue() == 0)
                 // Se muestra un mensaje de que la venta fue generada con éxito.
-                popup = new PopupMessage(1, "Ingrese alguna cantidad de golosinas.");
+                popup = new PopupMessage(mainPage, true,
+                                         1, "Ingrese alguna cantidad de golosinas.");
             
             // Si se seleccionó una golosina y se indicó la cantidad a agregar.
             else{
@@ -311,7 +317,8 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
                                     path);
                     
                     // Se muestra un mensaje de que la venta fue generada con éxito.
-                    popup = new PopupMessage(4, "La venta se ha realizado exitosamente");
+                    popup = new PopupMessage(mainPage, true,
+                                             4, "La venta se ha realizado exitosamente");
                     
                     
                 } catch (Exception e) {
