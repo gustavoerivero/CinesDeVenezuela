@@ -190,11 +190,9 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
         else if(evt.getSource() == mainPage.btnChangeSucursalCandySell){
             
             // Instanciar la clase
-            cSelectSucursal = new ControllerSelectSucursal();
+            cSelectSucursal = new ControllerSelectSucursal(mainPage, true);
             
-            // Se supone (No funciona) que devuelva el valor de la sucursal obtenida.
-            mainPage.lblSucursalNameCandySell.setText(cSelectSucursal.getId_Sucursal());
-            
+                       
             
         }
         
