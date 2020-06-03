@@ -101,36 +101,7 @@ public class TablesUtilities extends javax.swing.table.AbstractTableModel{
     public static int selectedRow;
     
     
-    public void clearCandyTable(javax.swing.JTable table){
-        
-        table.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                    {null, null, null, null, null, null, null, null},
-                    {null, null, null, null, null, null, null, null},
-                    {null, null, null, null, null, null, null, null},
-                    {null, null, null, null, null, null, null, null},
-                    {null, null, null, null, null, null, null, null},
-                    {null, null, null, null, null, null, null, null},
-                    {null, null, null, null, null, null, null, null},
-                    {null, null, null, null, null, null, null, null},
-                    {null, null, null, null, null, null, null, null}
-                },
-                new String [] {
-                                "Golosina", "Cantidad", "Precio (Unidad)", 
-                                "IVA (Unidad)", "Monto (Unidad)", "Total", 
-                                " ", " "
-                }
-            )   {
-                    boolean[] canEdit = new boolean [] {
-                        false, false, false, false, false, false, false, false
-                    };
 
-                    public boolean isCellEditable(int rowIndex, int columnIndex) {
-                        return canEdit [columnIndex];
-                    }
-        });
-        
-    }
     
     public void buildCandyTable(javax.swing.JTable table){
         

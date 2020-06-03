@@ -424,19 +424,19 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
             
             // Se indican las columnas por defecto
             new String [] {
-                "Golosina", "Cantidad", "Precio (Unidad)", "IVA (Unidad)",
-                "Monto (Unidad)", "Total", "Acción"
-            }){
-                // Ningún campo es editable
-                boolean[] canEdit = new boolean [] {
-                    false, false, false, false, false, false, false
-                };
-                
-                // Se aplican los cambios de celdas editables
-                public boolean isCellEditable(int rowIndex, int columnIndex) {
-                    return canEdit [columnIndex];
+                            "Golosina", "Cantidad", "Precio (Unidad)", 
+                            "IVA (Unidad)", "Monto (Unidad)", "Total", 
+                            " ", " "
+                }){
+                    boolean[] canEdit = new boolean [] {
+                        false, false, false, false, false, false, false, false
+                    };
+
+                    public boolean isCellEditable(int rowIndex, int columnIndex) {
+                        return canEdit [columnIndex];
+                    }
                 }
-        });
+        );
                        
         // Se muestran en pantalla la información de los acumuladores
         mainPage.txtSubTotalCandy.setText(String.valueOf(acum_Sub));

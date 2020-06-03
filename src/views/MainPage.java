@@ -1,7 +1,6 @@
 package views;
 
 import lib.SuportFunctions;
-import lib.TablesUtilities;
 
 /**
  *
@@ -13,7 +12,6 @@ public class MainPage extends javax.swing.JFrame {
     int xx = 0, xy = 0;
     
     private SuportFunctions suport;
-    private TablesUtilities tblUtil;
     
     public MainPage() {
         
@@ -97,11 +95,40 @@ public class MainPage extends javax.swing.JFrame {
         txtSubTotalCandy.setText("");
         txtIVACandy.setText("");
         txtTotalCandy.setText("");
-        tblUtil.clearCandyTable(tblCandy);
+        clearCandyTable(tblCandy);
         
     }
     
+    public void clearCandyTable(javax.swing.JTable table){
+        
+        table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                    {null, null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null, null}
+                },
+                new String [] {
+                                "Golosina", "Cantidad", "Precio (Unidad)", 
+                                "IVA (Unidad)", "Monto (Unidad)", "Total", 
+                                " ", " "
+                }
+            )   {
+                    boolean[] canEdit = new boolean [] {
+                        false, false, false, false, false, false, false, false
+                    };
 
+                    public boolean isCellEditable(int rowIndex, int columnIndex) {
+                        return canEdit [columnIndex];
+                    }
+        });
+        
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
