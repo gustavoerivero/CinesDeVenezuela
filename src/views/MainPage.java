@@ -1,5 +1,7 @@
 package views;
 
+import views.tables.Table;
+
 import lib.SuportFunctions;
 
 /**
@@ -10,6 +12,10 @@ public class MainPage extends javax.swing.JFrame {
 
     // Variables de apoyo para conocer la ubicación de la aplicación.
     int xx = 0, xy = 0;
+    
+    int column = 0, row = 0;
+    
+    Table candyTable = new Table();
     
     private SuportFunctions suport;
     
@@ -80,8 +86,15 @@ public class MainPage extends javax.swing.JFrame {
             btnCandySellClear.addActionListener(evt);           // -> Limpiar formulario
             btnCandySell.addActionListener(evt);                // -> Vender golosinas
             
+            
             // -> Cinema Ticket Sell
         
+        
+    }
+    
+    public void addMouseEvents(java.awt.event.MouseListener evt){
+        
+        tblCandy.addMouseListener(evt);
         
     }
 
@@ -100,34 +113,25 @@ public class MainPage extends javax.swing.JFrame {
     }
     
     public void clearCandyTable(javax.swing.JTable table){
+                
+        candyTable.showCandyTable(table, null);
         
-        table.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                    {null, null, null, null, null, null, null, null},
-                    {null, null, null, null, null, null, null, null},
-                    {null, null, null, null, null, null, null, null},
-                    {null, null, null, null, null, null, null, null},
-                    {null, null, null, null, null, null, null, null},
-                    {null, null, null, null, null, null, null, null},
-                    {null, null, null, null, null, null, null, null},
-                    {null, null, null, null, null, null, null, null},
-                    {null, null, null, null, null, null, null, null}
-                },
-                new String [] {
-                                "Golosina", "Cantidad", "Precio (Unidad)", 
-                                "IVA (Unidad)", "Monto (Unidad)", "Total", 
-                                " ", " "
-                }
-            )   {
-                    boolean[] canEdit = new boolean [] {
-                        false, false, false, false, false, false, false, false
-                    };
-
-                    public boolean isCellEditable(int rowIndex, int columnIndex) {
-                        return canEdit [columnIndex];
-                    }
-        });
+    }
+    
+    public void setColumnTable(int column){
+        this.column = column;
+    }
         
+    public int getColumnTable(){
+        return column;
+    }
+    
+    public void setRowTable(int row){
+        this.row = row;
+    }
+    
+    public int getRowTable(){
+        return row;
     }
     
     /**
@@ -1418,31 +1422,38 @@ public class MainPage extends javax.swing.JFrame {
         tblCandy.setBackground(new java.awt.Color(249, 249, 249));
         tblCandy.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Golosina", "Cantidad", "Precio (Unidad)", "IVA (Unidad)", "Monto (Unidad)", "Total", "Acción"
+                "Golosina", "Cantidad", "Precio (Unidad)", "IVA (Unidad)", "Monto (Unidad)", "Total", "", ""
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        tblCandy.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         tblCandy.setSelectionBackground(new java.awt.Color(75, 0, 145));
         tblCandy.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblCandy.getTableHeader().setReorderingAllowed(false);
+        tblCandy.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblCandyMouseClicked(evt);
+            }
+        });
         scpCandyTable.setViewportView(tblCandy);
+        if (tblCandy.getColumnModel().getColumnCount() > 0) {
+            tblCandy.getColumnModel().getColumn(1).setResizable(false);
+            tblCandy.getColumnModel().getColumn(1).setPreferredWidth(56);
+            tblCandy.getColumnModel().getColumn(6).setResizable(false);
+            tblCandy.getColumnModel().getColumn(6).setPreferredWidth(40);
+            tblCandy.getColumnModel().getColumn(7).setResizable(false);
+            tblCandy.getColumnModel().getColumn(7).setPreferredWidth(40);
+        }
 
         txtSubTotalCandy.setEditable(false);
         txtSubTotalCandy.setBackground(new java.awt.Color(249, 249, 249));
@@ -2112,8 +2123,11 @@ public class MainPage extends javax.swing.JFrame {
             evt.consume();
     }//GEN-LAST:event_txtIdClientCandySellKeyTyped
 
+    private void tblCandyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCandyMouseClicked
+        setColumnTable(tblCandy.getColumnModel().getColumnIndexAtX(evt.getX()));
+        setRowTable(evt.getY()/tblCandy.getRowHeight());
+    }//GEN-LAST:event_tblCandyMouseClicked
 
-        
     
     //</editor-fold>
     

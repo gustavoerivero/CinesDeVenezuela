@@ -5,6 +5,7 @@ package controllers;
 import views.MainPage;
 import views.ChangeBranch;
 import views.PopupMessage;
+import views.tables.Table;
 
 // Se importan los models que se van a utilizar
 import models.*;
@@ -15,12 +16,16 @@ import lib.PDFGenerator;
 
 // Se importan las librerías a utilizar
 import java.util.ArrayList;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import java.awt.event.MouseEvent;
 
 /**
  *
  * @author Gustavo
  */
-public class ControllerMainMenu implements java.awt.event.ActionListener{
+public class ControllerMainMenu implements java.awt.event.ActionListener, 
+                                            java.awt.event.MouseListener{
     
     // Instanciar las clases necesarias para el funcionamiento.
         // Views
@@ -44,6 +49,8 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
     ArrayList<String> names_list = new ArrayList<String>();
     ArrayList<Integer> cants_list = new ArrayList<Integer>(); 
     ArrayList<Double> amounts_list = new ArrayList<Double>();
+    
+    Object[][] matriz_candy;
         
     public ControllerMainMenu(){
         // Declarar la variable de las clases instanciadas.
@@ -52,6 +59,7 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
         
         // Activamos los eventos provocados por los botones.
         mainPage.addEvents(this);
+        mainPage.addMouseEvents(this);
         
     }
 
@@ -238,7 +246,14 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
                 
                 mainPage.cmbCandySelection.setSelectedIndex(0);
                 mainPage.spnCantCandySell.setValue((int) 0);
-                                                         
+                                  
+                /*
+                 * Se crea la matriz que se mostrará en la tabla; las filas corresponden 
+                 * a la cantidad de elementos de la lista mientras que las columnas serán 
+                 * las 7 por defecto.
+                 */
+                matriz_candy = new Object[candy_list.size()][8];
+        
                 showCandiesOnTicket(names_list, cants_list, amounts_list);
                                 
             }
@@ -247,6 +262,9 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
         
         // Retornar los valores iniciales
         else if(evt.getSource() == mainPage.btnCandySellClear){
+            
+            candy_list.clear();
+            candies_list.clear();
             
             // Aplicar método que retorna los componentes a sus valores iniciales
             mainPage.clearCandySell();
@@ -366,12 +384,12 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
     public void showCandiesOnTicket(ArrayList<String> names, ArrayList<Integer> cants,
                                     ArrayList<Double> amounts){
         
-        /*
-         * Se crea la matriz que se mostrará en la tabla; las filas corresponden 
-         * a la cantidad de elementos de la lista mientras que las columnas serán 
-         * las 7 por defecto.
-         */
-        String[][] matriz_candy = new String[candy_list.size()][7];
+        Table table = new Table();
+        
+        JButton btnModify = new JButton(), btnDelete = new JButton();
+        
+        table.addModifyButton(btnModify);
+        table.addDeleteButton(btnDelete);
         
         // Se crean las variables acumuladoras que mostrarán los montos correspondientes
         double acum_Sub = 0, acum_IVA = 0, acum_Total = 0;
@@ -397,13 +415,14 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
             int cant = candy_list.get(i).getCant();
             
             // Se dan valores a los elementos de la matriz
-            matriz_candy[i][0] = candy_list.get(i).getId_candies();
+            matriz_candy[i][0] = String.valueOf(candy_list.get(i).getId_candies());
             matriz_candy[i][1] = String.valueOf(cant);
             matriz_candy[i][2] = String.valueOf(price);
             matriz_candy[i][3] = String.valueOf(suport.numberDecimalFormat(price * 0.16, 2));
             matriz_candy[i][4] = String.valueOf(suport.numberDecimalFormat(price * 1.16, 2));
             matriz_candy[i][5] = String.valueOf(suport.numberDecimalFormat(price * 1.16 * cant, 2));
-            matriz_candy[i][6] = "Botón eliminar";
+            matriz_candy[i][6] = btnModify;
+            matriz_candy[i][7] = btnDelete;
             
             // Los acumuladores son llenados
             acum_Sub    += suport.numberDecimalFormat(price * cant, 2);
@@ -417,32 +436,91 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
                                         
         }
            
-        // La tabla adquiere el formato indicado
-        mainPage.tblCandy.setModel(new javax.swing.table.DefaultTableModel(
-            // Las celdas son llenadas por la información que posee la matriz
-            matriz_candy, 
-            
-            // Se indican las columnas por defecto
-            new String [] {
-                            "Golosina", "Cantidad", "Precio (Unidad)", 
-                            "IVA (Unidad)", "Monto (Unidad)", "Total", 
-                            " ", " "
-                }){
-                    boolean[] canEdit = new boolean [] {
-                        false, false, false, false, false, false, false, false
-                    };
-
-                    public boolean isCellEditable(int rowIndex, int columnIndex) {
-                        return canEdit [columnIndex];
-                    }
-                }
-        );
+        table.showCandyTable(mainPage.tblCandy, matriz_candy);
                        
         // Se muestran en pantalla la información de los acumuladores
         mainPage.txtSubTotalCandy.setText(String.valueOf(acum_Sub));
         mainPage.txtIVACandy.setText(String.valueOf(acum_IVA));
         mainPage.txtTotalCandy.setText(String.valueOf(acum_Total));
         
+    
+    }
+
+    public Object[][] deleteRow(int row, Object[][] matrix) {
+        
+            Object[][] newMatrix = new String[matrix.length-1][matrix[0].length];
+            int cont = 0;
+        
+            for(int currentRow = 0; currentRow < matrix.length; currentRow++) { 
+                for(int currentColumn = 0; currentColumn < matrix[0].length; currentColumn++) {    
+                    if(row == currentRow) {
+                        currentRow++;            
+                    }
+                    
+                    newMatrix[cont][currentColumn]= matrix[currentRow][currentColumn];
+                }
+                cont++;
+            }  
+            
+            return newMatrix;
+    }
+    
+    @Override
+    public void mouseClicked(MouseEvent evt) {
+        
+        if(evt.getSource() == mainPage.tblCandy){
+        
+            int column = mainPage.getColumnTable(), row = mainPage.getRowTable();
+
+            if(row < mainPage.tblCandy.getRowCount() && row >= 0 && 
+                    column < mainPage.tblCandy.getColumnCount() && column >= 0){
+                Object value = mainPage.tblCandy.getValueAt(row, column);
+                if(value instanceof JButton){
+                    ((JButton)value).doClick();
+                    JButton boton = (JButton) value;
+
+                    if(boton.getName().equals("m")){
+                        System.out.println("Click en el boton modificar");
+                        //EVENTOS MODIFICAR
+                    }
+                    if(boton.getName().equals("e")){
+                        JOptionPane.showConfirmDialog(null, "Desea eliminar este registro", "Confirmar", JOptionPane.OK_CANCEL_OPTION);
+                        System.out.println("Click en el boton eliminar");
+                        //EVENTOS ELIMINAR
+
+                        matriz_candy = new Object[candy_list.size()][8];
+        
+                        matriz_candy = deleteRow(row, matriz_candy);
+                        
+                        showCandiesOnTicket(names_list, cants_list, amounts_list);
+
+                    }
+                }
+
+            }
+
+        }
+    }
+
+    // PROHIBIDO TOCAR
+    
+    @Override
+    public void mousePressed(MouseEvent e) {
+    
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+    
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+    
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
     
     }
     
