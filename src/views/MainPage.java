@@ -1,6 +1,7 @@
 package views;
 
 import lib.SuportFunctions;
+import lib.TablesUtilities;
 
 /**
  *
@@ -12,6 +13,7 @@ public class MainPage extends javax.swing.JFrame {
     int xx = 0, xy = 0;
     
     private SuportFunctions suport;
+    private TablesUtilities tblUtil;
     
     public MainPage() {
         
@@ -95,40 +97,11 @@ public class MainPage extends javax.swing.JFrame {
         txtSubTotalCandy.setText("");
         txtIVACandy.setText("");
         txtTotalCandy.setText("");
-        clearCandyTable(tblCandy);
+        tblUtil.clearCandyTable(tblCandy);
         
     }
     
-    // Método que retorna a los valores iniciales que posee la tabla de golosinas
-    public void clearCandyTable(javax.swing.JTable table){
-        
-        table.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                    {null, null, null, null, null, null, null},
-                    {null, null, null, null, null, null, null},
-                    {null, null, null, null, null, null, null},
-                    {null, null, null, null, null, null, null},
-                    {null, null, null, null, null, null, null},
-                    {null, null, null, null, null, null, null},
-                    {null, null, null, null, null, null, null},
-                    {null, null, null, null, null, null, null},
-                    {null, null, null, null, null, null, null}
-                },
-                new String [] {
-                    "Golosina", "Cantidad", "Precio (Unidad)", "IVA (Unidad)", 
-                    "Monto (Unidad)", "Total", "Acción"
-                }
-            )   {
-                    boolean[] canEdit = new boolean [] {
-                        false, false, false, false, false, false
-                    };
 
-                    public boolean isCellEditable(int rowIndex, int columnIndex) {
-                        return canEdit [columnIndex];
-                    }
-        });
-        
-    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -1165,6 +1138,7 @@ public class MainPage extends javax.swing.JFrame {
         lblCandySellTittle.setToolTipText("");
 
         lblSucursalNameCandySell.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblSucursalNameCandySell.setForeground(new java.awt.Color(75, 0, 145));
         lblSucursalNameCandySell.setText("Sucursal ");
 
         txtIdClientCandySell.setBackground(new java.awt.Color(249, 249, 249));
@@ -1543,7 +1517,7 @@ public class MainPage extends javax.swing.JFrame {
                     .addGroup(panCandySellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(cmbCandySeller, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
                         .addComponent(lblCandySeller, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtIdClientCandySell, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtIdClientCandySell, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panCandySellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panCandySellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)

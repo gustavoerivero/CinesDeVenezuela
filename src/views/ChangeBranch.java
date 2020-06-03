@@ -8,6 +8,8 @@ package views;
 public class ChangeBranch extends javax.swing.JDialog {
 
     int xx = 0, xy = 0;
+    String sucursal;
+    private PopupDialogMessage popup;
         
     public ChangeBranch(java.awt.Frame parent, boolean modal) {
         
@@ -22,6 +24,10 @@ public class ChangeBranch extends javax.swing.JDialog {
         
         // Muestra el JDialog en pantalla.
         setVisible(true);
+        
+        // Se inicializa la variable
+        cmbCity.setSelectedIndex(0);
+        cmbBranch.setSelectedIndex(0);
         
     }
 
@@ -78,6 +84,11 @@ public class ChangeBranch extends javax.swing.JDialog {
         cmbCity.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " - Seleccione - ", "Roma", "Venecia", "Florencia", "Toscana" }));
         cmbCity.setBorder(null);
         cmbCity.setLightWeightPopupEnabled(false);
+        cmbCity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbCityActionPerformed(evt);
+            }
+        });
 
         lblBranch.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblBranch.setText("Sucursal:");
@@ -119,6 +130,11 @@ public class ChangeBranch extends javax.swing.JDialog {
         btnClose.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnCloseMouseExited(evt);
+            }
+        });
+        btnClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCloseActionPerformed(evt);
             }
         });
 
@@ -168,6 +184,11 @@ public class ChangeBranch extends javax.swing.JDialog {
         btnOk.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnOkMouseExited(evt);
+            }
+        });
+        btnOk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOkActionPerformed(evt);
             }
         });
 
@@ -241,13 +262,8 @@ public class ChangeBranch extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    public void addEvents(java.awt.event.ActionListener evt){
-        
-        btnClose.addActionListener(evt);
-        btnOk.addActionListener(evt);
-        
-    }
+    
+    //<editor-fold defaultstate="collapsed" desc=" Configuraciones visuales ">
     
     private void panChangeBranchMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panChangeBranchMousePressed
         //<editor-fold defaultstate="collapsed" desc=" Explicación sobre el método ">
@@ -341,6 +357,64 @@ public class ChangeBranch extends javax.swing.JDialog {
         panOkBtn.setBackground(new java.awt.Color(239,232,244));
     }//GEN-LAST:event_panOkBtnMouseExited
 
+    //</editor-fold>
+    
+    private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
+        // Si los combobox no se encuentran en su estado inicial.
+        if( cmbCity.getSelectedIndex() != 0 || cmbBranch.getSelectedIndex() != 0  ){
+            
+            // Se indica el valor de la sucursal seleccionada
+            sucursal = cmbBranch.getSelectedItem().toString();
+                                
+            // Se cierra la interfaz
+            setVisible(false);
+                
+        } else{
+                
+            // Si no se ha seleccionado algún dato (Ciudad o Sucursal)
+            popup = new PopupDialogMessage(this, true, 1, "Faltan datos por seleccionar");
+                
+        }
+    }//GEN-LAST:event_btnOkActionPerformed
+
+    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
+        // Se cierra la interfaz.
+        dispose();
+        
+    }//GEN-LAST:event_btnCloseActionPerformed
+
+    private void cmbCityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCityActionPerformed
+        // Se obtiene el elemento seleccionado.
+        String item = (String) cmbCity.getSelectedItem();
+            
+        // Se remueven todos los items del combobox.
+        cmbBranch.removeAllItems();
+            
+        // Se añade el item base del combobox
+        cmbBranch.addItem(" - Seleccionar - ");
+        cmbBranch.addItem("Cines De Venezuela. Roma");
+            
+        // Se instancia y se declara un Array que contendrá todos los nombres de las sucursales.
+        java.util.ArrayList<String> sucursales = new java.util.ArrayList<String>();
+            
+        // Falta agregar el método que pasa la lista obtenida por la BD de 
+        //   nombre de las sucursales a la variable 'sucursales' 
+            
+        // Se crea una variable indice.
+        java.util.Iterator<String> i = sucursales.iterator();
+            
+        // Se llena el combobox con los elementos correspondientes
+        while(i.hasNext()){
+                
+            cmbBranch.addItem(i.next());
+                
+        }
+    }//GEN-LAST:event_cmbCityActionPerformed
+
+    public String getId_Sucursal(){
+        return sucursal;
+    }
+    
     /**
      * @param args the command line arguments
      */

@@ -3,6 +3,7 @@ package controllers;
 
 // Se importan las views que se van a utilizar
 import views.MainPage;
+import views.ChangeBranch;
 import views.PopupMessage;
 
 // Se importan los models que se van a utilizar
@@ -22,11 +23,15 @@ import java.util.ArrayList;
 public class ControllerMainMenu implements java.awt.event.ActionListener{
     
     // Instanciar las clases necesarias para el funcionamiento.
-    public MainPage mainPage;
-    private PopupMessage popup;
-    private ControllerSelectSucursal cSelectSucursal;
-    private SuportFunctions suport;
+        // Views
+        private MainPage mainPage;
+        private PopupMessage popup;
+        private ChangeBranch changeBranch;
+
+        // Suport Class
+        private SuportFunctions suport;
                 
+    // Instanciar las variables necesarias para el funcionamiento.    
     ArrayList<Ticket_Candy> candy_list = new ArrayList<Ticket_Candy>();
     ArrayList<Candy> candies_list = new ArrayList<Candy>();
     
@@ -39,9 +44,7 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
     ArrayList<String> names_list = new ArrayList<String>();
     ArrayList<Integer> cants_list = new ArrayList<Integer>(); 
     ArrayList<Double> amounts_list = new ArrayList<Double>();
-    
-    public String id_sucursal = "";
-    
+        
     public ControllerMainMenu(){
         // Declarar la variable de las clases instanciadas.
         mainPage = new MainPage();
@@ -50,12 +53,12 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
         // Activamos los eventos provocados por los botones.
         mainPage.addEvents(this);
         
-        
     }
 
-    /*
+    /**
      * Método que determina las acciones a realizar por la aplicación según el 
      * botón presionado.
+     * @param evt indica los eventos posibles a ocurrir (click en botónes).
      */
     public void actionPerformed(java.awt.event.ActionEvent evt){
         
@@ -190,9 +193,12 @@ public class ControllerMainMenu implements java.awt.event.ActionListener{
         else if(evt.getSource() == mainPage.btnChangeSucursalCandySell){
             
             // Instanciar la clase
-            cSelectSucursal = new ControllerSelectSucursal(mainPage, true);
+            changeBranch = new ChangeBranch(mainPage, true);
             
-                       
+            // Se ubica el nombre de la sucursal.
+            mainPage.lblSucursalNameCandySell.setText(changeBranch.getId_Sucursal());
+            
+            changeBranch.dispose();
             
         }
         
