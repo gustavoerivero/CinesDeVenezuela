@@ -66,17 +66,21 @@ public class ControllerLogin implements java.awt.event.ActionListener {
                 login.pssPasswordField.getPassword().toString().equals("") || 
                 login.pssPasswordField.getPassword().toString().equals("Ingrese su contraseña"))){
                 
+                // Se muestra un mensaje emergente de "Datos erróneos".
                 popup = new PopupMessage(login, true, 1, 
                         "<html><p align = 'center'>El correo electrónico o la contraseña son incorrectos</p></html>");
                 
-                // Si todo está correcto, se accede al sistema.
+            // Si todo está correcto, se accede al sistema.
             } else{
                 
+                // Se muestra un mensaje emergente de "Bienvenido".
                 popup = new PopupMessage(login, true, 4, 
                         "Bienvenido");
                 
+                // Se oculta la view de Login.
                 login.dispose();
                 
+                // Se instancia el Controlador de MainMenu.
                 mainMenu = new ControllerMainMenu();
                 
             }
@@ -85,9 +89,12 @@ public class ControllerLogin implements java.awt.event.ActionListener {
         
         // ToggleButton para visualizar el campo de contraseña o ocultarlo (Según el caso).
         else if(evt.getSource() == login.tgbShowPass){
-     
+            
+            // Si el toggleButton es seleccionado la contraseña será visible.
             if(login.tgbShowPass.isSelected())
                 login.pssPasswordField.setEchoChar((char) 0);
+            
+            // Caso contrario; Si se deselecciona el toggleButton, se oculta la contraseña.
             else 
                 login.pssPasswordField.setEchoChar('*');
         }
