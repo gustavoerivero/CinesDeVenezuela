@@ -13,17 +13,22 @@ public class MainPage extends javax.swing.JFrame {
     // Variables de apoyo para conocer la ubicación de la aplicación.
     int xx = 0, xy = 0;
     
+    // Variables de soporte para el uso de tablas.
     int column = 0, row = 0;
     
+    // Se instancia la clase de soporte Table.
     Table candyTable = new Table();
     
+    // Se instancia la clase de soporte.
     private SuportFunctions suport;
     
+    // Constructor.
     public MainPage() {
         
         // Inicializa todas las variables (o mejor dicho componentes) que usa el JFrame.
         initComponents();
         
+        // Se instancia la clase de soporte.
         suport = new SuportFunctions();
         
         // Ubica el JFrame en el centro de la pantalla.
@@ -40,18 +45,17 @@ public class MainPage extends javax.swing.JFrame {
                 
     }
     
-    //<editor-fold defaultstate="collapsed" desc=" Explicación sobre el Método ">
-    /*
-     * ========================================================================
-     * addEvents es un método que se activa al realizar una acción (presionar 
-     * click sobre algún botón) añadiendo este evento a una lista que será ma-
-     * nejada con mayor profundidad en el Controlador correspondiente.
-     * ========================================================================
+    /**
+     * Método que se activa al realizar una acción (presionar click sobre algún 
+     * botón) añadiendo este evento a una lista que será manejada con mayor pro-
+     * fundidad en el Controlador correspondiente.
+     * Este método hace uso de la clase abstracta ActionListener la cual está 
+     * fuertemente vinculada a todas las acciones provocadas por botones.
+     * @param evt 
      */
-    //</editor-fold>
-    
     public void addEvents(java.awt.event.ActionListener evt){
         // Eventos de los botones de la barra superior.
+        btnOut.addActionListener(evt);  // -> Cerrar Sesión
         btnMin.addActionListener(evt);  // -> Minimizar
         btnExit.addActionListener(evt); // -> Cerrar app
         
@@ -92,13 +96,18 @@ public class MainPage extends javax.swing.JFrame {
         
     }
     
+    /**
+     * Método que permite activar los eventos del escuchador Mouse.
+     * @param evt parámetro que se activa cuando el Mouse reacciona a algo.
+     */
     public void addMouseEvents(java.awt.event.MouseListener evt){
-        
         tblCandy.addMouseListener(evt);
-        
     }
 
-    // Método que retorna los valores iniciales de los componentes de JPanel de Candy Sell
+    /**
+     * Método que retorna los valores iniciales de los componentes de 
+     * JPanel de Candy Sell.
+     */
     public void clearCandySell(){
         
         txtIdClientCandySell.setText("Cédula del cliente");
@@ -111,25 +120,42 @@ public class MainPage extends javax.swing.JFrame {
         clearCandyTable(tblCandy);
         
     }
-    
+    /**
+     * Método que retorna los valores iniciales de un JTable.
+     * @param table parámetro JTable.
+     */
     public void clearCandyTable(javax.swing.JTable table){
-                
-        candyTable.showCandyTable(table, null);
-        
+        candyTable.buildCandyTable(table, null);
     }
     
+    /**
+     * Método para indicar el valor de una columna en un JTable.
+     * @param column 
+     */
     public void setColumnTable(int column){
         this.column = column;
     }
-        
+    
+    /**
+     * Método para obtener el valor de una columna en un JTable.
+     * @return el valor de la columna.
+     */
     public int getColumnTable(){
         return column;
     }
     
+    /**
+     * Método para indicar el valor de una fila en un JTable.
+     * @param row 
+     */
     public void setRowTable(int row){
         this.row = row;
     }
     
+    /**
+     * Método para obtener el valor de una columna en un JTable.
+     * @return el valor de la fila.
+     */
     public int getRowTable(){
         return row;
     }
@@ -147,6 +173,7 @@ public class MainPage extends javax.swing.JFrame {
         panTopBar = new javax.swing.JPanel();
         panTopBarLateralMenu = new javax.swing.JPanel();
         panButtonsTopBar = new javax.swing.JPanel();
+        btnOut = new javax.swing.JButton();
         btnMin = new javax.swing.JButton();
         btnExit = new javax.swing.JButton();
         panLateralMenu = new javax.swing.JPanel();
@@ -289,6 +316,26 @@ public class MainPage extends javax.swing.JFrame {
         panButtonsTopBar.setBackground(new java.awt.Color(249, 249, 249));
         panButtonsTopBar.setPreferredSize(new java.awt.Dimension(215, 40));
 
+        btnOut.setBackground(new java.awt.Color(249, 249, 249));
+        btnOut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/signOffIcon-24px.png"))); // NOI18N
+        btnOut.setToolTipText("Cerrar Sesión");
+        btnOut.setBorder(null);
+        btnOut.setBorderPainted(false);
+        btnOut.setContentAreaFilled(false);
+        btnOut.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnOut.setFocusPainted(false);
+        btnOut.setOpaque(true);
+        btnOut.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnOutMouseMoved(evt);
+            }
+        });
+        btnOut.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnOutMouseExited(evt);
+            }
+        });
+
         btnMin.setBackground(new java.awt.Color(249, 249, 249));
         btnMin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/expandArrow(Gray)-32px.png"))); // NOI18N
         btnMin.setToolTipText("Minimizar");
@@ -334,7 +381,9 @@ public class MainPage extends javax.swing.JFrame {
         panButtonsTopBarLayout.setHorizontalGroup(
             panButtonsTopBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panButtonsTopBarLayout.createSequentialGroup()
-                .addContainerGap(131, Short.MAX_VALUE)
+                .addContainerGap(93, Short.MAX_VALUE)
+                .addComponent(btnOut, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnMin)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnExit)
@@ -343,9 +392,10 @@ public class MainPage extends javax.swing.JFrame {
         panButtonsTopBarLayout.setVerticalGroup(
             panButtonsTopBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panButtonsTopBarLayout.createSequentialGroup()
-                .addGroup(panButtonsTopBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnMin)
-                    .addComponent(btnExit))
+                .addGroup(panButtonsTopBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btnMin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnExit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnOut, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 8, Short.MAX_VALUE))
         );
 
@@ -2065,7 +2115,6 @@ public class MainPage extends javax.swing.JFrame {
     
     private void btnChangeSucursalCandySellMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChangeSucursalCandySellMouseMoved
         panChangeSucursalCandySell.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
-        
     }//GEN-LAST:event_btnChangeSucursalCandySellMouseMoved
 
     private void btnChangeSucursalCandySellMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChangeSucursalCandySellMouseExited
@@ -2128,14 +2177,21 @@ public class MainPage extends javax.swing.JFrame {
         setRowTable(evt.getY()/tblCandy.getRowHeight());
     }//GEN-LAST:event_tblCandyMouseClicked
 
-    
     //</editor-fold>
     
     //</editor-fold>
     
-    /**
-     * @param args the command line arguments
-     */
+    //<editor-fold defaultstate="collapsed" desc=" Botón de Cerrar Sesión ">
+    
+    private void btnOutMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOutMouseMoved
+        btnOut.setBackground(new java.awt.Color(239,232,244));
+    }//GEN-LAST:event_btnOutMouseMoved
+
+    private void btnOutMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOutMouseExited
+        btnOut.setBackground(new java.awt.Color(249,249,249));
+    }//GEN-LAST:event_btnOutMouseExited
+
+    //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc=" Declaración de Variables ">
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -2162,6 +2218,7 @@ public class MainPage extends javax.swing.JFrame {
     public javax.swing.JButton btnOptionLateral4;
     public javax.swing.JButton btnOptionLateral5;
     public javax.swing.JButton btnOptionLateral6;
+    public javax.swing.JButton btnOut;
     private javax.swing.JButton btnSearchClientCandySell;
     public javax.swing.JComboBox<String> cmbCandySelection;
     public javax.swing.JComboBox<String> cmbCandySeller;

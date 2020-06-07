@@ -1,6 +1,7 @@
 import controllers.ControllerLogin;
+
 /**
- *
+ * Comienza la diversión.
  * @author Gustavo
  */
 public class main {

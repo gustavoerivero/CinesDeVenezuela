@@ -14,8 +14,7 @@ import java.util.*;
  */
 
 //<editor-fold defaultstate="collapsed" desc=" Leyenda ">
-    /*
-     *
+    /**
      * - - - - - - - - - - - - - - - - - - - - VARIABLES - - - - - - - - - - - - - - - - - - - - - -
      *
      * Chunk:                   El la parte más pequeña que se puede añadir a un documento, la 
@@ -48,11 +47,14 @@ import java.util.*;
      * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  
      * 
      * Mayor información: http://codigoxules.org/en/java-itext-pdf-creando-pdf-java-itext/
-     *
-     */
-        
+     * @version iText 5.0.5
+     * @author Gustavo
+     */      
 //</editor-fold>
 
+/**
+ * Clase generadora de PDFs.
+ */
 public class PDFGenerator {
     
     // Se crean las variables necesarias (Preferiblemente crear solamente Font)
@@ -63,7 +65,13 @@ public class PDFGenerator {
     private Font fontLittleBold = new Font(Font.FontFamily.COURIER, 4, Font.BOLD);
     private Font fontLittleNormal = new Font(Font.FontFamily.COURIER, 4, Font.NORMAL);
     
-    // Método para agregar texto en el documento.
+    /**
+     * Método para agregar textos en forma de Paragraph.
+     * @param txt texto que se desea incorporar.
+     * @param font tipo de fuente a utilizar.
+     * @param element alineación que se le quiere dar al texto.
+     * @return variable de tipo Paragraph con el formado indicado.
+     */
     private Paragraph setText(String txt, Font font, int element){
         
         // Se crean las variables necesarias.
@@ -81,7 +89,14 @@ public class PDFGenerator {
         
     }
     
-    // Método para agregar imágenes al documento.
+    /**
+     * Método para agregar imágenes al documento.
+     * @param path Ruta de la imagen que se va a incorporar.
+     * @param WIDTH Ancho de la imagen.
+     * @param HEIGHT Alto de la imagen.
+     * @param element Alineación en el documento.
+     * @return variable de tipo Image con el formato indicado.
+     */
     private Image setImage(String path, int WIDTH, int HEIGHT, int element){
         
         // Se crean las variables necesarias.
@@ -110,7 +125,16 @@ public class PDFGenerator {
         
     }
         
-    // Método para crear el ticket de golosinas
+    /**
+     * Método para crear un PDF con formato de ticket de golosinas.
+     * @param name Nombre que se dará al documento.
+     * @param seller Nombre del vendedor.
+     * @param branch Nombre de la sucursal.
+     * @param path Ruta en donde se va a guardar el documento.
+     * @param id Código del ticket.
+     * @param product_names Listado de las golosinas compradas.
+     * @param product_cants Listado de la cantidad de golosinas compradas.
+     */
     public void pdfCandyTicket(String name, String seller, String branch, 
                                String path, int id, ArrayList<String> product_names,
                                ArrayList<Integer> product_cants){
@@ -184,7 +208,19 @@ public class PDFGenerator {
         
     }
     
-    // Método para crear facturas
+    /**
+     * Método para crear documentos PDFs con formato para facturas.
+     * @param data_enterprise Información sobre la empresa.
+     * @param data_seller Información sobre el vendedor.
+     * @param data_client Información sobre el cliente.
+     * @param id_ticket Código del/de los ticket/s.
+     * @param type_ticket Tipo de factura ('1' para golosinas. '2' para funciones).
+     * @param id_invoice Código de la factura.
+     * @param product_names Listado de los productos.
+     * @param product_cants Listado de la cantidad de productos.
+     * @param product_amounts Listado de los montos a pagar de los productos.
+     * @param path Ruta en donde se va a guardar el documento.
+     */
     public void pdfInvoice( ArrayList<String> data_enterprise, ArrayList<String> data_seller, 
                             ArrayList<String> data_client, ArrayList<String> id_ticket, 
                             char type_ticket, String id_invoice, ArrayList<String> product_names, 

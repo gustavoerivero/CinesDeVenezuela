@@ -2,9 +2,7 @@
 package controllers;
 
 // Se importan las views que se van a utilizar
-import views.MainPage;
-import views.ChangeBranch;
-import views.PopupMessage;
+import views.*;
 import views.tables.Table;
 
 // Se importan los models que se van a utilizar
@@ -36,6 +34,9 @@ public class ControllerMainMenu implements java.awt.event.ActionListener,
 
         // Suport Class
         private SuportFunctions suport;
+        
+        // Controllers
+        private ControllerLogin ctrlLogin;
                 
     // Instanciar las variables necesarias para el funcionamiento.    
     ArrayList<Ticket_Candy> candy_list = new ArrayList<Ticket_Candy>();
@@ -49,6 +50,7 @@ public class ControllerMainMenu implements java.awt.event.ActionListener,
         
     ArrayList<Object> objectList = new ArrayList<Object>();
     
+    // Constructor
     public ControllerMainMenu(){
         // Declarar la variable de las clases instanciadas.
         mainPage = new MainPage();
@@ -79,6 +81,15 @@ public class ControllerMainMenu implements java.awt.event.ActionListener,
         else if(evt.getSource() == mainPage.btnExit){
             System.exit(0);
         } 
+        
+        // Cerar Sesión.
+        else if(evt.getSource() == mainPage.btnOut){
+            
+            ctrlLogin = new ControllerLogin();
+            
+            mainPage.dispose();
+            
+        }
 
         //</editor-fold>
         
@@ -237,14 +248,13 @@ public class ControllerMainMenu implements java.awt.event.ActionListener,
                 Ticket_Candy ticket_candy = new Ticket_Candy(id, type_Ticket, estatus, id_candies, cant);
                 
                 Candy candy = new Candy(id, id_candies, id, 99, mount, estatus);
-                                
-                candy_list.add(ticket_candy);
-                candies_list.add(candy);
-                
+                                                
+                // Se restauran los valores iniciales.
                 mainPage.cmbCandySelection.setSelectedIndex(0);
                 mainPage.spnCantCandySell.setValue((int) 0);
                         
-                showCandiesOnTicket(objectList);
+                addCandies(id_candies, cant, mount); // -> Añade el registro.
+                showCandyAmounts();                  // -> Se muestran los montos.
                                 
             }
             
@@ -284,14 +294,16 @@ public class ControllerMainMenu implements java.awt.event.ActionListener,
                     // Se instancia la clase
                     PDFGenerator g = new PDFGenerator();
                        
+                    DefaultTableModel dtm = (DefaultTableModel) mainPage.tblCandy.getModel();
+                    
                     ArrayList<String>   names = new ArrayList<String>();
                     ArrayList<Integer>  cants = new ArrayList<Integer>();
                     ArrayList<Double> amounts = new ArrayList<Double>();
                     
-                    for (int i = 0; i < objectList.size(); i += 3){
-                        names.add(String.valueOf(objectList.get(i)));
-                        cants.add((Integer) objectList.get(i + 1));
-                        amounts.add((Double) objectList.get(i + 2));
+                    for (int i = 0; i < dtm.getRowCount(); i++){
+                        names.add(dtm.getValueAt(i, 0).toString());
+                        cants.add(Integer.valueOf(dtm.getValueAt(i, 1).toString()));
+                        amounts.add(Double.valueOf(dtm.getValueAt(i, 4).toString()));
                     }
                     
                     /* 
@@ -302,11 +314,10 @@ public class ControllerMainMenu implements java.awt.event.ActionListener,
                             mainPage.cmbCandySeller.getSelectedItem().toString(),
                             "Sucursal XYZ", 
                             path,
-                            (int) java.lang.Math.random() * 5000,
+                            (int) java.lang.Math.random() * 5000 + 1,
                             names, cants);
                     
-                    // Valores de prueba (Se debe borrar y sustituir por valores de la BD
-                    
+                    // Valores de prueba (Se debe borrar y sustituir por valores de la BD)
                     enterprise_data.add("J-31476980");
                     enterprise_data.add("CINES DE VENEZUELA, C.A.");
                     enterprise_data.add("AV. YATUSABE CON AV. WATAGATAPITUSBERRY");
@@ -324,18 +335,13 @@ public class ControllerMainMenu implements java.awt.event.ActionListener,
                     client_data.add("Dirc: urb. Pandemonium");
                     client_data.add("Tlf: 04149561231");
                     
-                    id_tickets.add(String.valueOf((int) java.lang.Math.random() * 5000));
+                    id_tickets.add(String.valueOf((int) java.lang.Math.random() * 5000) + 1);
                                         
-                    for (int i = 0; i < objectList.size(); i += 3){
-                        names.add(String.valueOf(objectList.get(i)));
-                        cants.add((Integer) objectList.get(i + 1));
-                    }
-                    
                     g.pdfInvoice(   enterprise_data, 
                                     seller_list, 
                                     client_data, 
                                     id_tickets, 
-                                    '1', String.valueOf((int) java.lang.Math.random() * 5000), 
+                                    '1', String.valueOf((int) java.lang.Math.random() * 5000 + 1), 
                                     names, 
                                     cants, 
                                     amounts, 
@@ -383,84 +389,6 @@ public class ControllerMainMenu implements java.awt.event.ActionListener,
         
     }
     
-    // Método para mostrar en la tabla las golosinas seleccionadas.
-    public void showCandiesOnTicket(ArrayList<Object> objectList){
-        
-        objectList.clear();
-        
-        Table table = new Table();
-        
-        DefaultTableModel dtm = (DefaultTableModel) mainPage.tblCandy.getModel();
-        
-        JButton btnModify = new JButton(), btnDelete = new JButton();
-        
-        table.addModifyButton(btnModify);
-        table.addDeleteButton(btnDelete);
-        
-        // Se crean las variables acumuladoras que mostrarán los montos correspondientes
-        double acum_Sub = 0, acum_IVA = 0, acum_Total = 0;
-               
-        for (int i = 0; i < candy_list.size(); i++){
-            
-            // Se inicializa el índice 'j'
-            int j = 0;
-            
-            // Se busca el precio del producto
-            while(!candies_list.get(j).getName().equals(candy_list.get(i).getId_candies()))
-                j++;
-            
-            int     cant    = candy_list.get(i).getCant();
-            
-            double  price   = suport.numberDecimalFormat(candies_list.get(j).getPrice(), 2),
-                    iva     = suport.numberDecimalFormat(price * 0.16, 2),
-                    unidad  = suport.numberDecimalFormat(price * 1.16, 2),
-                    total   = suport.numberDecimalFormat(price * 1.16 * cant, 2);
-            
-            String  candyName   = String.valueOf(candy_list.get(i).getId_candies()),
-                    cantString  = String.valueOf(cant),
-                    priceString = String.valueOf(price),
-                    ivaString   = String.valueOf(iva),
-                    monto       = String.valueOf(unidad),
-                    totalString = String.valueOf(total);
-            
-            dtm.addRow(new Object[]{candyName, cantString, priceString, ivaString,
-                                    monto, totalString, btnModify, btnDelete});
-                        
-            // Los acumuladores son llenados
-            acum_Sub    += suport.numberDecimalFormat(price * cant, 2);
-            acum_IVA    += suport.numberDecimalFormat(iva * cant, 2);
-            acum_Total  += suport.numberDecimalFormat(total, 2);
-            
-            objectList.add(candy_list.get(i).getId_candies());
-            objectList.add(cant);
-            objectList.add(suport.numberDecimalFormat(price * 1.16, 2));
-                                        
-        }
-        
-        mainPage.tblCandy.setModel(dtm);
-        
-        // Se muestran en pantalla la información de los acumuladores
-        mainPage.txtSubTotalCandy.setText(String.valueOf(acum_Sub));
-        mainPage.txtIVACandy.setText(String.valueOf(acum_IVA));
-        mainPage.txtTotalCandy.setText(String.valueOf(acum_Total));
-            
-    }
-    
-    public int searchIndex(String id, ArrayList<Object> objectList){
-        
-        int index = -1;
-        
-        for (int i = 0; i < objectList.size(); i += 3){
-            
-            if (objectList.get(i).equals(id))
-                return i;
-            
-        }
-        
-        return index;
-        
-    }
-    
     /**
      * Eventos provocados por el escuchador de Mouse (MouseListener)
      * @param evt son aquellos eventos que ocurren con acciones del Mouse.
@@ -470,43 +398,44 @@ public class ControllerMainMenu implements java.awt.event.ActionListener,
         
         if(evt.getSource() == mainPage.tblCandy){
         
+            // Se obtienen los valores de la fila y columna seleccionada.
             int column = mainPage.getColumnTable(), row = mainPage.getRowTable();
 
+            // Se valida que el evento del Mouse fue provocado dentro del JTable.
             if(row < mainPage.tblCandy.getRowCount() && row >= 0 && 
                     column < mainPage.tblCandy.getColumnCount() && column >= 0){
+                
+                // Se obtiene el valor de la celda seleccionada.
                 Object value = mainPage.tblCandy.getValueAt(row, column);
+                
+                // Si el valor de la celda seleccionada es un JButton;
                 if(value instanceof JButton){
+                    
                     ((JButton)value).doClick();
-                    JButton boton = (JButton) value;
+                    
+                    JButton btn = (JButton) value;
 
-                    if(boton.getName().equals("m")){
+                    // Si el JButton se llama "m";
+                    if(btn.getName().equals("m")){
                         System.out.println("Click en el boton modificar en la celda: " + row + ";" + column);
-                        //EVENTOS MODIFICAR
+                        //EVENTOS MODIFICAR GOLOSINA
                     }
-                    if(boton.getName().equals("e")){
+                    
+                    // Si el JButton se llama "e";
+                    if(btn.getName().equals("e")){
+                        
+                        // Se confirma que se desea eliminar el registro.
                         JOptionPane.showConfirmDialog(null, "Desea eliminar este registro", "Confirmar", JOptionPane.OK_CANCEL_OPTION);
+                        
+                        // Se imprime en consola en dónde se hizo click
                         System.out.println("Click en el boton eliminar en la celda: " + row + ";" + column);
-                        //EVENTOS ELIMINAR
+                        //EVENTOS ELIMINAR GOLOSINA
                                 
+                        // Se obtiene el modelo de la JTable.
                         DefaultTableModel dtm = (DefaultTableModel) mainPage.tblCandy.getModel();
                         
-                        String candyName = String.valueOf(dtm.getValueAt(row, 0));
-                        
-                        int i = 0, j = 0;
-                        
-                        while(!candy_list.get(i).getId_candies().equals(candyName))
-                            i++;
-                        
-                        while(!candies_list.get(i).getId().equals(candyName))
-                            j++;
-                        
-                        objectList.remove(searchIndex(candyName, objectList));
-                        candy_list.remove(i);
-                        candies_list.remove(j);
-                        
-                        //dtm.removeRow(row);
-                        
-                        showCandiesOnTicket(objectList);
+                        // Se remueve la fila seleccionada.
+                        dtm.removeRow(row);
                         
                     }
                 }
@@ -515,8 +444,8 @@ public class ControllerMainMenu implements java.awt.event.ActionListener,
 
         }
     }
-
-    // PROHIBIDO TOCAR
+    
+    //<editor-fold defaultstate="collapsed" desc=" PROHIBIDO TOCAR ">
     
     @Override
     public void mousePressed(MouseEvent e) {
@@ -538,5 +467,88 @@ public class ControllerMainMenu implements java.awt.event.ActionListener,
     
     }
     
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc=" Métodos para el funcionamiento del Controller ">
+    
+    /**
+     * Método para añadir golosinas en una compra.
+     * @param candyID id de la golosina comprada.
+     * @param cant cantidad de las golosinas compradas
+     * @param price precio (unidad) de las golosinas compradas
+     */
+    public void addCandies(String candyID, int cant, double price){
+        
+        // Se instancia la clase de apoyo Table
+        Table table = new Table();
+        
+        // Se obtiene el modelo de la JTable.
+        DefaultTableModel dtm = (DefaultTableModel) mainPage.tblCandy.getModel();
+        
+        // Se instancian y se crean las variables de tipo JButton.
+        JButton btnModify = new JButton(), btnDelete = new JButton();
+        
+        // Se les da un formato a las variables JButton.
+        table.addModifyButton(btnModify);
+        table.addDeleteButton(btnDelete);
+        
+        // Variables para mostrar montos.
+        double  iva     = suport.numberDecimalFormat(price * 0.16, 2),
+                unidad  = suport.numberDecimalFormat(price * 1.16, 2),
+                total   = suport.numberDecimalFormat(price * 1.16 * cant, 2);
+            
+        // Variables de tipo String, que serán utilizadas para mostrarse en la JTable.
+        String  candyName   = candyID, // Sustituir por búsqueda de nombre en la BD.
+                cantString  = String.valueOf(cant),
+                priceString = String.valueOf(price),
+                ivaString   = String.valueOf(iva),
+                monto       = String.valueOf(unidad),
+                totalString = String.valueOf(total);
+        
+        // Se añade una nueva fila con todos estos datos.
+        dtm.addRow(new Object[]{candyName, cantString, priceString, ivaString,
+                                monto, totalString, btnModify, btnDelete});
+        
+        // Se le da el nuevo formato a la tabla.
+        mainPage.tblCandy.setModel(dtm);
+        
+    }
+    
+    /**
+     * Método para mostrar los montos como 'Subtotal', 'IVA' y 'Total' que un 
+     * cliente tiene que cancelar.
+     */
+    public void showCandyAmounts(){
+        
+        // Se obtiene el modelo de la JTable.
+        DefaultTableModel dtm = (DefaultTableModel) mainPage.tblCandy.getModel();
+             
+        // Se crean las variables acumuladoras que mostrarán los montos correspondientes
+        double acumSub = 0, acumIVA = 0, acumTotal = 0;
+        
+        // Ciclo 'for' para recorrer todas las filas de la tabla
+        for (int i = 0; i < dtm.getRowCount(); i++){
+            
+            // Se obtienen los valores y se hacen los respectivos cálculos
+            int     cant    = Integer.valueOf(dtm.getValueAt(i, 1).toString());
+            double  price   = suport.numberDecimalFormat(Double.valueOf(dtm.getValueAt(i,2).toString()) * cant, 2),
+                    iva     = suport.numberDecimalFormat(price * 0.16, 2),
+                    total   = suport.numberDecimalFormat(price * 1.16, 2);
+            
+            // Se llenan los acumuladores.
+            acumSub     += price;
+            acumIVA     += iva;
+            acumTotal   += total;
+            
+        }
+        
+        // Se muestran en pantalla la información de los acumuladores
+        mainPage.txtSubTotalCandy.setText(String.valueOf(acumSub));
+        mainPage.txtIVACandy.setText(String.valueOf(acumIVA));
+        mainPage.txtTotalCandy.setText(String.valueOf(acumTotal));
+        
+    }
+    
+    //</editor-fold>
     
 }

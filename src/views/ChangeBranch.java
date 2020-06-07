@@ -7,8 +7,18 @@ package views;
  */
 public class ChangeBranch extends javax.swing.JDialog {
 
+    // Variables de apoyo para mover la interfaz por la pantalla.
     int xx = 0, xy = 0;
+    
+    // Variable para indicar la sucursal seleccionada.
     String sucursal;
+    
+    // Se instancia la clase de PopupDialogMessage
+        /*
+         * Esta clase es utilizada cuando la clase padre es un JDialog.
+         * Para los casos en donde la clase padre es un JFrame, se utilizará
+         * la clase PopupMessage.
+         */
     private PopupDialogMessage popup;
         
     public ChangeBranch(java.awt.Frame parent, boolean modal) {
@@ -25,7 +35,7 @@ public class ChangeBranch extends javax.swing.JDialog {
         // Muestra el JDialog en pantalla.
         setVisible(true);
         
-        // Se inicializa la variable
+        // Se inicializan las variables
         cmbCity.setSelectedIndex(0);
         cmbBranch.setSelectedIndex(0);
         
@@ -383,6 +393,12 @@ public class ChangeBranch extends javax.swing.JDialog {
         
     }//GEN-LAST:event_btnCloseActionPerformed
 
+    /**
+     * Cuando el ComboBox de Ciudad tiene un cambio, se activa este evento, el
+     * cual hace que el ComboBox de Sucursales obtenga el nombre de todas las
+     * sucursales de la Ciudad seleccionada.
+     * @param evt 
+     */
     private void cmbCityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCityActionPerformed
         // Se obtiene el elemento seleccionado.
         String item = (String) cmbCity.getSelectedItem();
@@ -411,15 +427,14 @@ public class ChangeBranch extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_cmbCityActionPerformed
 
+    /**
+     * Método para obtener el código de la sucursal seleccionada.
+     * @return el código de la sucursal seleccionada.
+     */
     public String getId_Sucursal(){
         return sucursal;
     }
     
-    /**
-     * @param args the command line arguments
-     */
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnClose;
     public javax.swing.JButton btnOk;

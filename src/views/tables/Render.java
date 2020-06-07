@@ -6,7 +6,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 
 /**
- *
+ * Clase para renderizar una JTable.
  * @author Gustavo
  */
 public class Render extends DefaultTableCellRenderer{

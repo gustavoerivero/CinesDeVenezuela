@@ -10,7 +10,10 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Table {
     
-            
+    /**
+     * Método para dar formato a un JButton con características de "Modificar".
+     * @param btnModify JButton que se le desea dar un formato.
+     */
     public void addModifyButton(JButton btnModify){
                 
         btnModify.setName("m");
@@ -23,7 +26,10 @@ public class Table {
         btnModify.setContentAreaFilled(false);
                 
     }
-    
+    /**
+     * Método para dar formato a un JButton con características de "Eliminar"
+     * @param btnDelete JButton que se le desea dar un formato.
+     */
     public void addDeleteButton(JButton btnDelete){
         
         btnDelete.setName("e");
@@ -37,6 +43,11 @@ public class Table {
                 
     }
     
+    /**
+     * Método para construir una JTable con formato para venta de dulces.
+     * @param table JTable que se le dará formato.
+     * @param matrix Datos que se van a incorporar a la JTable.
+     */
     public void buildCandyTable(javax.swing.JTable table, Object[][] matrix){
         
         table.setDefaultRenderer(Object.class, new Render());
@@ -76,12 +87,6 @@ public class Table {
             table.getColumnModel().getColumn(7).setPreferredWidth(40);
         }
         
-    }
-    
-    public void showCandyTable(javax.swing.JTable table, Object[][] matrix){
-        
-        buildCandyTable(table, matrix);
-          
     }
 
 }

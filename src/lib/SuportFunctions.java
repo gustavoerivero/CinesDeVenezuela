@@ -11,7 +11,11 @@ public class SuportFunctions {
         
     }
     
-    // Método para utilizar de manera cómoda el cardLayout.
+    /**
+     * Método para utilizar de manera cómoda y rápida el CardLayout.
+     * @param base JPanel Base; es el JPanel contenedor o padre.
+     * @param opc  JPanel Opc; es el JPanel que se va a mostrar o hijo.
+     */
     public void cardSelection(javax.swing.JPanel base, javax.swing.JPanel opc){
         base.removeAll(); // Elimina el contenido del JPanel principal.
         base.add(opc); // Añade el segundo JPanel al JPanel principal.
@@ -21,7 +25,10 @@ public class SuportFunctions {
     
     //<editor-fold defaultstate="collapsed" desc=" Métodos de validación ">
 
-    // Método para validar números enteros y positivos.
+    /**
+     * Método para validar números enteros y positivos
+     * @param evt Variable KeyEvent.
+     */
     public void integerPositiveKeyTyped(java.awt.event.KeyEvent evt){
         // Se trae el caracter ingresado en el campo de texto correspondiente.
         char numbers = evt.getKeyChar();
@@ -31,7 +38,10 @@ public class SuportFunctions {
             evt.consume();
     }
     
-    // Método para validar letras mayúsculas y minúsculas.
+    /**
+     * Método para validar letras del abecedario.
+     * @param evt variable de tipo KeyEvent
+     */
     public void alphabetKeyTyped(java.awt.event.KeyEvent evt){
         // Se trae el caracter ingresado en el campo de texto correspondiente.
         char letters = evt.getKeyChar();
@@ -45,7 +55,12 @@ public class SuportFunctions {
     
     // Métodos para dar formato a números.
     
-    // Método para dar cantidad de decimales a un número.
+    /**
+     * Método para dar formato a variables de tipo Double.
+     * @param number es el número al que se le quiere dar un formato.
+     * @param decimal la cantidad de decimales que se quieren mostrar.
+     * @return retorna el número con el formato deseado.
+     */
     public Double numberDecimalFormat(Double number, Integer decimal){
         return Math.round(number * Math.pow(10, decimal)) / Math.pow(10, decimal);
     }
