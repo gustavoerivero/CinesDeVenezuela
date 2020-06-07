@@ -1,4 +1,4 @@
-import controllers.ControllerMainMenu;
+import controllers.ControllerLogin;
 /**
  *
  * @author Gustavo
@@ -54,7 +54,7 @@ public class main {
         //</editor-fold>
                 
         // Se declara el controlador principal que dará ejecución a la aplicación.
-        ControllerMainMenu ctrlMM = new ControllerMainMenu();
+        ControllerLogin ctrlLogin = new ControllerLogin();
     }
     
 }

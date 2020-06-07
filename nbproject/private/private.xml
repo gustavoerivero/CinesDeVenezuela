@@ -11,15 +11,12 @@
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
         <group>
-            <file>file:/C:/Users/Gustavo/Documents/NetBeansProjects/CinesDeVenezuela/src/views/tables/Render.java</file>
             <file>file:/C:/Users/Gustavo/Documents/NetBeansProjects/CinesDeVenezuela/src/views/MainPage.java</file>
             <file>file:/C:/Users/Gustavo/Documents/NetBeansProjects/CinesDeVenezuela/src/controllers/ControllerMainMenu.java</file>
-            <file>file:/C:/Users/Gustavo/Documents/NetBeansProjects/CinesDeVenezuela/src/views/tables/Table.java</file>
+            <file>file:/C:/Users/Gustavo/Documents/NetBeansProjects/CinesDeVenezuela/src/views/Login.java</file>
+            <file>file:/C:/Users/Gustavo/Documents/NetBeansProjects/CinesDeVenezuela/src/controllers/ControllerLogin.java</file>
+            <file>file:/C:/Users/Gustavo/Documents/NetBeansProjects/CinesDeVenezuela/src/lib/SuportFunctions.java</file>
         </group>
-=======
-        <group/>
->>>>>>> 05bf41bd879f7382f3880b421941840886cf3717
     </open-files>
 </project-private>

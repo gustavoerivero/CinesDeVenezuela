@@ -32,7 +32,7 @@ public class SuportFunctions {
     }
     
     // Método para validar letras mayúsculas y minúsculas.
-    public void alphabetKeyTiped(java.awt.event.KeyEvent evt){
+    public void alphabetKeyTyped(java.awt.event.KeyEvent evt){
         // Se trae el caracter ingresado en el campo de texto correspondiente.
         char letters = evt.getKeyChar();
         // Se aplica la condición para que se elimine o no el caracter.
@@ -40,8 +40,7 @@ public class SuportFunctions {
             // Si cumple la condición, el caracter se elimina.
             evt.consume();
     }
-    
-    
+        
     //</editor-fold>
     
     // Métodos para dar formato a números.
