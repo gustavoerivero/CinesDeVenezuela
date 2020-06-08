@@ -5,7 +5,7 @@
             <url>src/controllers/ControllerMainMenu.java</url>
             <bookmark id="1">
                 <name/>
-                <line>13</line>
+                <line>11</line>
                 <key/>
             </bookmark>
         </file>
@@ -14,9 +14,6 @@
         <group>
             <file>file:/C:/Users/Gustavo/Documents/NetBeansProjects/CinesDeVenezuela/src/views/MainPage.java</file>
             <file>file:/C:/Users/Gustavo/Documents/NetBeansProjects/CinesDeVenezuela/src/controllers/ControllerMainMenu.java</file>
-            <file>file:/C:/Users/Gustavo/Documents/NetBeansProjects/CinesDeVenezuela/src/views/Login.java</file>
-            <file>file:/C:/Users/Gustavo/Documents/NetBeansProjects/CinesDeVenezuela/src/controllers/ControllerLogin.java</file>
-            <file>file:/C:/Users/Gustavo/Documents/NetBeansProjects/CinesDeVenezuela/src/lib/SuportFunctions.java</file>
         </group>
     </open-files>
 </project-private>

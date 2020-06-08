@@ -22,7 +22,9 @@ public class MainPage extends javax.swing.JFrame {
     // Se instancia la clase de soporte.
     private SuportFunctions suport;
     
-    // Constructor.
+    /**
+     * Constructor MainPage.
+     */
     public MainPage() {
         
         // Inicializa todas las variables (o mejor dicho componentes) que usa el JFrame.

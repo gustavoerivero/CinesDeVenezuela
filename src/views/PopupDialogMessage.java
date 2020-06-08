@@ -34,17 +34,17 @@ public class PopupDialogMessage extends javax.swing.JDialog {
                 lblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("images/okIcon.png")));
         }
         
-        // Colocar el mensaje pasado por parámetro en el JFrame
+        // Colocar el mensaje pasado por parámetro en el JDialog
         lblMessage.setText(message);
                 
-        // Cambia el ícono del JFrame.
+        // Cambia el ícono del JDialog.
         this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("images/CDV-icon.png")).getImage());
         
-        // Ubicar el JFrame en el centro de la pantalla.
+        // Ubicar el JDialog en el centro de la pantalla.
         setLocationRelativeTo(null);
         
-        // Hacer visible el JFrame
-        this.setVisible(true);
+        // Hacer visible el JDialog
+        setVisible(true);
         
     }
 
@@ -147,9 +147,10 @@ public class PopupDialogMessage extends javax.swing.JDialog {
                         .addContainerGap()
                         .addComponent(lblMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panPopupMessageLayout.createSequentialGroup()
+            .addGroup(panPopupMessageLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(lblIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         panPopupMessageLayout.setVerticalGroup(
             panPopupMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

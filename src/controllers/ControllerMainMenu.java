@@ -31,6 +31,7 @@ public class ControllerMainMenu implements java.awt.event.ActionListener,
         private MainPage mainPage;
         private PopupMessage popup;
         private ChangeBranch changeBranch;
+        private ModifyCandy modifyCandy;
 
         // Suport Class
         private SuportFunctions suport;
@@ -238,6 +239,8 @@ public class ControllerMainMenu implements java.awt.event.ActionListener,
                 
                 // Se debe restructurar esta sección con métodos y datos obtenidos de la BD
                 
+                DefaultTableModel dtm = (DefaultTableModel) mainPage.tblCandy.getModel();
+                
                 String id = "";
                 int cant = (int) mainPage.spnCantCandySell.getValue();
                 char type_Ticket = '1', estatus = '1';
@@ -245,27 +248,53 @@ public class ControllerMainMenu implements java.awt.event.ActionListener,
                 
                 String id_candies = mainPage.cmbCandySelection.getSelectedItem().toString();
                 
-                Ticket_Candy ticket_candy = new Ticket_Candy(id, type_Ticket, estatus, id_candies, cant);
+                // Se verifica que el dulce seleccionado no esté en la tabla.
                 
-                Candy candy = new Candy(id, id_candies, id, 99, mount, estatus);
-                                                
-                // Se restauran los valores iniciales.
-                mainPage.cmbCandySelection.setSelectedIndex(0);
-                mainPage.spnCantCandySell.setValue((int) 0);
+                // Se declara y se inicializa índice.
+                int index = 0;
+                
+                // Se declara y se inicializa la variable validadora.
+                boolean val = true;
+                
+                // Se recorre la tabla verificando que la golosina ya no haya sido agregada.
+                while(index < dtm.getRowCount() && val == true){
+                    if (id_candies != dtm.getValueAt(index, 0))
+                        index++;
+                    else
+                        val = false;
+                }
+                
+                // Si la golosina no ha sido agregada:
+                if(val == true){
+                    
+                    // Se restauran los valores iniciales.
+                    mainPage.cmbCandySelection.setSelectedIndex(0);
+                    mainPage.spnCantCandySell.setValue((int) 0);
                         
-                addCandies(id_candies, cant, mount); // -> Añade el registro.
-                showCandyAmounts();                  // -> Se muestran los montos.
-                                
+                    Ticket_Candy ticket_candy = new Ticket_Candy(id, type_Ticket, estatus, 
+                                                                 id_candies, cant);
+                
+                    Candy candy = new Candy(id, id_candies, id, 99, mount, estatus);
+                        
+                    addCandies(id_candies, cant, mount); // -> Añade el registro.
+                    showCandyAmounts();                  // -> Se muestran los montos.
+                    
+                }
+                
+                // Si la golosina ya fue agregada.
+                else{
+                    
+                    popup = new PopupMessage(mainPage, true, 1, "Ya la golosina ha sido ingresada.");
+                                        
+                }
+                                            
             }
             
         }
         
         // Retornar los valores iniciales
         else if(evt.getSource() == mainPage.btnCandySellClear){
-            
-            candy_list.clear();
-            candies_list.clear();
-            
+                        
             // Aplicar método que retorna los componentes a sus valores iniciales
             mainPage.clearCandySell();
             
@@ -274,92 +303,121 @@ public class ControllerMainMenu implements java.awt.event.ActionListener,
         // Realizar la venta de golosinas
         else if(evt.getSource() == mainPage.btnCandySell){
             
-            // Se genera un JFileChooser para obtener la ruta en donde se va a guardar los archivos.
-            javax.swing.JFileChooser FileChooser = new javax.swing.JFileChooser();
+            DefaultTableModel dtm = (DefaultTableModel) mainPage.tblCandy.getModel();
             
-            // Se configura el JFileChooser para que solo obtenga la ruta donde se desea guardar los archivos.
-            FileChooser.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
-            
-            // Se crea una variable para mostrar el JFileChooser
-            int option = FileChooser.showSaveDialog(mainPage);
-            
-            // Cuando se aprueba la ubicación, se obtiene la ruta de guardado
-            if(option == javax.swing.JFileChooser.APPROVE_OPTION){
-                String path = FileChooser.getSelectedFile().getPath();
-                         
-            path += "/0001"; // -> Colocar el id del ticket o factura.
+            /**
+             * Se verifica que estén todos los datos.
+             *  Se verifica:
+             *  - txtIdClientCandySell:      Que no esté vacío ni valor predeterminado.
+             *  - lblSucursalnameCandySell:  Que no esté vacío ni valor predeterminado.
+             *  - cmbCandySeller:            Que no esté en el valor predeterminado.
+             *  - getRowCount():             Que se haya ingresado al menos una golosina.
+             */
+            if((!"".equals(mainPage.txtIdClientCandySell.getText()) || 
+                !"Cédula del cliente".equals(mainPage.txtIdClientCandySell.getText())) && 
+               (!"".equals(mainPage.lblSucursalNameCandySell.getText()) || 
+                !"Sucursal".equals(mainPage.lblSucursalNameCandySell.getText())) &&
+                mainPage.cmbCandySeller.getSelectedIndex() != 0 && dtm.getRowCount() > 0){                             
                 
-                try {
+                // Se genera un JFileChooser para obtener la ruta en donde se va a guardar los archivos.
+                javax.swing.JFileChooser FileChooser = new javax.swing.JFileChooser();
+            
+                // Se configura el JFileChooser para que solo obtenga la ruta donde se desea guardar los archivos.
+                FileChooser.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
+            
+                // Se crea una variable para mostrar el JFileChooser
+                int option = FileChooser.showSaveDialog(mainPage);
+            
+                // Cuando se aprueba la ubicación, se obtiene la ruta de guardado
+                if(option == javax.swing.JFileChooser.APPROVE_OPTION){
                     
-                    // Se instancia la clase
-                    PDFGenerator g = new PDFGenerator();
+                    String path = FileChooser.getSelectedFile().getPath();
+                         
+                    path += "/0001"; // -> Colocar el id del ticket o factura.
+                
+                    try {
+                    
+                        // Se instancia la clase
+                        PDFGenerator g = new PDFGenerator();
                        
-                    DefaultTableModel dtm = (DefaultTableModel) mainPage.tblCandy.getModel();
+                        ArrayList<String>   names = new ArrayList<String>();
+                        ArrayList<Integer>  cants = new ArrayList<Integer>();
+                        ArrayList<Double> amounts = new ArrayList<Double>();
                     
-                    ArrayList<String>   names = new ArrayList<String>();
-                    ArrayList<Integer>  cants = new ArrayList<Integer>();
-                    ArrayList<Double> amounts = new ArrayList<Double>();
+                        for (int i = 0; i < dtm.getRowCount(); i++){
+                            names.add(dtm.getValueAt(i, 0).toString());
+                            cants.add(Integer.valueOf(dtm.getValueAt(i, 1).toString()));
+                            amounts.add(Double.valueOf(dtm.getValueAt(i, 4).toString()));
+                        }
                     
-                    for (int i = 0; i < dtm.getRowCount(); i++){
-                        names.add(dtm.getValueAt(i, 0).toString());
-                        cants.add(Integer.valueOf(dtm.getValueAt(i, 1).toString()));
-                        amounts.add(Double.valueOf(dtm.getValueAt(i, 4).toString()));
+                        /* 
+                         * Se llama el método generador de ticket para golosinas pasándole
+                         * los parámetros correspondientes.
+                         */
+                        g.pdfCandyTicket(mainPage.txtIdClientCandySell.getText(),
+                                mainPage.cmbCandySeller.getSelectedItem().toString(),
+                                "Sucursal XYZ", path, (int) java.lang.Math.random() * 5000 + 1,
+                                names, cants);
+                    
+                        // Valores de prueba (Se debe borrar y sustituir por valores de la BD)
+                        enterprise_data.add("J-31476980");
+                        enterprise_data.add("CINES DE VENEZUELA, C.A.");
+                        enterprise_data.add("AV. YATUSABE CON AV. WATAGATAPITUSBERRY");
+                        enterprise_data.add("TOSCANA, ITALIA");
+                        enterprise_data.add("TELEFONO: 02512611243");
+                        enterprise_data.add("Correo: cinesdevenezuela@gmail.com");
+                    
+                        seller_list.add("Vendedor: " + 
+                                        mainPage.cmbCandySeller.getSelectedItem().toString());
+                        seller_list.add("C.I./R.I.F. : v-7559054");
+                    
+                        client_data.add("Cliente: Analiza Meltrozo");
+                        client_data.add("C.I./R.I.F. : v-" + 
+                                        mainPage.txtIdClientCandySell.getText());
+                        client_data.add("Dirc: urb. Pandemonium");
+                        client_data.add("Tlf: 04149561231");
+                    
+                        id_tickets.add(String.valueOf((int) java.lang.Math.random() * 5000) + 1);
+                                    
+                        /* 
+                         * Se llama el método generador de factura para golosinas pasándole
+                         * los parámetros correspondientes.
+                         */
+                        g.pdfInvoice(   enterprise_data, 
+                                        seller_list, 
+                                        client_data, 
+                                        id_tickets, 
+                                        '1', String.valueOf((int) java.lang.Math.random() * 5000 + 1), 
+                                        names, 
+                                        cants, 
+                                        amounts, 
+                                        path);
+                    
+                        // Se muestra un mensaje de que la venta fue generada con éxito.
+                        popup = new PopupMessage(mainPage, true, 4, 
+                                "La venta se ha realizado exitosamente");
+                    
+                        // Aplicar método que retorna los componentes a sus valores iniciales
+                        mainPage.clearCandySell();
+                    
+                    } 
+                    
+                    catch (Exception e) {
+                        // De producirse un error, se muestra en consola.
+                        System.out.print("Error: " + e);
                     }
-                    
-                    /* 
-                     * Se llama el método generador de ticket para golosinas pasándole
-                     * los parámetros correspondientes.
-                     */
-                    g.pdfCandyTicket(mainPage.txtIdClientCandySell.getText(),
-                            mainPage.cmbCandySeller.getSelectedItem().toString(),
-                            "Sucursal XYZ", 
-                            path,
-                            (int) java.lang.Math.random() * 5000 + 1,
-                            names, cants);
-                    
-                    // Valores de prueba (Se debe borrar y sustituir por valores de la BD)
-                    enterprise_data.add("J-31476980");
-                    enterprise_data.add("CINES DE VENEZUELA, C.A.");
-                    enterprise_data.add("AV. YATUSABE CON AV. WATAGATAPITUSBERRY");
-                    enterprise_data.add("TOSCANA, ITALIA");
-                    enterprise_data.add("TELEFONO: 02512611243");
-                    enterprise_data.add("Correo: cinesdevenezuela@gmail.com");
-                    
-                    seller_list.add("Vendedor: " + 
-                                    mainPage.cmbCandySeller.getSelectedItem().toString());
-                    seller_list.add("C.I./R.I.F. : v-7559054");
-                    
-                    client_data.add("Cliente: Analiza Meltrozo");
-                    client_data.add("C.I./R.I.F. : v-" + 
-                                    mainPage.txtIdClientCandySell.getText());
-                    client_data.add("Dirc: urb. Pandemonium");
-                    client_data.add("Tlf: 04149561231");
-                    
-                    id_tickets.add(String.valueOf((int) java.lang.Math.random() * 5000) + 1);
-                                        
-                    g.pdfInvoice(   enterprise_data, 
-                                    seller_list, 
-                                    client_data, 
-                                    id_tickets, 
-                                    '1', String.valueOf((int) java.lang.Math.random() * 5000 + 1), 
-                                    names, 
-                                    cants, 
-                                    amounts, 
-                                    path);
-                    
-                    // Se muestra un mensaje de que la venta fue generada con éxito.
-                    popup = new PopupMessage(mainPage, true,
-                                             4, "La venta se ha realizado exitosamente");
-                    
-                    
-                } catch (Exception e) {
-                    // De producirse un error, se muestra en consola.
-                    System.out.print("Error: " + e);
+                
                 }
                 
             }
             
-            
+            // En caso de que falten datos por ingresar.
+            else{
+                // Se muestra mensaje de error.
+                popup = new PopupMessage(mainPage, true, 1, "Faltan datos por ingresar.");
+                
+            }
+                           
         }
         
         //</editor-fold>
@@ -396,6 +454,7 @@ public class ControllerMainMenu implements java.awt.event.ActionListener,
     @Override
     public void mouseClicked(MouseEvent evt) {
         
+        // Si el evento ocurre en la tabla de golosinas.
         if(evt.getSource() == mainPage.tblCandy){
         
             // Se obtienen los valores de la fila y columna seleccionada.
@@ -417,25 +476,55 @@ public class ControllerMainMenu implements java.awt.event.ActionListener,
 
                     // Si el JButton se llama "m";
                     if(btn.getName().equals("m")){
+                        
+                        // Se imprime en consola en dónde se hizo click
                         System.out.println("Click en el boton modificar en la celda: " + row + ";" + column);
-                        //EVENTOS MODIFICAR GOLOSINA
+                                      
+                        // Se obtiene el modelo de la JTable.
+                        DefaultTableModel dtm = (DefaultTableModel) mainPage.tblCandy.getModel();
+                                                
+                        // Se obtienen los valores del producto.
+                        String name     = dtm.getValueAt(row, 0).toString();
+                        String desc     = "Acá iría la descripción del producto " + name;
+                        double amount   = Double.valueOf(dtm.getValueAt(row, 2).toString());
+                        
+                        // Se instancia la clase para modificar el producto seleccionado.
+                        modifyCandy = new ModifyCandy(mainPage, true, name, desc, amount);
+                        
+                        // Se modifica el producto: Cantidad.
+                        dtm.setValueAt(String.valueOf(modifyCandy.getCant()), row, 1);
+                        
+                        // Se modifica el producto: Total
+                        dtm.setValueAt(String.valueOf(modifyCandy.getBuy()), row, 5);
+                        
+                        // Se actualizan montos.
+                        showCandyAmounts();
+                        
                     }
                     
                     // Si el JButton se llama "e";
                     if(btn.getName().equals("e")){
                         
-                        // Se confirma que se desea eliminar el registro.
-                        JOptionPane.showConfirmDialog(null, "Desea eliminar este registro", "Confirmar", JOptionPane.OK_CANCEL_OPTION);
-                        
                         // Se imprime en consola en dónde se hizo click
                         System.out.println("Click en el boton eliminar en la celda: " + row + ";" + column);
-                        //EVENTOS ELIMINAR GOLOSINA
-                                
-                        // Se obtiene el modelo de la JTable.
-                        DefaultTableModel dtm = (DefaultTableModel) mainPage.tblCandy.getModel();
+                                                                                
+                        // Se confirma que se desea eliminar el registro.
+                        SelectOption select = new SelectOption(mainPage, true, 2, 
+                                                "¿Desea eliminar este registro?", "Si", "No");
                         
-                        // Se remueve la fila seleccionada.
-                        dtm.removeRow(row);
+                        // Si se confirma la eliminación.
+                        if(select.getOpc()){
+                            
+                            // Se obtiene el modelo de la JTable.
+                            DefaultTableModel dtm = (DefaultTableModel) mainPage.tblCandy.getModel();
+                        
+                            // Se remueve la fila seleccionada.
+                            dtm.removeRow(row);
+                            
+                            // Se actualizan los montos.
+                            showCandyAmounts();
+                            
+                        }
                         
                     }
                 }
