@@ -427,6 +427,8 @@ public class ControllerMainMenu implements java.awt.event.ActionListener,
             mainPage.panCapsuleCinemaDecision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239,232,244)));
         
             suport.cardSelection(mainPage.panOption2, mainPage.panCinemaSell);
+            
+            suport.cardSelection(mainPage.panStepsCinemaTickets, mainPage.panFirstStepCinemaTickets);
         }
         
         //<editor-fold defaultstate="collapsed" desc=" Venta de tickets para funciones ">
@@ -436,6 +438,19 @@ public class ControllerMainMenu implements java.awt.event.ActionListener,
             mainPage.btnBackToTicketDecision2.setBackground(new java.awt.Color(249,249,249));
             
             suport.cardSelection(mainPage.panOption2, mainPage.panDecisionOption2);
+            
+        }
+        
+        // Cambiar de sucursal a gestionar
+        else if(evt.getSource() == mainPage.btnChangeSucursalCinemaTickets){
+            
+            // Instanciar la clase
+            changeBranch = new ChangeBranch(mainPage, true);
+            
+            // Se ubica el nombre de la sucursal.
+            mainPage.lblSucursalNameCinemaTickets.setText(changeBranch.getId_Sucursal());
+            
+            changeBranch.dispose();
             
         }
         
@@ -531,6 +546,13 @@ public class ControllerMainMenu implements java.awt.event.ActionListener,
 
             }
 
+        }
+        
+        // Si el evento ocurre en la tabla de películas.
+        else if (evt.getSource() == mainPage.tblMovieSelector){
+            
+            mainPage.pgrCinemaTickets.setIndeterminate(true);
+            
         }
     }
     

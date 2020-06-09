@@ -53,6 +53,7 @@ public class ControllerLogin implements java.awt.event.ActionListener {
             
             login.txtEmailField.setText("Ingrese su correo electrónico");
             login.pssPasswordField.setText("Ingrese su contraseña");
+            login.tgbShowPass.setSelected(false);
             login.pssPasswordField.setEchoChar('*');
             
         }
