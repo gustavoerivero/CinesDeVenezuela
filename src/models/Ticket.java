@@ -7,8 +7,8 @@ package models;
  */
 public class Ticket {
     
-    String id;
-    char type, estatus;
+    private String id;
+    private char type, estatus;
 
     public Ticket(String id, char type, char estatus) {
         

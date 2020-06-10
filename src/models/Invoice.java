@@ -9,10 +9,10 @@ import java.util.Date;
  */
 public class Invoice {
     
-    String id, id_employee;
-    Date date_purchase;
-    double discount, iva, amount;
-    char estatus;
+    private String id, id_employee;
+    private Date date_purchase;
+    private double discount, iva, amount;
+    private char estatus;
 
     public Invoice(String id, String id_employee, Date date_purchase, 
                    double discount, double iva, double amount, char estatus) {

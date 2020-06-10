@@ -7,8 +7,8 @@ package models;
  */
 public class Ticket_Candy extends Ticket{
     
-    String id_candies;
-    int cant;
+    private String id_candies;
+    private int cant;
     
     public Ticket_Candy(String id, char type, char estatus, String id_candies, int cant) {
         
