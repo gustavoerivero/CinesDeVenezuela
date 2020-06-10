@@ -7,16 +7,16 @@ package models;
  */
 public class Candy {
     
-    String id, name, descr;
-    int cant;
-    double price;
-    char estatus;
+    private String id, name, descr;
+    private int stock;
+    private double price;
+    private char estatus;
 
-    public Candy(String id, String name, String descr, int cant, double price, char estatus) {
+    public Candy(String id, String name, String descr, int stock, double price, char estatus) {
         this.id = id;
         this.name = name;
         this.descr = descr;
-        this.cant = cant;
+        this.stock = stock;
         this.price = price;
         this.estatus = estatus;
     }
@@ -45,12 +45,12 @@ public class Candy {
         this.descr = descr;
     }
 
-    public int getCant() {
-        return cant;
+    public int getStock() {
+        return stock;
     }
 
-    public void setCant(int cant) {
-        this.cant = cant;
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 
     public double getPrice() {
