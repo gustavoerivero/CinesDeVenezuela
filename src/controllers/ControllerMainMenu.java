@@ -15,16 +15,14 @@ import lib.PDFGenerator;
 // Se importan las librerías a utilizar
 import java.util.ArrayList;
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Gustavo
  */
-public class ControllerMainMenu implements java.awt.event.ActionListener, 
-                                            java.awt.event.MouseListener{
+public class ControllerMainMenu implements ActionListener, MouseListener{
     
     // Instanciar las clases necesarias para el funcionamiento.
         // Views
@@ -271,10 +269,10 @@ public class ControllerMainMenu implements java.awt.event.ActionListener,
                     mainPage.cmbCandySelection.setSelectedIndex(0);
                     mainPage.spnCantCandySell.setValue((int) 0);
                         
-                    Ticket_Candy ticket_candy = new Ticket_Candy(id, type_Ticket, estatus, 
+                    /*Ticket_Candy ticket_candy = new Ticket_Candy(id, type_Ticket, estatus, 
                                                                  id_candies, cant);
                 
-                    Candy candy = new Candy(id, id_candies, id, 99, mount, estatus);
+                    Candy candy = new Candy(id, id_candies, id, 99, mount, estatus);*/
                         
                     addCandies(id_candies, cant, mount); // -> Añade el registro.
                     showCandyAmounts();                  // -> Se muestran los montos.

@@ -5,6 +5,9 @@ package controllers;
 import views.Login;
 import views.PopupMessage;
 
+
+import models.ConexionBD;
+
 /**
  *
  * @author Gustavo
@@ -15,7 +18,8 @@ public class ControllerLogin implements java.awt.event.ActionListener {
     private Login login;
     private PopupMessage popup;
     private ControllerMainMenu mainMenu;
-    
+    private ConexionBD con;
+        
     // Constructor del Login
     public ControllerLogin(){
         
@@ -24,7 +28,7 @@ public class ControllerLogin implements java.awt.event.ActionListener {
         
         // Se añaden los eventos.
         login.addEvents(this);
-        
+                
     }
     
     /**
@@ -60,29 +64,43 @@ public class ControllerLogin implements java.awt.event.ActionListener {
         
         // Botón para ingresar al sistema.
         else if(evt.getSource() == login.btnOk){
-                  
+                 
+            String  email   = login.txtEmailField.getText(),
+                    pass    = login.pssPasswordField.getPassword().toString();
+            
             // Si el contenido de los campos es igual a vacío o el mensaje predeterminado.
-            if((login.txtEmailField.getText().equals("") || 
-                login.txtEmailField.getText().equals("Ingrese su correo electrónico")) || ( 
-                login.pssPasswordField.getPassword().toString().equals("") || 
-                login.pssPasswordField.getPassword().toString().equals("Ingrese su contraseña"))){
+            if((email.isEmpty() || email.equals("Ingrese su correo electrónico")) || ( 
+                pass.isEmpty() || pass.equals("Ingrese su contraseña"))){
                 
-                // Se muestra un mensaje emergente de "Datos erróneos".
+                // Se muestra un mensaje emergente de "Datos faltantes".
                 popup = new PopupMessage(login, true, 1, 
-                        "<html><p align = 'center'>El correo electrónico o la contraseña son incorrectos</p></html>");
+                        "<html><p align = 'center'>Debe ingresar los datos correspondientes.</p></html>");
                 
             // Si todo está correcto, se accede al sistema.
             } else{
                 
-                // Se muestra un mensaje emergente de "Bienvenido".
-                popup = new PopupMessage(login, true, 4, 
-                        "Bienvenido");
+                // Si el usuario y la contraseña son correctos.
+                if(signer(email, pass) == true){
+                    
+                    // Se muestra un mensaje emergente de "Bienvenido".
+                    popup = new PopupMessage(login, true, 4, 
+                            "Bienvenido");
                 
-                // Se oculta la view de Login.
-                login.dispose();
+                    // Se oculta la view de Login.
+                    login.dispose();
                 
-                // Se instancia el Controlador de MainMenu.
-                mainMenu = new ControllerMainMenu();
+                    // Se instancia el Controlador de MainMenu.
+                    mainMenu = new ControllerMainMenu();
+                   
+                // Si el usuario y/o la contraseña son incorrectos.
+                } else{
+                    
+                    // Se muestra un mensaje emergente de "Datos faltantes".
+                    popup = new PopupMessage(login, true, 1, 
+                            "<html><p align = 'center'>El correo electrónico o "
+                                    + "la contraseña son incorrectos.</p></html>");
+                    
+                }
                 
             }
             
@@ -99,6 +117,32 @@ public class ControllerLogin implements java.awt.event.ActionListener {
             else 
                 login.pssPasswordField.setEchoChar('*');
         }
+        
+    }
+    
+    public boolean signer(String email, String pass){
+        
+        try{
+            
+            con = new ConexionBD();
+            con.conectar();
+          
+            String SQL =    "SELECT * FROM public.\"Usuario\" WHERE \"Correo\" = '"
+                            + email + "' AND \"Clave\" = '" + pass + 
+                            "' AND \"Estado\" = '1';";
+            
+            java.sql.ResultSet rs = con.queryConsultar(SQL);
+            
+            con.desconectar();
+            
+            return rs.next();
+            
+            
+        } catch (java.sql.SQLException ex){
+            System.out.println("No se pudo encontrar el usuario. Error: " + ex);
+        }
+        
+        return false;
         
     }
     
