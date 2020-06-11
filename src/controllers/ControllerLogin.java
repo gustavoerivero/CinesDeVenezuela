@@ -5,7 +5,7 @@ package controllers;
 import views.Login;
 import views.PopupMessage;
 
-
+// Se importan los models a utilizar
 import models.ConexionBD;
 
 /**
@@ -17,6 +17,7 @@ public class ControllerLogin implements java.awt.event.ActionListener {
     // Se instancias las clases a utilizar.
     private Login login;
     private PopupMessage popup;
+    private ControllerForgotPass forgot;
     private ControllerMainMenu mainMenu;
     private ConexionBD con;
         
@@ -116,6 +117,13 @@ public class ControllerLogin implements java.awt.event.ActionListener {
             // Caso contrario; Si se deselecciona el toggleButton, se oculta la contraseña.
             else 
                 login.pssPasswordField.setEchoChar('*');
+        }
+        
+        // Si se ha olvidado la contraseña.
+        else if(evt.getSource() == login.btnForgotPass){
+            
+            forgot = new ControllerForgotPass();
+            
         }
         
     }

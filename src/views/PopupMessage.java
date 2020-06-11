@@ -35,7 +35,7 @@ public class PopupMessage extends javax.swing.JDialog {
         }
         
         // Colocar el mensaje pasado por parámetro en el JDialog
-        lblMessage.setText(message);
+        lblMessage.setText("<html><p align='center'>" + message + "</p></html>");
                 
         // Cambia el ícono del JDialog.
         this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("images/CDV-icon.png")).getImage());

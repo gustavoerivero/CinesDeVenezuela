@@ -333,7 +333,7 @@ public class SelectOption extends javax.swing.JDialog {
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         opc = false;
-        dispose();
+        this.dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
 
 
