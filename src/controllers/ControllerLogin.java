@@ -8,21 +8,30 @@ import views.PopupMessage;
 // Se importan los models a utilizar
 import models.ConexionBD;
 
+// Se importan las clases de soporte.
+import lib.SuportFunctions;
+
 /**
  *
  * @author Gustavo
  */
 public class ControllerLogin implements java.awt.event.ActionListener {
     
-    // Se instancias las clases a utilizar.
+    // Se declaran las clases a utilizar.
     private Login login;
     private PopupMessage popup;
     private ControllerForgotPass forgot;
     private ControllerMainMenu mainMenu;
     private ConexionBD con;
+    
+    // Se declaran clases de soporte.
+    private SuportFunctions suport;
         
     // Constructor del Login
     public ControllerLogin(){
+        
+        // Se instancian las clases de soporte.
+        suport = new SuportFunctions();
         
         // Se instancia la view de Login.
         login = new Login();
@@ -83,35 +92,50 @@ public class ControllerLogin implements java.awt.event.ActionListener {
                 
                 // Se muestra un mensaje emergente de "Datos faltantes".
                 popup = new PopupMessage(login, true, 1, 
-                        "<html><p align = 'center'>Debe ingresar los datos correspondientes.</p></html>");
+                        "Debe ingresar los datos correspondientes.");
                 
             // Si todo está correcto, se accede al sistema.
             } else{
-                
-                // Si el usuario y la contraseña son correctos.
-                if(signer(email, pass) == true){
+                                
+                // Se verifica el formato del correo ingresado.
+                if(suport.verifyEmail(email)){
                     
-                    // Se muestra quién ingresó al sistema.
-                    System.out.println("El usuario '" + email + "' ha ingresado al"
-                            + " sistema con la contraseña '" + pass + "'.");
+                    // Si el usuario y la contraseña son correctos.
+                    if(signer(email, pass) == true){
+
+                        // Se muestra quién ingresó al sistema.
+                        System.out.println("El usuario '" + email + "' ha ingresado al"
+                                + " sistema con la contraseña '" + pass + "'.");
+
+                        // Se muestra un mensaje emergente de "Bienvenido".
+                        popup = new PopupMessage(login, true, 4, 
+                                "Bienvenido");
+
+                        // Se oculta la view de Login.
+                        login.dispose();
+
+                        // Se instancia el Controlador de MainMenu.
+                        mainMenu = new ControllerMainMenu();
+
+                    } 
                     
-                    // Se muestra un mensaje emergente de "Bienvenido".
-                    popup = new PopupMessage(login, true, 4, 
-                            "Bienvenido");
+                    // Si el usuario y/o la contraseña son incorrectos.
+                    else{
+                    
+                        // Se muestra un mensaje emergente de "Datos faltantes".
+                        popup = new PopupMessage(login, true, 1, 
+                                "El correo electrónico o la contraseña son "
+                                        + "incorrectos.");
+
+                    }
+                    
+                }
                 
-                    // Se oculta la view de Login.
-                    login.dispose();
-                
-                    // Se instancia el Controlador de MainMenu.
-                    mainMenu = new ControllerMainMenu();
-                   
-                // Si el usuario y/o la contraseña son incorrectos.
-                } else{
+                else{
                     
                     // Se muestra un mensaje emergente de "Datos faltantes".
                     popup = new PopupMessage(login, true, 1, 
-                            "<html><p align = 'center'>El correo electrónico o "
-                                    + "la contraseña son incorrectos.</p></html>");
+                            "El correo electrónico no tiene un formato válido.");
                     
                 }
                 

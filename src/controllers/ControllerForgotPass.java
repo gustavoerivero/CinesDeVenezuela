@@ -83,6 +83,7 @@ public class ControllerForgotPass implements java.awt.event.ActionListener{
             String  email               = forgot.txtEmailField.getText(),
                     emailConfirmation   = forgot.txtEmailField1.getText();
             
+            // Si no se proporcionaron los datos solicitados.
             if((email.isEmpty() ^ emailConfirmation.isEmpty()) ^ 
                     ((email.equals("Ingrese su correo electrónico") ^ 
                     emailConfirmation.equals("Ingrese nuevamente su correo electrónico")))){
@@ -92,91 +93,116 @@ public class ControllerForgotPass implements java.awt.event.ActionListener{
                 
             }
             
+            // Si se proporcionaron los datos solicitados.
             else {
             
-                if(email.equals(emailConfirmation) && signer(email)){
+                // Si ambos correos electrónicos tienen formato válido.
+                if(suport.verifyEmail(email) || suport.verifyEmail(emailConfirmation)){
+                    
+                    // Si los correos electrónicos son iguales y existe el usuario.
+                    if(email.equals(emailConfirmation) && signer(email)){
                 
-                    correo = email;
-                    
-                    System.out.println("El correo con código de confirmación está"
-                            + " siendo preparado.");
-                    
-                    // Datos del usuario emisor.
-                    String  from = "cinesdevenezuela.nacional@gmail.com",
-                            pass = "cines1234venezuela";
-                    
-                    // Array de caracteres válidos para el código de confirmación.
-                    char[] chars = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789".toCharArray();
-                    
-                    // StringBuilder de longitud '6'.
-                    StringBuilder sb = new StringBuilder(6);
-                    
-                    // Instanciar clase Random.
-                    Random random = new Random();
-                    
-                    // Ciclo para construir aleatoriamente el código de confirmación.
-                    for (int i = 0; i < 6; i++) {
-                        char c = chars[random.nextInt(chars.length)];
-                        sb.append(c);
-                    }
-                    
-                    // Obtener el código de confirmación.
-                    codex = sb.toString();
-                                 
-                    // Se describen las propiedades de la sesión.
-                    Properties props = new Properties();
-                    props.put("mail.smtp.auth", "true");
-                    props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
-                    props.put("mail.smtp.starttls.enable", "true");
-                    props.put("mail.smtp.host", "smtp.gmail.com");
-                    props.put("mail.smtp.port", "587");
-                    
-                    // Se instancia una nueva sesión.
-                    Session session = Session.getInstance(props,
-                            new Authenticator() {
-                                protected PasswordAuthentication getPasswordAuthentication() {
-                                    return new PasswordAuthentication(from, pass);
+                        correo = email;
+
+                        System.out.println("El correo con código de confirmación está"
+                                + " siendo preparado.");
+
+                        // Datos del usuario emisor.
+                        String  from = "cinesdevenezuela.nacional@gmail.com",
+                                pass = "cines1234venezuela";
+
+                        // Array de caracteres válidos para el código de confirmación.
+                        char[] chars = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789".toCharArray();
+
+                        // StringBuilder de longitud '6'.
+                        StringBuilder sb = new StringBuilder(6);
+
+                        // Instanciar clase Random.
+                        Random random = new Random();
+
+                        // Ciclo para construir aleatoriamente el código de confirmación.
+                        for (int i = 0; i < 6; i++) {
+                            char c = chars[random.nextInt(chars.length)];
+                            sb.append(c);
+                        }
+
+                        // Obtener el código de confirmación.
+                        codex = sb.toString();
+
+                        // Se describen las propiedades de la sesión.
+                        Properties props = new Properties();
+                        props.put("mail.smtp.auth", "true");
+                        props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+                        props.put("mail.smtp.starttls.enable", "true");
+                        props.put("mail.smtp.host", "smtp.gmail.com");
+                        props.put("mail.smtp.port", "587");
+
+                        // Se instancia una nueva sesión.
+                        Session session = Session.getInstance(props,
+                                new Authenticator() {
+                                    protected PasswordAuthentication getPasswordAuthentication() {
+                                        return new PasswordAuthentication(from, pass);
+                                    }
                                 }
-                            }
-                    );
-                            
-                    try {
- 
-                        // Se describen los emisores, receptores, asunto y mensaje.
-                        Message message = new MimeMessage(session);
-                        message.setFrom(new InternetAddress(from));
-                        message.setRecipients(Message.RecipientType.TO,
-                            InternetAddress.parse(email));
-                        message.setSubject("Código de confirmación para "
-                                + "recuperar contraseña");
-                        message.setText("El código de confirmación para poder "
-                                + "recuperar tu contraseña es: " + codex);
- 
-                        // Se envía el mensaje.
-                        Transport.send(message);
-                        
-                        System.out.println("El código " + codex + " ha sido "
-                                + "enviado con éxito.");
-                        
-                        popup = new PopupMessage(forgot, true, 2, "El correo con el "
-                            + "código de verificación ha sido enviado");
- 
-                    } catch (MessagingException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                    
-                    // Se cambia la pantalla.
-                    suport.cardSelection(forgot.panContent, forgot.panStepTwo);
-                
-                }   
+                        );
+
+                        try {
+
+                            // Se describen los emisores, receptores, asunto y mensaje.
+                            Message message = new MimeMessage(session);
+                            message.setFrom(new InternetAddress(from));
+                            message.setRecipients(Message.RecipientType.TO,
+                                InternetAddress.parse(email));
+                            message.setSubject("Código de confirmación para "
+                                    + "recuperar contraseña");
+                            message.setText("El código de confirmación para poder "
+                                    + "recuperar tu contraseña es: " + codex);
+
+                            // Se envía el mensaje.
+                            Transport.send(message);
+
+                            System.out.println("El código " + codex + " ha sido "
+                                    + "enviado con éxito.");
+
+                            popup = new PopupMessage(forgot, true, 2, "El correo con el "
+                                + "código de verificación ha sido enviado");
+
+                        } catch (MessagingException ex) {
+                            throw new RuntimeException(ex);
+                        }
+
+                        // Se cambia la pantalla.
+                        suport.cardSelection(forgot.panContent, forgot.panStepTwo);
+
+                    }   
             
-                else{
-                
-                    popup = new PopupMessage(forgot, true, 1, "Los correos "
-                            + "electrónicos no son iguales.");
-                
+                    // Si los correos proporcionados no son iguales o el usuario no está registrado.
+                    else{
+                        
+                        // Si los correos proporcionados no son iguales.
+                        if(!email.equals(emailConfirmation))
+                            popup = new PopupMessage(forgot, true, 1, "Los correos "
+                                    + "electrónicos no son iguales.");
+                        
+                        // Si el usuario no está registrado
+                        else
+                            popup = new PopupMessage(forgot, true, 1, "El usuario "
+                                    + "no está registrado.");
+
+                    }
                 }
+                
+                // Si uno de los correos electrónicos proporcionados no tienen formato válido.
+                else{
+                    
+                    // Se muestra un mensaje emergente de "Datos faltantes".
+                    popup = new PopupMessage(forgot, true, 1, 
+                            "El correo electrónico no tiene un formato válido.");
+                    
+                }
+                    
             }
+                
         }
         
         //</editor-fold>
