@@ -50,6 +50,30 @@ public class SuportFunctions {
             // Si cumple la condición, el caracter se elimina.
             evt.consume();
     }
+    
+    public boolean isPasswordCorrect(char[] passOne, char[] passTwo) {
+        
+        boolean valor = true;
+        
+        int pointer = 0;
+        
+        if (passOne.length != passTwo.length)
+            valor = false;
+        
+        else{
+            while((valor)&&(pointer < passOne.length)){
+                
+                if (passOne[pointer] != passTwo[pointer])
+                    valor = false;
+                
+                pointer++;
+                
+            }
+            
+        }
+        
+        return valor;
+    }
         
     //</editor-fold>
     

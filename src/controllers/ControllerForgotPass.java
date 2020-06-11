@@ -23,22 +23,28 @@ import views.SelectOption;
  */
 public class ControllerForgotPass implements java.awt.event.ActionListener{
     
+    // Se declaran las clases a utilizar.
     private ForgotPass forgot;
     private PopupMessage popup;
     private SelectOption select;
     private SuportFunctions suport;
     private ConexionBD con;
     
+    // Se declaran las variables a utilizar.
     String correo, codex;
     
     public ControllerForgotPass(){
     
+        // Se instancia clase de soporte.
         suport = new SuportFunctions();
         
+        // Se instancia view a utilizar.
         forgot = new ForgotPass();
         
+        // Se activan los eventos de los botones.
         forgot.addEvents(this);
         
+        // Se inicializan las variables.
         correo = null;
         codex = null;
                 
@@ -243,23 +249,42 @@ public class ControllerForgotPass implements java.awt.event.ActionListener{
         
         // Para actualizar las contraseñas.
         else if(evt.getSource() == forgot.btnOk2){
-                             
+                           
+            // Se otienen las contraseñas.
+            char[] password = forgot.pssPasswordField.getPassword(),
+                   confirm  = forgot.pssPasswordField1.getPassword();
+            
+            /* 
+             * Se otienen sus variables de tipo String.
+             * Se hace esta transformación debido a que las contraseñas de por
+             * sí se encuentran encriptadas.
+             */
+            String  pass                = new String(password),
+                    passConfirmation    = new String(confirm);
+            
+            // Se muestra en consola las contraseñas ingresadas.
+            System.out.println("La primera contraseña es: " + pass + " mientras"
+                    + " que la segunda es: " + passConfirmation);
+            
             // Se comprueba de que las contraseñas sean iguales.
-            if(forgot.pssPasswordField.getPassword().toString().equals(
-                    forgot.pssPasswordField1.getPassword().toString())){
+            if(suport.isPasswordCorrect(forgot.pssPasswordField.getPassword(), 
+                    forgot.pssPasswordField1.getPassword())){
                 
-                String pass = forgot.pssPasswordField.getPassword().toString();
-                
+                // Se muestra el aviso de que las contraseñas son iguales.
                 System.out.println("Contraseñas iguales. Se procede a actualizar.");
                 
+                // Se actualiza la contraseña.
                 insertNewPass(correo, pass);
                 
-                System.out.println("La contraseña " + pass + " ha sido cambiada "
-                        + "para el usuario " + correo + ".");
+                // Se muestra mensaje de que la actualización fue exitosa.
+                System.out.println("Al usuario " + correo + " se le ha actualizado "
+                        + "su contraseña por " + pass + ".");
                 
+                // Se muestra en pantalla mensaje de que la actualización fue exitosa.
                 popup = new PopupMessage(forgot, true, 4, 
                         "La contraseña ha sido actualizada.");
                 
+                // Se cierra pantalla.
                 forgot.dispose();
                 
             }
@@ -298,16 +323,21 @@ public class ControllerForgotPass implements java.awt.event.ActionListener{
         
         try{
             
+            // Se instancia la clase de conexión con BD y se establece una conexión.
             con = new ConexionBD();
             con.conectar();
           
+            // Se declara una sentencia SQL.
             String SQL =    "SELECT * FROM public.\"Usuario\" WHERE \"Correo\" = '"
                             + email + "' AND \"Estado\" = '1';";
             
+            // Se realiza la consulta y se obtiene el resultado.
             java.sql.ResultSet rs = con.queryConsultar(SQL);
             
+            // Se desconecta la BD.
             con.desconectar();
             
+            // Si el usuario existe (que debe ser único) retorna 'true'.
             return rs.next();
             
             
@@ -315,6 +345,7 @@ public class ControllerForgotPass implements java.awt.event.ActionListener{
             System.out.println("No se pudo encontrar el usuario. Error: " + ex);
         }
         
+        // Si el usuario no existe, retorna 'false'.
         return false;
         
     }
@@ -326,14 +357,18 @@ public class ControllerForgotPass implements java.awt.event.ActionListener{
      */
     public void insertNewPass(String email, String pass){
        
+        // Se instancia la clase de conexión de la BD y se establece conexión.
         con = new ConexionBD();
         con.conectar();
           
+        // Se declara la sentencia SQL.
         String SQL =    "UPDATE public.\"Usuario\" SET \"Clave\" = "
                         + "'" + pass + "' WHERE \"Correo\" = '" + email + "';";
             
+        // Se realiza la actualización.
         con.queryInsert(SQL);
             
+        // Se desconecta la BD.
         con.desconectar();
                  
     }

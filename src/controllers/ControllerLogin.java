@@ -66,8 +66,16 @@ public class ControllerLogin implements java.awt.event.ActionListener {
         // Botón para ingresar al sistema.
         else if(evt.getSource() == login.btnOk){
                  
+            // Se obtiene la contraseña ingresada.
+            char[] password = login.pssPasswordField.getPassword();
+            
+            // Se obtienen los datos de tipo String.
             String  email   = login.txtEmailField.getText(),
-                    pass    = login.pssPasswordField.getPassword().toString();
+                    pass    = new String(password); /*
+                                                     * -> Se transforma la contraseña en String
+                                                     *    por el hecho que esta se encuentra
+                                                     *    encriptada por sí sola.
+                                                     */
             
             // Si el contenido de los campos es igual a vacío o el mensaje predeterminado.
             if((email.isEmpty() || email.equals("Ingrese su correo electrónico")) || ( 
@@ -82,6 +90,10 @@ public class ControllerLogin implements java.awt.event.ActionListener {
                 
                 // Si el usuario y la contraseña son correctos.
                 if(signer(email, pass) == true){
+                    
+                    // Se muestra quién ingresó al sistema.
+                    System.out.println("El usuario '" + email + "' ha ingresado al"
+                            + " sistema con la contraseña '" + pass + "'.");
                     
                     // Se muestra un mensaje emergente de "Bienvenido".
                     popup = new PopupMessage(login, true, 4, 
@@ -122,27 +134,40 @@ public class ControllerLogin implements java.awt.event.ActionListener {
         // Si se ha olvidado la contraseña.
         else if(evt.getSource() == login.btnForgotPass){
             
+            // Se instancia la clase para recuperar contraseña.
             forgot = new ControllerForgotPass();
             
         }
         
     }
     
+    /**
+     * Método para comprobar si el usuario que desea ingresar al sistema se 
+     * encuentra registrado.
+     * @param email correo electrónico del usuario.
+     * @param pass contraseña del usuario.
+     * @return variable booleana.
+     */
     public boolean signer(String email, String pass){
         
         try{
             
+            // Se instancia la clase para la conexión con la BD y se establece la conexión.
             con = new ConexionBD();
             con.conectar();
           
+            // Se descrie la sentencia SQL.
             String SQL =    "SELECT * FROM public.\"Usuario\" WHERE \"Correo\" = '"
                             + email + "' AND \"Clave\" = '" + pass + 
                             "' AND \"Estado\" = '1';";
             
+            // Se realiza la consulta y se obtiene el resultado.
             java.sql.ResultSet rs = con.queryConsultar(SQL);
             
+            // Se desconecta la BD.
             con.desconectar();
             
+            // Si se obtuvo un resultado (que tiene que ser único) retorna 'true'.
             return rs.next();
             
             
@@ -150,6 +175,7 @@ public class ControllerLogin implements java.awt.event.ActionListener {
             System.out.println("No se pudo encontrar el usuario. Error: " + ex);
         }
         
+        // De no encontrarse ningún resultado, retorna 'false'.
         return false;
         
     }
