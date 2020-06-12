@@ -32,7 +32,6 @@ public class ControllerForgotPass implements java.awt.event.ActionListener{
         private Mail mail;
         
         // Models
-        private ConnectionDB con;
         private UserCRUD user;
     
     
@@ -43,6 +42,8 @@ public class ControllerForgotPass implements java.awt.event.ActionListener{
     
         // Se instancia clase de soporte.
         suport = new SuportFunctions();
+        user = new UserCRUD();
+        mail = new Mail();
         
         // Se instancia view a utilizar.
         forgot = new ForgotPass();
@@ -103,7 +104,7 @@ public class ControllerForgotPass implements java.awt.event.ActionListener{
             else {
             
                 // Si ambos correos electrónicos tienen formato válido.
-                if(suport.verifyEmail(email) || suport.verifyEmail(emailConfirmation)){
+                if(suport.verifyEmail(email) && suport.verifyEmail(emailConfirmation)){
                     
                     // Si los correos electrónicos son iguales y existe el usuario.
                     if(email.equals(emailConfirmation) && user.signer(email)){

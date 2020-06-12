@@ -41,7 +41,8 @@ public class ControllerLogin implements java.awt.event.ActionListener {
         
         // Se instancian las clases de soporte.
         suport = new SuportFunctions();
-        
+        user = new UserCRUD();
+                
         // Se instancia la view de Login.
         login = new Login();
         

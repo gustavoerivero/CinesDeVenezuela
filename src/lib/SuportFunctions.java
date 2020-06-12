@@ -103,9 +103,6 @@ public class SuportFunctions {
      */
     public boolean verifyEmail(String email){
         
-        // Variable a retornar.
-        boolean valor = true;
-        
         //<editor-fold defaultstate="collapsed" desc=" Explicación de la expresión regular utilizada ">
         /*
          *  ^ especifica el inicio de la entrada.
@@ -140,20 +137,19 @@ public class SuportFunctions {
              * tándar el mensaje Valido.
              */
             Matcher matcher = pattern.matcher(email);
-            if (matcher.matches())
+            if (matcher.matches()){
                 System.out.println("Email válido");
-            
+                return true;
+            }
             else{
                 System.out.println("Email no válido");
-                valor = false;
+                return false;
             }
         }
         // De encontrarse vacío.
         else
-            valor = false;
+            return false;
         
-        // Se retorna el valor.
-        return valor;
     }
     
     //</editor-fold>
