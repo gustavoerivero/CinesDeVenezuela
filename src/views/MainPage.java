@@ -1775,7 +1775,7 @@ public class MainPage extends javax.swing.JFrame {
         tblMovieSelector.setBackground(new java.awt.Color(249, 249, 249));
         tblMovieSelector.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null}
+                {null, "", "", "", "", null}
             },
             new String [] {
                 "Poster", "Película", "Sipnosis", "Género", "Censura", "Seleccionar"

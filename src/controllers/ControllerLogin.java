@@ -6,7 +6,8 @@ import views.Login;
 import views.PopupMessage;
 
 // Se importan los models a utilizar
-import models.ConexionBD;
+import models.database.ConnectionDB;
+import models.database.UserCRUD;
 
 // Se importan las clases de soporte.
 import lib.SuportFunctions;
@@ -18,12 +19,20 @@ import lib.SuportFunctions;
 public class ControllerLogin implements java.awt.event.ActionListener {
     
     // Se declaran las clases a utilizar.
-    private Login login;
-    private PopupMessage popup;
-    private ControllerForgotPass forgot;
-    private ControllerMainMenu mainMenu;
-    private ConexionBD con;
     
+        // Views
+        private Login login;
+        private PopupMessage popup;
+        
+        // Models
+        private ConnectionDB con;
+        private UserCRUD user;
+        
+        // Controllers
+        private ControllerForgotPass forgot;
+        private ControllerMainMenu mainMenu;
+    
+        
     // Se declaran clases de soporte.
     private SuportFunctions suport;
         
@@ -101,7 +110,7 @@ public class ControllerLogin implements java.awt.event.ActionListener {
                 if(suport.verifyEmail(email)){
                     
                     // Si el usuario y la contraseña son correctos.
-                    if(signer(email, pass) == true){
+                    if(user.signer(email, pass) == true){
 
                         // Se muestra quién ingresó al sistema.
                         System.out.println("El usuario '" + email + "' ha ingresado al"
@@ -164,44 +173,5 @@ public class ControllerLogin implements java.awt.event.ActionListener {
         }
         
     }
-    
-    /**
-     * Método para comprobar si el usuario que desea ingresar al sistema se 
-     * encuentra registrado.
-     * @param email correo electrónico del usuario.
-     * @param pass contraseña del usuario.
-     * @return variable booleana.
-     */
-    public boolean signer(String email, String pass){
         
-        try{
-            
-            // Se instancia la clase para la conexión con la BD y se establece la conexión.
-            con = new ConexionBD();
-            con.conectar();
-          
-            // Se descrie la sentencia SQL.
-            String SQL =    "SELECT * FROM public.\"Usuario\" WHERE \"Correo\" = '"
-                            + email + "' AND \"Clave\" = '" + pass + 
-                            "' AND \"Estado\" = '1';";
-            
-            // Se realiza la consulta y se obtiene el resultado.
-            java.sql.ResultSet rs = con.queryConsultar(SQL);
-            
-            // Se desconecta la BD.
-            con.desconectar();
-            
-            // Si se obtuvo un resultado (que tiene que ser único) retorna 'true'.
-            return rs.next();
-            
-            
-        } catch (java.sql.SQLException ex){
-            System.out.println("No se pudo encontrar el usuario. Error: " + ex);
-        }
-        
-        // De no encontrarse ningún resultado, retorna 'false'.
-        return false;
-        
-    }
-    
 }

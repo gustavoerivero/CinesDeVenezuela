@@ -9,6 +9,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Table {
     
+    //<editor-fold defaultstate="collapsed" desc=" Botónes para tablas ">
+        
     /**
      * Método para dar formato a un JButton con características de "Aceptar".
      * @param btnOk JButton que se le desea dar un formato.
@@ -77,6 +79,10 @@ public class Table {
                 
     }
     
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc=" Constructores de tablas ">
+        
     /**
      * Método para construir una JTable con formato para venta de dulces.
      * @param table JTable que se le dará formato.
@@ -206,4 +212,6 @@ public class Table {
         
     }
 
+    //</editor-fold>
+    
 }

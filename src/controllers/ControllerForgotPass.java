@@ -1,16 +1,13 @@
 
 package controllers;
 
-// Se importan las librerías a utilizar.
-import java.util.*;
-import javax.mail.*;
-import javax.mail.internet.*;
-
 // Se importan las librerías de apoyo.
 import lib.SuportFunctions;
+import lib.Mail;
 
 // Se importan los models a utilizar.
-import models.ConexionBD;
+import models.database.ConnectionDB;
+import models.database.UserCRUD;
 
 // Se importan las views a utilizar.
 import views.ForgotPass;
@@ -24,11 +21,20 @@ import views.SelectOption;
 public class ControllerForgotPass implements java.awt.event.ActionListener{
     
     // Se declaran las clases a utilizar.
-    private ForgotPass forgot;
-    private PopupMessage popup;
-    private SelectOption select;
-    private SuportFunctions suport;
-    private ConexionBD con;
+    
+        // Views
+        private ForgotPass forgot;
+        private PopupMessage popup;
+        private SelectOption select;
+        
+        // Librerías de soporte
+        private SuportFunctions suport;
+        private Mail mail;
+        
+        // Models
+        private ConnectionDB con;
+        private UserCRUD user;
+    
     
     // Se declaran las variables a utilizar.
     String correo, codex;
@@ -100,7 +106,7 @@ public class ControllerForgotPass implements java.awt.event.ActionListener{
                 if(suport.verifyEmail(email) || suport.verifyEmail(emailConfirmation)){
                     
                     // Si los correos electrónicos son iguales y existe el usuario.
-                    if(email.equals(emailConfirmation) && signer(email)){
+                    if(email.equals(emailConfirmation) && user.signer(email)){
                 
                         correo = email;
 
@@ -111,69 +117,28 @@ public class ControllerForgotPass implements java.awt.event.ActionListener{
                         String  from = "cinesdevenezuela.nacional@gmail.com",
                                 pass = "cines1234venezuela";
 
-                        // Array de caracteres válidos para el código de confirmación.
-                        char[] chars = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789".toCharArray();
-
-                        // StringBuilder de longitud '6'.
-                        StringBuilder sb = new StringBuilder(6);
-
-                        // Instanciar clase Random.
-                        Random random = new Random();
-
-                        // Ciclo para construir aleatoriamente el código de confirmación.
-                        for (int i = 0; i < 6; i++) {
-                            char c = chars[random.nextInt(chars.length)];
-                            sb.append(c);
-                        }
-
                         // Obtener el código de confirmación.
-                        codex = sb.toString();
-
-                        // Se describen las propiedades de la sesión.
-                        Properties props = new Properties();
-                        props.put("mail.smtp.auth", "true");
-                        props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
-                        props.put("mail.smtp.starttls.enable", "true");
-                        props.put("mail.smtp.host", "smtp.gmail.com");
-                        props.put("mail.smtp.port", "587");
-
-                        // Se instancia una nueva sesión.
-                        Session session = Session.getInstance(props,
-                                new Authenticator() {
-                                    protected PasswordAuthentication getPasswordAuthentication() {
-                                        return new PasswordAuthentication(from, pass);
-                                    }
-                                }
-                        );
-
-                        try {
-
-                            // Se describen los emisores, receptores, asunto y mensaje.
-                            Message message = new MimeMessage(session);
-                            message.setFrom(new InternetAddress(from));
-                            message.setRecipients(Message.RecipientType.TO,
-                                InternetAddress.parse(email));
-                            message.setSubject("Código de confirmación para "
-                                    + "recuperar contraseña");
-                            message.setText("El código de confirmación para poder "
-                                    + "recuperar tu contraseña es: " + codex);
-
-                            // Se envía el mensaje.
-                            Transport.send(message);
-
-                            System.out.println("El código " + codex + " ha sido "
-                                    + "enviado con éxito.");
-
+                        codex = suport.randomCharacterString('1', 6);
+                            
+                        // Se procede a enviar el mensaje con el código de verificación.
+                        if(mail.sendMessage(mail.authentication(from, pass), 
+                                from, correo, "Código de confirmación para "
+                                    + "recuperar contraseña", "El código de "
+                                            + "confirmación para poder recuperar"
+                                            + " tu contraseña es: " + codex)){
+                            
                             popup = new PopupMessage(forgot, true, 2, "El correo con el "
                                 + "código de verificación ha sido enviado");
-
-                        } catch (MessagingException ex) {
-                            throw new RuntimeException(ex);
-                        }
-
-                        // Se cambia la pantalla.
-                        suport.cardSelection(forgot.panContent, forgot.panStepTwo);
-
+                            
+                            // Se cambia la pantalla.
+                            suport.cardSelection(forgot.panContent, forgot.panStepTwo);
+                            
+                        } else
+                            
+                            popup = new PopupMessage(forgot, true, 2, "El correo con el "
+                                + "código de verificación no pudo ser enviado, "
+                                    + "verifique los datos ingresados");
+                                                  
                     }   
             
                     // Si los correos proporcionados no son iguales o el usuario no está registrado.
@@ -300,7 +265,7 @@ public class ControllerForgotPass implements java.awt.event.ActionListener{
                 System.out.println("Contraseñas iguales. Se procede a actualizar.");
                 
                 // Se actualiza la contraseña.
-                insertNewPass(correo, pass);
+                user.insertNewPass(correo, pass);
                 
                 // Se muestra mensaje de que la actualización fue exitosa.
                 System.out.println("Al usuario " + correo + " se le ha actualizado "
@@ -339,64 +304,5 @@ public class ControllerForgotPass implements java.awt.event.ActionListener{
         //</editor-fold>
         
     }
-
-    /**
-     * Método para comprobar la existencia de un usuario.
-     * @param email correo electrónico del usuario.
-     * @return variable booleana.
-     */
-    public boolean signer(String email){
         
-        try{
-            
-            // Se instancia la clase de conexión con BD y se establece una conexión.
-            con = new ConexionBD();
-            con.conectar();
-          
-            // Se declara una sentencia SQL.
-            String SQL =    "SELECT * FROM public.\"Usuario\" WHERE \"Correo\" = '"
-                            + email + "' AND \"Estado\" = '1';";
-            
-            // Se realiza la consulta y se obtiene el resultado.
-            java.sql.ResultSet rs = con.queryConsultar(SQL);
-            
-            // Se desconecta la BD.
-            con.desconectar();
-            
-            // Si el usuario existe (que debe ser único) retorna 'true'.
-            return rs.next();
-            
-            
-        } catch (java.sql.SQLException ex){
-            System.out.println("No se pudo encontrar el usuario. Error: " + ex);
-        }
-        
-        // Si el usuario no existe, retorna 'false'.
-        return false;
-        
-    }
-    
-    /**
-     * Método para actualizar la contraseña de un usuario.
-     * @param email correo electrónico del usuario.
-     * @param pass nueva contraseña
-     */
-    public void insertNewPass(String email, String pass){
-       
-        // Se instancia la clase de conexión de la BD y se establece conexión.
-        con = new ConexionBD();
-        con.conectar();
-          
-        // Se declara la sentencia SQL.
-        String SQL =    "UPDATE public.\"Usuario\" SET \"Clave\" = "
-                        + "'" + pass + "' WHERE \"Correo\" = '" + email + "';";
-            
-        // Se realiza la actualización.
-        con.queryInsert(SQL);
-            
-        // Se desconecta la BD.
-        con.desconectar();
-                 
-    }
-    
 }

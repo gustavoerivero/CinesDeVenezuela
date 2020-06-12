@@ -2,6 +2,7 @@
 package controllers;
 
 // Se importan las views que se van a utilizar
+import models.database.ConnectionDB;
 import views.*;
 import views.tables.Table;
 
@@ -30,6 +31,9 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         private PopupMessage popup;
         private ChangeBranch changeBranch;
         private ModifyCandy modifyCandy;
+        
+        // Models
+        private ConnectionDB con;
 
         // Suport Class
         private SuportFunctions suport;
@@ -549,7 +553,16 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         // Si el evento ocurre en la tabla de películas.
         else if (evt.getSource() == mainPage.tblMovieSelector){
             
+            
+            
             mainPage.pgrCinemaTickets.setIndeterminate(true);
+            
+        }
+        
+        // Si el evento ocurre en la tabla de funciones.
+        else if (evt.getSource() == mainPage.tblFunctionSelector){
+            
+            
             
         }
     }
@@ -640,7 +653,8 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
             
             // Se obtienen los valores y se hacen los respectivos cálculos
             int     cant    = Integer.valueOf(dtm.getValueAt(i, 1).toString());
-            double  price   = suport.numberDecimalFormat(Double.valueOf(dtm.getValueAt(i,2).toString()) * cant, 2),
+            double  price   = suport.numberDecimalFormat(Double.valueOf(
+                                dtm.getValueAt(i,2).toString()) * cant, 2),
                     iva     = suport.numberDecimalFormat(price * 0.16, 2),
                     total   = suport.numberDecimalFormat(price * 1.16, 2);
             
@@ -655,6 +669,32 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         mainPage.txtSubTotalCandy.setText(String.valueOf(acumSub));
         mainPage.txtIVACandy.setText(String.valueOf(acumIVA));
         mainPage.txtTotalCandy.setText(String.valueOf(acumTotal));
+        
+    }
+    
+    public void addMovies(String branch){
+        
+        // Se instancia la clase de apoyo Table
+        Table table = new Table();
+        
+        // Se obtiene el modelo de la JTable.
+        DefaultTableModel dtm = (DefaultTableModel) mainPage.tblCandy.getModel();
+        
+        JButton btnSelection = new JButton();
+        
+        table.addOkButton(btnSelection);
+        
+        String SQL = "SELECT * FROM public.\"Sucursal\" WHERE \"Nombre\" = '" 
+                     + branch + "' AND \"Estado\" = '1';";
+        
+        con = new ConnectionDB();
+        con.conectar();
+        
+        java.sql.ResultSet rs = con.queryConsultar(SQL);
+        
+        con.desconectar();
+        
+        
         
     }
     
