@@ -2,12 +2,12 @@
 package controllers;
 
 // Se importan las views que se van a utilizar
-import models.database.ConnectionDB;
 import views.*;
 import views.tables.Table;
 
 // Se importan los models que se van a utilizar
 import models.*;
+import models.database.ConnectionDB;
 
 // Se importan las clases de soporte a utilizar
 import lib.SuportFunctions;
@@ -15,15 +15,17 @@ import lib.PDFGenerator;
 
 // Se importan las librerías a utilizar
 import java.util.ArrayList;
-import javax.swing.JButton;
 import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.event.*;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Gustavo
  */
-public class ControllerMainMenu implements ActionListener, MouseListener{
+public class ControllerMainMenu implements ActionListener, MouseListener, 
+        ChangeListener{
     
     // Instanciar las clases necesarias para el funcionamiento.
         // Views
@@ -59,9 +61,10 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         mainPage = new MainPage();
         suport = new SuportFunctions();
         
-        // Activamos los eventos provocados por los botones.
+        // Activamos los eventos por las views.
         mainPage.addEvents(this);
         mainPage.addMouseEvents(this);
+        mainPage.addStatesChanged(this);
         
     }
 
@@ -452,7 +455,37 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
             // Se ubica el nombre de la sucursal.
             mainPage.lblSucursalNameCinemaTickets.setText(changeBranch.getId_Sucursal());
             
+            // Se cierra el JDialog de cambio de sucursal.
             changeBranch.dispose();
+            
+        }
+        
+        // Volver al primer paso de compra de boletos.
+        else if(evt.getSource() == mainPage.btnBackToSelectorMovie){
+            
+            // Se muestra el paso anterior para compra de boletos.
+            suport.cardSelection(mainPage.panStepsCinemaTickets, 
+                    mainPage.panSecondStepCinemaTickets);
+            
+            // Se cancela la indeterminación de la barra de progreso.
+            mainPage.pgrCinemaTickets.setIndeterminate(false);
+            
+            // Se devuelve el valor de la barra de progreso a '0'
+            mainPage.pgrCinemaTickets.setValue(0);
+            
+        }
+        
+        else if(evt.getSource() == mainPage.btnNextStepBuyTicket){
+            
+            // Se muestra el siguiente paso para compra de boletos.
+            suport.cardSelection(mainPage.panStepsCinemaTickets, 
+                    mainPage.panThirdStepCinemaTickets);
+            
+            // Se cancela la indeterminación de la barra de progreso.
+            mainPage.pgrCinemaTickets.setIndeterminate(false);
+            
+            // Se devuelve el valor de la barra de progreso a '0'
+            mainPage.pgrCinemaTickets.setValue(50);
             
         }
         
@@ -590,31 +623,29 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
             
             
         }
+        
     }
     
-    //<editor-fold defaultstate="collapsed" desc=" PROHIBIDO TOCAR ">
-    
-    @Override
-    public void mousePressed(MouseEvent e) {
-    
+    /**
+     * Eventos provocados por el escuchador de cambios para elementos Swing 
+     * (ChangeListener).
+     * @param evt 
+     */
+    public void stateChanged(ChangeEvent evt){
+        
+        if(evt.getSource() == mainPage.spnCantAdultTicket)
+            showAmountsOfCinemaTickets();
+                    
+        else if(evt.getSource() == mainPage.spnCantKinderTicket)
+            showAmountsOfCinemaTickets();
+                    
+        else if(evt.getSource() == mainPage.spnCantChildTicket)
+            showAmountsOfCinemaTickets();
+        
+        else if(evt.getSource() == mainPage.spnCantOldTicket)
+            showAmountsOfCinemaTickets();
+                    
     }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-    
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-    
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-    
-    }
-    
-    //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc=" Métodos para el funcionamiento del Controller ">
     
@@ -697,30 +728,130 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         
     }
     
-    public void addMovies(String branch){
+    /**
+     * Método utilizado para mostrar montos según la cantidad de tickets
+     * seleccionados para la compra.
+     */
+    public void showAmountsOfCinemaTickets(){
         
-        // Se instancia la clase de apoyo Table
-        Table table = new Table();
+        double price = 0, iva = 0, total = 0;
         
-        // Se obtiene el modelo de la JTable.
-        DefaultTableModel dtm = (DefaultTableModel) mainPage.tblCandy.getModel();
+        int cantA = Integer.valueOf(mainPage.spnCantAdultTicket.getValue().toString()),
+            cantK = Integer.valueOf(mainPage.spnCantKinderTicket.getValue().toString()),
+            cantC = Integer.valueOf(mainPage.spnCantChildTicket.getValue().toString()),
+            cantO = Integer.valueOf(mainPage.spnCantOldTicket.getValue().toString());
         
-        JButton btnSelection = new JButton();
+        if(cantA > 0){
+            
+            double adultPrice = suport.numberDecimalFormat(
+                    Double.valueOf(mainPage.lblPriceTicketAdult.toString()), 2);
+            
+            double  aPrice  = suport.numberDecimalFormat((adultPrice * 100 / 116), 2),
+                    aIva    = suport.numberDecimalFormat(
+                            (cantA * (adultPrice * 100 / 116)) * 0.16, 2),
+                    aTotal  = suport.numberDecimalFormat((cantA * adultPrice), 2);
+            
+            price   += suport.numberDecimalFormat(aPrice, 2);
+            iva     += suport.numberDecimalFormat(aIva, 2);
+            total   += suport.numberDecimalFormat(aTotal, 2);
+            
+            mainPage.lblSubtotalAmountAdultTicket.setText(String.valueOf(aPrice));
+            mainPage.lblIVAAmountAdultTicket.setText(String.valueOf(aIva));
+            mainPage.lblTotalAmountAdultTicket.setText(String.valueOf(aTotal));
+            
+        }
         
-        table.addOkButton(btnSelection);
+        if(cantK > 0){
+            
+            double kinderPrice = suport.numberDecimalFormat(
+                    Double.valueOf(mainPage.lblPriceTicketKinder.toString()), 2);
+            
+            double  kPrice  = suport.numberDecimalFormat((kinderPrice * 100 / 116), 2),
+                    kIva    = suport.numberDecimalFormat(
+                            (cantK * (kinderPrice * 100 / 116)) * 0.16, 2),
+                    kTotal  = suport.numberDecimalFormat((cantK * kinderPrice), 2);
+            
+            price   += suport.numberDecimalFormat(kPrice, 2);
+            iva     += suport.numberDecimalFormat(kIva, 2);
+            total   += suport.numberDecimalFormat(kTotal, 2);
+            
+            mainPage.lblSubtotalAmountKinderTicket.setText(String.valueOf(kPrice));
+            mainPage.lblIVAAmountKinderTicket.setText(String.valueOf(kIva));
+            mainPage.lblTotalAmountKinderTicket.setText(String.valueOf(kTotal));
+            
+        }
         
-        String SQL = "SELECT * FROM public.\"Sucursal\" WHERE \"Nombre\" = '" 
-                     + branch + "' AND \"Estado\" = '1';";
+        if(cantC > 0){
+            
+            double childPrice = suport.numberDecimalFormat(
+                    Double.valueOf(mainPage.lblPriceTicketChild.toString()), 2);
+            
+            double  cPrice  = suport.numberDecimalFormat((childPrice * 100 / 116), 2),
+                    cIva    = suport.numberDecimalFormat(
+                            (cantC * (childPrice * 100 / 116)) * 0.16, 2),
+                    cTotal  = suport.numberDecimalFormat((cantC * childPrice), 2);
+            
+            price   += suport.numberDecimalFormat(cPrice, 2);
+            iva     += suport.numberDecimalFormat(cIva, 2);
+            total   += suport.numberDecimalFormat(cTotal, 2);
+            
+            mainPage.lblSubtotalAmountChildTicket.setText(String.valueOf(cPrice));
+            mainPage.lblIVAAmountChildTicket.setText(String.valueOf(cIva));
+            mainPage.lblTotalAmountChildTicket.setText(String.valueOf(cTotal));
+            
+        }
         
-        con = new ConnectionDB();
-        con.conectar();
+        if(cantO > 0){
+            
+            double oldPrice = suport.numberDecimalFormat(
+                    Double.valueOf(mainPage.lblPriceTicketOld.toString()), 2);
+            
+            double  oPrice  = suport.numberDecimalFormat((oldPrice * 100 / 116), 2),
+                    oIva    = suport.numberDecimalFormat(
+                            (cantO * (oldPrice * 100 / 116)) * 0.16, 2),
+                    oTotal  = suport.numberDecimalFormat((cantO * oldPrice), 2);
+            
+            price   += suport.numberDecimalFormat(oPrice, 2);
+            iva     += suport.numberDecimalFormat(oIva, 2);
+            total   += suport.numberDecimalFormat(oTotal, 2);
+            
+            mainPage.lblSubtotalAmountOldTicket.setText(String.valueOf(oPrice));
+            mainPage.lblIVAAmountOldTicket.setText(String.valueOf(oIva));
+            mainPage.lblTotalAmountOldTicket.setText(String.valueOf(oTotal));
+            
+        }
         
-        java.sql.ResultSet rs = con.queryConsultar(SQL);
+        mainPage.lblSubtotalAmountTicket.setText(String.valueOf(
+                suport.numberDecimalFormat(price, 2)));
+        mainPage.lblIVAAmountTicket.setText(String.valueOf(
+                suport.numberDecimalFormat(iva, 2)));
+        mainPage.lblTotalAmountTicket.setText(String.valueOf(
+                suport.numberDecimalFormat(total, 2)));
         
-        con.desconectar();
-        
-        
-        
+    }
+    
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc=" PROHIBIDO TOCAR ">
+    
+    @Override
+    public void mousePressed(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     //</editor-fold>

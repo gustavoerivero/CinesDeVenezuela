@@ -26,7 +26,7 @@ public class UserCRUD {
             con.conectar();
           
             // Se descrie la sentencia SQL.
-            String SQL =    "SELECT * FROM public.\"Usuario\" WHERE \"Correo\" = '"
+            String SQL =    "SELECT * FROM \"Usuario\" WHERE \"Correo\" = '"
                             + email + "' AND \"Clave\" = '" + pass + 
                             "' AND \"Estado\" = '1';";
             
@@ -63,7 +63,7 @@ public class UserCRUD {
             con.conectar();
           
             // Se declara una sentencia SQL.
-            String SQL =    "SELECT * FROM public.\"Usuario\" WHERE \"Correo\" = '"
+            String SQL =    "SELECT * FROM \"Usuario\" WHERE \"Correo\" = '"
                             + email + "' AND \"Estado\" = '1';";
             
             // Se realiza la consulta y se obtiene el resultado.
@@ -97,8 +97,8 @@ public class UserCRUD {
         con.conectar();
           
         // Se declara la sentencia SQL.
-        String SQL =    "UPDATE public.\"Usuario\" SET \"Clave\" = "
-                        + "'" + pass + "' WHERE \"Correo\" = '" + email + "';";
+        String SQL =    "UPDATE \"Usuario\" SET \"Clave\" = '" + pass + 
+                        "' WHERE \"Correo\" = '" + email + "';";
             
         // Se realiza la actualización.
         con.queryInsert(SQL);
