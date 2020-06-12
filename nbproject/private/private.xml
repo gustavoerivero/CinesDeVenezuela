@@ -14,10 +14,9 @@
         <group>
             <file>file:/C:/Users/Gustavo/Documents/NetBeansProjects/CinesDeVenezuela/src/views/MainPage.java</file>
             <file>file:/C:/Users/Gustavo/Documents/NetBeansProjects/CinesDeVenezuela/src/controllers/ControllerMainMenu.java</file>
+            <file>file:/C:/Users/Gustavo/Documents/NetBeansProjects/CinesDeVenezuela/src/models/database/UserCRUD.java</file>
             <file>file:/C:/Users/Gustavo/Documents/NetBeansProjects/CinesDeVenezuela/src/views/tables/Table.java</file>
-            <file>file:/C:/Users/Gustavo/Documents/NetBeansProjects/CinesDeVenezuela/src/controllers/ControllerLogin.java</file>
-            <file>file:/C:/Users/Gustavo/Documents/NetBeansProjects/CinesDeVenezuela/src/lib/SuportFunctions.java</file>
-            <file>file:/C:/Users/Gustavo/Documents/NetBeansProjects/CinesDeVenezuela/src/controllers/ControllerForgotPass.java</file>
+            <file>file:/C:/Users/Gustavo/Documents/NetBeansProjects/CinesDeVenezuela/src/models/database/MovieCRUD.java</file>
         </group>
     </open-files>
 </project-private>

@@ -17,7 +17,7 @@ public class Table {
      */
     public void addOkButton(JButton btnOk){
                 
-        btnOk.setName("i");
+        btnOk.setName("o");
         ImageIcon okIcon = new ImageIcon(getClass().getResource(
                 "/views/images/okIcon-small.png"));        
         btnOk.setIcon(okIcon);

@@ -553,10 +553,35 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         // Si el evento ocurre en la tabla de películas.
         else if (evt.getSource() == mainPage.tblMovieSelector){
             
+            // Se obtienen los valores de la fila y columna seleccionada.
+            int column = mainPage.getColumnTable(), row = mainPage.getRowTable();
+
+            // Se valida que el evento del Mouse fue provocado dentro del JTable.
+            if(row < mainPage.tblMovieSelector.getRowCount() && row >= 0 && 
+                    column < mainPage.tblMovieSelector.getColumnCount() && column >= 0){
+                
+                // Se obtiene el valor de la celda seleccionada.
+                Object value = mainPage.tblMovieSelector.getValueAt(row, column);
+                
+                // Si el valor de la celda seleccionada es un JButton;
+                if(value instanceof JButton){
+                    
+                    ((JButton)value).doClick();
+                    
+                    JButton btn = (JButton) value;
+
+                    // Si el JButton se llama "o";
+                    if(btn.getName().equals("o")){
             
-            
-            mainPage.pgrCinemaTickets.setIndeterminate(true);
-            
+                        DefaultTableModel dtm = (DefaultTableModel) mainPage.tblFunctionSelector.getModel();
+                        
+                        
+                        
+                        mainPage.pgrCinemaTickets.setIndeterminate(true);
+                        
+                    }
+                }
+            }
         }
         
         // Si el evento ocurre en la tabla de funciones.
