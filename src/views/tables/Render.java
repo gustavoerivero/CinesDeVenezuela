@@ -17,7 +17,7 @@ public class Render extends DefaultTableCellRenderer{
         
         if(value instanceof JButton){
             
-            JButton btn = (JButton)value;
+            JButton btn = (JButton) value;
             
             if(isSelected){
                 
@@ -34,6 +34,14 @@ public class Render extends DefaultTableCellRenderer{
             }
             
             return btn;
+            
+        }
+        
+        else if(value instanceof JLabel){
+            
+            JLabel lbl = (JLabel) value;
+            
+            return lbl;
             
         }
         

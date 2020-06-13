@@ -2,6 +2,7 @@
 package controllers;
 
 // Se importan las views que se van a utilizar
+import java.awt.Image;
 import views.*;
 import views.tables.Table;
 
@@ -434,6 +435,13 @@ public class ControllerMainMenu implements ActionListener, MouseListener,
             suport.cardSelection(mainPage.panOption2, mainPage.panCinemaSell);
             
             suport.cardSelection(mainPage.panStepsCinemaTickets, mainPage.panFirstStepCinemaTickets);
+            
+            mainPage.clearMovieTable(mainPage.tblMovieSelector);
+            
+            mainPage.clearFunctionSelectorTable(mainPage.tblFunctionSelector);
+            
+            showMovies();
+            
         }
         
         //<editor-fold defaultstate="collapsed" desc=" Venta de tickets para funciones ">
@@ -443,6 +451,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener,
             mainPage.btnBackToTicketDecision2.setBackground(new java.awt.Color(249,249,249));
             
             suport.cardSelection(mainPage.panOption2, mainPage.panDecisionOption2);
+            
             
         }
         
@@ -576,6 +585,9 @@ public class ControllerMainMenu implements ActionListener, MouseListener,
                             
                         }
                         
+                        // Se cierra el JDialog.
+                        select.dispose();
+                        
                     }
                 }
 
@@ -606,9 +618,11 @@ public class ControllerMainMenu implements ActionListener, MouseListener,
                     // Si el JButton se llama "o";
                     if(btn.getName().equals("o")){
             
+                        System.out.println("Click en el boton eliminar en la celda: " + row + ";" + column);
+                        
                         DefaultTableModel dtm = (DefaultTableModel) mainPage.tblFunctionSelector.getModel();
                         
-                        
+                        showFunctions(null);
                         
                         mainPage.pgrCinemaTickets.setIndeterminate(true);
                         
@@ -620,7 +634,39 @@ public class ControllerMainMenu implements ActionListener, MouseListener,
         // Si el evento ocurre en la tabla de funciones.
         else if (evt.getSource() == mainPage.tblFunctionSelector){
             
+            // Se obtienen los valores de la fila y columna seleccionada.
+            int column = mainPage.getColumnTable(), row = mainPage.getRowTable();
+
+            // Se valida que el evento del Mouse fue provocado dentro del JTable.
+            if(row < mainPage.tblFunctionSelector.getRowCount() && row >= 0 && 
+                    column < mainPage.tblFunctionSelector.getColumnCount() && column >= 0){
+                
+                // Se obtiene el valor de la celda seleccionada.
+                Object value = mainPage.tblFunctionSelector.getValueAt(row, column);
+                
+                // Si el valor de la celda seleccionada es un JButton;
+                if(value instanceof JButton){
+                    
+                    ((JButton)value).doClick();
+                    
+                    JButton btn = (JButton) value;
+
+                    // Si el JButton se llama "o";
+                    if(btn.getName().equals("o")){
             
+                        System.out.println("Click en el boton eliminar en la celda: " + row + ";" + column);
+                        
+                        DefaultTableModel dtm = (DefaultTableModel) mainPage.tblFunctionSelector.getModel();
+                                               
+                        mainPage.pgrCinemaTickets.setIndeterminate(false);
+                        
+                        mainPage.pgrCinemaTickets.setValue(25);
+                        
+                        suport.cardSelection(mainPage.panStepsCinemaTickets, mainPage.panSecondStepCinemaTickets);
+                        
+                    }
+                }
+            }
             
         }
         
@@ -725,6 +771,102 @@ public class ControllerMainMenu implements ActionListener, MouseListener,
         mainPage.txtSubTotalCandy.setText(String.valueOf(acumSub));
         mainPage.txtIVACandy.setText(String.valueOf(acumIVA));
         mainPage.txtTotalCandy.setText(String.valueOf(acumTotal));
+        
+    }
+    
+    /**
+     * Método que carga las películas correspondientes a una sucursal.
+     */
+    public void showMovies(){
+        
+        DefaultTableModel dtm = (DefaultTableModel) mainPage.tblMovieSelector.getModel();
+        
+        Table table = new Table();
+             
+        JLabel lbl = new JLabel();
+                    
+        lbl.setSize(100, 120);
+            
+        ImageIcon img   = new ImageIcon(getClass().getResource("/views/images/images.jpg"));
+        
+        ImageIcon icon  = new ImageIcon(img.getImage().getScaledInstance(
+                lbl.getWidth(), lbl.getHeight(), Image.SCALE_DEFAULT));
+            
+        lbl.setIcon(icon);
+        
+        JLabel lbl2 = new JLabel();
+                    
+        lbl2.setSize(100, 120);
+            
+        ImageIcon img2   = new ImageIcon(getClass().getResource("/views/images/images2.jpg"));
+        
+        ImageIcon icon2  = new ImageIcon(img2.getImage().getScaledInstance(
+                lbl2.getWidth(), lbl2.getHeight(), Image.SCALE_DEFAULT));
+            
+        lbl2.setIcon(icon2);
+        
+        String  name        = "The Greatest Showman",
+                synopsis    = "Un musical en un circo we.",
+                gender      = "Musical",
+                censorship  = "A";
+            
+        String  name2        = "Mulan",
+                synopsis2    = "Reboot de Mulan.",
+                gender2      = "Acción / Aventura",
+                censorship2  = "A";
+        
+        JButton btn = new JButton();
+                        
+        table.addOkButton(btn);
+                    
+        dtm.addRow(new Object[]{
+            lbl, 
+            "<html><p align='left'>" + name + "</p></html>",
+            "<html><p align='left'>" + synopsis + "</p></html>",
+            "<html><p align='left'>" + gender + "</p></html>",
+            "<html><p align='left'>" + censorship + "</p></html>",
+            btn
+        });
+        
+        dtm.addRow(new Object[]{
+            lbl2, 
+            "<html><p align='left'>" + name2 + "</p></html>",
+            "<html><p align='left'>" + synopsis2 + "</p></html>",
+            "<html><p align='left'>" + gender2 + "</p></html>",
+            "<html><p align='left'>" + censorship2 + "</p></html>",
+            btn
+        });
+        
+    }
+    
+    /**
+     * Método para mostrar las funciones correspondentes a una película.
+     * @param idMovie Código de la película de la que se van a buscar sus funciones.
+     */
+    public void showFunctions(String idMovie){
+        
+        DefaultTableModel dtm = (DefaultTableModel) mainPage.tblFunctionSelector.getModel();
+        
+        Table table = new Table();
+        
+        JButton btn = new JButton();
+                        
+        table.addOkButton(btn);
+        
+        String  date        = "13/06/2020",
+                cinemaRoom  = "D",
+                hour        = "5:45 p.m.",
+                seats       = "64",
+                freeSeats   = "32";
+        
+        dtm.addRow(new Object[]{
+            date,
+            cinemaRoom,
+            hour,
+            seats,
+            freeSeats,
+            btn
+        });
         
     }
     
@@ -836,22 +978,22 @@ public class ControllerMainMenu implements ActionListener, MouseListener,
     
     @Override
     public void mousePressed(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     //</editor-fold>

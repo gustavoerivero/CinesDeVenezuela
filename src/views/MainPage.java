@@ -1842,7 +1842,7 @@ public class MainPage extends javax.swing.JFrame {
                 {null, "", "", "", "", null}
             },
             new String [] {
-                "Poster", "Película", "Sipnosis", "Género", "Censura", "Seleccionar"
+                "Poster", "Película", "Sinopsis", "Género", "Censura", "Seleccionar"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -1964,7 +1964,6 @@ public class MainPage extends javax.swing.JFrame {
         spnCantAdultTicket.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         spnCantAdultTicket.setModel(new javax.swing.SpinnerNumberModel(0, 0, 150, 1));
         spnCantAdultTicket.setAutoscrolls(true);
-        spnCantAdultTicket.setEditor(new javax.swing.JSpinner.NumberEditor(spnCantAdultTicket, ""));
         spnCantAdultTicket.setOpaque(false);
 
         lblDescKinderTicket.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -1976,7 +1975,6 @@ public class MainPage extends javax.swing.JFrame {
         spnCantKinderTicket.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         spnCantKinderTicket.setModel(new javax.swing.SpinnerNumberModel(0, 0, 150, 1));
         spnCantKinderTicket.setAutoscrolls(true);
-        spnCantKinderTicket.setEditor(new javax.swing.JSpinner.NumberEditor(spnCantKinderTicket, ""));
         spnCantKinderTicket.setOpaque(false);
 
         lblDescChildTicket.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -1988,7 +1986,6 @@ public class MainPage extends javax.swing.JFrame {
         spnCantChildTicket.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         spnCantChildTicket.setModel(new javax.swing.SpinnerNumberModel(0, 0, 150, 1));
         spnCantChildTicket.setAutoscrolls(true);
-        spnCantChildTicket.setEditor(new javax.swing.JSpinner.NumberEditor(spnCantChildTicket, ""));
         spnCantChildTicket.setOpaque(false);
 
         lblDescOldTicket.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -2000,7 +1997,6 @@ public class MainPage extends javax.swing.JFrame {
         spnCantOldTicket.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         spnCantOldTicket.setModel(new javax.swing.SpinnerNumberModel(0, 0, 150, 1));
         spnCantOldTicket.setAutoscrolls(true);
-        spnCantOldTicket.setEditor(new javax.swing.JSpinner.NumberEditor(spnCantOldTicket, ""));
         spnCantOldTicket.setOpaque(false);
 
         lblSubtotalAdultTicket.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -2199,16 +2195,16 @@ public class MainPage extends javax.swing.JFrame {
         );
 
         lblPriceTicketAdult.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        lblPriceTicketAdult.setText("0.0");
+        lblPriceTicketAdult.setText("1.0");
 
         lblPriceTicketKinder.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        lblPriceTicketKinder.setText("0.0");
+        lblPriceTicketKinder.setText("0.5");
 
         lblPriceTicketChild.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        lblPriceTicketChild.setText("0.0");
+        lblPriceTicketChild.setText("0.7");
 
         lblPriceTicketOld.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        lblPriceTicketOld.setText("0.0");
+        lblPriceTicketOld.setText("0.7");
 
         javax.swing.GroupLayout panSecondStepCinemaTicketsLayout = new javax.swing.GroupLayout(panSecondStepCinemaTickets);
         panSecondStepCinemaTickets.setLayout(panSecondStepCinemaTicketsLayout);

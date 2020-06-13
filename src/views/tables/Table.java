@@ -135,7 +135,7 @@ public class Table {
         DefaultTableModel movieSelectorTableModel = new  DefaultTableModel(
             matrix,
             new Object[]{
-                            "Poster", "Película", "Sipnosis", 
+                            "Poster", "Película", "Sinopsis", 
                             "Género", "Censura", "Seleccionar"
             }
         )
@@ -149,7 +149,7 @@ public class Table {
         
         table.setPreferredScrollableViewportSize(table.getPreferredSize());
              
-        table.setRowHeight(24);
+        table.setRowHeight(125);
         
         if (table.getColumnModel().getColumnCount() > 0) {
             table.getColumnModel().getColumn(0).setResizable(false);

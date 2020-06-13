@@ -2888,7 +2888,7 @@
                                             <Column editable="false" title="Pel&#xed;cula" type="java.lang.Object">
                                               <Data value=""/>
                                             </Column>
-                                            <Column editable="false" title="Sipnosis" type="java.lang.Object">
+                                            <Column editable="false" title="Sinopsis" type="java.lang.Object">
                                               <Data value=""/>
                                             </Column>
                                             <Column editable="false" title="G&#xe9;nero" type="java.lang.Object">
@@ -3367,9 +3367,6 @@
                                       <SpinnerModel initial="0" maximum="150" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
                                     </Property>
                                     <Property name="autoscrolls" type="boolean" value="true"/>
-                                    <Property name="editor" type="javax.swing.JComponent" editor="org.netbeans.modules.form.editors.SpinnerEditorEditor">
-                                      <SpinnerEditor format="" type="3"/>
-                                    </Property>
                                     <Property name="opaque" type="boolean" value="false"/>
                                   </Properties>
                                   <AuxValues>
@@ -3401,9 +3398,6 @@
                                       <SpinnerModel initial="0" maximum="150" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
                                     </Property>
                                     <Property name="autoscrolls" type="boolean" value="true"/>
-                                    <Property name="editor" type="javax.swing.JComponent" editor="org.netbeans.modules.form.editors.SpinnerEditorEditor">
-                                      <SpinnerEditor format="" type="3"/>
-                                    </Property>
                                     <Property name="opaque" type="boolean" value="false"/>
                                   </Properties>
                                   <AuxValues>
@@ -3435,9 +3429,6 @@
                                       <SpinnerModel initial="0" maximum="150" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
                                     </Property>
                                     <Property name="autoscrolls" type="boolean" value="true"/>
-                                    <Property name="editor" type="javax.swing.JComponent" editor="org.netbeans.modules.form.editors.SpinnerEditorEditor">
-                                      <SpinnerEditor format="" type="3"/>
-                                    </Property>
                                     <Property name="opaque" type="boolean" value="false"/>
                                   </Properties>
                                   <AuxValues>
@@ -3469,9 +3460,6 @@
                                       <SpinnerModel initial="0" maximum="150" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
                                     </Property>
                                     <Property name="autoscrolls" type="boolean" value="true"/>
-                                    <Property name="editor" type="javax.swing.JComponent" editor="org.netbeans.modules.form.editors.SpinnerEditorEditor">
-                                      <SpinnerEditor format="" type="3"/>
-                                    </Property>
                                     <Property name="opaque" type="boolean" value="false"/>
                                   </Properties>
                                   <AuxValues>
@@ -3919,7 +3907,7 @@
                                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                       <Font name="Arial" size="12" style="0"/>
                                     </Property>
-                                    <Property name="text" type="java.lang.String" value="0.0"/>
+                                    <Property name="text" type="java.lang.String" value="1.0"/>
                                   </Properties>
                                   <AuxValues>
                                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -3930,7 +3918,7 @@
                                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                       <Font name="Arial" size="12" style="0"/>
                                     </Property>
-                                    <Property name="text" type="java.lang.String" value="0.0"/>
+                                    <Property name="text" type="java.lang.String" value="0.5"/>
                                   </Properties>
                                   <AuxValues>
                                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -3941,7 +3929,7 @@
                                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                       <Font name="Arial" size="12" style="0"/>
                                     </Property>
-                                    <Property name="text" type="java.lang.String" value="0.0"/>
+                                    <Property name="text" type="java.lang.String" value="0.7"/>
                                   </Properties>
                                   <AuxValues>
                                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -3952,7 +3940,7 @@
                                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                       <Font name="Arial" size="12" style="0"/>
                                     </Property>
-                                    <Property name="text" type="java.lang.String" value="0.0"/>
+                                    <Property name="text" type="java.lang.String" value="0.7"/>
                                   </Properties>
                                   <AuxValues>
                                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
