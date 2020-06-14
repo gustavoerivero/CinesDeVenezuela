@@ -2,12 +2,10 @@
 package controllers;
 
 // Se importan las views que se van a utilizar
-import java.awt.Image;
 import views.*;
 import views.tables.Table;
 
 // Se importan los models que se van a utilizar
-import models.*;
 import models.database.ConnectionDB;
 
 // Se importan las clases de soporte a utilizar
@@ -17,21 +15,21 @@ import lib.PDFGenerator;
 // Se importan las librerías a utilizar
 import java.util.ArrayList;
 import java.awt.event.*;
+import java.awt.Image;
 import javax.swing.*;
-import javax.swing.event.*;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Gustavo
  */
-public class ControllerMainMenu implements ActionListener, MouseListener, 
-        ChangeListener{
+public class ControllerMainMenu implements ActionListener, MouseListener{
     
     // Instanciar las clases necesarias para el funcionamiento.
         // Views
         private MainPage mainPage;
         private PopupMessage popup;
+        private SelectOption select;
         private ChangeBranch changeBranch;
         private ModifyCandy modifyCandy;
         
@@ -45,9 +43,6 @@ public class ControllerMainMenu implements ActionListener, MouseListener,
         private ControllerLogin ctrlLogin;
                 
     // Instanciar las variables necesarias para el funcionamiento.    
-    ArrayList<Ticket_Candy> candy_list = new ArrayList<Ticket_Candy>();
-    ArrayList<Candy> candies_list = new ArrayList<Candy>();
-    
     ArrayList<String> enterprise_data = new ArrayList<String>();
     ArrayList<String> seller_list = new ArrayList<String>();
     ArrayList<String> client_data = new ArrayList<String>();
@@ -55,6 +50,8 @@ public class ControllerMainMenu implements ActionListener, MouseListener,
     ArrayList<String> id_tickets = new ArrayList<String>();
         
     ArrayList<Object> objectList = new ArrayList<Object>();
+    
+    ArrayList<Integer> cantCinemaTickets = new ArrayList<Integer>();
     
     // Constructor
     public ControllerMainMenu(){
@@ -65,7 +62,6 @@ public class ControllerMainMenu implements ActionListener, MouseListener,
         // Activamos los eventos por las views.
         mainPage.addEvents(this);
         mainPage.addMouseEvents(this);
-        mainPage.addStatesChanged(this);
         
     }
 
@@ -197,9 +193,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener,
             suport.cardSelection(mainPage.panOption2, mainPage.panCandySell);
             
             mainPage.clearCandySell();
-            
-            candy_list.clear();
-            
+                        
         }
         
         //<editor-fold defaultstate="collapsed" desc=" Venta de tickets para golosinas ">
@@ -449,7 +443,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener,
         // Volver para la sección anterior
         else if(evt.getSource() == mainPage.btnBackToTicketDecision2){
             mainPage.btnBackToTicketDecision2.setBackground(new java.awt.Color(249,249,249));
-            
+                        
             suport.cardSelection(mainPage.panOption2, mainPage.panDecisionOption2);
             
             
@@ -472,31 +466,452 @@ public class ControllerMainMenu implements ActionListener, MouseListener,
         // Volver al primer paso de compra de boletos.
         else if(evt.getSource() == mainPage.btnBackToSelectorMovie){
             
-            // Se muestra el paso anterior para compra de boletos.
-            suport.cardSelection(mainPage.panStepsCinemaTickets, 
-                    mainPage.panSecondStepCinemaTickets);
+            // Declarar e iniciar la variable acumuladora.
+            int cant = 0;
             
-            // Se cancela la indeterminación de la barra de progreso.
-            mainPage.pgrCinemaTickets.setIndeterminate(false);
+            // Acumular las entradas seleccionadas para la compra.
+            for(int i = 0; i < cantCinemaTickets.size(); i++)
+                cant += cantCinemaTickets.get(i);
             
-            // Se devuelve el valor de la barra de progreso a '0'
-            mainPage.pgrCinemaTickets.setValue(0);
+            // Si la cantidad de tickets seleccionados es mayor a '0'
+            if(cant > 0){
+                select = new SelectOption(mainPage, true, 2, 
+                        "¿Está seguro que desea volver a la opción anterior?", 
+                        "Si", "No");
+            
+                // Si la respuesta es afirmativa.
+                if(select.getOpc()){
+
+                    // Se muestra el paso anterior para compra de boletos.
+                    suport.cardSelection(mainPage.panStepsCinemaTickets, 
+                            mainPage.panFirstStepCinemaTickets);
+
+                    /*
+                     * Método para retornar los valores gráficos de los botones de 
+                     * la compra de tickets para funciones.
+                     */
+                    mainPage.clearButtonsOfTheBuyCinemaTickets();
+
+                    // Se vacían los tickets seleccionados.
+                    clearCantsCinemaTickets();
+                    
+                    // Se cancela la indeterminación de la barra de progreso.
+                    mainPage.pgrCinemaTickets.setIndeterminate(false);
+
+                    // Se devuelve el valor de la barra de progreso a '0'
+                    mainPage.pgrCinemaTickets.setValue(0);
+
+                }
+            
+            }
+            
+            // Caso contrario
+            else {
+                
+                // Se muestra el paso anterior para compra de boletos.
+                suport.cardSelection(mainPage.panStepsCinemaTickets, 
+                        mainPage.panFirstStepCinemaTickets);
+
+                /*
+                 * Método para retornar los valores gráficos de los botones de 
+                 * la compra de tickets para funciones.
+                 */
+                mainPage.clearButtonsOfTheBuyCinemaTickets();
+
+                // Se vacían los tickets seleccionados.
+                clearCantsCinemaTickets();
+                    
+                // Se cancela la indeterminación de la barra de progreso.
+                mainPage.pgrCinemaTickets.setIndeterminate(false);
+
+                // Se devuelve el valor de la barra de progreso a '0'
+                mainPage.pgrCinemaTickets.setValue(0);
+                
+            }
+        }
+        
+        // Pasar al siguiente paso de compra de boletos.
+        else if(evt.getSource() == mainPage.btnNextStepBuyTicket){
+            
+            // Declarar e iniciar la variable acumuladora.
+            int cant = 0;
+            
+            // Acumular las entradas seleccionadas para la compra.
+            for(int i = 0; i < cantCinemaTickets.size(); i++)
+                cant += cantCinemaTickets.get(i);
+            
+            // Si la cantidad de boletos a comprar es mayor a '0'.
+            if(cant > 0){
+            
+                // Se muestra el siguiente paso para compra de boletos.
+                suport.cardSelection(mainPage.panStepsCinemaTickets, 
+                        mainPage.panThirdStepCinemaTickets);
+                
+                /*
+                 * Método para retornar los valores gráficos de los botones de 
+                 * la compra de tickets para funciones.
+                 */
+                mainPage.clearButtonsOfTheBuyCinemaTickets();
+
+                // Se cancela la indeterminación de la barra de progreso.
+                mainPage.pgrCinemaTickets.setIndeterminate(false);
+
+                // Se devuelve el valor de la barra de progreso a '0'
+                mainPage.pgrCinemaTickets.setValue(50);
+                
+            }
+            
+            else{
+                
+                // Mensaje para indicar que se debe indicar al menos un ticket a comprar.
+                popup = new PopupMessage(mainPage, true, 1, "Debe indicar al menos un ticket.");
+                
+            }
+        }
+        
+        //<editor-fold defaultstate="collapsed" desc=" Aumentar/Disminuir tickets para adultos ">
+        
+        // Aumentar la cantidad de tickets para adultos.
+        else if(evt.getSource() == mainPage.btnAddCinemaTickets1){
+            
+            // Si la barra de progreso ya está cargando.
+            if(mainPage.pgrCinemaTickets.isIndeterminate()){}
+            else // Caso contrario.
+                mainPage.pgrCinemaTickets.setIndeterminate(true);
+            
+            // Se declara y se inicia la variable acumuladora.
+            int cant = Integer.valueOf(mainPage.lblCantCinemaTickets1.getText());
+                
+            // Si la cantidad es mayor a 'x', se muestra mensaje de error.
+            if(cant >= 99)
+                popup = new PopupMessage(mainPage, true, 1, 
+                        "Ha ingresado una cantidad muy alta de tickets.");
+            
+            // De lo contrario, se muestra la cantidad de tickets seleccionados.
+            else{
+                
+                // Se aumenta el contador.
+                cant++;
+                
+                // Se muestra la cantidad de tickets seleccionados.
+                mainPage.lblCantCinemaTickets1.setText(String.valueOf(cant));
+                //mainPage.lblCantCinemaTickets1.repaint();
+                
+                // Se agrega a la lista de tickets la cantidad seleccionada.
+                cantCinemaTickets.set(0, cant);
+                
+                // Se actualizan los montos.
+                showAmountsOfCinemaTickets();
+                
+            }
             
         }
         
-        else if(evt.getSource() == mainPage.btnNextStepBuyTicket){
+        // Disminuir la cantidad de tickets para adultos.
+        else if (evt.getSource() == mainPage.btnMinusCinemaTickets1){
             
-            // Se muestra el siguiente paso para compra de boletos.
-            suport.cardSelection(mainPage.panStepsCinemaTickets, 
-                    mainPage.panThirdStepCinemaTickets);
+            // Si la barra de progreso ya está cargando.
+            if(mainPage.pgrCinemaTickets.isIndeterminate()){}
+            else // Caso contrario.
+                mainPage.pgrCinemaTickets.setIndeterminate(true);
             
-            // Se cancela la indeterminación de la barra de progreso.
-            mainPage.pgrCinemaTickets.setIndeterminate(false);
+            // Se declara y se inicia la variable acumuladora.
+            int cant = Integer.valueOf(mainPage.lblCantCinemaTickets1.getText());
+                        
+            // Si la cantidad es menor o igual a '0', se muestra mensaje de error.
+            if(cant <= 0)
+                popup = new PopupMessage(mainPage, true, 1, 
+                        "No puede ingresar una cantidad negativa de tickets.");
             
-            // Se devuelve el valor de la barra de progreso a '0'
-            mainPage.pgrCinemaTickets.setValue(50);
+            // De lo contrario, se muestra la cantidad de tickets seleccionados.
+            else{
+                
+                // Declarar e iniciar variable acumuladora
+                int c = 0;
+                
+                // Acumular la cantidad de tickets.
+                for(int i = 0; i < cantCinemaTickets.size(); i++)
+                    c += cantCinemaTickets.get(i);
+                
+                // Si no hay tickets, se desactiva la barra de progreso.
+                if(c == 0)
+                    mainPage.pgrCinemaTickets.setIndeterminate(false);
+                
+                // Se disminuye el contador.
+                cant--;
+                
+                // Se muestra la cantidad de tickets seleccionados.
+                mainPage.lblCantCinemaTickets1.setText(String.valueOf(cant));
+                
+                // Se agrega a la lista de tickets la cantidad seleccionada.
+                cantCinemaTickets.set(0, cant);
+                
+                // Se actualizan los montos.
+                showAmountsOfCinemaTickets();
+                
+            }
             
         }
+        
+        //</editor-fold>
+        
+        //<editor-fold defaultstate="collapsed" desc=" Aumentar/Disminuir tickets para kinder ">
+        
+        // Aumentar la cantidad de tickets para adultos.
+        else if(evt.getSource() == mainPage.btnAddCinemaTickets2){
+            
+            // Si la barra de progreso ya está cargando.
+            if(mainPage.pgrCinemaTickets.isIndeterminate()){}
+            else // Caso contrario.
+                mainPage.pgrCinemaTickets.setIndeterminate(true);
+            
+            // Se declara y se inicia la variable acumuladora.
+            int cant = Integer.valueOf(mainPage.lblCantCinemaTickets2.getText());
+                
+            // Si la cantidad es mayor a 'x', se muestra mensaje de error.
+            if(cant >= 99)
+                popup = new PopupMessage(mainPage, true, 1, 
+                        "Ha ingresado una cantidad muy alta de tickets.");
+            
+            // De lo contrario, se muestra la cantidad de tickets seleccionados.
+            else{
+                
+                // Se aumenta el contador.
+                cant++;
+                
+                // Se muestra la cantidad de tickets seleccionados.
+                mainPage.lblCantCinemaTickets2.setText(String.valueOf(cant));
+                //mainPage.lblCantCinemaTickets1.repaint();
+                
+                // Se agrega a la lista de tickets la cantidad seleccionada.
+                cantCinemaTickets.set(1, cant);
+                
+                // Se actualizan los montos.
+                showAmountsOfCinemaTickets();
+                
+            }
+            
+        }
+        
+        // Disminuir la cantidad de tickets para adultos.
+        else if (evt.getSource() == mainPage.btnMinusCinemaTickets2){
+            
+            // Si la barra de progreso ya está cargando.
+            if(mainPage.pgrCinemaTickets.isIndeterminate()){}
+            else // Caso contrario.
+                mainPage.pgrCinemaTickets.setIndeterminate(true);
+            
+            // Se declara y se inicia la variable acumuladora.
+            int cant = Integer.valueOf(mainPage.lblCantCinemaTickets2.getText());
+                        
+            // Si la cantidad es menor o igual a '0', se muestra mensaje de error.
+            if(cant <= 0)
+                popup = new PopupMessage(mainPage, true, 1, 
+                        "No puede ingresar una cantidad negativa de tickets.");
+            
+            // De lo contrario, se muestra la cantidad de tickets seleccionados.
+            else{
+                
+                // Declarar e iniciar variable acumuladora
+                int c = 0;
+                
+                // Acumular la cantidad de tickets.
+                for(int i = 0; i < cantCinemaTickets.size(); i++)
+                    c += cantCinemaTickets.get(i);
+                
+                // Si no hay tickets, se desactiva la barra de progreso.
+                if(c == 0)
+                    mainPage.pgrCinemaTickets.setIndeterminate(false);
+                
+                // Se disminuye el contador.
+                cant--;
+                
+                // Se muestra la cantidad de tickets seleccionados.
+                mainPage.lblCantCinemaTickets2.setText(String.valueOf(cant));
+                
+                // Se agrega a la lista de tickets la cantidad seleccionada.
+                cantCinemaTickets.set(1, cant);
+                
+                // Se actualizan los montos.
+                showAmountsOfCinemaTickets();
+                
+            }
+            
+        }
+        
+        //</editor-fold>
+        
+        //<editor-fold defaultstate="collapsed" desc=" Aumentar/Disminuir tickets para niños ">
+        
+        // Aumentar la cantidad de tickets para adultos.
+        else if(evt.getSource() == mainPage.btnAddCinemaTickets3){
+            
+            // Si la barra de progreso ya está cargando.
+            if(mainPage.pgrCinemaTickets.isIndeterminate()){}
+            else // Caso contrario.
+                mainPage.pgrCinemaTickets.setIndeterminate(true);
+            
+            // Se declara y se inicia la variable acumuladora.
+            int cant = Integer.valueOf(mainPage.lblCantCinemaTickets3.getText());
+                
+            // Si la cantidad es mayor a 'x', se muestra mensaje de error.
+            if(cant >= 99)
+                popup = new PopupMessage(mainPage, true, 1, 
+                        "Ha ingresado una cantidad muy alta de tickets.");
+            
+            // De lo contrario, se muestra la cantidad de tickets seleccionados.
+            else{
+                
+                // Se aumenta el contador.
+                cant++;
+                
+                // Se muestra la cantidad de tickets seleccionados.
+                mainPage.lblCantCinemaTickets3.setText(String.valueOf(cant));
+                //mainPage.lblCantCinemaTickets1.repaint();
+                
+                // Se agrega a la lista de tickets la cantidad seleccionada.
+                cantCinemaTickets.set(2, cant);
+                
+                // Se actualizan los montos.
+                showAmountsOfCinemaTickets();
+                
+            }
+            
+        }
+        
+        // Disminuir la cantidad de tickets para adultos.
+        else if (evt.getSource() == mainPage.btnMinusCinemaTickets3){
+            
+            // Si la barra de progreso ya está cargando.
+            if(mainPage.pgrCinemaTickets.isIndeterminate()){}
+            else // Caso contrario.
+                mainPage.pgrCinemaTickets.setIndeterminate(true);
+            
+            // Se declara y se inicia la variable acumuladora.
+            int cant = Integer.valueOf(mainPage.lblCantCinemaTickets3.getText());
+                        
+            // Si la cantidad es menor o igual a '0', se muestra mensaje de error.
+            if(cant <= 0)
+                popup = new PopupMessage(mainPage, true, 1, 
+                        "No puede ingresar una cantidad negativa de tickets.");
+            
+            // De lo contrario, se muestra la cantidad de tickets seleccionados.
+            else{
+                
+                // Declarar e iniciar variable acumuladora
+                int c = 0;
+                
+                // Acumular la cantidad de tickets.
+                for(int i = 0; i < cantCinemaTickets.size(); i++)
+                    c += cantCinemaTickets.get(i);
+                
+                // Si no hay tickets, se desactiva la barra de progreso.
+                if(c == 0)
+                    mainPage.pgrCinemaTickets.setIndeterminate(false);
+                
+                // Se disminuye el contador.
+                cant--;
+                
+                // Se muestra la cantidad de tickets seleccionados.
+                mainPage.lblCantCinemaTickets3.setText(String.valueOf(cant));
+                
+                // Se agrega a la lista de tickets la cantidad seleccionada.
+                cantCinemaTickets.set(2, cant);
+                
+                // Se actualizan los montos.
+                showAmountsOfCinemaTickets();
+                
+            }
+            
+        }
+        
+        //</editor-fold>
+        
+        //<editor-fold defaultstate="collapsed" desc=" Aumentar/Disminuir tickets para adultos mayores ">
+        
+        // Aumentar la cantidad de tickets para adultos.
+        else if(evt.getSource() == mainPage.btnAddCinemaTickets4){
+            
+            // Si la barra de progreso ya está cargando.
+            if(mainPage.pgrCinemaTickets.isIndeterminate()){}
+            else // Caso contrario.
+                mainPage.pgrCinemaTickets.setIndeterminate(true);
+            
+            // Se declara y se inicia la variable acumuladora.
+            int cant = Integer.valueOf(mainPage.lblCantCinemaTickets4.getText());
+                
+            // Si la cantidad es mayor a 'x', se muestra mensaje de error.
+            if(cant >= 99)
+                popup = new PopupMessage(mainPage, true, 1, 
+                        "Ha ingresado una cantidad muy alta de tickets.");
+            
+            // De lo contrario, se muestra la cantidad de tickets seleccionados.
+            else{
+                
+                // Se aumenta el contador.
+                cant++;
+                
+                // Se muestra la cantidad de tickets seleccionados.
+                mainPage.lblCantCinemaTickets4.setText(String.valueOf(cant));
+                //mainPage.lblCantCinemaTickets1.repaint();
+                
+                // Se agrega a la lista de tickets la cantidad seleccionada.
+                cantCinemaTickets.set(3, cant);
+                
+                // Se actualizan los montos.
+                showAmountsOfCinemaTickets();
+                
+            }
+            
+        }
+        
+        // Disminuir la cantidad de tickets para adultos.
+        else if (evt.getSource() == mainPage.btnMinusCinemaTickets4){
+            
+            // Si la barra de progreso ya está cargando.
+            if(mainPage.pgrCinemaTickets.isIndeterminate()){}
+            else // Caso contrario.
+                mainPage.pgrCinemaTickets.setIndeterminate(true);
+            
+            // Se declara y se inicia la variable acumuladora.
+            int cant = Integer.valueOf(mainPage.lblCantCinemaTickets4.getText());
+                        
+            // Si la cantidad es menor o igual a '0', se muestra mensaje de error.
+            if(cant <= 0)
+                popup = new PopupMessage(mainPage, true, 1, 
+                        "No puede ingresar una cantidad negativa de tickets.");
+            
+            // De lo contrario, se muestra la cantidad de tickets seleccionados.
+            else{
+                
+                // Declarar e iniciar variable acumuladora
+                int c = 0;
+                
+                // Acumular la cantidad de tickets.
+                for(int i = 0; i < cantCinemaTickets.size(); i++)
+                    c += cantCinemaTickets.get(i);
+                
+                // Si no hay tickets, se desactiva la barra de progreso.
+                if(c == 0)
+                    mainPage.pgrCinemaTickets.setIndeterminate(false);
+                
+                // Se disminuye el contador.
+                cant--;
+                
+                // Se muestra la cantidad de tickets seleccionados.
+                mainPage.lblCantCinemaTickets4.setText(String.valueOf(cant));
+                
+                // Se agrega a la lista de tickets la cantidad seleccionada.
+                cantCinemaTickets.set(3, cant);
+                
+                // Se actualizan los montos.
+                showAmountsOfCinemaTickets();
+                
+            }
+            
+        }
+        
+        //</editor-fold>
         
         //</editor-fold>
         
@@ -512,6 +927,8 @@ public class ControllerMainMenu implements ActionListener, MouseListener,
      */
     @Override
     public void mouseClicked(MouseEvent evt) {
+        
+        //<editor-fold defaultstate="collapsed" desc=" Tabla de Golosinas ">
         
         // Si el evento ocurre en la tabla de golosinas.
         if(evt.getSource() == mainPage.tblCandy){
@@ -595,6 +1012,10 @@ public class ControllerMainMenu implements ActionListener, MouseListener,
 
         }
         
+        //</editor-fold>
+        
+        //<editor-fold defaultstate="collapsed" desc=" Tabla de Películas ">
+        
         // Si el evento ocurre en la tabla de películas.
         else if (evt.getSource() == mainPage.tblMovieSelector){
             
@@ -631,6 +1052,10 @@ public class ControllerMainMenu implements ActionListener, MouseListener,
             }
         }
         
+        //</editor-fold>
+        
+        //<editor-fold defaultstate="collapsed" desc=" Tabla de Funciones ">
+        
         // Si el evento ocurre en la tabla de funciones.
         else if (evt.getSource() == mainPage.tblFunctionSelector){
             
@@ -664,35 +1089,25 @@ public class ControllerMainMenu implements ActionListener, MouseListener,
                         
                         suport.cardSelection(mainPage.panStepsCinemaTickets, mainPage.panSecondStepCinemaTickets);
                         
+                        /*
+                         * Método para retornar los valores gráficos de los botones de 
+                         * la compra de tickets para funciones.
+                         */
+                        mainPage.clearButtonsOfTheBuyCinemaTickets();
+                        
+                        for(int i = 0; i < 4; i++)
+                            cantCinemaTickets.add(0);
+                        
                     }
                 }
             }
             
         }
         
-    }
-    
-    /**
-     * Eventos provocados por el escuchador de cambios para elementos Swing 
-     * (ChangeListener).
-     * @param evt 
-     */
-    public void stateChanged(ChangeEvent evt){
+        //</editor-fold>
         
-        if(evt.getSource() == mainPage.spnCantAdultTicket)
-            showAmountsOfCinemaTickets();
-                    
-        else if(evt.getSource() == mainPage.spnCantKinderTicket)
-            showAmountsOfCinemaTickets();
-                    
-        else if(evt.getSource() == mainPage.spnCantChildTicket)
-            showAmountsOfCinemaTickets();
-        
-        else if(evt.getSource() == mainPage.spnCantOldTicket)
-            showAmountsOfCinemaTickets();
-                    
     }
-    
+        
     //<editor-fold defaultstate="collapsed" desc=" Métodos para el funcionamiento del Controller ">
     
     /**
@@ -878,17 +1293,17 @@ public class ControllerMainMenu implements ActionListener, MouseListener,
         
         double price = 0, iva = 0, total = 0;
         
-        int cantA = Integer.valueOf(mainPage.spnCantAdultTicket.getValue().toString()),
-            cantK = Integer.valueOf(mainPage.spnCantKinderTicket.getValue().toString()),
-            cantC = Integer.valueOf(mainPage.spnCantChildTicket.getValue().toString()),
-            cantO = Integer.valueOf(mainPage.spnCantOldTicket.getValue().toString());
+        int cantA = cantCinemaTickets.get(0),
+            cantK = cantCinemaTickets.get(1),
+            cantC = cantCinemaTickets.get(2),
+            cantO = cantCinemaTickets.get(3);
         
-        if(cantA > 0){
+        if(cantA >= 0){
             
             double adultPrice = suport.numberDecimalFormat(
-                    Double.valueOf(mainPage.lblPriceTicketAdult.toString()), 2);
+                    Double.valueOf(mainPage.lblPriceTicketAdult.getText()), 2);
             
-            double  aPrice  = suport.numberDecimalFormat((adultPrice * 100 / 116), 2),
+            double  aPrice  = suport.numberDecimalFormat(cantA * (adultPrice * 100 / 116), 2),
                     aIva    = suport.numberDecimalFormat(
                             (cantA * (adultPrice * 100 / 116)) * 0.16, 2),
                     aTotal  = suport.numberDecimalFormat((cantA * adultPrice), 2);
@@ -903,12 +1318,12 @@ public class ControllerMainMenu implements ActionListener, MouseListener,
             
         }
         
-        if(cantK > 0){
+        if(cantK >= 0){
             
             double kinderPrice = suport.numberDecimalFormat(
-                    Double.valueOf(mainPage.lblPriceTicketKinder.toString()), 2);
+                    Double.valueOf(mainPage.lblPriceTicketKinder.getText()), 2);
             
-            double  kPrice  = suport.numberDecimalFormat((kinderPrice * 100 / 116), 2),
+            double  kPrice  = suport.numberDecimalFormat(cantK * (kinderPrice * 100 / 116), 2),
                     kIva    = suport.numberDecimalFormat(
                             (cantK * (kinderPrice * 100 / 116)) * 0.16, 2),
                     kTotal  = suport.numberDecimalFormat((cantK * kinderPrice), 2);
@@ -923,12 +1338,12 @@ public class ControllerMainMenu implements ActionListener, MouseListener,
             
         }
         
-        if(cantC > 0){
+        if(cantC >= 0){
             
             double childPrice = suport.numberDecimalFormat(
-                    Double.valueOf(mainPage.lblPriceTicketChild.toString()), 2);
+                    Double.valueOf(mainPage.lblPriceTicketChild.getText()), 2);
             
-            double  cPrice  = suport.numberDecimalFormat((childPrice * 100 / 116), 2),
+            double  cPrice  = suport.numberDecimalFormat(cantC * (childPrice * 100 / 116), 2),
                     cIva    = suport.numberDecimalFormat(
                             (cantC * (childPrice * 100 / 116)) * 0.16, 2),
                     cTotal  = suport.numberDecimalFormat((cantC * childPrice), 2);
@@ -943,12 +1358,12 @@ public class ControllerMainMenu implements ActionListener, MouseListener,
             
         }
         
-        if(cantO > 0){
+        if(cantO >= 0){
             
             double oldPrice = suport.numberDecimalFormat(
-                    Double.valueOf(mainPage.lblPriceTicketOld.toString()), 2);
+                    Double.valueOf(mainPage.lblPriceTicketOld.getText()), 2);
             
-            double  oPrice  = suport.numberDecimalFormat((oldPrice * 100 / 116), 2),
+            double  oPrice  = suport.numberDecimalFormat(cantO * (oldPrice * 100 / 116), 2),
                     oIva    = suport.numberDecimalFormat(
                             (cantO * (oldPrice * 100 / 116)) * 0.16, 2),
                     oTotal  = suport.numberDecimalFormat((cantO * oldPrice), 2);
@@ -969,6 +1384,22 @@ public class ControllerMainMenu implements ActionListener, MouseListener,
                 suport.numberDecimalFormat(iva, 2)));
         mainPage.lblTotalAmountTicket.setText(String.valueOf(
                 suport.numberDecimalFormat(total, 2)));
+        
+    }
+    
+    /**
+     * Método para limpiar la cantidad de tickets seleccionados.
+     */
+    public void clearCantsCinemaTickets(){
+        
+        for(int i = 0; i < cantCinemaTickets.size(); i++)
+            cantCinemaTickets.set(i, 0);
+        
+        mainPage.lblCantCinemaTickets1.setText("0");
+        mainPage.lblCantCinemaTickets2.setText("0");
+        mainPage.lblCantCinemaTickets3.setText("0");
+        mainPage.lblCantCinemaTickets4.setText("0");
+        showAmountsOfCinemaTickets();
         
     }
     
