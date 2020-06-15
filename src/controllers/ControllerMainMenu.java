@@ -11,6 +11,7 @@ import models.database.ConnectionDB;
 // Se importan las clases de soporte a utilizar
 import lib.SuportFunctions;
 import lib.PDFGenerator;
+import lib.TheaterSeatingChart;
 
 // Se importan las librerías a utilizar
 import java.util.ArrayList;
@@ -26,6 +27,13 @@ import javax.swing.table.DefaultTableModel;
 public class ControllerMainMenu implements ActionListener, MouseListener{
     
     // Instanciar las clases necesarias para el funcionamiento.
+                
+        // Models
+        private ConnectionDB con;
+
+        // Controllers
+        private ControllerLogin ctrlLogin;
+        
         // Views
         private MainPage mainPage;
         private PopupMessage popup;
@@ -33,14 +41,11 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         private ChangeBranch changeBranch;
         private ModifyCandy modifyCandy;
         
-        // Models
-        private ConnectionDB con;
-
         // Suport Class
         private SuportFunctions suport;
         
-        // Controllers
-        private ControllerLogin ctrlLogin;
+        // Theater Seating Chart
+        private TheaterSeatingChart seatingChart;
                 
     // Instanciar las variables necesarias para el funcionamiento.    
     ArrayList<String> enterprise_data = new ArrayList<String>();
@@ -57,8 +62,9 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
     public ControllerMainMenu(){
         
         // Declarar la variable de las clases instanciadas.
-        mainPage = new MainPage();
-        suport = new SuportFunctions();
+        mainPage        = new MainPage();
+        suport          = new SuportFunctions();
+        seatingChart    = new TheaterSeatingChart();
         
         // Activamos los eventos por las views.
         mainPage.addEvents(this);
@@ -560,6 +566,18 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
                 // Se devuelve el valor de la barra de progreso a '0'
                 mainPage.pgrCinemaTickets.setValue(50);
                 
+                // Se indican los iconos a utilizar
+                javax.swing.Icon free = new javax.swing.ImageIcon(getClass().getResource(
+                        "/views/images/freeSeat.png"));
+                javax.swing.Icon selected = new javax.swing.ImageIcon(getClass().getResource(
+                        "/views/images/selectedSeat.png"));
+                
+                // Método para mostrar los asientos disponibles
+                seatingChart.buildCinemaSeats(8, 8, mainPage.panSelectorSeats, 
+                        mainPage.panTheaterSeatChart, free, selected, 
+                        mainPage.lblTotalSeatsCant, mainPage.lblFreeSeatsCant, 
+                        mainPage.lblSelectedSeatsCant);
+                                
             }
             
             else{
