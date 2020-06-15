@@ -379,6 +379,19 @@ public class MainPage extends javax.swing.JFrame {
         btnAddCinemaTickets4 = new javax.swing.JButton();
         btnMinusCinemaTickets4 = new javax.swing.JButton();
         panThirdStepCinemaTickets = new javax.swing.JPanel();
+        panSelectorSeats = new javax.swing.JPanel();
+        btnSeatsClear = new javax.swing.JButton();
+        btnBackToCantCinemaTickets = new javax.swing.JButton();
+        btnForuthStepCinemaTickets = new javax.swing.JButton();
+        lblTotalSeats = new javax.swing.JLabel();
+        lblFreeSeats = new javax.swing.JLabel();
+        lblSelectedSeats = new javax.swing.JLabel();
+        lblCantSeatsToSelect = new javax.swing.JLabel();
+        lblTittleSelectorSeat = new javax.swing.JLabel();
+        lblTotalSeatsCant = new javax.swing.JLabel();
+        lblFreeSeatsCant = new javax.swing.JLabel();
+        lblSelectedSeatsCant = new javax.swing.JLabel();
+        lblCantSeatsToSelectNumber = new javax.swing.JLabel();
         panFourthStepCinemaTickets = new javax.swing.JPanel();
         panOption3 = new javax.swing.JPanel();
         lblTittleOption3 = new javax.swing.JLabel();
@@ -2608,15 +2621,154 @@ public class MainPage extends javax.swing.JFrame {
 
         panThirdStepCinemaTickets.setBackground(new java.awt.Color(249, 249, 249));
 
+        panSelectorSeats.setBackground(new java.awt.Color(239, 232, 244));
+
+        javax.swing.GroupLayout panSelectorSeatsLayout = new javax.swing.GroupLayout(panSelectorSeats);
+        panSelectorSeats.setLayout(panSelectorSeatsLayout);
+        panSelectorSeatsLayout.setHorizontalGroup(
+            panSelectorSeatsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 380, Short.MAX_VALUE)
+        );
+        panSelectorSeatsLayout.setVerticalGroup(
+            panSelectorSeatsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 380, Short.MAX_VALUE)
+        );
+
+        btnSeatsClear.setBackground(new java.awt.Color(245, 245, 245));
+        btnSeatsClear.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnSeatsClear.setForeground(new java.awt.Color(0, 0, 0));
+        btnSeatsClear.setText("Limpiar");
+        btnSeatsClear.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnSeatsClear.setBorderPainted(false);
+        btnSeatsClear.setContentAreaFilled(false);
+        btnSeatsClear.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSeatsClear.setFocusPainted(false);
+        btnSeatsClear.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnSeatsClearMouseMoved(evt);
+            }
+        });
+        btnSeatsClear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnSeatsClearMouseExited(evt);
+            }
+        });
+
+        btnBackToCantCinemaTickets.setBackground(new java.awt.Color(245, 245, 245));
+        btnBackToCantCinemaTickets.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnBackToCantCinemaTickets.setForeground(new java.awt.Color(0, 0, 0));
+        btnBackToCantCinemaTickets.setText("Atrás");
+        btnBackToCantCinemaTickets.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnBackToCantCinemaTickets.setBorderPainted(false);
+        btnBackToCantCinemaTickets.setContentAreaFilled(false);
+        btnBackToCantCinemaTickets.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBackToCantCinemaTickets.setFocusPainted(false);
+
+        btnForuthStepCinemaTickets.setBackground(new java.awt.Color(245, 245, 245));
+        btnForuthStepCinemaTickets.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnForuthStepCinemaTickets.setForeground(new java.awt.Color(0, 0, 0));
+        btnForuthStepCinemaTickets.setText("Aceptar");
+        btnForuthStepCinemaTickets.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnForuthStepCinemaTickets.setBorderPainted(false);
+        btnForuthStepCinemaTickets.setContentAreaFilled(false);
+        btnForuthStepCinemaTickets.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnForuthStepCinemaTickets.setFocusPainted(false);
+
+        lblTotalSeats.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lblTotalSeats.setText("Total de asientos:");
+
+        lblFreeSeats.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lblFreeSeats.setText("Asientos disponibles:");
+
+        lblSelectedSeats.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lblSelectedSeats.setText("Asientos seleccionados:");
+
+        lblCantSeatsToSelect.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lblCantSeatsToSelect.setText("Boletos a comprar:");
+
+        lblTittleSelectorSeat.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblTittleSelectorSeat.setForeground(new java.awt.Color(75, 0, 145));
+        lblTittleSelectorSeat.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTittleSelectorSeat.setText("Selecciona los asientos");
+
+        lblTotalSeatsCant.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        lblTotalSeatsCant.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblTotalSeatsCant.setText("0");
+
+        lblFreeSeatsCant.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        lblFreeSeatsCant.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblFreeSeatsCant.setText("0");
+
+        lblSelectedSeatsCant.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        lblSelectedSeatsCant.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblSelectedSeatsCant.setText("0");
+
+        lblCantSeatsToSelectNumber.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        lblCantSeatsToSelectNumber.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblCantSeatsToSelectNumber.setText("0");
+
         javax.swing.GroupLayout panThirdStepCinemaTicketsLayout = new javax.swing.GroupLayout(panThirdStepCinemaTickets);
         panThirdStepCinemaTickets.setLayout(panThirdStepCinemaTicketsLayout);
         panThirdStepCinemaTicketsLayout.setHorizontalGroup(
             panThirdStepCinemaTicketsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 673, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panThirdStepCinemaTicketsLayout.createSequentialGroup()
+                .addContainerGap(32, Short.MAX_VALUE)
+                .addGroup(panThirdStepCinemaTicketsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblTittleSelectorSeat, javax.swing.GroupLayout.PREFERRED_SIZE, 611, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panThirdStepCinemaTicketsLayout.createSequentialGroup()
+                        .addComponent(panSelectorSeats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addGroup(panThirdStepCinemaTicketsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnSeatsClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnBackToCantCinemaTickets, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnForuthStepCinemaTickets, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(panThirdStepCinemaTicketsLayout.createSequentialGroup()
+                                .addGroup(panThirdStepCinemaTicketsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(lblTotalSeats, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblSelectedSeats, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblCantSeatsToSelect, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblFreeSeats, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(panThirdStepCinemaTicketsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblTotalSeatsCant, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblFreeSeatsCant, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
+                                    .addComponent(lblSelectedSeatsCant, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
+                                    .addComponent(lblCantSeatsToSelectNumber, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE))))))
+                .addGap(30, 30, 30))
         );
         panThirdStepCinemaTicketsLayout.setVerticalGroup(
             panThirdStepCinemaTicketsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 477, Short.MAX_VALUE)
+            .addGroup(panThirdStepCinemaTicketsLayout.createSequentialGroup()
+                .addContainerGap(17, Short.MAX_VALUE)
+                .addComponent(lblTittleSelectorSeat, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panThirdStepCinemaTicketsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panThirdStepCinemaTicketsLayout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(panThirdStepCinemaTicketsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblTotalSeats)
+                            .addComponent(lblTotalSeatsCant))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(panThirdStepCinemaTicketsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblFreeSeats)
+                            .addComponent(lblFreeSeatsCant))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(panThirdStepCinemaTicketsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblSelectedSeats)
+                            .addComponent(lblSelectedSeatsCant))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(panThirdStepCinemaTicketsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblCantSeatsToSelect)
+                            .addComponent(lblCantSeatsToSelectNumber))
+                        .addGap(31, 31, 31)
+                        .addComponent(btnSeatsClear, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnBackToCantCinemaTickets, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnForuthStepCinemaTickets, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panThirdStepCinemaTicketsLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(panSelectorSeats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(34, 34, 34))
         );
 
         panStepsCinemaTickets.add(panThirdStepCinemaTickets, "card4");
@@ -3315,6 +3467,18 @@ public class MainPage extends javax.swing.JFrame {
         btnMinusCinemaTickets4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));  
     }//GEN-LAST:event_btnMinusCinemaTickets4MouseExited
 
+    private void btnSeatsClearMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSeatsClearMouseMoved
+        panCandySellClear.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
+        btnCandySellClear.setForeground(new java.awt.Color(255,255,255));
+        panCandySellClear.setBackground(new java.awt.Color(66,0,124));
+    }//GEN-LAST:event_btnSeatsClearMouseMoved
+
+    private void btnSeatsClearMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSeatsClearMouseExited
+        panCandySellClear.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
+        btnCandySellClear.setForeground(new java.awt.Color(0,0,0));
+        panCandySellClear.setBackground(new java.awt.Color(239,232,244));
+    }//GEN-LAST:event_btnSeatsClearMouseExited
+
     /**
      * Método para retornar los valores gráficos de todos los botones de la
      * compra de tickets para funciones.
@@ -3354,6 +3518,7 @@ public class MainPage extends javax.swing.JFrame {
     public javax.swing.JButton btnAddCinemaTickets2;
     public javax.swing.JButton btnAddCinemaTickets3;
     public javax.swing.JButton btnAddCinemaTickets4;
+    public javax.swing.JButton btnBackToCantCinemaTickets;
     public javax.swing.JButton btnBackToSelectorMovie;
     public javax.swing.JButton btnBackToTicketDecision1;
     public javax.swing.JButton btnBackToTicketDecision2;
@@ -3371,6 +3536,7 @@ public class MainPage extends javax.swing.JFrame {
     public javax.swing.JButton btnChangeSucursalCinemaTickets;
     public javax.swing.JButton btnCinemaDecision;
     public javax.swing.JButton btnExit;
+    public javax.swing.JButton btnForuthStepCinemaTickets;
     public javax.swing.JButton btnMin;
     public javax.swing.JButton btnMinusCinemaTickets1;
     public javax.swing.JButton btnMinusCinemaTickets2;
@@ -3385,6 +3551,7 @@ public class MainPage extends javax.swing.JFrame {
     public javax.swing.JButton btnOptionLateral6;
     public javax.swing.JButton btnOut;
     private javax.swing.JButton btnSearchClientCandySell;
+    public javax.swing.JButton btnSeatsClear;
     public javax.swing.JComboBox<String> cmbCandySelection;
     public javax.swing.JComboBox<String> cmbCandySeller;
     private javax.swing.JSeparator jSeparator1;
@@ -3403,11 +3570,15 @@ public class MainPage extends javax.swing.JFrame {
     public javax.swing.JLabel lblCantCinemaTickets2;
     public javax.swing.JLabel lblCantCinemaTickets3;
     public javax.swing.JLabel lblCantCinemaTickets4;
+    private javax.swing.JLabel lblCantSeatsToSelect;
+    public javax.swing.JLabel lblCantSeatsToSelectNumber;
     private javax.swing.JLabel lblCinemaTickets;
     private javax.swing.JLabel lblDescAdultTicket;
     private javax.swing.JLabel lblDescChildTicket;
     private javax.swing.JLabel lblDescKinderTicket;
     private javax.swing.JLabel lblDescOldTicket;
+    private javax.swing.JLabel lblFreeSeats;
+    public javax.swing.JLabel lblFreeSeatsCant;
     private javax.swing.JLabel lblFunctionSelector;
     private javax.swing.JLabel lblIVAAdultTicket;
     public javax.swing.JLabel lblIVAAmountAdultTicket;
@@ -3425,6 +3596,8 @@ public class MainPage extends javax.swing.JFrame {
     public javax.swing.JLabel lblPriceTicketChild;
     public javax.swing.JLabel lblPriceTicketKinder;
     public javax.swing.JLabel lblPriceTicketOld;
+    private javax.swing.JLabel lblSelectedSeats;
+    public javax.swing.JLabel lblSelectedSeatsCant;
     public javax.swing.JLabel lblSubTotalCandySell;
     private javax.swing.JLabel lblSubtotalAdultTicket;
     public javax.swing.JLabel lblSubtotalAmountAdultTicket;
@@ -3444,6 +3617,7 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JLabel lblTittleOption4;
     private javax.swing.JLabel lblTittleOption5;
     private javax.swing.JLabel lblTittleOption6;
+    private javax.swing.JLabel lblTittleSelectorSeat;
     private javax.swing.JLabel lblTotalAdultTicket;
     public javax.swing.JLabel lblTotalAmountAdultTicket;
     public javax.swing.JLabel lblTotalAmountChildTicket;
@@ -3454,6 +3628,8 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JLabel lblTotalChildTicket;
     private javax.swing.JLabel lblTotalKinderTicket;
     private javax.swing.JLabel lblTotalOldTicket;
+    private javax.swing.JLabel lblTotalSeats;
+    public javax.swing.JLabel lblTotalSeatsCant;
     private javax.swing.JLabel lblTotalTicket;
     private javax.swing.JPanel panAddCandySell;
     public javax.swing.JPanel panBodyOption1;
@@ -3491,6 +3667,7 @@ public class MainPage extends javax.swing.JFrame {
     public javax.swing.JPanel panOption6;
     public javax.swing.JPanel panSearchClientCandySell;
     public javax.swing.JPanel panSecondStepCinemaTickets;
+    public javax.swing.JPanel panSelectorSeats;
     public javax.swing.JPanel panStepsCinemaTickets;
     public javax.swing.JPanel panThirdStepCinemaTickets;
     private javax.swing.JPanel panTopBar;

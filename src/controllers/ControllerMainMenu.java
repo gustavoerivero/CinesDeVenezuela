@@ -55,6 +55,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
     
     // Constructor
     public ControllerMainMenu(){
+        
         // Declarar la variable de las clases instanciadas.
         mainPage = new MainPage();
         suport = new SuportFunctions();
