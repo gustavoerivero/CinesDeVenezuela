@@ -269,12 +269,12 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="lblCDVlogo" min="-2" pref="102" max="-2" attributes="0"/>
+                      <Component id="lblCDVlogo" min="-2" pref="110" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="sepLateralMenu" min="-2" pref="10" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="panLateralOptions" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="28" max="32767" attributes="0"/>
+                      <EmptySpace pref="20" max="32767" attributes="0"/>
                       <Component id="lblADCmark" min="-2" pref="24" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -286,7 +286,7 @@
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/views/images/CDV-small.png"/>
+                  <Image iconType="3" name="/views/images/CDV-logo2.png"/>
                 </Property>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
               </Properties>
@@ -869,7 +869,7 @@
                                       <Color blue="33" green="33" red="33" type="rgb"/>
                                     </Property>
                                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                                      <Image iconType="3" name="/views/images/CDV-medium.png"/>
+                                      <Image iconType="3" name="/views/images/CDV-icono.png"/>
                                     </Property>
                                     <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;&lt;p align = &apos;center&apos;&gt;&lt;FONT SIZE=5&gt;&#xbf;Qui&#xe9;nes somos?&lt;/font&gt;&lt;/p&gt;&lt;/b&gt;&lt;br&gt;&lt;p align = &apos;justify&apos;&gt;La empresa &#x201c;Cines de Venezuela&#x201d; es una red de cines dispersa a lo largo de todo el pa&#xed;s, teniendo sucursales en todas las ciudades, ofreciendo las pel&#xed;culas m&#xe1;s recientes y aclamadas en el campo del entretenimiento, satisfaciendo as&#xed; los gustos de todos sus clientes.&lt;/p&gt;&lt;/html&gt;"/>
                                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -3374,7 +3374,7 @@
                                               <Component id="lblAmountOldTicket" alignment="3" min="-2" max="-2" attributes="0"/>
                                               <Component id="lblPriceTicketOld" alignment="3" min="-2" max="-2" attributes="0"/>
                                           </Group>
-                                          <EmptySpace pref="24" max="32767" attributes="0"/>
+                                          <EmptySpace pref="39" max="32767" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Group type="102" attributes="0">
                                                   <Group type="103" groupAlignment="3" attributes="0">
