@@ -1,5 +1,7 @@
 package views;
 
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import views.tables.Table;
 
 import lib.SuportFunctions;
@@ -112,6 +114,10 @@ public class MainPage extends javax.swing.JFrame {
                 
                 btnAddCinemaTickets4.addActionListener(evt);
                 btnMinusCinemaTickets4.addActionListener(evt);
+                
+                
+            // Eventos de los botones de la opción 4 -> Empleado.
+                btnAddEmployee.addActionListener(evt);
             
         
     }
@@ -128,12 +134,33 @@ public class MainPage extends javax.swing.JFrame {
 
     //</editor-fold>
     
+    //<editor-fold defaultstate="collapsed" desc=" Set y get de Tablas ">
+   public JTable getTblEmployee(){
+        
+        return tblEmployee;
+        
+    }
+    /**
+     * Método que retorna los valores iniciales de los componentes de 
+     * JPanel de Candy Sell.
+     */
+    public void setTblEmployee(JTable tblEmployee) {
+        this.tblEmployee = tblEmployee;
+    } 
+     //</editor-fold>
+    
+    
+    
     //<editor-fold defaultstate="collapsed" desc=" Métodos para manipular tablas ">
     
     /**
      * Método que retorna los valores iniciales de los componentes de 
      * JPanel de Candy Sell.
      */
+
+    
+    
+    
     public void clearCandySell(){
         
         txtIdClientCandySell.setText("Cédula del cliente");
@@ -398,13 +425,27 @@ public class MainPage extends javax.swing.JFrame {
         lblTittleOption3 = new javax.swing.JLabel();
         sepTittleOption3 = new javax.swing.JSeparator();
         panOption4 = new javax.swing.JPanel();
-        lblTittleOption4 = new javax.swing.JLabel();
-        sepTittleOption4 = new javax.swing.JSeparator();
+        panEmployeeForm = new javax.swing.JPanel();
+        btnBackToTicketDecision4 = new javax.swing.JButton();
+        sepEmployeeTittle = new javax.swing.JSeparator();
+        lblEmployeeTittle = new javax.swing.JLabel();
+        lblSucursalNameEmployee = new javax.swing.JLabel();
+        txtIEmployeeForm = new javax.swing.JTextField();
+        lblEmployeeFiltro = new javax.swing.JLabel();
+        cmbEmployeForm = new javax.swing.JComboBox<>();
+        panChangeSucursalEmpleado1 = new javax.swing.JPanel();
+        btnChangeSucursalEmployee = new javax.swing.JButton();
+        panSearchEmpleado1 = new javax.swing.JPanel();
+        btnSearchEmployee = new javax.swing.JButton();
+        panAddEmployee = new javax.swing.JPanel();
+        btnAddEmployee = new javax.swing.JButton();
+        jSeparatorEmployee = new javax.swing.JSeparator();
+        scpEmployee = new javax.swing.JScrollPane();
+        tblEmployee = new javax.swing.JTable();
         panOption5 = new javax.swing.JPanel();
         lblTittleOption5 = new javax.swing.JLabel();
         sepTittleOption5 = new javax.swing.JSeparator();
         panOption6 = new javax.swing.JPanel();
-        lblTittleOption6 = new javax.swing.JLabel();
         sepTittleOption6 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -454,7 +495,7 @@ public class MainPage extends javax.swing.JFrame {
         btnOut.setBorder(null);
         btnOut.setBorderPainted(false);
         btnOut.setContentAreaFilled(false);
-        btnOut.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnOut.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnOut.setFocusPainted(false);
         btnOut.setOpaque(true);
         btnOut.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -474,7 +515,7 @@ public class MainPage extends javax.swing.JFrame {
         btnMin.setBorder(null);
         btnMin.setBorderPainted(false);
         btnMin.setContentAreaFilled(false);
-        btnMin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMin.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnMin.setFocusPainted(false);
         btnMin.setOpaque(true);
         btnMin.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -494,7 +535,7 @@ public class MainPage extends javax.swing.JFrame {
         btnExit.setBorder(null);
         btnExit.setBorderPainted(false);
         btnExit.setContentAreaFilled(false);
-        btnExit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnExit.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnExit.setFocusPainted(false);
         btnExit.setOpaque(true);
         btnExit.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -574,7 +615,7 @@ public class MainPage extends javax.swing.JFrame {
         btnOptionLateral1.setText("Inicio");
         btnOptionLateral1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 232, 244)));
         btnOptionLateral1.setContentAreaFilled(false);
-        btnOptionLateral1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnOptionLateral1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnOptionLateral1.setDefaultCapable(false);
         btnOptionLateral1.setFocusPainted(false);
         btnOptionLateral1.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
@@ -597,7 +638,7 @@ public class MainPage extends javax.swing.JFrame {
         btnOptionLateral2.setText("Ventas");
         btnOptionLateral2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 232, 244)));
         btnOptionLateral2.setContentAreaFilled(false);
-        btnOptionLateral2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnOptionLateral2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnOptionLateral2.setDefaultCapable(false);
         btnOptionLateral2.setFocusPainted(false);
         btnOptionLateral2.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
@@ -620,7 +661,7 @@ public class MainPage extends javax.swing.JFrame {
         btnOptionLateral3.setText("Reportes");
         btnOptionLateral3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 232, 244)));
         btnOptionLateral3.setContentAreaFilled(false);
-        btnOptionLateral3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnOptionLateral3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnOptionLateral3.setDefaultCapable(false);
         btnOptionLateral3.setFocusPainted(false);
         btnOptionLateral3.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
@@ -643,7 +684,7 @@ public class MainPage extends javax.swing.JFrame {
         btnOptionLateral4.setText("Empleados");
         btnOptionLateral4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 232, 244)));
         btnOptionLateral4.setContentAreaFilled(false);
-        btnOptionLateral4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnOptionLateral4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnOptionLateral4.setDefaultCapable(false);
         btnOptionLateral4.setFocusPainted(false);
         btnOptionLateral4.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
@@ -666,7 +707,7 @@ public class MainPage extends javax.swing.JFrame {
         btnOptionLateral5.setText("Sucursales");
         btnOptionLateral5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 232, 244)));
         btnOptionLateral5.setContentAreaFilled(false);
-        btnOptionLateral5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnOptionLateral5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnOptionLateral5.setDefaultCapable(false);
         btnOptionLateral5.setFocusPainted(false);
         btnOptionLateral5.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
@@ -689,7 +730,7 @@ public class MainPage extends javax.swing.JFrame {
         btnOptionLateral6.setText("Configuración");
         btnOptionLateral6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 232, 244)));
         btnOptionLateral6.setContentAreaFilled(false);
-        btnOptionLateral6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnOptionLateral6.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnOptionLateral6.setDefaultCapable(false);
         btnOptionLateral6.setFocusPainted(false);
         btnOptionLateral6.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
@@ -845,7 +886,7 @@ public class MainPage extends javax.swing.JFrame {
         panBodyOption2.setBackground(new java.awt.Color(249, 249, 249));
         panBodyOption2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 232, 244)));
         panBodyOption2.setForeground(new java.awt.Color(249, 249, 249));
-        panBodyOption2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        panBodyOption2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         panBodyOption2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 panBodyOption2MouseMoved(evt);
@@ -896,7 +937,7 @@ public class MainPage extends javax.swing.JFrame {
         panBodyOption3.setBackground(new java.awt.Color(249, 249, 249));
         panBodyOption3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 232, 244)));
         panBodyOption3.setForeground(new java.awt.Color(249, 249, 249));
-        panBodyOption3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        panBodyOption3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         btnBodyOption3.setBackground(new java.awt.Color(249, 249, 249));
         btnBodyOption3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -936,7 +977,7 @@ public class MainPage extends javax.swing.JFrame {
         panBodyOption4.setBackground(new java.awt.Color(249, 249, 249));
         panBodyOption4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 232, 244)));
         panBodyOption4.setForeground(new java.awt.Color(249, 249, 249));
-        panBodyOption4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        panBodyOption4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         btnBodyOption4.setBackground(new java.awt.Color(249, 249, 249));
         btnBodyOption4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -977,7 +1018,7 @@ public class MainPage extends javax.swing.JFrame {
         panBodyOption5.setBackground(new java.awt.Color(249, 249, 249));
         panBodyOption5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 232, 244)));
         panBodyOption5.setForeground(new java.awt.Color(249, 249, 249));
-        panBodyOption5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        panBodyOption5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         btnBodyOption5.setBackground(new java.awt.Color(249, 249, 249));
         btnBodyOption5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -1017,7 +1058,7 @@ public class MainPage extends javax.swing.JFrame {
         panBodyOption6.setBackground(new java.awt.Color(249, 249, 249));
         panBodyOption6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 232, 244)));
         panBodyOption6.setForeground(new java.awt.Color(249, 249, 249));
-        panBodyOption6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        panBodyOption6.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         panBodyOption6.setPreferredSize(new java.awt.Dimension(413, 200));
 
         btnBodyOption6.setBackground(new java.awt.Color(249, 249, 249));
@@ -1193,7 +1234,7 @@ public class MainPage extends javax.swing.JFrame {
 
         panCapsuleCandyDecision.setBackground(new java.awt.Color(249, 249, 249));
         panCapsuleCandyDecision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 232, 244)));
-        panCapsuleCandyDecision.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        panCapsuleCandyDecision.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         btnCandyDecision.setBackground(new java.awt.Color(249, 249, 249));
         btnCandyDecision.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -1212,6 +1253,11 @@ public class MainPage extends javax.swing.JFrame {
         btnCandyDecision.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnCandyDecisionMouseExited(evt);
+            }
+        });
+        btnCandyDecision.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCandyDecisionActionPerformed(evt);
             }
         });
 
@@ -1233,7 +1279,7 @@ public class MainPage extends javax.swing.JFrame {
 
         panCapsuleCinemaDecision.setBackground(new java.awt.Color(249, 249, 249));
         panCapsuleCinemaDecision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 232, 244)));
-        panCapsuleCinemaDecision.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        panCapsuleCinemaDecision.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         btnCinemaDecision.setBackground(new java.awt.Color(249, 249, 249));
         btnCinemaDecision.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -1309,7 +1355,7 @@ public class MainPage extends javax.swing.JFrame {
                 .addComponent(panCapsuleCinemaDecision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(sepCinemaDecision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(391, Short.MAX_VALUE))
+                .addContainerGap(366, Short.MAX_VALUE))
         );
 
         panOption2.add(panDecisionOption2, "card2");
@@ -1326,7 +1372,7 @@ public class MainPage extends javax.swing.JFrame {
         btnBackToTicketDecision1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 232, 244)));
         btnBackToTicketDecision1.setBorderPainted(false);
         btnBackToTicketDecision1.setContentAreaFilled(false);
-        btnBackToTicketDecision1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBackToTicketDecision1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnBackToTicketDecision1.setFocusPainted(false);
         btnBackToTicketDecision1.setIconTextGap(25);
         btnBackToTicketDecision1.setOpaque(true);
@@ -1417,7 +1463,7 @@ public class MainPage extends javax.swing.JFrame {
         btnChangeSucursalCandySell.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(249, 249, 249), 1, true));
         btnChangeSucursalCandySell.setBorderPainted(false);
         btnChangeSucursalCandySell.setContentAreaFilled(false);
-        btnChangeSucursalCandySell.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnChangeSucursalCandySell.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnChangeSucursalCandySell.setFocusPainted(false);
         btnChangeSucursalCandySell.setPreferredSize(new java.awt.Dimension(50, 50));
         btnChangeSucursalCandySell.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -1456,7 +1502,7 @@ public class MainPage extends javax.swing.JFrame {
         btnSearchClientCandySell.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(249, 249, 249), 1, true));
         btnSearchClientCandySell.setBorderPainted(false);
         btnSearchClientCandySell.setContentAreaFilled(false);
-        btnSearchClientCandySell.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSearchClientCandySell.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnSearchClientCandySell.setFocusPainted(false);
         btnSearchClientCandySell.setPreferredSize(new java.awt.Dimension(50, 50));
         btnSearchClientCandySell.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -1494,7 +1540,7 @@ public class MainPage extends javax.swing.JFrame {
         btnAddCandySell.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(249, 249, 249), 1, true));
         btnAddCandySell.setBorderPainted(false);
         btnAddCandySell.setContentAreaFilled(false);
-        btnAddCandySell.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAddCandySell.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnAddCandySell.setFocusPainted(false);
         btnAddCandySell.setPreferredSize(new java.awt.Dimension(50, 50));
         btnAddCandySell.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -1531,7 +1577,7 @@ public class MainPage extends javax.swing.JFrame {
         btnCandySellClear.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnCandySellClear.setBorderPainted(false);
         btnCandySellClear.setContentAreaFilled(false);
-        btnCandySellClear.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCandySellClear.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCandySellClear.setFocusPainted(false);
         btnCandySellClear.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -1541,6 +1587,11 @@ public class MainPage extends javax.swing.JFrame {
         btnCandySellClear.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnCandySellClearMouseExited(evt);
+            }
+        });
+        btnCandySellClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCandySellClearActionPerformed(evt);
             }
         });
 
@@ -1568,7 +1619,7 @@ public class MainPage extends javax.swing.JFrame {
         btnCandySell.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnCandySell.setBorderPainted(false);
         btnCandySell.setContentAreaFilled(false);
-        btnCandySell.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCandySell.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCandySell.setFocusPainted(false);
         btnCandySell.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -1618,7 +1669,7 @@ public class MainPage extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tblCandy.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tblCandy.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tblCandy.setSelectionBackground(new java.awt.Color(75, 0, 145));
         tblCandy.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tblCandy.getTableHeader().setReorderingAllowed(false);
@@ -1789,7 +1840,7 @@ public class MainPage extends javax.swing.JFrame {
         btnBackToTicketDecision2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 232, 244)));
         btnBackToTicketDecision2.setBorderPainted(false);
         btnBackToTicketDecision2.setContentAreaFilled(false);
-        btnBackToTicketDecision2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBackToTicketDecision2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnBackToTicketDecision2.setFocusPainted(false);
         btnBackToTicketDecision2.setIconTextGap(25);
         btnBackToTicketDecision2.setOpaque(true);
@@ -1813,7 +1864,7 @@ public class MainPage extends javax.swing.JFrame {
         btnChangeSucursalCinemaTickets.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(249, 249, 249), 1, true));
         btnChangeSucursalCinemaTickets.setBorderPainted(false);
         btnChangeSucursalCinemaTickets.setContentAreaFilled(false);
-        btnChangeSucursalCinemaTickets.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnChangeSucursalCinemaTickets.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnChangeSucursalCinemaTickets.setFocusPainted(false);
         btnChangeSucursalCinemaTickets.setPreferredSize(new java.awt.Dimension(50, 50));
         btnChangeSucursalCinemaTickets.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -1877,7 +1928,7 @@ public class MainPage extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tblMovieSelector.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tblMovieSelector.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tblMovieSelector.setSelectionBackground(new java.awt.Color(75, 0, 145));
         tblMovieSelector.getTableHeader().setReorderingAllowed(false);
         tblMovieSelector.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1923,7 +1974,7 @@ public class MainPage extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tblFunctionSelector.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tblFunctionSelector.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tblFunctionSelector.setSelectionBackground(new java.awt.Color(75, 0, 145));
         tblFunctionSelector.getTableHeader().setReorderingAllowed(false);
         tblFunctionSelector.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1972,7 +2023,7 @@ public class MainPage extends javax.swing.JFrame {
                 .addComponent(lblFunctionSelector, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scpFunctionSelector, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
 
         panStepsCinemaTickets.add(panFirstStepCinemaTickets, "card2");
@@ -2129,7 +2180,7 @@ public class MainPage extends javax.swing.JFrame {
         btnBackToSelectorMovie.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnBackToSelectorMovie.setBorderPainted(false);
         btnBackToSelectorMovie.setContentAreaFilled(false);
-        btnBackToSelectorMovie.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBackToSelectorMovie.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnBackToSelectorMovie.setFocusPainted(false);
         btnBackToSelectorMovie.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -2174,7 +2225,7 @@ public class MainPage extends javax.swing.JFrame {
         btnNextStepBuyTicket.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnNextStepBuyTicket.setBorderPainted(false);
         btnNextStepBuyTicket.setContentAreaFilled(false);
-        btnNextStepBuyTicket.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnNextStepBuyTicket.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnNextStepBuyTicket.setFocusPainted(false);
         btnNextStepBuyTicket.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -2215,7 +2266,7 @@ public class MainPage extends javax.swing.JFrame {
         btnAddCinemaTickets1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/incorporateIcon-small.png"))); // NOI18N
         btnAddCinemaTickets1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249, 249, 249)));
         btnAddCinemaTickets1.setContentAreaFilled(false);
-        btnAddCinemaTickets1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAddCinemaTickets1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnAddCinemaTickets1.setFocusPainted(false);
         btnAddCinemaTickets1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -2232,7 +2283,7 @@ public class MainPage extends javax.swing.JFrame {
         btnMinusCinemaTickets1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/minusIcon-small.png"))); // NOI18N
         btnMinusCinemaTickets1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249, 249, 249)));
         btnMinusCinemaTickets1.setContentAreaFilled(false);
-        btnMinusCinemaTickets1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMinusCinemaTickets1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnMinusCinemaTickets1.setFocusPainted(false);
         btnMinusCinemaTickets1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -2257,7 +2308,7 @@ public class MainPage extends javax.swing.JFrame {
         btnAddCinemaTickets2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/incorporateIcon-small.png"))); // NOI18N
         btnAddCinemaTickets2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249, 249, 249)));
         btnAddCinemaTickets2.setContentAreaFilled(false);
-        btnAddCinemaTickets2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAddCinemaTickets2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnAddCinemaTickets2.setFocusPainted(false);
         btnAddCinemaTickets2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -2274,7 +2325,7 @@ public class MainPage extends javax.swing.JFrame {
         btnMinusCinemaTickets2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/minusIcon-small.png"))); // NOI18N
         btnMinusCinemaTickets2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249, 249, 249)));
         btnMinusCinemaTickets2.setContentAreaFilled(false);
-        btnMinusCinemaTickets2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMinusCinemaTickets2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnMinusCinemaTickets2.setFocusPainted(false);
         btnMinusCinemaTickets2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -2295,7 +2346,7 @@ public class MainPage extends javax.swing.JFrame {
         btnAddCinemaTickets3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/incorporateIcon-small.png"))); // NOI18N
         btnAddCinemaTickets3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249, 249, 249)));
         btnAddCinemaTickets3.setContentAreaFilled(false);
-        btnAddCinemaTickets3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAddCinemaTickets3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnAddCinemaTickets3.setFocusPainted(false);
         btnAddCinemaTickets3.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -2312,7 +2363,7 @@ public class MainPage extends javax.swing.JFrame {
         btnMinusCinemaTickets3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/minusIcon-small.png"))); // NOI18N
         btnMinusCinemaTickets3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249, 249, 249)));
         btnMinusCinemaTickets3.setContentAreaFilled(false);
-        btnMinusCinemaTickets3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMinusCinemaTickets3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnMinusCinemaTickets3.setFocusPainted(false);
         btnMinusCinemaTickets3.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -2333,7 +2384,7 @@ public class MainPage extends javax.swing.JFrame {
         btnAddCinemaTickets4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/incorporateIcon-small.png"))); // NOI18N
         btnAddCinemaTickets4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249, 249, 249)));
         btnAddCinemaTickets4.setContentAreaFilled(false);
-        btnAddCinemaTickets4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAddCinemaTickets4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnAddCinemaTickets4.setFocusPainted(false);
         btnAddCinemaTickets4.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -2350,7 +2401,7 @@ public class MainPage extends javax.swing.JFrame {
         btnMinusCinemaTickets4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/minusIcon-small.png"))); // NOI18N
         btnMinusCinemaTickets4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249, 249, 249)));
         btnMinusCinemaTickets4.setContentAreaFilled(false);
-        btnMinusCinemaTickets4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMinusCinemaTickets4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnMinusCinemaTickets4.setFocusPainted(false);
         btnMinusCinemaTickets4.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -2599,7 +2650,7 @@ public class MainPage extends javax.swing.JFrame {
                 .addGroup(panSecondStepCinemaTicketsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblAmountOldTicket, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPriceTicketOld))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
                 .addGroup(panSecondStepCinemaTicketsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panSecondStepCinemaTicketsLayout.createSequentialGroup()
                         .addGroup(panSecondStepCinemaTicketsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -2665,7 +2716,7 @@ public class MainPage extends javax.swing.JFrame {
         btnSeatsClear.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnSeatsClear.setBorderPainted(false);
         btnSeatsClear.setContentAreaFilled(false);
-        btnSeatsClear.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSeatsClear.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnSeatsClear.setFocusPainted(false);
         btnSeatsClear.setOpaque(true);
         btnSeatsClear.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -2686,7 +2737,7 @@ public class MainPage extends javax.swing.JFrame {
         btnBackToCantCinemaTickets.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnBackToCantCinemaTickets.setBorderPainted(false);
         btnBackToCantCinemaTickets.setContentAreaFilled(false);
-        btnBackToCantCinemaTickets.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBackToCantCinemaTickets.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnBackToCantCinemaTickets.setFocusPainted(false);
         btnBackToCantCinemaTickets.setOpaque(true);
         btnBackToCantCinemaTickets.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -2707,7 +2758,7 @@ public class MainPage extends javax.swing.JFrame {
         btnForuthStepCinemaTickets.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnForuthStepCinemaTickets.setBorderPainted(false);
         btnForuthStepCinemaTickets.setContentAreaFilled(false);
-        btnForuthStepCinemaTickets.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnForuthStepCinemaTickets.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnForuthStepCinemaTickets.setFocusPainted(false);
         btnForuthStepCinemaTickets.setOpaque(true);
         btnForuthStepCinemaTickets.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -2830,7 +2881,7 @@ public class MainPage extends javax.swing.JFrame {
         );
         panFourthStepCinemaTicketsLayout.setVerticalGroup(
             panFourthStepCinemaTicketsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 477, Short.MAX_VALUE)
+            .addGap(0, 517, Short.MAX_VALUE)
         );
 
         panStepsCinemaTickets.add(panFourthStepCinemaTickets, "card5");
@@ -2907,40 +2958,302 @@ public class MainPage extends javax.swing.JFrame {
                 .addComponent(lblTittleOption3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(sepTittleOption3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 559, Short.MAX_VALUE))
+                .addGap(0, 519, Short.MAX_VALUE))
         );
 
         panContent.add(panOption3, "card2");
 
         panOption4.setBackground(new java.awt.Color(249, 249, 249));
         panOption4.setPreferredSize(new java.awt.Dimension(685, 620));
+        panOption4.setLayout(new java.awt.CardLayout());
 
-        lblTittleOption4.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        lblTittleOption4.setForeground(new java.awt.Color(28, 0, 63));
-        lblTittleOption4.setText("Empleados");
-        lblTittleOption4.setToolTipText("");
+        panEmployeeForm.setBackground(new java.awt.Color(249, 249, 249));
+        panEmployeeForm.setForeground(new java.awt.Color(239, 232, 244));
+        panEmployeeForm.setMaximumSize(new java.awt.Dimension(685, 580));
+        panEmployeeForm.setMinimumSize(new java.awt.Dimension(685, 580));
 
-        sepTittleOption4.setBackground(new java.awt.Color(249, 249, 249));
-        sepTittleOption4.setForeground(new java.awt.Color(239, 232, 244));
+        btnBackToTicketDecision4.setBackground(new java.awt.Color(249, 249, 249));
+        btnBackToTicketDecision4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnBackToTicketDecision4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/backToIcon.png"))); // NOI18N
+        btnBackToTicketDecision4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 232, 244)));
+        btnBackToTicketDecision4.setBorderPainted(false);
+        btnBackToTicketDecision4.setContentAreaFilled(false);
+        btnBackToTicketDecision4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnBackToTicketDecision4.setFocusPainted(false);
+        btnBackToTicketDecision4.setIconTextGap(25);
+        btnBackToTicketDecision4.setOpaque(true);
+        btnBackToTicketDecision4.setPreferredSize(null);
+        btnBackToTicketDecision4.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnBackToTicketDecision4MouseMoved(evt);
+            }
+        });
+        btnBackToTicketDecision4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnBackToTicketDecision4MouseExited(evt);
+            }
+        });
 
-        javax.swing.GroupLayout panOption4Layout = new javax.swing.GroupLayout(panOption4);
-        panOption4.setLayout(panOption4Layout);
-        panOption4Layout.setHorizontalGroup(
-            panOption4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panOption4Layout.createSequentialGroup()
-                .addContainerGap(44, Short.MAX_VALUE)
-                .addComponent(lblTittleOption4, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE)
+        sepEmployeeTittle.setBackground(new java.awt.Color(249, 249, 249));
+        sepEmployeeTittle.setForeground(new java.awt.Color(239, 232, 244));
+
+        lblEmployeeTittle.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        lblEmployeeTittle.setForeground(new java.awt.Color(28, 0, 63));
+        lblEmployeeTittle.setText("Empleados");
+        lblEmployeeTittle.setToolTipText("");
+
+        lblSucursalNameEmployee.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblSucursalNameEmployee.setForeground(new java.awt.Color(75, 0, 145));
+        lblSucursalNameEmployee.setText("Sucursal ");
+
+        txtIEmployeeForm.setBackground(new java.awt.Color(249, 249, 249));
+        txtIEmployeeForm.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtIEmployeeForm.setText("Cédula del Empleado");
+        txtIEmployeeForm.setBorder(null);
+        txtIEmployeeForm.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtIEmployeeFormMouseClicked(evt);
+            }
+        });
+        txtIEmployeeForm.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtIEmployeeFormKeyTyped(evt);
+            }
+        });
+
+        lblEmployeeFiltro.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblEmployeeFiltro.setText("Filtro");
+
+        cmbEmployeForm.setBackground(new java.awt.Color(249, 249, 249));
+        cmbEmployeForm.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        cmbEmployeForm.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " - Seleccionar - ", "Esteban Dido", "Ana Tomía", "Armando Casas" }));
+        cmbEmployeForm.setBorder(null);
+        cmbEmployeForm.setLightWeightPopupEnabled(false);
+
+        panChangeSucursalEmpleado1.setBackground(new java.awt.Color(249, 249, 249));
+        panChangeSucursalEmpleado1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249, 249, 249)));
+
+        btnChangeSucursalEmployee.setBackground(new java.awt.Color(249, 249, 249));
+        btnChangeSucursalEmployee.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/shopIcon.png"))); // NOI18N
+        btnChangeSucursalEmployee.setToolTipText("Cambiar Sucursal");
+        btnChangeSucursalEmployee.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(249, 249, 249), 1, true));
+        btnChangeSucursalEmployee.setBorderPainted(false);
+        btnChangeSucursalEmployee.setContentAreaFilled(false);
+        btnChangeSucursalEmployee.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnChangeSucursalEmployee.setFocusPainted(false);
+        btnChangeSucursalEmployee.setPreferredSize(new java.awt.Dimension(50, 50));
+        btnChangeSucursalEmployee.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnChangeSucursalEmployeeMouseMoved(evt);
+            }
+        });
+        btnChangeSucursalEmployee.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnChangeSucursalEmployeeMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panChangeSucursalEmpleado1Layout = new javax.swing.GroupLayout(panChangeSucursalEmpleado1);
+        panChangeSucursalEmpleado1.setLayout(panChangeSucursalEmpleado1Layout);
+        panChangeSucursalEmpleado1Layout.setHorizontalGroup(
+            panChangeSucursalEmpleado1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panChangeSucursalEmpleado1Layout.createSequentialGroup()
+                .addComponent(btnChangeSucursalEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        panChangeSucursalEmpleado1Layout.setVerticalGroup(
+            panChangeSucursalEmpleado1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btnChangeSucursalEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        panSearchEmpleado1.setBackground(new java.awt.Color(249, 249, 249));
+        panSearchEmpleado1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249, 249, 249)));
+        panSearchEmpleado1.setMaximumSize(new java.awt.Dimension(52, 52));
+        panSearchEmpleado1.setMinimumSize(new java.awt.Dimension(0, 50));
+        panSearchEmpleado1.setPreferredSize(new java.awt.Dimension(52, 52));
+
+        btnSearchEmployee.setBackground(new java.awt.Color(249, 249, 249));
+        btnSearchEmployee.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/findUserIcon.png"))); // NOI18N
+        btnSearchEmployee.setToolTipText(" Buscar");
+        btnSearchEmployee.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(249, 249, 249), 1, true));
+        btnSearchEmployee.setBorderPainted(false);
+        btnSearchEmployee.setContentAreaFilled(false);
+        btnSearchEmployee.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnSearchEmployee.setFocusPainted(false);
+        btnSearchEmployee.setPreferredSize(new java.awt.Dimension(50, 50));
+        btnSearchEmployee.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnSearchEmployeeMouseMoved(evt);
+            }
+        });
+        btnSearchEmployee.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnSearchEmployeeMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panSearchEmpleado1Layout = new javax.swing.GroupLayout(panSearchEmpleado1);
+        panSearchEmpleado1.setLayout(panSearchEmpleado1Layout);
+        panSearchEmpleado1Layout.setHorizontalGroup(
+            panSearchEmpleado1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panSearchEmpleado1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSearchEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addComponent(sepTittleOption4)
         );
-        panOption4Layout.setVerticalGroup(
-            panOption4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panOption4Layout.createSequentialGroup()
-                .addComponent(lblTittleOption4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+        panSearchEmpleado1Layout.setVerticalGroup(
+            panSearchEmpleado1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panSearchEmpleado1Layout.createSequentialGroup()
+                .addComponent(btnSearchEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        panAddEmployee.setBackground(new java.awt.Color(239, 232, 244));
+        panAddEmployee.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249, 249, 249)));
+        panAddEmployee.setForeground(new java.awt.Color(255, 255, 255));
+
+        btnAddEmployee.setBackground(new java.awt.Color(249, 249, 249));
+        btnAddEmployee.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/addIcon.png"))); // NOI18N
+        btnAddEmployee.setToolTipText("Agregar");
+        btnAddEmployee.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(249, 249, 249), 1, true));
+        btnAddEmployee.setBorderPainted(false);
+        btnAddEmployee.setContentAreaFilled(false);
+        btnAddEmployee.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnAddEmployee.setFocusPainted(false);
+        btnAddEmployee.setPreferredSize(new java.awt.Dimension(50, 50));
+        btnAddEmployee.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnAddEmployeeMouseMoved(evt);
+            }
+        });
+        btnAddEmployee.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnAddEmployeeMouseExited(evt);
+            }
+        });
+        btnAddEmployee.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddEmployeeActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panAddEmployeeLayout = new javax.swing.GroupLayout(panAddEmployee);
+        panAddEmployee.setLayout(panAddEmployeeLayout);
+        panAddEmployeeLayout.setHorizontalGroup(
+            panAddEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panAddEmployeeLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAddEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        panAddEmployeeLayout.setVerticalGroup(
+            panAddEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panAddEmployeeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnAddEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jSeparatorEmployee.setBackground(new java.awt.Color(249, 249, 249));
+        jSeparatorEmployee.setForeground(new java.awt.Color(75, 0, 145));
+
+        scpEmployee.setBackground(new java.awt.Color(249, 249, 249));
+
+        tblEmployee.setBackground(new java.awt.Color(249, 249, 249));
+        tblEmployee.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Cedula", "Cargo", "Sucursal", "Nombre", "Apellido", "Telefono", "Dirección", "Nacimiento", "Ingreso", "Correo", "Estado"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblEmployee.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tblEmployee.setSelectionBackground(new java.awt.Color(75, 0, 145));
+        tblEmployee.getTableHeader().setReorderingAllowed(false);
+        tblEmployee.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblEmployeeMouseClicked(evt);
+            }
+        });
+        scpEmployee.setViewportView(tblEmployee);
+
+        javax.swing.GroupLayout panEmployeeFormLayout = new javax.swing.GroupLayout(panEmployeeForm);
+        panEmployeeForm.setLayout(panEmployeeFormLayout);
+        panEmployeeFormLayout.setHorizontalGroup(
+            panEmployeeFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(sepEmployeeTittle)
+            .addGroup(panEmployeeFormLayout.createSequentialGroup()
+                .addGroup(panEmployeeFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panEmployeeFormLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jSeparatorEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12))
+                    .addGroup(panEmployeeFormLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(txtIEmployeeForm, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(panSearchEmpleado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(54, 54, 54)
+                .addComponent(lblEmployeeFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(cmbEmployeForm, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panEmployeeFormLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnBackToTicketDecision4, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sepTittleOption4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 509, Short.MAX_VALUE))
+                .addComponent(lblEmployeeTittle, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lblSucursalNameEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panChangeSucursalEmpleado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panEmployeeFormLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panEmployeeFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scpEmployee, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 643, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panAddEmployee, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
+        panEmployeeFormLayout.setVerticalGroup(
+            panEmployeeFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panEmployeeFormLayout.createSequentialGroup()
+                .addGroup(panEmployeeFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panChangeSucursalEmpleado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panEmployeeFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(btnBackToTicketDecision4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblEmployeeTittle, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE))
+                    .addComponent(lblSucursalNameEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sepEmployeeTittle, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panEmployeeFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panEmployeeFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblEmployeeFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbEmployeForm))
+                    .addGroup(panEmployeeFormLayout.createSequentialGroup()
+                        .addGroup(panEmployeeFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(panEmployeeFormLayout.createSequentialGroup()
+                                .addComponent(txtIEmployeeForm, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jSeparatorEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(panSearchEmpleado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addComponent(scpEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(panAddEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18))
+        );
+
+        panOption4.add(panEmployeeForm, "card2");
 
         panContent.add(panOption4, "card2");
 
@@ -2971,40 +3284,18 @@ public class MainPage extends javax.swing.JFrame {
                 .addComponent(lblTittleOption5, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(sepTittleOption5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 509, Short.MAX_VALUE))
+                .addGap(0, 519, Short.MAX_VALUE))
         );
 
         panContent.add(panOption5, "card2");
 
         panOption6.setBackground(new java.awt.Color(249, 249, 249));
         panOption6.setPreferredSize(new java.awt.Dimension(685, 620));
-
-        lblTittleOption6.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        lblTittleOption6.setForeground(new java.awt.Color(28, 0, 63));
-        lblTittleOption6.setText("Configuración");
-        lblTittleOption6.setToolTipText("");
+        panOption6.setLayout(new java.awt.CardLayout());
 
         sepTittleOption6.setBackground(new java.awt.Color(249, 249, 249));
         sepTittleOption6.setForeground(new java.awt.Color(239, 232, 244));
-
-        javax.swing.GroupLayout panOption6Layout = new javax.swing.GroupLayout(panOption6);
-        panOption6.setLayout(panOption6Layout);
-        panOption6Layout.setHorizontalGroup(
-            panOption6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panOption6Layout.createSequentialGroup()
-                .addContainerGap(44, Short.MAX_VALUE)
-                .addComponent(lblTittleOption6, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addComponent(sepTittleOption6)
-        );
-        panOption6Layout.setVerticalGroup(
-            panOption6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panOption6Layout.createSequentialGroup()
-                .addComponent(lblTittleOption6, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sepTittleOption6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 509, Short.MAX_VALUE))
-        );
+        panOption6.add(sepTittleOption6, "card3");
 
         panContent.add(panOption6, "card2");
 
@@ -3552,6 +3843,65 @@ public class MainPage extends javax.swing.JFrame {
         btnForuthStepCinemaTickets.setBackground(new java.awt.Color(239,232,244));
     }//GEN-LAST:event_btnForuthStepCinemaTicketsMouseExited
 
+    private void btnBackToTicketDecision4MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackToTicketDecision4MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBackToTicketDecision4MouseMoved
+
+    private void btnBackToTicketDecision4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackToTicketDecision4MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBackToTicketDecision4MouseExited
+
+    private void txtIEmployeeFormMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtIEmployeeFormMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIEmployeeFormMouseClicked
+
+    private void txtIEmployeeFormKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIEmployeeFormKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIEmployeeFormKeyTyped
+
+    private void btnChangeSucursalEmployeeMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChangeSucursalEmployeeMouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnChangeSucursalEmployeeMouseMoved
+
+    private void btnChangeSucursalEmployeeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChangeSucursalEmployeeMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnChangeSucursalEmployeeMouseExited
+
+    private void btnSearchEmployeeMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchEmployeeMouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSearchEmployeeMouseMoved
+
+    private void btnSearchEmployeeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchEmployeeMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSearchEmployeeMouseExited
+
+    private void btnAddEmployeeMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddEmployeeMouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAddEmployeeMouseMoved
+
+    private void btnAddEmployeeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddEmployeeMouseExited
+        // TODO add your handling code here:
+        panAddEmployee.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
+        panAddEmployee.setForeground(new java.awt.Color(0,0,0));
+        panAddEmployee.setBackground(new java.awt.Color(239,232,244));
+    }//GEN-LAST:event_btnAddEmployeeMouseExited
+
+    private void tblEmployeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEmployeeMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblEmployeeMouseClicked
+
+    private void btnAddEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEmployeeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAddEmployeeActionPerformed
+
+    private void btnCandySellClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCandySellClearActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCandySellClearActionPerformed
+
+    private void btnCandyDecisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCandyDecisionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCandyDecisionActionPerformed
+
     /**
      * Método para retornar los valores gráficos de todos los botones de la
      * compra de tickets para funciones.
@@ -3608,10 +3958,12 @@ public class MainPage extends javax.swing.JFrame {
     public javax.swing.JButton btnAddCinemaTickets2;
     public javax.swing.JButton btnAddCinemaTickets3;
     public javax.swing.JButton btnAddCinemaTickets4;
+    public javax.swing.JButton btnAddEmployee;
     public javax.swing.JButton btnBackToCantCinemaTickets;
     public javax.swing.JButton btnBackToSelectorMovie;
     public javax.swing.JButton btnBackToTicketDecision1;
     public javax.swing.JButton btnBackToTicketDecision2;
+    public javax.swing.JButton btnBackToTicketDecision4;
     public javax.swing.JButton btnBodyOption1;
     public javax.swing.JButton btnBodyOption2;
     public javax.swing.JButton btnBodyOption3;
@@ -3624,6 +3976,7 @@ public class MainPage extends javax.swing.JFrame {
     public javax.swing.JButton btnCandySellClear;
     public javax.swing.JButton btnChangeSucursalCandySell;
     public javax.swing.JButton btnChangeSucursalCinemaTickets;
+    public javax.swing.JButton btnChangeSucursalEmployee;
     public javax.swing.JButton btnCinemaDecision;
     public javax.swing.JButton btnExit;
     public javax.swing.JButton btnForuthStepCinemaTickets;
@@ -3640,11 +3993,14 @@ public class MainPage extends javax.swing.JFrame {
     public javax.swing.JButton btnOptionLateral5;
     public javax.swing.JButton btnOptionLateral6;
     public javax.swing.JButton btnOut;
-    private javax.swing.JButton btnSearchClientCandySell;
+    public javax.swing.JButton btnSearchClientCandySell;
+    private javax.swing.JButton btnSearchEmployee;
     public javax.swing.JButton btnSeatsClear;
     public javax.swing.JComboBox<String> cmbCandySelection;
     public javax.swing.JComboBox<String> cmbCandySeller;
+    public javax.swing.JComboBox<String> cmbEmployeForm;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparatorEmployee;
     private javax.swing.JLabel lblADCmark;
     private javax.swing.JLabel lblAmountAdultTicket;
     private javax.swing.JLabel lblAmountChildTicket;
@@ -3667,6 +4023,8 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JLabel lblDescChildTicket;
     private javax.swing.JLabel lblDescKinderTicket;
     private javax.swing.JLabel lblDescOldTicket;
+    private javax.swing.JLabel lblEmployeeFiltro;
+    private javax.swing.JLabel lblEmployeeTittle;
     private javax.swing.JLabel lblFreeSeats;
     public javax.swing.JLabel lblFreeSeatsCant;
     private javax.swing.JLabel lblFunctionSelector;
@@ -3701,12 +4059,11 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JLabel lblSubtotalTicket;
     public javax.swing.JLabel lblSucursalNameCandySell;
     public javax.swing.JLabel lblSucursalNameCinemaTickets;
+    public javax.swing.JLabel lblSucursalNameEmployee;
     private javax.swing.JLabel lblTittleOption1;
     private javax.swing.JLabel lblTittleOption2;
     private javax.swing.JLabel lblTittleOption3;
-    private javax.swing.JLabel lblTittleOption4;
     private javax.swing.JLabel lblTittleOption5;
-    private javax.swing.JLabel lblTittleOption6;
     private javax.swing.JLabel lblTittleSelectorSeat;
     private javax.swing.JLabel lblTotalAdultTicket;
     public javax.swing.JLabel lblTotalAmountAdultTicket;
@@ -3722,6 +4079,7 @@ public class MainPage extends javax.swing.JFrame {
     public javax.swing.JLabel lblTotalSeatsCant;
     private javax.swing.JLabel lblTotalTicket;
     private javax.swing.JPanel panAddCandySell;
+    public javax.swing.JPanel panAddEmployee;
     public javax.swing.JPanel panBodyOption1;
     public javax.swing.JPanel panBodyOption2;
     public javax.swing.JPanel panBodyOption3;
@@ -3740,14 +4098,16 @@ public class MainPage extends javax.swing.JFrame {
     public javax.swing.JPanel panCapsuleCinemaDecision;
     private javax.swing.JPanel panChangeSucursalCandySell;
     private javax.swing.JPanel panChangeSucursalCinemaTickets;
+    private javax.swing.JPanel panChangeSucursalEmpleado1;
     public javax.swing.JPanel panCinemaSell;
     public javax.swing.JPanel panContent;
     public javax.swing.JPanel panDecisionOption2;
+    public javax.swing.JPanel panEmployeeForm;
     public javax.swing.JPanel panFirstStepCinemaTickets;
     public javax.swing.JPanel panFourthStepCinemaTickets;
     private javax.swing.JPanel panLateralMenu;
     private javax.swing.JPanel panLateralOptions;
-    private javax.swing.JPanel panMainMenu;
+    public javax.swing.JPanel panMainMenu;
     private javax.swing.JPanel panMainPage;
     public javax.swing.JPanel panOption1;
     public javax.swing.JPanel panOption2;
@@ -3756,6 +4116,7 @@ public class MainPage extends javax.swing.JFrame {
     public javax.swing.JPanel panOption5;
     public javax.swing.JPanel panOption6;
     public javax.swing.JPanel panSearchClientCandySell;
+    public javax.swing.JPanel panSearchEmpleado1;
     public javax.swing.JPanel panSecondStepCinemaTickets;
     public javax.swing.JPanel panSelectorSeats;
     public javax.swing.JPanel panStepsCinemaTickets;
@@ -3766,6 +4127,7 @@ public class MainPage extends javax.swing.JFrame {
     public javax.swing.JProgressBar pgrCinemaTickets;
     private javax.swing.JScrollPane scpBodyOption1;
     private javax.swing.JScrollPane scpCandyTable;
+    public javax.swing.JScrollPane scpEmployee;
     private javax.swing.JScrollPane scpFunctionSelector;
     private javax.swing.JScrollPane scpMovieSelector;
     private javax.swing.JSeparator sepBodyOption1;
@@ -3780,17 +4142,19 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JSeparator sepCandySellTittle;
     private javax.swing.JSeparator sepCinemaDecision;
     private javax.swing.JSeparator sepCinemaSellTittle;
+    private javax.swing.JSeparator sepEmployeeTittle;
     private javax.swing.JSeparator sepLateralMenu;
     private javax.swing.JSeparator sepTittleOption1;
     private javax.swing.JSeparator sepTittleOption2;
     private javax.swing.JSeparator sepTittleOption3;
-    private javax.swing.JSeparator sepTittleOption4;
     private javax.swing.JSeparator sepTittleOption5;
     private javax.swing.JSeparator sepTittleOption6;
     public javax.swing.JSpinner spnCantCandySell;
     public javax.swing.JTable tblCandy;
+    public javax.swing.JTable tblEmployee;
     public javax.swing.JTable tblFunctionSelector;
     public javax.swing.JTable tblMovieSelector;
+    public javax.swing.JTextField txtIEmployeeForm;
     public javax.swing.JTextField txtIVACandy;
     public javax.swing.JTextField txtIdClientCandySell;
     public javax.swing.JTextField txtSubTotalCandy;

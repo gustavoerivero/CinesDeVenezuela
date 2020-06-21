@@ -7,6 +7,7 @@ import views.tables.Table;
 
 // Se importan los models que se van a utilizar
 import models.database.ConnectionDB;
+import models.database.ClientCRUD;
 
 // Se importan las clases de soporte a utilizar
 import lib.SuportFunctions;
@@ -30,6 +31,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
                 
         // Models
         private ConnectionDB con;
+        private ClientCRUD cli;
 
         // Controllers
         private ControllerLogin ctrlLogin;
@@ -225,6 +227,40 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
             changeBranch.dispose();
             
         }
+        
+        //Buscar si el cliente esta registrado
+        else if(evt.getSource()==mainPage.btnSearchClientCandySell){
+            cli= new ClientCRUD();
+            
+           // Se obtienen los datos de la cedula.
+            String id = mainPage.txtIdClientCandySell.getText();
+            
+            // Si el contenido del campo id es vacio
+             if(id.isEmpty() || id.equals("Cédula del cliente")){
+                 
+                 // Se muestra un mensaje emergente de "Ingrese la cédula del cliente".
+                popup = new PopupMessage(mainPage, true, 1, 
+                        "Debe ingresar la cédula del cliente");
+             }else {
+                 if(cli.signer(id)==true){
+            
+                 // Se muestra si se encontro la cedula en el sistema.
+                        System.out.println("El cliente con la cédula'" + id + 
+                                "' ha sido encontrado.");
+
+                        // Se muestra un mensaje emergente de "Cliente Encontrado".
+                        popup = new PopupMessage(mainPage, true, 4, 
+                                "Cliente Encontrado");
+                 } else{
+                      // Se muestra un mensaje emergente de "Cliente no encontrado".
+                        popup = new PopupMessage(mainPage, true, 1, 
+                                "Cliente no Encontrado.");
+                        
+                      //SI NO SE ENCUENTRA, REGISTRAR
+                 }
+            }
+        }
+        
         
         // Agregar golosinas
         else if(evt.getSource() == mainPage.btnAddCandySell){
