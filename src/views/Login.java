@@ -54,6 +54,7 @@ public class Login extends javax.swing.JFrame {
         btnClear = new javax.swing.JButton();
         panOkBtn = new javax.swing.JPanel();
         btnOk = new javax.swing.JButton();
+        btnForgotPass = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -139,7 +140,7 @@ public class Login extends javax.swing.JFrame {
         );
 
         lblIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/CDV-small.png"))); // NOI18N
+        lblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/CDV-logoo.png"))); // NOI18N
 
         txtEmailField.setBackground(new java.awt.Color(249, 249, 249));
         txtEmailField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -285,40 +286,56 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(btnOk, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE))
         );
 
+        btnForgotPass.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnForgotPass.setForeground(new java.awt.Color(75, 0, 145));
+        btnForgotPass.setText("¿Ha olvidado su contraseña?");
+        btnForgotPass.setBorder(null);
+        btnForgotPass.setBorderPainted(false);
+        btnForgotPass.setContentAreaFilled(false);
+        btnForgotPass.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnForgotPass.setFocusPainted(false);
+
         javax.swing.GroupLayout panLoginLayout = new javax.swing.GroupLayout(panLogin);
         panLogin.setLayout(panLoginLayout);
         panLoginLayout.setHorizontalGroup(
             panLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panButtonsTopBar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
             .addGroup(panLoginLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(panLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panLoginLayout.createSequentialGroup()
-                        .addGap(75, 75, 75)
-                        .addGroup(panLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(sptPassField)
-                            .addComponent(pssPasswordField, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(sptEmailField)
-                            .addComponent(txtEmailField, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(tgbShowPass, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap()
+                        .addGroup(panLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(panLoginLayout.createSequentialGroup()
+                                .addGap(75, 75, 75)
+                                .addGroup(panLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(sptPassField)
+                                    .addComponent(pssPasswordField, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(sptEmailField)
+                                    .addComponent(txtEmailField, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(tgbShowPass, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(panLoginLayout.createSequentialGroup()
+                        .addGroup(panLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panLoginLayout.createSequentialGroup()
+                                .addGap(65, 65, 65)
+                                .addComponent(panClearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(panOkBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panLoginLayout.createSequentialGroup()
+                                .addGap(144, 144, 144)
+                                .addComponent(btnForgotPass)))
+                        .addGap(0, 59, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(panLoginLayout.createSequentialGroup()
-                .addGap(65, 65, 65)
-                .addComponent(panClearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panOkBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(65, Short.MAX_VALUE))
         );
         panLoginLayout.setVerticalGroup(
             panLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panLoginLayout.createSequentialGroup()
                 .addComponent(panButtonsTopBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblIcon)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtEmailField, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(sptEmailField, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -332,7 +349,9 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(panLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panClearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(panOkBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 47, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnForgotPass)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -366,6 +385,7 @@ public class Login extends javax.swing.JFrame {
         btnClear.addActionListener(evt);
         btnOk.addActionListener(evt);
         tgbShowPass.addActionListener(evt);
+        btnForgotPass.addActionListener(evt);
         
     }
     
@@ -493,6 +513,7 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnClear;
     public javax.swing.JButton btnExit;
+    public javax.swing.JButton btnForgotPass;
     public javax.swing.JButton btnMin;
     public javax.swing.JButton btnOk;
     private javax.swing.JLabel lblIcon;

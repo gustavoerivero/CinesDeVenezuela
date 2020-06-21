@@ -6,43 +6,52 @@ import views.*;
 import views.tables.Table;
 
 // Se importan los models que se van a utilizar
-import models.*;
+import models.database.ConnectionDB;
+import models.database.ClientCRUD;
 
 // Se importan las clases de soporte a utilizar
 import lib.SuportFunctions;
 import lib.PDFGenerator;
+import lib.TheaterSeatingChart;
 
 // Se importan las librerías a utilizar
 import java.util.ArrayList;
-import javax.swing.JButton;
-import javax.swing.JOptionPane;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
+import java.awt.Image;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Gustavo
  */
-public class ControllerMainMenu implements java.awt.event.ActionListener, 
-                                            java.awt.event.MouseListener{
+public class ControllerMainMenu implements ActionListener, MouseListener{
     
     // Instanciar las clases necesarias para el funcionamiento.
+                
+        // Models
+        private ConnectionDB con;
+        private ClientCRUD cli;
+
+        // Controllers
+        private ControllerLogin ctrlLogin;
+        
         // Views
         private MainPage mainPage;
         private PopupMessage popup;
+        private SelectOption select;
         private ChangeBranch changeBranch;
         private ModifyCandy modifyCandy;
-
+        
+        private ConsultList consulList;
+        private RegisterModify registerModify;
         // Suport Class
         private SuportFunctions suport;
         
-        // Controllers
-        private ControllerLogin ctrlLogin;
+        // Theater Seating Chart
+        private TheaterSeatingChart seatingChart;
                 
     // Instanciar las variables necesarias para el funcionamiento.    
-    ArrayList<Ticket_Candy> candy_list = new ArrayList<Ticket_Candy>();
-    ArrayList<Candy> candies_list = new ArrayList<Candy>();
-    
     ArrayList<String> enterprise_data = new ArrayList<String>();
     ArrayList<String> seller_list = new ArrayList<String>();
     ArrayList<String> client_data = new ArrayList<String>();
@@ -51,15 +60,21 @@ public class ControllerMainMenu implements java.awt.event.ActionListener,
         
     ArrayList<Object> objectList = new ArrayList<Object>();
     
+    ArrayList<Integer> cantCinemaTickets = new ArrayList<Integer>();
+    
     // Constructor
     public ControllerMainMenu(){
-        // Declarar la variable de las clases instanciadas.
-        mainPage = new MainPage();
-        suport = new SuportFunctions();
         
-        // Activamos los eventos provocados por los botones.
+        // Declarar la variable de las clases instanciadas.
+        mainPage        = new MainPage();
+        suport          = new SuportFunctions();
+        seatingChart    = new TheaterSeatingChart();
+        
+        // Activamos los eventos por las views.
         mainPage.addEvents(this);
         mainPage.addMouseEvents(this);
+        //consulList.addEvents(this);
+       // consulList.addMouseEvents(this);
         
     }
 
@@ -191,9 +206,7 @@ public class ControllerMainMenu implements java.awt.event.ActionListener,
             suport.cardSelection(mainPage.panOption2, mainPage.panCandySell);
             
             mainPage.clearCandySell();
-            
-            candy_list.clear();
-            
+                        
         }
         
         //<editor-fold defaultstate="collapsed" desc=" Venta de tickets para golosinas ">
@@ -218,6 +231,40 @@ public class ControllerMainMenu implements java.awt.event.ActionListener,
             changeBranch.dispose();
             
         }
+        
+        //Buscar si el cliente esta registrado
+        else if(evt.getSource()==mainPage.btnSearchClientCandySell){
+            cli= new ClientCRUD();
+            
+           // Se obtienen los datos de la cedula.
+            String id = mainPage.txtIdClientCandySell.getText();
+            
+            // Si el contenido del campo id es vacio
+             if(id.isEmpty() || id.equals("Cédula del cliente")){
+                 
+                 // Se muestra un mensaje emergente de "Ingrese la cédula del cliente".
+                popup = new PopupMessage(mainPage, true, 1, 
+                        "Debe ingresar la cédula del cliente");
+             }else {
+                 if(cli.signer(id)==true){
+            
+                 // Se muestra si se encontro la cedula en el sistema.
+                        System.out.println("El cliente con la cédula'" + id + 
+                                "' ha sido encontrado.");
+
+                        // Se muestra un mensaje emergente de "Cliente Encontrado".
+                        popup = new PopupMessage(mainPage, true, 4, 
+                                "Cliente Encontrado");
+                 } else{
+                      // Se muestra un mensaje emergente de "Cliente no encontrado".
+                        popup = new PopupMessage(mainPage, true, 1, 
+                                "Cliente no Encontrado.");
+                        
+                      //SI NO SE ENCUENTRA, REGISTRAR
+                 }
+            }
+        }
+        
         
         // Agregar golosinas
         else if(evt.getSource() == mainPage.btnAddCandySell){
@@ -271,10 +318,10 @@ public class ControllerMainMenu implements java.awt.event.ActionListener,
                     mainPage.cmbCandySelection.setSelectedIndex(0);
                     mainPage.spnCantCandySell.setValue((int) 0);
                         
-                    Ticket_Candy ticket_candy = new Ticket_Candy(id, type_Ticket, estatus, 
+                    /*Ticket_Candy ticket_candy = new Ticket_Candy(id, type_Ticket, estatus, 
                                                                  id_candies, cant);
                 
-                    Candy candy = new Candy(id, id_candies, id, 99, mount, estatus);
+                    Candy candy = new Candy(id, id_candies, id, 99, mount, estatus);*/
                         
                     addCandies(id_candies, cant, mount); // -> Añade el registro.
                     showCandyAmounts();                  // -> Se muestran los montos.
@@ -427,6 +474,15 @@ public class ControllerMainMenu implements java.awt.event.ActionListener,
             mainPage.panCapsuleCinemaDecision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239,232,244)));
         
             suport.cardSelection(mainPage.panOption2, mainPage.panCinemaSell);
+            
+            suport.cardSelection(mainPage.panStepsCinemaTickets, mainPage.panFirstStepCinemaTickets);
+            
+            mainPage.clearMovieTable(mainPage.tblMovieSelector);
+            
+            mainPage.clearFunctionSelectorTable(mainPage.tblFunctionSelector);
+            
+            showMovies();
+            
         }
         
         //<editor-fold defaultstate="collapsed" desc=" Venta de tickets para funciones ">
@@ -434,8 +490,483 @@ public class ControllerMainMenu implements java.awt.event.ActionListener,
         // Volver para la sección anterior
         else if(evt.getSource() == mainPage.btnBackToTicketDecision2){
             mainPage.btnBackToTicketDecision2.setBackground(new java.awt.Color(249,249,249));
-            
+                        
             suport.cardSelection(mainPage.panOption2, mainPage.panDecisionOption2);
+            
+            
+        }
+        
+        // Cambiar de sucursal a gestionar
+        else if(evt.getSource() == mainPage.btnChangeSucursalCinemaTickets){
+            
+            // Instanciar la clase
+            changeBranch = new ChangeBranch(mainPage, true);
+            
+            // Se ubica el nombre de la sucursal.
+            mainPage.lblSucursalNameCinemaTickets.setText(changeBranch.getId_Sucursal());
+            
+            // Se cierra el JDialog de cambio de sucursal.
+            changeBranch.dispose();
+            
+        }
+        
+        // Volver al primer paso de compra de boletos.
+        else if(evt.getSource() == mainPage.btnBackToSelectorMovie){
+            
+            // Declarar e iniciar la variable acumuladora.
+            int cant = 0;
+            
+            // Acumular las entradas seleccionadas para la compra.
+            for(int i = 0; i < cantCinemaTickets.size(); i++)
+                cant += cantCinemaTickets.get(i);
+            
+            // Si la cantidad de tickets seleccionados es mayor a '0'
+            if(cant > 0){
+                select = new SelectOption(mainPage, true, 2, 
+                        "¿Está seguro que desea volver a la opción anterior?", 
+                        "Si", "No");
+            
+                // Si la respuesta es afirmativa.
+                if(select.getOpc()){
+
+                    // Se muestra el paso anterior para compra de boletos.
+                    suport.cardSelection(mainPage.panStepsCinemaTickets, 
+                            mainPage.panFirstStepCinemaTickets);
+
+                    /*
+                     * Método para retornar los valores gráficos de los botones de 
+                     * la compra de tickets para funciones.
+                     */
+                    mainPage.clearButtonsOfTheBuyCinemaTickets();
+
+                    // Se vacían los tickets seleccionados.
+                    clearCantsCinemaTickets();
+                    
+                    // Se cancela la indeterminación de la barra de progreso.
+                    mainPage.pgrCinemaTickets.setIndeterminate(false);
+
+                    // Se devuelve el valor de la barra de progreso a '0'
+                    mainPage.pgrCinemaTickets.setValue(0);
+
+                }
+            
+            }
+            
+            // Caso contrario
+            else {
+                
+                // Se muestra el paso anterior para compra de boletos.
+                suport.cardSelection(mainPage.panStepsCinemaTickets, 
+                        mainPage.panFirstStepCinemaTickets);
+
+                /*
+                 * Método para retornar los valores gráficos de los botones de 
+                 * la compra de tickets para funciones.
+                 */
+                mainPage.clearButtonsOfTheBuyCinemaTickets();
+
+                // Se vacían los tickets seleccionados.
+                clearCantsCinemaTickets();
+                    
+                // Se cancela la indeterminación de la barra de progreso.
+                mainPage.pgrCinemaTickets.setIndeterminate(false);
+
+                // Se devuelve el valor de la barra de progreso a '0'
+                mainPage.pgrCinemaTickets.setValue(0);
+                
+            }
+        }
+        
+        // Pasar al siguiente paso de compra de boletos.
+        else if(evt.getSource() == mainPage.btnNextStepBuyTicket){
+            
+            // Declarar e iniciar la variable acumuladora.
+            int cant = 0;
+            
+            // Acumular las entradas seleccionadas para la compra.
+            for(int i = 0; i < cantCinemaTickets.size(); i++)
+                cant += cantCinemaTickets.get(i);
+            
+            // Si la cantidad de boletos a comprar es mayor a '0'.
+            if(cant > 0){
+            
+                // Se muestra el siguiente paso para compra de boletos.
+                suport.cardSelection(mainPage.panStepsCinemaTickets, 
+                        mainPage.panThirdStepCinemaTickets);
+                
+                /*
+                 * Método para retornar los valores gráficos de los botones de 
+                 * la compra de tickets para funciones.
+                 */
+                mainPage.clearButtonsOfTheBuyCinemaTickets();
+
+                // Se cancela la indeterminación de la barra de progreso.
+                mainPage.pgrCinemaTickets.setIndeterminate(false);
+
+                // Se devuelve el valor de la barra de progreso a '0'
+                mainPage.pgrCinemaTickets.setValue(50);
+                
+                // Se indican los iconos a utilizar
+                javax.swing.Icon free = new javax.swing.ImageIcon(getClass().getResource(
+                        "/views/images/freeSeat.png"));
+                javax.swing.Icon selected = new javax.swing.ImageIcon(getClass().getResource(
+                        "/views/images/selectedSeat.png"));
+                
+                // Método para mostrar los asientos disponibles
+                seatingChart.buildCinemaSeats(8, 8, mainPage.panSelectorSeats, 
+                        mainPage.panTheaterSeatChart, free, selected, 
+                        mainPage.lblTotalSeatsCant, mainPage.lblFreeSeatsCant, 
+                        mainPage.lblSelectedSeatsCant);
+                                
+            }
+            
+            else{
+                
+                // Mensaje para indicar que se debe indicar al menos un ticket a comprar.
+                popup = new PopupMessage(mainPage, true, 1, "Debe indicar al menos un ticket.");
+                
+            }
+        }
+        
+        //<editor-fold defaultstate="collapsed" desc=" Aumentar/Disminuir tickets para adultos ">
+        
+        // Aumentar la cantidad de tickets para adultos.
+        else if(evt.getSource() == mainPage.btnAddCinemaTickets1){
+            
+            // Si la barra de progreso ya está cargando.
+            if(mainPage.pgrCinemaTickets.isIndeterminate()){}
+            else // Caso contrario.
+                mainPage.pgrCinemaTickets.setIndeterminate(true);
+            
+            // Se declara y se inicia la variable acumuladora.
+            int cant = Integer.valueOf(mainPage.lblCantCinemaTickets1.getText());
+                
+            // Si la cantidad es mayor a 'x', se muestra mensaje de error.
+            if(cant >= 99)
+                popup = new PopupMessage(mainPage, true, 1, 
+                        "Ha ingresado una cantidad muy alta de tickets.");
+            
+            // De lo contrario, se muestra la cantidad de tickets seleccionados.
+            else{
+                
+                // Se aumenta el contador.
+                cant++;
+                
+                // Se muestra la cantidad de tickets seleccionados.
+                mainPage.lblCantCinemaTickets1.setText(String.valueOf(cant));
+                //mainPage.lblCantCinemaTickets1.repaint();
+                
+                // Se agrega a la lista de tickets la cantidad seleccionada.
+                cantCinemaTickets.set(0, cant);
+                
+                // Se actualizan los montos.
+                showAmountsOfCinemaTickets();
+                
+            }
+            
+        }
+        
+        // Disminuir la cantidad de tickets para adultos.
+        else if (evt.getSource() == mainPage.btnMinusCinemaTickets1){
+            
+            // Si la barra de progreso ya está cargando.
+            if(mainPage.pgrCinemaTickets.isIndeterminate()){}
+            else // Caso contrario.
+                mainPage.pgrCinemaTickets.setIndeterminate(true);
+            
+            // Se declara y se inicia la variable acumuladora.
+            int cant = Integer.valueOf(mainPage.lblCantCinemaTickets1.getText());
+                        
+            // Si la cantidad es menor o igual a '0', se muestra mensaje de error.
+            if(cant <= 0)
+                popup = new PopupMessage(mainPage, true, 1, 
+                        "No puede ingresar una cantidad negativa de tickets.");
+            
+            // De lo contrario, se muestra la cantidad de tickets seleccionados.
+            else{
+                
+                // Declarar e iniciar variable acumuladora
+                int c = 0;
+                
+                // Acumular la cantidad de tickets.
+                for(int i = 0; i < cantCinemaTickets.size(); i++)
+                    c += cantCinemaTickets.get(i);
+                
+                // Si no hay tickets, se desactiva la barra de progreso.
+                if(c == 0)
+                    mainPage.pgrCinemaTickets.setIndeterminate(false);
+                
+                // Se disminuye el contador.
+                cant--;
+                
+                // Se muestra la cantidad de tickets seleccionados.
+                mainPage.lblCantCinemaTickets1.setText(String.valueOf(cant));
+                
+                // Se agrega a la lista de tickets la cantidad seleccionada.
+                cantCinemaTickets.set(0, cant);
+                
+                // Se actualizan los montos.
+                showAmountsOfCinemaTickets();
+                
+            }
+            
+        }
+        
+        //</editor-fold>
+        
+        //<editor-fold defaultstate="collapsed" desc=" Aumentar/Disminuir tickets para kinder ">
+        
+        // Aumentar la cantidad de tickets para adultos.
+        else if(evt.getSource() == mainPage.btnAddCinemaTickets2){
+            
+            // Si la barra de progreso ya está cargando.
+            if(mainPage.pgrCinemaTickets.isIndeterminate()){}
+            else // Caso contrario.
+                mainPage.pgrCinemaTickets.setIndeterminate(true);
+            
+            // Se declara y se inicia la variable acumuladora.
+            int cant = Integer.valueOf(mainPage.lblCantCinemaTickets2.getText());
+                
+            // Si la cantidad es mayor a 'x', se muestra mensaje de error.
+            if(cant >= 99)
+                popup = new PopupMessage(mainPage, true, 1, 
+                        "Ha ingresado una cantidad muy alta de tickets.");
+            
+            // De lo contrario, se muestra la cantidad de tickets seleccionados.
+            else{
+                
+                // Se aumenta el contador.
+                cant++;
+                
+                // Se muestra la cantidad de tickets seleccionados.
+                mainPage.lblCantCinemaTickets2.setText(String.valueOf(cant));
+                //mainPage.lblCantCinemaTickets1.repaint();
+                
+                // Se agrega a la lista de tickets la cantidad seleccionada.
+                cantCinemaTickets.set(1, cant);
+                
+                // Se actualizan los montos.
+                showAmountsOfCinemaTickets();
+                
+            }
+            
+        }
+        
+        // Disminuir la cantidad de tickets para adultos.
+        else if (evt.getSource() == mainPage.btnMinusCinemaTickets2){
+            
+            // Si la barra de progreso ya está cargando.
+            if(mainPage.pgrCinemaTickets.isIndeterminate()){}
+            else // Caso contrario.
+                mainPage.pgrCinemaTickets.setIndeterminate(true);
+            
+            // Se declara y se inicia la variable acumuladora.
+            int cant = Integer.valueOf(mainPage.lblCantCinemaTickets2.getText());
+                        
+            // Si la cantidad es menor o igual a '0', se muestra mensaje de error.
+            if(cant <= 0)
+                popup = new PopupMessage(mainPage, true, 1, 
+                        "No puede ingresar una cantidad negativa de tickets.");
+            
+            // De lo contrario, se muestra la cantidad de tickets seleccionados.
+            else{
+                
+                // Declarar e iniciar variable acumuladora
+                int c = 0;
+                
+                // Acumular la cantidad de tickets.
+                for(int i = 0; i < cantCinemaTickets.size(); i++)
+                    c += cantCinemaTickets.get(i);
+                
+                // Si no hay tickets, se desactiva la barra de progreso.
+                if(c == 0)
+                    mainPage.pgrCinemaTickets.setIndeterminate(false);
+                
+                // Se disminuye el contador.
+                cant--;
+                
+                // Se muestra la cantidad de tickets seleccionados.
+                mainPage.lblCantCinemaTickets2.setText(String.valueOf(cant));
+                
+                // Se agrega a la lista de tickets la cantidad seleccionada.
+                cantCinemaTickets.set(1, cant);
+                
+                // Se actualizan los montos.
+                showAmountsOfCinemaTickets();
+                
+            }
+            
+        }
+        
+        //</editor-fold>
+        
+        //<editor-fold defaultstate="collapsed" desc=" Aumentar/Disminuir tickets para niños ">
+        
+        // Aumentar la cantidad de tickets para adultos.
+        else if(evt.getSource() == mainPage.btnAddCinemaTickets3){
+            
+            // Si la barra de progreso ya está cargando.
+            if(mainPage.pgrCinemaTickets.isIndeterminate()){}
+            else // Caso contrario.
+                mainPage.pgrCinemaTickets.setIndeterminate(true);
+            
+            // Se declara y se inicia la variable acumuladora.
+            int cant = Integer.valueOf(mainPage.lblCantCinemaTickets3.getText());
+                
+            // Si la cantidad es mayor a 'x', se muestra mensaje de error.
+            if(cant >= 99)
+                popup = new PopupMessage(mainPage, true, 1, 
+                        "Ha ingresado una cantidad muy alta de tickets.");
+            
+            // De lo contrario, se muestra la cantidad de tickets seleccionados.
+            else{
+                
+                // Se aumenta el contador.
+                cant++;
+                
+                // Se muestra la cantidad de tickets seleccionados.
+                mainPage.lblCantCinemaTickets3.setText(String.valueOf(cant));
+                //mainPage.lblCantCinemaTickets1.repaint();
+                
+                // Se agrega a la lista de tickets la cantidad seleccionada.
+                cantCinemaTickets.set(2, cant);
+                
+                // Se actualizan los montos.
+                showAmountsOfCinemaTickets();
+                
+            }
+            
+        }
+        
+        // Disminuir la cantidad de tickets para adultos.
+        else if (evt.getSource() == mainPage.btnMinusCinemaTickets3){
+            
+            // Si la barra de progreso ya está cargando.
+            if(mainPage.pgrCinemaTickets.isIndeterminate()){}
+            else // Caso contrario.
+                mainPage.pgrCinemaTickets.setIndeterminate(true);
+            
+            // Se declara y se inicia la variable acumuladora.
+            int cant = Integer.valueOf(mainPage.lblCantCinemaTickets3.getText());
+                        
+            // Si la cantidad es menor o igual a '0', se muestra mensaje de error.
+            if(cant <= 0)
+                popup = new PopupMessage(mainPage, true, 1, 
+                        "No puede ingresar una cantidad negativa de tickets.");
+            
+            // De lo contrario, se muestra la cantidad de tickets seleccionados.
+            else{
+                
+                // Declarar e iniciar variable acumuladora
+                int c = 0;
+                
+                // Acumular la cantidad de tickets.
+                for(int i = 0; i < cantCinemaTickets.size(); i++)
+                    c += cantCinemaTickets.get(i);
+                
+                // Si no hay tickets, se desactiva la barra de progreso.
+                if(c == 0)
+                    mainPage.pgrCinemaTickets.setIndeterminate(false);
+                
+                // Se disminuye el contador.
+                cant--;
+                
+                // Se muestra la cantidad de tickets seleccionados.
+                mainPage.lblCantCinemaTickets3.setText(String.valueOf(cant));
+                
+                // Se agrega a la lista de tickets la cantidad seleccionada.
+                cantCinemaTickets.set(2, cant);
+                
+                // Se actualizan los montos.
+                showAmountsOfCinemaTickets();
+                
+            }
+            
+        }
+        
+        //</editor-fold>
+        
+        //<editor-fold defaultstate="collapsed" desc=" Aumentar/Disminuir tickets para adultos mayores ">
+        
+        // Aumentar la cantidad de tickets para adultos.
+        else if(evt.getSource() == mainPage.btnAddCinemaTickets4){
+            
+            // Si la barra de progreso ya está cargando.
+            if(mainPage.pgrCinemaTickets.isIndeterminate()){}
+            else // Caso contrario.
+                mainPage.pgrCinemaTickets.setIndeterminate(true);
+            
+            // Se declara y se inicia la variable acumuladora.
+            int cant = Integer.valueOf(mainPage.lblCantCinemaTickets4.getText());
+                
+            // Si la cantidad es mayor a 'x', se muestra mensaje de error.
+            if(cant >= 99)
+                popup = new PopupMessage(mainPage, true, 1, 
+                        "Ha ingresado una cantidad muy alta de tickets.");
+            
+            // De lo contrario, se muestra la cantidad de tickets seleccionados.
+            else{
+                
+                // Se aumenta el contador.
+                cant++;
+                
+                // Se muestra la cantidad de tickets seleccionados.
+                mainPage.lblCantCinemaTickets4.setText(String.valueOf(cant));
+                //mainPage.lblCantCinemaTickets1.repaint();
+                
+                // Se agrega a la lista de tickets la cantidad seleccionada.
+                cantCinemaTickets.set(3, cant);
+                
+                // Se actualizan los montos.
+                showAmountsOfCinemaTickets();
+                
+            }
+            
+        }
+        
+        // Disminuir la cantidad de tickets para adultos.
+        else if (evt.getSource() == mainPage.btnMinusCinemaTickets4){
+            
+            // Si la barra de progreso ya está cargando.
+            if(mainPage.pgrCinemaTickets.isIndeterminate()){}
+            else // Caso contrario.
+                mainPage.pgrCinemaTickets.setIndeterminate(true);
+            
+            // Se declara y se inicia la variable acumuladora.
+            int cant = Integer.valueOf(mainPage.lblCantCinemaTickets4.getText());
+                        
+            // Si la cantidad es menor o igual a '0', se muestra mensaje de error.
+            if(cant <= 0)
+                popup = new PopupMessage(mainPage, true, 1, 
+                        "No puede ingresar una cantidad negativa de tickets.");
+            
+            // De lo contrario, se muestra la cantidad de tickets seleccionados.
+            else{
+                
+                // Declarar e iniciar variable acumuladora
+                int c = 0;
+                
+                // Acumular la cantidad de tickets.
+                for(int i = 0; i < cantCinemaTickets.size(); i++)
+                    c += cantCinemaTickets.get(i);
+                
+                // Si no hay tickets, se desactiva la barra de progreso.
+                if(c == 0)
+                    mainPage.pgrCinemaTickets.setIndeterminate(false);
+                
+                // Se disminuye el contador.
+                cant--;
+                
+                // Se muestra la cantidad de tickets seleccionados.
+                mainPage.lblCantCinemaTickets4.setText(String.valueOf(cant));
+                
+                // Se agrega a la lista de tickets la cantidad seleccionada.
+                cantCinemaTickets.set(3, cant);
+                
+                // Se actualizan los montos.
+                showAmountsOfCinemaTickets();
+                
+            }
             
         }
         
@@ -445,14 +976,38 @@ public class ControllerMainMenu implements java.awt.event.ActionListener,
         
         //</editor-fold>
         
-    }
-    
+        //</editor-fold>
+        //<editor-fold defaultstate="collapsed" desc=" Botones del MainPage Option 5 ">    
+        
+        //Consultar listado
+         else if(evt.getSource() == mainPage.btnBranchDecision)
+         {
+            //mainPage.panCapsuleCandyDecision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239,232,244)));         
+            consulList = new ConsultList();
+            suport.cardSelection(consulList.panTableConsultList, consulList.panTableConsultBranchList);   
+            suport.cardSelection(consulList.panFilter, consulList.panFilterBranch);
+            suport          = new SuportFunctions();
+            seatingChart    = new TheaterSeatingChart();
+            consulList.addEvents(this);//michaelmontero.idb@gmail.com
+         }
+           else if(evt.getSource() == consulList.btnAdd)
+         {
+             registerModify = new RegisterModify();
+             suport.cardSelection(registerModify.panButtonsModifyRegister, registerModify.panButtonRegister);    
+             suport.cardSelection(registerModify.panData, registerModify.panDataBranch); 
+         }//michaelmontero.idb@gmail.com
+                    
+
+        }
+            //</editor-fold>
     /**
      * Eventos provocados por el escuchador de Mouse (MouseListener)
      * @param evt son aquellos eventos que ocurren con acciones del Mouse.
      */
     @Override
     public void mouseClicked(MouseEvent evt) {
+        
+        //<editor-fold defaultstate="collapsed" desc=" Tabla de Golosinas ">
         
         // Si el evento ocurre en la tabla de golosinas.
         if(evt.getSource() == mainPage.tblCandy){
@@ -526,38 +1081,112 @@ public class ControllerMainMenu implements java.awt.event.ActionListener,
                             
                         }
                         
+                        // Se cierra el JDialog.
+                        select.dispose();
+                        
                     }
                 }
 
             }
 
         }
-    }
-    
-    //<editor-fold defaultstate="collapsed" desc=" PROHIBIDO TOCAR ">
-    
-    @Override
-    public void mousePressed(MouseEvent e) {
-    
-    }
+        
+        //</editor-fold>
+        
+        //<editor-fold defaultstate="collapsed" desc=" Tabla de Películas ">
+        
+        // Si el evento ocurre en la tabla de películas.
+        else if (evt.getSource() == mainPage.tblMovieSelector){
+            
+            // Se obtienen los valores de la fila y columna seleccionada.
+            int column = mainPage.getColumnTable(), row = mainPage.getRowTable();
 
-    @Override
-    public void mouseReleased(MouseEvent e) {
-    
-    }
+            // Se valida que el evento del Mouse fue provocado dentro del JTable.
+            if(row < mainPage.tblMovieSelector.getRowCount() && row >= 0 && 
+                    column < mainPage.tblMovieSelector.getColumnCount() && column >= 0){
+                
+                // Se obtiene el valor de la celda seleccionada.
+                Object value = mainPage.tblMovieSelector.getValueAt(row, column);
+                
+                // Si el valor de la celda seleccionada es un JButton;
+                if(value instanceof JButton){
+                    
+                    ((JButton)value).doClick();
+                    
+                    JButton btn = (JButton) value;
 
-    @Override
-    public void mouseEntered(MouseEvent e) {
-    
-    }
+                    // Si el JButton se llama "o";
+                    if(btn.getName().equals("o")){
+            
+                        System.out.println("Click en el boton eliminar en la celda: " + row + ";" + column);
+                        
+                        DefaultTableModel dtm = (DefaultTableModel) mainPage.tblFunctionSelector.getModel();
+                        
+                        showFunctions(null);
+                        
+                        mainPage.pgrCinemaTickets.setIndeterminate(true);
+                        
+                    }
+                }
+            }
+        }
+        
+        //</editor-fold>
+        
+        //<editor-fold defaultstate="collapsed" desc=" Tabla de Funciones ">
+        
+        // Si el evento ocurre en la tabla de funciones.
+        else if (evt.getSource() == mainPage.tblFunctionSelector){
+            
+            // Se obtienen los valores de la fila y columna seleccionada.
+            int column = mainPage.getColumnTable(), row = mainPage.getRowTable();
 
-    @Override
-    public void mouseExited(MouseEvent e) {
-    
+            // Se valida que el evento del Mouse fue provocado dentro del JTable.
+            if(row < mainPage.tblFunctionSelector.getRowCount() && row >= 0 && 
+                    column < mainPage.tblFunctionSelector.getColumnCount() && column >= 0){
+                
+                // Se obtiene el valor de la celda seleccionada.
+                Object value = mainPage.tblFunctionSelector.getValueAt(row, column);
+                
+                // Si el valor de la celda seleccionada es un JButton;
+                if(value instanceof JButton){
+                    
+                    ((JButton)value).doClick();
+                    
+                    JButton btn = (JButton) value;
+
+                    // Si el JButton se llama "o";
+                    if(btn.getName().equals("o")){
+            
+                        System.out.println("Click en el boton eliminar en la celda: " + row + ";" + column);
+                        
+                        DefaultTableModel dtm = (DefaultTableModel) mainPage.tblFunctionSelector.getModel();
+                                               
+                        mainPage.pgrCinemaTickets.setIndeterminate(false);
+                        
+                        mainPage.pgrCinemaTickets.setValue(25);
+                        
+                        suport.cardSelection(mainPage.panStepsCinemaTickets, mainPage.panSecondStepCinemaTickets);
+                        
+                        /*
+                         * Método para retornar los valores gráficos de los botones de 
+                         * la compra de tickets para funciones.
+                         */
+                        mainPage.clearButtonsOfTheBuyCinemaTickets();
+                        
+                        for(int i = 0; i < 4; i++)
+                            cantCinemaTickets.add(0);
+                        
+                    }
+                }
+            }
+            
+        }
+        
+        //</editor-fold>
+        
     }
-    
-    //</editor-fold>
-    
+        
     //<editor-fold defaultstate="collapsed" desc=" Métodos para el funcionamiento del Controller ">
     
     /**
@@ -620,7 +1249,8 @@ public class ControllerMainMenu implements java.awt.event.ActionListener,
             
             // Se obtienen los valores y se hacen los respectivos cálculos
             int     cant    = Integer.valueOf(dtm.getValueAt(i, 1).toString());
-            double  price   = suport.numberDecimalFormat(Double.valueOf(dtm.getValueAt(i,2).toString()) * cant, 2),
+            double  price   = suport.numberDecimalFormat(Double.valueOf(
+                                dtm.getValueAt(i,2).toString()) * cant, 2),
                     iva     = suport.numberDecimalFormat(price * 0.16, 2),
                     total   = suport.numberDecimalFormat(price * 1.16, 2);
             
@@ -636,6 +1266,244 @@ public class ControllerMainMenu implements java.awt.event.ActionListener,
         mainPage.txtIVACandy.setText(String.valueOf(acumIVA));
         mainPage.txtTotalCandy.setText(String.valueOf(acumTotal));
         
+    }
+    
+    /**
+     * Método que carga las películas correspondientes a una sucursal.
+     */
+    public void showMovies(){
+        
+        DefaultTableModel dtm = (DefaultTableModel) mainPage.tblMovieSelector.getModel();
+        
+        Table table = new Table();
+             
+        JLabel lbl = new JLabel();
+                    
+        lbl.setSize(100, 120);
+            
+        ImageIcon img   = new ImageIcon(getClass().getResource("/views/images/images.jpg"));
+        
+        ImageIcon icon  = new ImageIcon(img.getImage().getScaledInstance(
+                lbl.getWidth(), lbl.getHeight(), Image.SCALE_DEFAULT));
+            
+        lbl.setIcon(icon);
+        
+        JLabel lbl2 = new JLabel();
+                    
+        lbl2.setSize(100, 120);
+            
+        ImageIcon img2   = new ImageIcon(getClass().getResource("/views/images/images2.jpg"));
+        
+        ImageIcon icon2  = new ImageIcon(img2.getImage().getScaledInstance(
+                lbl2.getWidth(), lbl2.getHeight(), Image.SCALE_DEFAULT));
+            
+        lbl2.setIcon(icon2);
+        
+        String  name        = "The Greatest Showman",
+                synopsis    = "Un musical en un circo we.",
+                gender      = "Musical",
+                censorship  = "A";
+            
+        String  name2        = "Mulan",
+                synopsis2    = "Reboot de Mulan.",
+                gender2      = "Acción / Aventura",
+                censorship2  = "A";
+        
+        JButton btn = new JButton();
+                        
+        table.addOkButton(btn);
+                    
+        dtm.addRow(new Object[]{
+            lbl, 
+            "<html><p align='left'>" + name + "</p></html>",
+            "<html><p align='left'>" + synopsis + "</p></html>",
+            "<html><p align='left'>" + gender + "</p></html>",
+            "<html><p align='left'>" + censorship + "</p></html>",
+            btn
+        });
+        
+        dtm.addRow(new Object[]{
+            lbl2, 
+            "<html><p align='left'>" + name2 + "</p></html>",
+            "<html><p align='left'>" + synopsis2 + "</p></html>",
+            "<html><p align='left'>" + gender2 + "</p></html>",
+            "<html><p align='left'>" + censorship2 + "</p></html>",
+            btn
+        });
+        
+    }
+    
+    /**
+     * Método para mostrar las funciones correspondentes a una película.
+     * @param idMovie Código de la película de la que se van a buscar sus funciones.
+     */
+    public void showFunctions(String idMovie){
+        
+        DefaultTableModel dtm = (DefaultTableModel) mainPage.tblFunctionSelector.getModel();
+        
+        Table table = new Table();
+        
+        JButton btn = new JButton();
+                        
+        table.addOkButton(btn);
+        
+        String  date        = "13/06/2020",
+                cinemaRoom  = "D",
+                hour        = "5:45 p.m.",
+                seats       = "64",
+                freeSeats   = "32";
+        
+        dtm.addRow(new Object[]{
+            date,
+            cinemaRoom,
+            hour,
+            seats,
+            freeSeats,
+            btn
+        });
+        
+    }
+    
+    /**
+     * Método utilizado para mostrar montos según la cantidad de tickets
+     * seleccionados para la compra.
+     */
+    public void showAmountsOfCinemaTickets(){
+        
+        double price = 0, iva = 0, total = 0;
+        
+        int cantA = cantCinemaTickets.get(0),
+            cantK = cantCinemaTickets.get(1),
+            cantC = cantCinemaTickets.get(2),
+            cantO = cantCinemaTickets.get(3);
+        
+        if(cantA >= 0){
+            
+            double adultPrice = suport.numberDecimalFormat(
+                    Double.valueOf(mainPage.lblPriceTicketAdult.getText()), 2);
+            
+            double  aPrice  = suport.numberDecimalFormat(cantA * (adultPrice * 100 / 116), 2),
+                    aIva    = suport.numberDecimalFormat(
+                            (cantA * (adultPrice * 100 / 116)) * 0.16, 2),
+                    aTotal  = suport.numberDecimalFormat((cantA * adultPrice), 2);
+            
+            price   += suport.numberDecimalFormat(aPrice, 2);
+            iva     += suport.numberDecimalFormat(aIva, 2);
+            total   += suport.numberDecimalFormat(aTotal, 2);
+            
+            mainPage.lblSubtotalAmountAdultTicket.setText(String.valueOf(aPrice));
+            mainPage.lblIVAAmountAdultTicket.setText(String.valueOf(aIva));
+            mainPage.lblTotalAmountAdultTicket.setText(String.valueOf(aTotal));
+            
+        }
+        
+        if(cantK >= 0){
+            
+            double kinderPrice = suport.numberDecimalFormat(
+                    Double.valueOf(mainPage.lblPriceTicketKinder.getText()), 2);
+            
+            double  kPrice  = suport.numberDecimalFormat(cantK * (kinderPrice * 100 / 116), 2),
+                    kIva    = suport.numberDecimalFormat(
+                            (cantK * (kinderPrice * 100 / 116)) * 0.16, 2),
+                    kTotal  = suport.numberDecimalFormat((cantK * kinderPrice), 2);
+            
+            price   += suport.numberDecimalFormat(kPrice, 2);
+            iva     += suport.numberDecimalFormat(kIva, 2);
+            total   += suport.numberDecimalFormat(kTotal, 2);
+            
+            mainPage.lblSubtotalAmountKinderTicket.setText(String.valueOf(kPrice));
+            mainPage.lblIVAAmountKinderTicket.setText(String.valueOf(kIva));
+            mainPage.lblTotalAmountKinderTicket.setText(String.valueOf(kTotal));
+            
+        }
+        
+        if(cantC >= 0){
+            
+            double childPrice = suport.numberDecimalFormat(
+                    Double.valueOf(mainPage.lblPriceTicketChild.getText()), 2);
+            
+            double  cPrice  = suport.numberDecimalFormat(cantC * (childPrice * 100 / 116), 2),
+                    cIva    = suport.numberDecimalFormat(
+                            (cantC * (childPrice * 100 / 116)) * 0.16, 2),
+                    cTotal  = suport.numberDecimalFormat((cantC * childPrice), 2);
+            
+            price   += suport.numberDecimalFormat(cPrice, 2);
+            iva     += suport.numberDecimalFormat(cIva, 2);
+            total   += suport.numberDecimalFormat(cTotal, 2);
+            
+            mainPage.lblSubtotalAmountChildTicket.setText(String.valueOf(cPrice));
+            mainPage.lblIVAAmountChildTicket.setText(String.valueOf(cIva));
+            mainPage.lblTotalAmountChildTicket.setText(String.valueOf(cTotal));
+            
+        }
+        
+        if(cantO >= 0){
+            
+            double oldPrice = suport.numberDecimalFormat(
+                    Double.valueOf(mainPage.lblPriceTicketOld.getText()), 2);
+            
+            double  oPrice  = suport.numberDecimalFormat(cantO * (oldPrice * 100 / 116), 2),
+                    oIva    = suport.numberDecimalFormat(
+                            (cantO * (oldPrice * 100 / 116)) * 0.16, 2),
+                    oTotal  = suport.numberDecimalFormat((cantO * oldPrice), 2);
+            
+            price   += suport.numberDecimalFormat(oPrice, 2);
+            iva     += suport.numberDecimalFormat(oIva, 2);
+            total   += suport.numberDecimalFormat(oTotal, 2);
+            
+            mainPage.lblSubtotalAmountOldTicket.setText(String.valueOf(oPrice));
+            mainPage.lblIVAAmountOldTicket.setText(String.valueOf(oIva));
+            mainPage.lblTotalAmountOldTicket.setText(String.valueOf(oTotal));
+            
+        }
+        
+        mainPage.lblSubtotalAmountTicket.setText(String.valueOf(
+                suport.numberDecimalFormat(price, 2)));
+        mainPage.lblIVAAmountTicket.setText(String.valueOf(
+                suport.numberDecimalFormat(iva, 2)));
+        mainPage.lblTotalAmountTicket.setText(String.valueOf(
+                suport.numberDecimalFormat(total, 2)));
+        
+    }
+    
+    /**
+     * Método para limpiar la cantidad de tickets seleccionados.
+     */
+    public void clearCantsCinemaTickets(){
+        
+        for(int i = 0; i < cantCinemaTickets.size(); i++)
+            cantCinemaTickets.set(i, 0);
+        
+        mainPage.lblCantCinemaTickets1.setText("0");
+        mainPage.lblCantCinemaTickets2.setText("0");
+        mainPage.lblCantCinemaTickets3.setText("0");
+        mainPage.lblCantCinemaTickets4.setText("0");
+        showAmountsOfCinemaTickets();
+        
+    }
+    
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc=" PROHIBIDO TOCAR ">
+    
+    @Override
+    public void mousePressed(MouseEvent e) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     //</editor-fold>

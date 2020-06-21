@@ -1,0 +1,12 @@
+/**
+ * GitHub no sube los archivos .jar, es por ello que se hace uso del archivo
+ * .zip para subir las librerías que el proyecto está utilzando.
+ * Los archivos .jar que se encuentran en esta carpeta, pueden ser colocados
+ * en la carpeta /src/lib/ del proyecto. Al abrir el proyecto desde NetBeans
+ * aparecerá una ventana que indica que se deben resolver ciertos problemas,
+ * se le indica "Ok" y a cada librería que arroja "Error", se le indica "Re-
+ * solve" y aparece una ventana para indicar la ubicación de dicha librería.
+ * Una vez se indique su dirección, se presiona "Aceptar" y en la ventana 
+ * anterior deberá aparecer un icono de que la librería ha sido corregida.
+ * Hacer esto con el resto de librerías y luego presionar "Ok".
+ */
