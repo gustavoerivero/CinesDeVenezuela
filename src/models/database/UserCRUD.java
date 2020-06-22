@@ -6,10 +6,14 @@ package models.database;
  * @author Gustavo
  */
 public class UserCRUD {
-    
     // Se declara la clase a utilizar.
     private ConnectionDB con;
     
+    /**
+     * Constructor.
+     */
+    public UserCRUD(){}
+        
     /**
      * Método para comprobar si el usuario que desea ingresar al sistema se 
      * encuentra registrado.
@@ -26,9 +30,9 @@ public class UserCRUD {
             con.conectar();
           
             // Se descrie la sentencia SQL.
-            String SQL =    "SELECT * FROM \"Usuario\" WHERE \"Correo\" = '"
-                            + email + "' AND \"Clave\" = '" + pass + 
-                            "' AND \"Estado\" = '1';";
+            String SQL =    "SELECT * FROM \"usuario\" WHERE \"correo\" = '"
+                            + email + "' AND \"clave\" = '" + pass + 
+                            "' AND \"estado\" = 'A';";
             
             // Se realiza la consulta y se obtiene el resultado.
             java.sql.ResultSet rs = con.queryConsultar(SQL);
@@ -63,8 +67,8 @@ public class UserCRUD {
             con.conectar();
           
             // Se declara una sentencia SQL.
-            String SQL =    "SELECT * FROM \"Usuario\" WHERE \"Correo\" = '"
-                            + email + "' AND \"Estado\" = '1';";
+            String SQL =    "SELECT * FROM \"usuario\" WHERE \"correo\" = '"
+                            + email + "' AND \"estado\" = 'A';";
             
             // Se realiza la consulta y se obtiene el resultado.
             java.sql.ResultSet rs = con.queryConsultar(SQL);
@@ -97,8 +101,8 @@ public class UserCRUD {
         con.conectar();
           
         // Se declara la sentencia SQL.
-        String SQL =    "UPDATE \"Usuario\" SET \"Clave\" = '" + pass + 
-                        "' WHERE \"Correo\" = '" + email + "';";
+        String SQL =    "UPDATE \"usuario\" SET \"clave\" = '" + pass + 
+                        "' WHERE \"correo\" = '" + email + "';";
             
         // Se realiza la actualización.
         con.queryInsert(SQL);

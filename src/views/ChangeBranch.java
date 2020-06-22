@@ -1,12 +1,15 @@
 
 package views;
 
+// Se importan las clases a utilizar.
+import java.util.ArrayList;
+
 /**
  *
  * @author Gustavo
  */
 public class ChangeBranch extends javax.swing.JDialog {
-
+    
     // Variables de apoyo para mover la interfaz por la pantalla.
     int xx = 0, xy = 0;
     
@@ -20,24 +23,33 @@ public class ChangeBranch extends javax.swing.JDialog {
          * la clase PopupMessage.
          */
     private PopupDialogMessage popup;
-        
-    public ChangeBranch(java.awt.Frame parent, boolean modal) {
+    
+    private ArrayList<String> cityNames, branchNames;
+    
+    public ChangeBranch(java.awt.Frame parent, boolean modal, ArrayList<String> city, 
+            ArrayList<String> cityNames, ArrayList<String> branchNames) {
         
         // Relaciona elementos y decide si es un contenedor modal o no.
         super(parent, modal);
         
         // Se inician los componentes.
         initComponents();
-        
+                    
         // Centra el JDialog.
         setLocationRelativeTo(null);
         
+        this.cityNames = cityNames;
+        this.branchNames = branchNames;
+        
+        chargeCityNames(city);
+        
         // Muestra el JDialog en pantalla.
         setVisible(true);
-        
+                      
         // Se inicializan las variables
         cmbCity.setSelectedIndex(0);
         cmbBranch.setSelectedIndex(0);
+        
         
     }
 
@@ -94,9 +106,9 @@ public class ChangeBranch extends javax.swing.JDialog {
         cmbCity.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " - Seleccione - ", "Roma", "Venecia", "Florencia", "Toscana" }));
         cmbCity.setBorder(null);
         cmbCity.setLightWeightPopupEnabled(false);
-        cmbCity.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbCityActionPerformed(evt);
+        cmbCity.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbCityItemStateChanged(evt);
             }
         });
 
@@ -393,40 +405,62 @@ public class ChangeBranch extends javax.swing.JDialog {
         
     }//GEN-LAST:event_btnCloseActionPerformed
 
+    private void cmbCityItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbCityItemStateChanged
+        chargeBranch(chargeListBranch(evt.getItem().toString()));
+    }//GEN-LAST:event_cmbCityItemStateChanged
+    
     /**
-     * Cuando el ComboBox de Ciudad tiene un cambio, se activa este evento, el
-     * cual hace que el ComboBox de Sucursales obtenga el nombre de todas las
-     * sucursales de la Ciudad seleccionada.
-     * @param evt 
+     * Método para cargar los nombres de las ciudades.
+     * @param cityNames listado de nombres de ciudades.
      */
-    private void cmbCityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCityActionPerformed
-        // Se obtiene el elemento seleccionado.
-        String item = (String) cmbCity.getSelectedItem();
+    private void chargeCityNames(ArrayList<String> cityNames){
+        
+        cmbCity.removeAllItems();
+        cmbCity.addItem(" - Seleccione - ");
+        
+        for(int i = 0; i < cityNames.size(); i++){
             
-        // Se remueven todos los items del combobox.
-        cmbBranch.removeAllItems();
+            cmbCity.addItem(cityNames.get(i));
             
-        // Se añade el item base del combobox
-        cmbBranch.addItem(" - Seleccionar - ");
-        cmbBranch.addItem("Cines De Venezuela. Roma");
-            
-        // Se instancia y se declara un Array que contendrá todos los nombres de las sucursales.
-        java.util.ArrayList<String> sucursales = new java.util.ArrayList<String>();
-            
-        // Falta agregar el método que pasa la lista obtenida por la BD de 
-        //   nombre de las sucursales a la variable 'sucursales' 
-            
-        // Se crea una variable indice.
-        java.util.Iterator<String> i = sucursales.iterator();
-            
-        // Se llena el combobox con los elementos correspondientes
-        while(i.hasNext()){
-                
-            cmbBranch.addItem(i.next());
-                
         }
-    }//GEN-LAST:event_cmbCityActionPerformed
-
+        
+        cmbCity.repaint();
+        
+    }
+    
+    
+    private ArrayList<String> chargeListBranch(String city){
+        
+        ArrayList<String> list = new ArrayList<>();
+        
+        for(int i = 0; i < cityNames.size(); i++){
+            
+            if(city.equals(cityNames.get(i)))
+                list.add(branchNames.get(i));
+            
+        }
+        
+        return list;
+        
+    }
+    
+    private void chargeBranch(ArrayList<String> list){
+        
+        cmbBranch.removeAllItems();
+        cmbBranch.addItem(" - Seleccione - ");
+        
+        for(int i = 0; i < list.size(); i++){
+            
+            cmbBranch.addItem(list.get(i));
+            
+        }
+        
+        cmbBranch.repaint();
+        
+    }
+    
+    
+    
     /**
      * Método para obtener el código de la sucursal seleccionada.
      * @return el código de la sucursal seleccionada.

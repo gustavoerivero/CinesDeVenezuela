@@ -6,7 +6,6 @@ import lib.SuportFunctions;
 import lib.Mail;
 
 // Se importan los models a utilizar.
-import models.database.ConnectionDB;
 import models.database.UserCRUD;
 
 // Se importan las views a utilizar.

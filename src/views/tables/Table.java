@@ -211,7 +211,35 @@ public class Table {
         }
         
     }
-
+    
+    /**
+     * Método para construir una JTable con formato para visualizar los tickets
+     * a comprar
+     * @param table JTable que se le dará formato.
+     * @param matrix Datos que se van a incorporar a la JTable.
+     */
+     
+    public void buildCinemaTicketsTable(javax.swing.JTable table, Object[][] matrix){
+        
+        table.setDefaultRenderer(Object.class, new Render());
+        
+        DefaultTableModel functionSelectorTableModel = new DefaultTableModel(
+        matrix,
+        new Object[]{
+            "Tipo", "Butaca", "Precio", "IVA (16%)", "Monto"
+        }
+    )
+    {
+        public boolean isCellEditable(int row, int colum){
+            return false;
+            }
+        };
+        table.setModel(functionSelectorTableModel);
+        
+        table.setPreferredScrollableViewportSize(table.getPreferredSize());
+        
+    }
+    
     //</editor-fold>
     
 }

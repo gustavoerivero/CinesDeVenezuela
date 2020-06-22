@@ -112,7 +112,7 @@ public class ControllerLogin implements java.awt.event.ActionListener {
                     
                     // Si el usuario y la contraseña son correctos.
                     if(user.signer(email, pass) == true){
-
+                        
                         // Se muestra quién ingresó al sistema.
                         System.out.println("El usuario '" + email + "' ha ingresado al"
                                 + " sistema con la contraseña '" + pass + "'.");

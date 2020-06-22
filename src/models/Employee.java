@@ -10,17 +10,17 @@ import java.util.Date;
 public class Employee extends Persona{
     private String
             branch_id,
-            position_id;
+            position;
     private Date admission_date;
     
     public Employee(String id, String name,String surname, String phone,
             String direction,Date birth_date,String email, char estatus,
-            String branch_id, String position_id, Date admission_date){
+            String branch_id, String position, Date admission_date){
         
         super(id, name, surname, phone, direction, birth_date, email, estatus);
         
         this.branch_id=branch_id;
-        this.position_id=position_id;
+        this.position=position;
         this.admission_date=admission_date;
     }
 
@@ -32,12 +32,12 @@ public class Employee extends Persona{
         this.branch_id = branch_id;
     }
 
-    public String getPosition_id() {
-        return position_id;
+    public String getPosition() {
+        return position;
     }
 
-    public void setPosition_id(String position_id) {
-        this.position_id = position_id;
+    public void setPosition(String position) {
+        this.position = position;
     }
 
     public Date getAdmission_date() {
