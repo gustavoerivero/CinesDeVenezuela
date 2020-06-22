@@ -8,6 +8,7 @@ import views.tables.Table;
 // Se importan los models que se van a utilizar
 import models.database.ConnectionDB;
 import models.database.ClientCRUD;
+import models.database.EmployeeCRUD;
 
 // Se importan las clases de soporte a utilizar
 import lib.SuportFunctions;
@@ -20,6 +21,8 @@ import java.awt.event.*;
 import java.awt.Image;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 
 /**
  *
@@ -32,6 +35,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         // Models
         private ConnectionDB con;
         private ClientCRUD cli;
+        private EmployeeCRUD empc;
 
         // Controllers
         private ControllerLogin ctrlLogin;
@@ -75,9 +79,59 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         mainPage.addMouseEvents(this);
         //consulList.addEvents(this);
        // consulList.addMouseEvents(this);
-        
+        empc = new EmployeeCRUD();
     }
 
+    
+             
+         //<editor-fold defaultstate="collapsed" desc=" Cargar Tabla dE EMPLEADO Funcional">
+     /* private void CargarEmpleados()
+    
+      {  
+          ResultSet resu;
+        try {
+            DefaultTableModel TablaEmployee = (DefaultTableModel) mainPage.getTblEmployee().getModel();
+            resu = empc.listaEmployee();
+            ResultSetMetaData rMd = resu.getMetaData();
+            int cantcolumnas = rMd.getColumnCount();
+            
+
+            while(resu.next()){
+                Object[] filas = new Object[cantcolumnas];
+                    for (int i = 0; i < cantcolumnas ; i++) 
+                    {
+                        filas[i] = resu.getObject(i+1);
+                    }
+                    TablaEmployee.addRow(filas);
+            }
+        } catch (Exception e) {
+        }
+        
+    }
+      */
+      
+       //</editor-fold>
+         
+         //<editor-fold defaultstate="collapsed" desc=" Cargar Tabla FINAL ">       
+   
+  //Metodo de Cargar Tabla super Comprimido
+  /*  
+public ResultSet listaEmployee()
+    {
+   
+    ResultSet resu;
+    String sql = "SELECT * FROM \"Empleadito\""; 
+    ConnectionDB con = new ConnectionDB();
+    con.conectar();
+    resu = con.queryConsultar(sql);
+    con.desconectar();
+    return resu;
+}
+*/
+ //</editor-fold>
+         
+    
+    
     /**
      * Método que determina las acciones a realizar por la aplicación según el 
      * botón presionado.
@@ -977,29 +1031,93 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         //</editor-fold>
         
         //</editor-fold>
-        //<editor-fold defaultstate="collapsed" desc=" Botones del MainPage Option 5 ">    
         
-        //Consultar listado
+        //<editor-fold defaultstate="collapsed" desc=" Botones del MainPage Option 4 ">
+        //<editor-fold defaultstate="collapsed" desc=" CRUD Employee ">    
+        //Consultar listado ->  Empleado
+         else if(evt.getSource() == mainPage.btnEmployeeDecision)
+         {
+            consulList = new ConsultList();
+            suport.cardSelection(consulList.panTableConsultList, consulList.panTableConsultEmployeeList);   
+            suport.cardSelection(consulList.panFilter, consulList.panFilterEmployee);
+            consulList.addEvents(this);
+         }
+
+         //Añadir Sucursal
+         else if(evt.getSource() == consulList.btnAdd)
+         {
+               registerModify = new RegisterModify();
+               registerModify.lblModifyRegistrer7.setText("Registrar Empleado");
+               suport.cardSelection(registerModify.panSelectionButtons, registerModify.panButtonRegister);    
+               suport.cardSelection(registerModify.panDataRegisterModify, registerModify.panRegisterModifyEmployee); 
+         }
+        //</editor-fold>
+        //</editor-fold>
+        
+        //<editor-fold defaultstate="collapsed" desc=" Botones del MainPage Option 5 ">
+        
+        //<editor-fold defaultstate="collapsed" desc=" CRUD Branch ">    
+        //Consultar listado ->  Sucursal
          else if(evt.getSource() == mainPage.btnBranchDecision)
          {
-            //mainPage.panCapsuleCandyDecision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239,232,244)));         
             consulList = new ConsultList();
             suport.cardSelection(consulList.panTableConsultList, consulList.panTableConsultBranchList);   
             suport.cardSelection(consulList.panFilter, consulList.panFilterBranch);
-            suport          = new SuportFunctions();
-            seatingChart    = new TheaterSeatingChart();
-            consulList.addEvents(this);//michaelmontero.idb@gmail.com
+            consulList.addEvents(this);
          }
-           else if(evt.getSource() == consulList.btnAdd)
+         //Añadir Sucursal
+         else if(evt.getSource() == consulList.btnAdd)
          {
-             registerModify = new RegisterModify();
-             suport.cardSelection(registerModify.panButtonsModifyRegister, registerModify.panButtonRegister);    
-             suport.cardSelection(registerModify.panData, registerModify.panDataBranch); 
-         }//michaelmontero.idb@gmail.com
-                    
+               registerModify = new RegisterModify();
+               registerModify.lblModifyRegistrer7.setText("Registrar Sucursal");
+               suport.cardSelection(registerModify.panSelectionButtons, registerModify.panButtonRegister);    
+               suport.cardSelection(registerModify.panDataRegisterModify, registerModify.panRegisterModifyBranch); 
+         }
+        //</editor-fold>
+         
+        //<editor-fold defaultstate="collapsed" desc=" CRUD Cinema Room ">
+        //Consultar listado ->  Salas
+         else if(evt.getSource() == mainPage.btnCinemaRoomDecision)
+         {
+            consulList = new ConsultList();
+            suport.cardSelection(consulList.panTableConsultList, consulList.panTableConsultBranchList);   
+            suport.cardSelection(consulList.panFilter, consulList.panFilterBranch);
+            consulList.addEvents(this);
+         }
+         //Añadir Sala
+         else if(evt.getSource() == consulList.btnAdd)
+         {
+               registerModify = new RegisterModify();
+               registerModify.lblModifyRegistrer7.setText("Registrar Sala");
+               suport.cardSelection(registerModify.panSelectionButtons, registerModify.panButtonRegister);    
+               suport.cardSelection(registerModify.panDataRegisterModify, registerModify.panRegisterModifyCinemaRoom); 
+         }
+        //</editor-fold>
 
+        //<editor-fold defaultstate="collapsed" desc=" CRUD Enterprise ">
+
+        //Consultar listado ->  Empresa
+         else if(evt.getSource() == mainPage.btnEnterpriseDecision)
+         {
+            consulList = new ConsultList();
+            suport.cardSelection(consulList.panTableConsultList, consulList.panTableConsultEnterpriseList);   
+            suport.cardSelection(consulList.panFilter, consulList.panFilterEnterprise);
+            consulList.addEvents(this);
+         }
+         //Añadir Empresa
+         else if(evt.getSource() == consulList.btnAdd)
+         {
+               registerModify = new RegisterModify();
+               registerModify.lblModifyRegistrer7.setText("Registrar Empresa");
+               suport.cardSelection(registerModify.panSelectionButtons, registerModify.panButtonRegister);    
+               suport.cardSelection(registerModify.panDataRegisterModify, registerModify.panRegisterModifyEnterprise); 
+         }
+//michaelmontero.idb@gmail.com
+        //</editor-fold>
+
+        //</editor-fold>
         }
-            //</editor-fold>
+            
     /**
      * Eventos provocados por el escuchador de Mouse (MouseListener)
      * @param evt son aquellos eventos que ocurren con acciones del Mouse.

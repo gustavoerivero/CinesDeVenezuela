@@ -102,7 +102,7 @@ public class ConsultList extends javax.swing.JFrame {
         tblConsultCandyList = new javax.swing.JTable();
         panTableConsultEmployeeList = new javax.swing.JPanel();
         scpConsultEmployeeList = new javax.swing.JScrollPane();
-        tblConsultEmployeeList = new javax.swing.JTable();
+        tblEmployee = new javax.swing.JTable();
         panTableConsultFilmList = new javax.swing.JPanel();
         scpConsultFilmList = new javax.swing.JScrollPane();
         tblConsultFilmList = new javax.swing.JTable();
@@ -287,24 +287,32 @@ public class ConsultList extends javax.swing.JFrame {
 
         panTableConsultList.add(panTableConsultCandytList, "card6");
 
-        tblConsultEmployeeList.setBackground(new java.awt.Color(249, 249, 249));
-        tblConsultEmployeeList.setModel(new javax.swing.table.DefaultTableModel(
+        tblEmployee.setBackground(new java.awt.Color(249, 249, 249));
+        tblEmployee.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Cedula", "Nombre", "Apellido", "Direccion", "Telefono", "Correo", "Cargo", "Cod Sucursal", "", ""
+                "Cedula", "Cargo", "Sucursal", "Nombre", "Apellido", "Telefono", "Dirección", "Nacimiento", "Ingreso", "Correo", "Estado"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        scpConsultEmployeeList.setViewportView(tblConsultEmployeeList);
+        tblEmployee.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tblEmployee.setSelectionBackground(new java.awt.Color(75, 0, 145));
+        tblEmployee.getTableHeader().setReorderingAllowed(false);
+        tblEmployee.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblEmployeeMouseClicked(evt);
+            }
+        });
+        scpConsultEmployeeList.setViewportView(tblEmployee);
 
         javax.swing.GroupLayout panTableConsultEmployeeListLayout = new javax.swing.GroupLayout(panTableConsultEmployeeList);
         panTableConsultEmployeeList.setLayout(panTableConsultEmployeeListLayout);
@@ -670,7 +678,7 @@ public class ConsultList extends javax.swing.JFrame {
                     .addGroup(panConsultationLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(panConsultationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(panSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+                            .addComponent(panSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
                             .addGroup(panConsultationLayout.createSequentialGroup()
                                 .addComponent(panAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))))
@@ -783,6 +791,10 @@ public class ConsultList extends javax.swing.JFrame {
         // Se coloca la opacidad de la aplicación en 100%.
         //</editor-fold>
         setOpacity((float)1.0);    }//GEN-LAST:event_panTopBarMouseReleased
+
+    private void tblEmployeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEmployeeMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblEmployeeMouseClicked
      //</editor-fold>   
     
     
@@ -791,7 +803,6 @@ public class ConsultList extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnAdd;
-    public javax.swing.JButton btnAdd1;
     public javax.swing.JButton btnSearch;
     private javax.swing.JComboBox<String> cmbFilterBranch;
     private javax.swing.JComboBox<String> cmbFilterCandy;
@@ -806,15 +817,14 @@ public class ConsultList extends javax.swing.JFrame {
     private javax.swing.JLabel lblConsultList;
     private javax.swing.JLabel lblEntityName;
     public javax.swing.JPanel panAdd;
-    private javax.swing.JPanel panAdd1;
     public javax.swing.JPanel panConsultation;
     public javax.swing.JPanel panFilter;
     public javax.swing.JPanel panFilterBranch;
     private javax.swing.JPanel panFilterCandy;
     private javax.swing.JPanel panFilterCinemaRoom;
     private javax.swing.JPanel panFilterClient;
-    private javax.swing.JPanel panFilterEmployee;
-    private javax.swing.JPanel panFilterEnterprise;
+    public javax.swing.JPanel panFilterEmployee;
+    public javax.swing.JPanel panFilterEnterprise;
     private javax.swing.JPanel panFilterFilm;
     public javax.swing.JPanel panSearch;
     public javax.swing.JPanel panTableConsultBranchList;
@@ -832,14 +842,15 @@ public class ConsultList extends javax.swing.JFrame {
     private javax.swing.JScrollPane scpConsultEmployeeList;
     private javax.swing.JScrollPane scpConsultEnterpriseList;
     private javax.swing.JScrollPane scpConsultFilmList;
+    public javax.swing.JScrollPane scpEmployee;
     private javax.swing.JScrollPane spcConsultCinemaRoomList;
     private javax.swing.JTable tblConsultBranchList;
     private javax.swing.JTable tblConsultCandyList;
     private javax.swing.JTable tblConsultCinemaRoomList;
     private javax.swing.JTable tblConsultClientList;
-    private javax.swing.JTable tblConsultEmployeeList;
     private javax.swing.JTable tblConsultEnterpriseList;
     private javax.swing.JTable tblConsultFilmList;
+    public javax.swing.JTable tblEmployee;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }
