@@ -111,10 +111,19 @@ public class MainPage extends javax.swing.JFrame {
                 btnAddCinemaTickets4.addActionListener(evt);
                 btnMinusCinemaTickets4.addActionListener(evt);
                 
+                //->Opcion 4 
+                btnEmployeeDecision.addActionListener(evt);
+                btnUserDecision.addActionListener(evt);
+
                 //->Opcion 5 
                 btnBranchDecision.addActionListener(evt);
-            
-        
+                btnCinemaRoomDecision.addActionListener(evt);
+                btnEnterpriseDecision.addActionListener(evt);
+                
+                //->Opcion 6 
+                btnFilmDecision.addActionListener(evt);
+                btnCandyDecisionCL.addActionListener(evt);
+                btnClientDecision.addActionListener(evt);        
     }
    
     /**

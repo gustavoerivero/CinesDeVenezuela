@@ -57,6 +57,8 @@ public class ConsultList extends javax.swing.JFrame {
     {
         btnAdd.addActionListener(evt);
         btnSearch.addActionListener(evt);
+        btnMin.addActionListener(evt);
+        btnExit.addActionListener(evt);
     }
     /**
      * Método que permite activar los eventos del escuchador Mouse.
@@ -130,8 +132,8 @@ public class ConsultList extends javax.swing.JFrame {
         btnSearch = new javax.swing.JButton();
         panTopBar = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnMin = new javax.swing.JButton();
+        btnExit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -604,9 +606,9 @@ public class ConsultList extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Min");
+        btnMin.setText("Min");
 
-        jButton2.setText("Sal");
+        btnExit.setText("Sal");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -614,16 +616,16 @@ public class ConsultList extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(98, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(btnMin)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2))
+                .addComponent(btnExit))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnMin, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -678,7 +680,7 @@ public class ConsultList extends javax.swing.JFrame {
                     .addGroup(panConsultationLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(panConsultationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(panSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                            .addComponent(panSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
                             .addGroup(panConsultationLayout.createSequentialGroup()
                                 .addComponent(panAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))))
@@ -803,6 +805,8 @@ public class ConsultList extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnAdd;
+    public javax.swing.JButton btnExit;
+    public javax.swing.JButton btnMin;
     public javax.swing.JButton btnSearch;
     private javax.swing.JComboBox<String> cmbFilterBranch;
     private javax.swing.JComboBox<String> cmbFilterCandy;
@@ -811,17 +815,15 @@ public class ConsultList extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbFilterEmployee;
     private javax.swing.JComboBox<String> cmbFilterEnterprise;
     private javax.swing.JComboBox<String> cmbFilterFilm;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblConsultList;
-    private javax.swing.JLabel lblEntityName;
+    public javax.swing.JLabel lblEntityName;
     public javax.swing.JPanel panAdd;
     public javax.swing.JPanel panConsultation;
     public javax.swing.JPanel panFilter;
     public javax.swing.JPanel panFilterBranch;
     private javax.swing.JPanel panFilterCandy;
-    private javax.swing.JPanel panFilterCinemaRoom;
+    public javax.swing.JPanel panFilterCinemaRoom;
     private javax.swing.JPanel panFilterClient;
     public javax.swing.JPanel panFilterEmployee;
     public javax.swing.JPanel panFilterEnterprise;
@@ -835,14 +837,13 @@ public class ConsultList extends javax.swing.JFrame {
     public javax.swing.JPanel panTableConsultEnterpriseList;
     public javax.swing.JPanel panTableConsultFilmList;
     public javax.swing.JPanel panTableConsultList;
-    private javax.swing.JPanel panTopBar;
+    public javax.swing.JPanel panTopBar;
     private javax.swing.JScrollPane scpConsultBranchList;
     private javax.swing.JScrollPane scpConsultCandytList;
     private javax.swing.JScrollPane scpConsultClientList;
     private javax.swing.JScrollPane scpConsultEmployeeList;
     private javax.swing.JScrollPane scpConsultEnterpriseList;
     private javax.swing.JScrollPane scpConsultFilmList;
-    public javax.swing.JScrollPane scpEmployee;
     private javax.swing.JScrollPane spcConsultCinemaRoomList;
     private javax.swing.JTable tblConsultBranchList;
     private javax.swing.JTable tblConsultCandyList;

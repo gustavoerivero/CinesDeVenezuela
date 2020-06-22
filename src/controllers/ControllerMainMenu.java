@@ -77,8 +77,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         // Activamos los eventos por las views.
         mainPage.addEvents(this);
         mainPage.addMouseEvents(this);
-        //consulList.addEvents(this);
-       // consulList.addMouseEvents(this);
+
         empc = new EmployeeCRUD();
     }
 
@@ -1038,18 +1037,21 @@ public ResultSet listaEmployee()
          else if(evt.getSource() == mainPage.btnEmployeeDecision)
          {
             consulList = new ConsultList();
+            consulList.lblEntityName.setText("Empleado");
             suport.cardSelection(consulList.panTableConsultList, consulList.panTableConsultEmployeeList);   
             suport.cardSelection(consulList.panFilter, consulList.panFilterEmployee);
             consulList.addEvents(this);
          }
 
-         //Añadir Sucursal
-         else if(evt.getSource() == consulList.btnAdd)
+         //Añadir Empleado
+         else if((evt.getSource() == consulList.btnAdd)&&("Empleado".equals(consulList.lblEntityName.getText())))
          {
                registerModify = new RegisterModify();
-               registerModify.lblModifyRegistrer7.setText("Registrar Empleado");
-               suport.cardSelection(registerModify.panSelectionButtons, registerModify.panButtonRegister);    
-               suport.cardSelection(registerModify.panDataRegisterModify, registerModify.panRegisterModifyEmployee); 
+               registerModify.lblModifyRegistrer.setText("Registrar Empleado");
+               suport.cardSelection(registerModify.panButtonsModifyRegister, registerModify.panButtonRegister);    
+               suport.cardSelection(registerModify.panData, registerModify.panDataEmployee); 
+               registerModify.addEvents(this);
+
          }
         //</editor-fold>
         //</editor-fold>
@@ -1061,17 +1063,19 @@ public ResultSet listaEmployee()
          else if(evt.getSource() == mainPage.btnBranchDecision)
          {
             consulList = new ConsultList();
+            consulList.lblEntityName.setText("Sucursal");
             suport.cardSelection(consulList.panTableConsultList, consulList.panTableConsultBranchList);   
             suport.cardSelection(consulList.panFilter, consulList.panFilterBranch);
             consulList.addEvents(this);
          }
-         //Añadir Sucursal
-         else if(evt.getSource() == consulList.btnAdd)
-         {
+        //Añadir Sucursal
+         else if((evt.getSource() == consulList.btnAdd)&&("Sucursal".equals(consulList.lblEntityName.getText())))
+         {      
                registerModify = new RegisterModify();
-               registerModify.lblModifyRegistrer7.setText("Registrar Sucursal");
-               suport.cardSelection(registerModify.panSelectionButtons, registerModify.panButtonRegister);    
-               suport.cardSelection(registerModify.panDataRegisterModify, registerModify.panRegisterModifyBranch); 
+               registerModify.lblModifyRegistrer.setText("Registrar Sucursal");
+               suport.cardSelection(registerModify.panButtonsModifyRegister, registerModify.panButtonRegister);    
+               suport.cardSelection(registerModify.panData, registerModify.panDataBranch); 
+               registerModify.addEvents(this);
          }
         //</editor-fold>
          
@@ -1080,17 +1084,20 @@ public ResultSet listaEmployee()
          else if(evt.getSource() == mainPage.btnCinemaRoomDecision)
          {
             consulList = new ConsultList();
-            suport.cardSelection(consulList.panTableConsultList, consulList.panTableConsultBranchList);   
-            suport.cardSelection(consulList.panFilter, consulList.panFilterBranch);
+            consulList.lblEntityName.setText("Sala");
+            suport.cardSelection(consulList.panTableConsultList, consulList.panTableConsultCinemaRoomList);   
+            suport.cardSelection(consulList.panFilter, consulList.panFilterCinemaRoom);
             consulList.addEvents(this);
          }
          //Añadir Sala
-         else if(evt.getSource() == consulList.btnAdd)
+         else if((evt.getSource() == consulList.btnAdd)&&("Sala".equals(consulList.lblEntityName.getText())))
          {
                registerModify = new RegisterModify();
-               registerModify.lblModifyRegistrer7.setText("Registrar Sala");
-               suport.cardSelection(registerModify.panSelectionButtons, registerModify.panButtonRegister);    
-               suport.cardSelection(registerModify.panDataRegisterModify, registerModify.panRegisterModifyCinemaRoom); 
+               registerModify.lblModifyRegistrer.setText("Registrar Sala");
+               suport.cardSelection(registerModify.panButtonsModifyRegister, registerModify.panButtonRegister);    
+               suport.cardSelection(registerModify.panData, registerModify.panDataCinemaRoom); 
+               registerModify.addEvents(this);
+
          }
         //</editor-fold>
 
@@ -1100,22 +1107,59 @@ public ResultSet listaEmployee()
          else if(evt.getSource() == mainPage.btnEnterpriseDecision)
          {
             consulList = new ConsultList();
+            consulList.lblEntityName.setText("Sala");
             suport.cardSelection(consulList.panTableConsultList, consulList.panTableConsultEnterpriseList);   
             suport.cardSelection(consulList.panFilter, consulList.panFilterEnterprise);
             consulList.addEvents(this);
          }
          //Añadir Empresa
-         else if(evt.getSource() == consulList.btnAdd)
+         else if((evt.getSource() == consulList.btnAdd)&&("Empresa".equals(consulList.lblEntityName.getText())))
          {
                registerModify = new RegisterModify();
-               registerModify.lblModifyRegistrer7.setText("Registrar Empresa");
-               suport.cardSelection(registerModify.panSelectionButtons, registerModify.panButtonRegister);    
-               suport.cardSelection(registerModify.panDataRegisterModify, registerModify.panRegisterModifyEnterprise); 
+               registerModify.lblModifyRegistrer.setText("Registrar Empresa");
+               suport.cardSelection(registerModify.panButtonsModifyRegister, registerModify.panButtonRegister);    
+               suport.cardSelection(registerModify.panData, registerModify.panDataEnterprise); 
+               registerModify.addEvents(this);
          }
 //michaelmontero.idb@gmail.com
         //</editor-fold>
 
         //</editor-fold>
+         
+                  
+        //<editor-fold defaultstate="collapsed" desc=" minimizar y salir del consult list ">
+
+         // Minimizar aplicación.
+         else if(evt.getSource() == consulList.btnMin)
+        {
+            consulList.setExtendedState(java.awt.Frame.ICONIFIED);
+            consulList.btnMin.setBackground(new java.awt.Color(249,249,249));
+        } 
+        
+        // Salir de la aplicación.
+        else if(evt.getSource() == consulList.btnExit)
+        {
+            consulList.dispose();
+        } 
+        //</editor-fold>
+         
+        //<editor-fold defaultstate="collapsed" desc=" minimizar y salir del formulario ">
+
+         // Minimizar aplicación.
+         else if(evt.getSource() == registerModify.btnMin)
+        {
+            registerModify.setExtendedState(java.awt.Frame.ICONIFIED);
+            registerModify.btnMin.setBackground(new java.awt.Color(249,249,249));
+        } 
+        
+        // Salir de la aplicación.
+        else if(evt.getSource() == registerModify.btnExitt)
+        {
+            registerModify.dispose();
+        } 
+        //</editor-fold>
+
+       
         }
             
     /**
