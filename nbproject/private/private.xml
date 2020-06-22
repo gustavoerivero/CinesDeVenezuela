@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2">
         <file>
             <url>src/controllers/ControllerMainMenu.java</url>
             <bookmark id="1">
@@ -8,9 +8,22 @@
                 <line>11</line>
                 <key/>
             </bookmark>
+            <bookmark id="2">
+                <name/>
+                <line>1065</line>
+                <key/>
+            </bookmark>
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/CinesDeVenezuela/src/controllers/ControllerMainMenu.java</file>
+            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/CinesDeVenezuela/src/views/MainPage.java</file>
+            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/CinesDeVenezuela/src/controllers/ControllerEmployeeCRUD.java</file>
+            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/CinesDeVenezuela/src/views/ModifyCandy.java</file>
+            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/CinesDeVenezuela/src/views/RegisterModify.java</file>
+            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/CinesDeVenezuela/src/controllers/ControllerRegisterModify.java</file>
+            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/CinesDeVenezuela/src/models/database/EmployeeCRUD.java</file>
+        </group>
     </open-files>
 </project-private>

@@ -117,7 +117,7 @@ public class MainPage extends javax.swing.JFrame {
                 
                 
             // Eventos de los botones de la opción 4 -> Empleado.
-                btnAddEmployee.addActionListener(evt);
+                  btnAddEmployee.addActionListener(evt);
             
         
     }

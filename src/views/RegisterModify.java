@@ -5,6 +5,7 @@
  */
 package views;
 
+import com.toedter.calendar.JDateChooser;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JButton;
@@ -25,18 +26,15 @@ public class RegisterModify extends javax.swing.JFrame  {
      * Creates new form RegisterModify
      */
     
-    // Luis instancia la clase de soporte. jajajaja
     private SuportFunctions suport;
     
-    
+    //constructor
     public RegisterModify() {
         
         
         initComponents();
         
-        // Relaciona elementos y decide si es un contenedor modal o no.
-        
-        
+
         // Se instancia la clase de soporte.
         suport = new SuportFunctions();
         
@@ -48,16 +46,12 @@ public class RegisterModify extends javax.swing.JFrame  {
         
         
         this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("images/CDV-icon.png")).getImage());
-
-        // Iniciar
-        
-        
-        
+ 
     }
     
     
     public void mensaje(String m){
-       JOptionPane.showMessageDialog(this, m);
+     JOptionPane.showMessageDialog(this, m);
    }
     
     //<editor-fold defaultstate="collapsed" desc=" Listeners ">
@@ -67,13 +61,9 @@ public class RegisterModify extends javax.swing.JFrame  {
             
         btnMin.addActionListener(evt);  // -> Minimizar
         btnExitt.addActionListener(evt); // -> cerrar
-        btnRegisterEmployee.addActionListener(evt); // -> Registrar
+        btnCancel.addActionListener(evt); // -> Registrar
             
         }
-        
-        
-        
-        
         //</editor-fold>
     
     public void modificarCampos(boolean estado){
@@ -86,13 +76,10 @@ public class RegisterModify extends javax.swing.JFrame  {
     txtbranch_idEmploye1.setEditable(estado);
     txtposition_idEmployee1.setEditable(estado);
     txtDirectionEmployee1.setEditable(estado);
-    txtbirth_dateEmployee1.setEditable(estado);
-    txtAdmission_dateEmployee1.setEditable(estado);
+
     
 }
 
-    
-    
     public boolean validarCampos(){
        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
        String fecha ="";
@@ -139,7 +126,7 @@ public class RegisterModify extends javax.swing.JFrame  {
     
     
     
-    
+   
     
 
     /**
@@ -160,10 +147,9 @@ public class RegisterModify extends javax.swing.JFrame  {
         btnMini = new javax.swing.JPanel();
         btnMin = new javax.swing.JButton();
         panButtonsModifyRegister = new javax.swing.JPanel();
-        panButtonRegister = new javax.swing.JPanel();
-        btnRegisterEmployee = new javax.swing.JButton();
-        panButtonModify = new javax.swing.JPanel();
-        btnModifyClient = new javax.swing.JButton();
+        panButton = new javax.swing.JPanel();
+        btnSave = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
         panData = new javax.swing.JPanel();
         panDataCinemaRoom = new javax.swing.JPanel();
         jSeparator10 = new javax.swing.JSeparator();
@@ -223,12 +209,8 @@ public class RegisterModify extends javax.swing.JFrame  {
         jSeparator55 = new javax.swing.JSeparator();
         lblbirth_date2 = new javax.swing.JLabel();
         lblbirth_date3 = new javax.swing.JLabel();
-        txtbirth_dateEmployee1 = new javax.swing.JTextField();
-        jSeparator56 = new javax.swing.JSeparator();
         lblAdmission_date2 = new javax.swing.JLabel();
         lblAdmission_date3 = new javax.swing.JLabel();
-        txtAdmission_dateEmployee1 = new javax.swing.JTextField();
-        jSeparator57 = new javax.swing.JSeparator();
         jSeparator58 = new javax.swing.JSeparator();
         jCalendarbirth_dateEmployee = new com.toedter.calendar.JDateChooser();
         jCalendarAdmission_dateEmployee1 = new com.toedter.calendar.JDateChooser();
@@ -270,6 +252,11 @@ public class RegisterModify extends javax.swing.JFrame  {
         btnExitt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnExittMouseExited(evt);
+            }
+        });
+        btnExitt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExittActionPerformed(evt);
             }
         });
 
@@ -355,96 +342,82 @@ public class RegisterModify extends javax.swing.JFrame  {
         panButtonsModifyRegister.setBackground(new java.awt.Color(249, 249, 249));
         panButtonsModifyRegister.setLayout(new java.awt.CardLayout());
 
-        panButtonRegister.setBackground(new java.awt.Color(249, 249, 249));
-        panButtonRegister.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249, 249, 249)));
-        panButtonRegister.setForeground(new java.awt.Color(255, 255, 255));
+        panButton.setBackground(new java.awt.Color(249, 249, 249));
+        panButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249, 249, 249)));
+        panButton.setForeground(new java.awt.Color(255, 255, 255));
 
-        btnRegisterEmployee.setBackground(new java.awt.Color(245, 245, 245));
-        btnRegisterEmployee.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnRegisterEmployee.setForeground(new java.awt.Color(0, 0, 0));
-        btnRegisterEmployee.setText("Registrar");
-        btnRegisterEmployee.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        btnRegisterEmployee.setBorderPainted(false);
-        btnRegisterEmployee.setContentAreaFilled(false);
-        btnRegisterEmployee.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnRegisterEmployee.setFocusPainted(false);
-        btnRegisterEmployee.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+        btnSave.setBackground(new java.awt.Color(245, 245, 245));
+        btnSave.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnSave.setForeground(new java.awt.Color(0, 0, 0));
+        btnSave.setText("Guardar");
+        btnSave.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnSave.setBorderPainted(false);
+        btnSave.setContentAreaFilled(false);
+        btnSave.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnSave.setFocusPainted(false);
+        btnSave.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
-                btnRegisterEmployeeMouseMoved(evt);
+                btnSaveMouseMoved(evt);
             }
         });
-        btnRegisterEmployee.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnSave.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnRegisterEmployeeMouseExited(evt);
+                btnSaveMouseExited(evt);
             }
         });
-        btnRegisterEmployee.addActionListener(new java.awt.event.ActionListener() {
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegisterEmployeeActionPerformed(evt);
+                btnSaveActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout panButtonRegisterLayout = new javax.swing.GroupLayout(panButtonRegister);
-        panButtonRegister.setLayout(panButtonRegisterLayout);
-        panButtonRegisterLayout.setHorizontalGroup(
-            panButtonRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panButtonRegisterLayout.createSequentialGroup()
-                .addGap(161, 161, 161)
-                .addComponent(btnRegisterEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(182, Short.MAX_VALUE))
-        );
-        panButtonRegisterLayout.setVerticalGroup(
-            panButtonRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panButtonRegisterLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(btnRegisterEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
-        );
-
-        panButtonsModifyRegister.add(panButtonRegister, "card2");
-
-        panButtonModify.setBackground(new java.awt.Color(249, 249, 249));
-        panButtonModify.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249, 249, 249)));
-        panButtonModify.setForeground(new java.awt.Color(255, 255, 255));
-
-        btnModifyClient.setBackground(new java.awt.Color(245, 245, 245));
-        btnModifyClient.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnModifyClient.setForeground(new java.awt.Color(0, 0, 0));
-        btnModifyClient.setText("Actualizar");
-        btnModifyClient.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        btnModifyClient.setBorderPainted(false);
-        btnModifyClient.setContentAreaFilled(false);
-        btnModifyClient.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnModifyClient.setFocusPainted(false);
-        btnModifyClient.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+        btnCancel.setBackground(new java.awt.Color(245, 245, 245));
+        btnCancel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnCancel.setForeground(new java.awt.Color(0, 0, 0));
+        btnCancel.setText("Cancelar");
+        btnCancel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnCancel.setBorderPainted(false);
+        btnCancel.setContentAreaFilled(false);
+        btnCancel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnCancel.setFocusPainted(false);
+        btnCancel.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
-                btnModifyClientMouseMoved(evt);
+                btnCancelMouseMoved(evt);
             }
         });
-        btnModifyClient.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnCancel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnModifyClientMouseExited(evt);
+                btnCancelMouseExited(evt);
+            }
+        });
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout panButtonModifyLayout = new javax.swing.GroupLayout(panButtonModify);
-        panButtonModify.setLayout(panButtonModifyLayout);
-        panButtonModifyLayout.setHorizontalGroup(
-            panButtonModifyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panButtonModifyLayout.createSequentialGroup()
-                .addGap(160, 160, 160)
-                .addComponent(btnModifyClient, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(183, Short.MAX_VALUE))
+        javax.swing.GroupLayout panButtonLayout = new javax.swing.GroupLayout(panButton);
+        panButton.setLayout(panButtonLayout);
+        panButtonLayout.setHorizontalGroup(
+            panButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panButtonLayout.createSequentialGroup()
+                .addGap(83, 83, 83)
+                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
+                .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34))
         );
-        panButtonModifyLayout.setVerticalGroup(
-            panButtonModifyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panButtonModifyLayout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
-                .addComponent(btnModifyClient, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+        panButtonLayout.setVerticalGroup(
+            panButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panButtonLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(panButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
-        panButtonsModifyRegister.add(panButtonModify, "card2");
+        panButtonsModifyRegister.add(panButton, "card2");
 
         panRegisterModifyClient.add(panButtonsModifyRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 420, 660, 100));
 
@@ -858,12 +831,16 @@ public class RegisterModify extends javax.swing.JFrame  {
 
         txtSurnameEmployee1.setBackground(new java.awt.Color(239, 232, 244));
         txtSurnameEmployee1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        txtSurnameEmployee1.setForeground(new java.awt.Color(239, 232, 244));
-        txtSurnameEmployee1.setText("Cédula del cliente");
+        txtSurnameEmployee1.setForeground(new java.awt.Color(0, 0, 0));
         txtSurnameEmployee1.setBorder(null);
         txtSurnameEmployee1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtSurnameEmployee1MouseClicked(evt);
+            }
+        });
+        txtSurnameEmployee1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSurnameEmployee1ActionPerformed(evt);
             }
         });
         txtSurnameEmployee1.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -982,8 +959,7 @@ public class RegisterModify extends javax.swing.JFrame  {
 
         txtDirectionEmployee1.setBackground(new java.awt.Color(239, 232, 244));
         txtDirectionEmployee1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        txtDirectionEmployee1.setForeground(new java.awt.Color(239, 232, 244));
-        txtDirectionEmployee1.setText("Cédula del cliente");
+        txtDirectionEmployee1.setForeground(new java.awt.Color(0, 0, 0));
         txtDirectionEmployee1.setBorder(null);
         txtDirectionEmployee1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1011,25 +987,6 @@ public class RegisterModify extends javax.swing.JFrame  {
         lblbirth_date3.setText("Nacimiento:");
         panDataEmployee.add(lblbirth_date3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 220, -1, -1));
 
-        txtbirth_dateEmployee1.setBackground(new java.awt.Color(239, 232, 244));
-        txtbirth_dateEmployee1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        txtbirth_dateEmployee1.setBorder(null);
-        txtbirth_dateEmployee1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtbirth_dateEmployee1MouseClicked(evt);
-            }
-        });
-        txtbirth_dateEmployee1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtbirth_dateEmployee1KeyTyped(evt);
-            }
-        });
-        panDataEmployee.add(txtbirth_dateEmployee1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, 60, 39));
-
-        jSeparator56.setBackground(new java.awt.Color(249, 249, 249));
-        jSeparator56.setForeground(new java.awt.Color(75, 0, 145));
-        panDataEmployee.add(jSeparator56, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 250, 190, 12));
-
         lblAdmission_date2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblAdmission_date2.setForeground(new java.awt.Color(75, 0, 145));
         lblAdmission_date2.setText("Fecha \n");
@@ -1039,25 +996,6 @@ public class RegisterModify extends javax.swing.JFrame  {
         lblAdmission_date3.setForeground(new java.awt.Color(75, 0, 145));
         lblAdmission_date3.setText("Ingreso");
         panDataEmployee.add(lblAdmission_date3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 280, -1, 20));
-
-        txtAdmission_dateEmployee1.setBackground(new java.awt.Color(239, 232, 244));
-        txtAdmission_dateEmployee1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        txtAdmission_dateEmployee1.setBorder(null);
-        txtAdmission_dateEmployee1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtAdmission_dateEmployee1MouseClicked(evt);
-            }
-        });
-        txtAdmission_dateEmployee1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtAdmission_dateEmployee1KeyTyped(evt);
-            }
-        });
-        panDataEmployee.add(txtAdmission_dateEmployee1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 300, 60, 39));
-
-        jSeparator57.setBackground(new java.awt.Color(249, 249, 249));
-        jSeparator57.setForeground(new java.awt.Color(75, 0, 145));
-        panDataEmployee.add(jSeparator57, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 310, 200, 12));
 
         jSeparator58.setBackground(new java.awt.Color(249, 249, 249));
         jSeparator58.setForeground(new java.awt.Color(75, 0, 145));
@@ -1140,30 +1078,6 @@ public class RegisterModify extends javax.swing.JFrame  {
     private void btnMinMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinMouseExited
         btnMin.setBackground(new java.awt.Color(249,249,249));
     }//GEN-LAST:event_btnMinMouseExited
-
-    private void btnRegisterEmployeeMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegisterEmployeeMouseMoved
-        panButtonRegister.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
-        btnRegisterEmployee.setForeground(new java.awt.Color(255,255,255));
-        panButtonRegister.setBackground(new java.awt.Color(66,0,124));
-    }//GEN-LAST:event_btnRegisterEmployeeMouseMoved
-
-    private void btnRegisterEmployeeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegisterEmployeeMouseExited
-        panButtonRegister.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
-        btnRegisterEmployee.setForeground(new java.awt.Color(0,0,0));
-        panButtonRegister.setBackground(new java.awt.Color(239,232,244));
-    }//GEN-LAST:event_btnRegisterEmployeeMouseExited
-
-    private void btnRegisterEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterEmployeeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRegisterEmployeeActionPerformed
-
-    private void btnModifyClientMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModifyClientMouseMoved
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnModifyClientMouseMoved
-
-    private void btnModifyClientMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModifyClientMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnModifyClientMouseExited
 
     private void txtBirthDateKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBirthDateKeyTyped
         // TODO add your handling code here:
@@ -1293,25 +1207,41 @@ public class RegisterModify extends javax.swing.JFrame  {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDirectionEmployee1KeyTyped
 
-    private void txtbirth_dateEmployee1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtbirth_dateEmployee1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtbirth_dateEmployee1MouseClicked
-
-    private void txtbirth_dateEmployee1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbirth_dateEmployee1KeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtbirth_dateEmployee1KeyTyped
-
-    private void txtAdmission_dateEmployee1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtAdmission_dateEmployee1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtAdmission_dateEmployee1MouseClicked
-
-    private void txtAdmission_dateEmployee1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAdmission_dateEmployee1KeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtAdmission_dateEmployee1KeyTyped
-
     private void jCalendarbirth_dateEmployeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCalendarbirth_dateEmployeeMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jCalendarbirth_dateEmployeeMouseClicked
+
+    private void btnSaveMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveMouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSaveMouseMoved
+
+    private void btnSaveMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveMouseExited
+        btnSave.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239,232,244)));
+    }//GEN-LAST:event_btnSaveMouseExited
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void btnCancelMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelMouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCancelMouseMoved
+
+    private void btnCancelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelMouseExited
+        btnCancel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239,232,244)));
+    }//GEN-LAST:event_btnCancelMouseExited
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void txtSurnameEmployee1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSurnameEmployee1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSurnameEmployee1ActionPerformed
+
+    private void btnExittActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExittActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnExittActionPerformed
 
     
     
@@ -1400,20 +1330,53 @@ public class RegisterModify extends javax.swing.JFrame  {
         this.btnMini = btnMini;
     }
 
-    public JButton getBtnModifyClient() {
-        return btnModifyClient;
+    public JButton getBtnCancel() {
+        return btnCancel;
     }
 
-    public void setBtnModifyClient(JButton btnModifyClient) {
-        this.btnModifyClient = btnModifyClient;
+    public void setBtnCancel(JButton btnCancel) {
+        this.btnCancel = btnCancel;
     }
+
+    public JButton getBtnSave() {
+        return btnSave;
+    }
+
+    public void setBtnSave(JButton btnSave) {
+        this.btnSave = btnSave;
+    }
+
+    public JDateChooser getjCalendarAdmission_dateEmployee1() {
+        return jCalendarAdmission_dateEmployee1;
+    }
+
+    public void setjCalendarAdmission_dateEmployee1(JDateChooser jCalendarAdmission_dateEmployee1) {
+        this.jCalendarAdmission_dateEmployee1 = jCalendarAdmission_dateEmployee1;
+    }
+
+    public JDateChooser getjCalendarbirth_dateEmployee() {
+        return jCalendarbirth_dateEmployee;
+    }
+
+    public void setjCalendarbirth_dateEmployee(JDateChooser jCalendarbirth_dateEmployee) {
+        this.jCalendarbirth_dateEmployee = jCalendarbirth_dateEmployee;
+    }
+
+    public JPanel getPanButtonCancel() {
+        return panButton;
+    }
+
+    public void setPanButtonCancel(JPanel panButtonCancel) {
+        this.panButton = panButtonCancel;
+    }
+
 
     public JButton getBtnRegisterEmployee() {
-        return btnRegisterEmployee;
+        return btnCancel;
     }
 
     public void setBtnRegisterEmployee(JButton btnRegisterEmployee) {
-        this.btnRegisterEmployee = btnRegisterEmployee;
+        this.btnCancel = btnRegisterEmployee;
     }
 
     public JSeparator getjSeparator10() {
@@ -1560,21 +1523,7 @@ public class RegisterModify extends javax.swing.JFrame  {
         this.jSeparator55 = jSeparator55;
     }
 
-    public JSeparator getjSeparator56() {
-        return jSeparator56;
-    }
-
-    public void setjSeparator56(JSeparator jSeparator56) {
-        this.jSeparator56 = jSeparator56;
-    }
-
-    public JSeparator getjSeparator57() {
-        return jSeparator57;
-    }
-
-    public void setjSeparator57(JSeparator jSeparator57) {
-        this.jSeparator57 = jSeparator57;
-    }
+    
 
     public JSeparator getjSeparator58() {
         return jSeparator58;
@@ -1792,21 +1741,7 @@ public class RegisterModify extends javax.swing.JFrame  {
         this.lblposition_idEmployee1 = lblposition_idEmployee1;
     }
 
-    public JPanel getPanButtonModify() {
-        return panButtonModify;
-    }
-
-    public void setPanButtonModify(JPanel panButtonModify) {
-        this.panButtonModify = panButtonModify;
-    }
-
-    public JPanel getPanButtonRegister() {
-        return panButtonRegister;
-    }
-
-    public void setPanButtonRegister(JPanel panButtonRegister) {
-        this.panButtonRegister = panButtonRegister;
-    }
+   
 
     public JPanel getPanButtonsModifyRegister() {
         return panButtonsModifyRegister;
@@ -1904,13 +1839,7 @@ public class RegisterModify extends javax.swing.JFrame  {
         this.panTopBarButtons = panTopBarButtons;
     }
 
-    public JTextField getTxtAdmission_dateEmployee1() {
-        return txtAdmission_dateEmployee1;
-    }
 
-    public void setTxtAdmission_dateEmployee1(JTextField txtAdmission_dateEmployee1) {
-        this.txtAdmission_dateEmployee1 = txtAdmission_dateEmployee1;
-    }
 
     public JTextField getTxtBirthDate() {
         return txtBirthDate;
@@ -2016,13 +1945,7 @@ public class RegisterModify extends javax.swing.JFrame  {
         this.txtSurnameEmployee1 = txtSurnameEmployee1;
     }
 
-    public JTextField getTxtbirth_dateEmployee1() {
-        return txtbirth_dateEmployee1;
-    }
 
-    public void setTxtbirth_dateEmployee1(JTextField txtbirth_dateEmployee1) {
-        this.txtbirth_dateEmployee1 = txtbirth_dateEmployee1;
-    }
 
     public JTextField getTxtbranch_idEmploye1() {
         return txtbranch_idEmploye1;
@@ -2047,11 +1970,11 @@ public class RegisterModify extends javax.swing.JFrame  {
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton btnCancel;
     public javax.swing.JButton btnExitt;
     public javax.swing.JButton btnMin;
-    private javax.swing.JPanel btnMini;
-    public javax.swing.JButton btnModifyClient;
-    public javax.swing.JButton btnRegisterEmployee;
+    public javax.swing.JPanel btnMini;
+    public javax.swing.JButton btnSave;
     public com.toedter.calendar.JDateChooser jCalendarAdmission_dateEmployee1;
     public com.toedter.calendar.JDateChooser jCalendarbirth_dateEmployee;
     private javax.swing.JSeparator jSeparator10;
@@ -2072,8 +1995,6 @@ public class RegisterModify extends javax.swing.JFrame  {
     private javax.swing.JSeparator jSeparator53;
     private javax.swing.JSeparator jSeparator54;
     private javax.swing.JSeparator jSeparator55;
-    private javax.swing.JSeparator jSeparator56;
-    private javax.swing.JSeparator jSeparator57;
     private javax.swing.JSeparator jSeparator58;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
@@ -2101,8 +2022,7 @@ public class RegisterModify extends javax.swing.JFrame  {
     private javax.swing.JLabel lblbirth_date3;
     private javax.swing.JLabel lblbranch_idEmploye1;
     private javax.swing.JLabel lblposition_idEmployee1;
-    private javax.swing.JPanel panButtonModify;
-    private javax.swing.JPanel panButtonRegister;
+    public javax.swing.JPanel panButton;
     public javax.swing.JPanel panButtonsModifyRegister;
     public javax.swing.JPanel panData;
     private javax.swing.JPanel panDataBranch;
@@ -2112,10 +2032,9 @@ public class RegisterModify extends javax.swing.JFrame  {
     public javax.swing.JPanel panDataEmployee;
     private javax.swing.JPanel panDataEnterprise;
     private javax.swing.JPanel panDataFilm;
-    private javax.swing.JPanel panExitt;
+    public javax.swing.JPanel panExitt;
     public javax.swing.JPanel panRegisterModifyClient;
     public javax.swing.JPanel panTopBarButtons;
-    public javax.swing.JTextField txtAdmission_dateEmployee1;
     public javax.swing.JTextField txtBirthDate;
     public javax.swing.JTextField txtDirectionClient;
     public javax.swing.JTextField txtDirectionEmployee1;
@@ -2129,7 +2048,6 @@ public class RegisterModify extends javax.swing.JFrame  {
     public javax.swing.JTextField txtPhoneEmployee1;
     public javax.swing.JTextField txtSurnameClient;
     public javax.swing.JTextField txtSurnameEmployee1;
-    public javax.swing.JTextField txtbirth_dateEmployee1;
     public javax.swing.JTextField txtbranch_idEmploye1;
     public javax.swing.JTextField txtposition_idEmployee1;
     // End of variables declaration//GEN-END:variables

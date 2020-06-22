@@ -475,6 +475,7 @@ public class ModifyCandy extends javax.swing.JDialog {
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         this.dispose();
+        
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnOkMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOkMouseMoved

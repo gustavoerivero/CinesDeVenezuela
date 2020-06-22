@@ -7,7 +7,8 @@ import views.tables.Table;
 
 // Se importan los models que se van a utilizar
 import models.database.ConnectionDB;
-import models.database.ClientCRUD;
+import models.Employee;
+
 
 // Se importan las clases de soporte a utilizar
 import lib.SuportFunctions;
@@ -18,8 +19,12 @@ import lib.TheaterSeatingChart;
 import java.util.ArrayList;
 import java.awt.event.*;
 import java.awt.Image;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import models.database.*;
+
 
 /**
  *
@@ -31,8 +36,10 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
                 
         // Models
         private ConnectionDB con;
-        private ClientCRUD cli;
+        private EmployeeCRUD empC;
+        
 
+        
         // Controllers
         private ControllerLogin ctrlLogin;
         
@@ -42,12 +49,17 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         private SelectOption select;
         private ChangeBranch changeBranch;
         private ModifyCandy modifyCandy;
+        private RegisterModify registerModify;
         
         // Suport Class
         private SuportFunctions suport;
         
         // Theater Seating Chart
         private TheaterSeatingChart seatingChart;
+        
+        
+        //tablets
+        
                 
     // Instanciar las variables necesarias para el funcionamiento.    
     ArrayList<String> enterprise_data = new ArrayList<String>();
@@ -55,10 +67,12 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
     ArrayList<String> client_data = new ArrayList<String>();
     
     ArrayList<String> id_tickets = new ArrayList<String>();
-        
+
     ArrayList<Object> objectList = new ArrayList<Object>();
     
+    
     ArrayList<Integer> cantCinemaTickets = new ArrayList<Integer>();
+    
     
     // Constructor
     public ControllerMainMenu(){
@@ -68,11 +82,110 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         suport          = new SuportFunctions();
         seatingChart    = new TheaterSeatingChart();
         
+        empC = new EmployeeCRUD();
+        
         // Activamos los eventos por las views.
         mainPage.addEvents(this);
         mainPage.addMouseEvents(this);
+        this.CargarEmpleados();
+        
+        //se carga la lista de empleados, no es lo mas practico pero lo hace !
+        
+  
+    }
+    
+    
+    
+    //Autor Luis David
+    //<editor-fold defaultstate="collapsed" desc=" METODO PARA EL BOTON EMPLEADO ">
+         
+        
+    //<editor-fold defaultstate="collapsed" desc=" Cargar Tabla dE EMPLEADO Funcional">
+      private void CargarEmpleados()
+    
+      {  
+          ResultSet resu;
+        try {
+            DefaultTableModel TablaEmployee = (DefaultTableModel) mainPage.tblEmployee.getModel();
+            resu = empC.listaEmployee();
+            ResultSetMetaData rMd = resu.getMetaData();
+            int cantcolumnas = rMd.getColumnCount();
+            
+
+            while(resu.next()){
+                Object[] filas = new Object[cantcolumnas];
+                    for (int i = 0; i < cantcolumnas ; i++) 
+                    {
+                        filas[i] = resu.getObject(i+1);
+                    }
+                    TablaEmployee.addRow(filas);
+            }
+        } catch (Exception e) {
+        }
         
     }
+      
+      
+       //</editor-fold>
+      
+    //<editor-fold defaultstate="collapsed" desc=" Cargar Tabla V01 Anterior">
+   /* private void CargarTabla2()
+    
+      {  
+        DefaultTableModel tablet = (DefaultTableModel) mainPage.getTblEmployee().getModel();
+        lista2 = empC.lista2();
+        int total = lista2.size();
+        
+        for (int i = 0; i < total ; i++) {
+            
+            tablet.setValueAt(lista2.get(i).getId(), i, 0);
+            tablet.setValueAt(lista2.get(i).getPosition_id(), i, 1);
+            tablet.setValueAt(lista2.get(i).getBranch_id(), i, 2);
+            tablet.setValueAt(lista2.get(i).getName(), i, 3);
+            tablet.setValueAt(lista2.get(i).getSurname(), i, 4);
+            tablet.setValueAt(lista2.get(i).getPhone(), i, 5);
+            tablet.setValueAt(lista2.get(i).getDirection(), i, 6);
+            tablet.setValueAt(lista2.get(i).getBirth_date(), i, 7);
+            tablet.setValueAt(lista2.get(i).getAdmission_date(), i, 8);
+            tablet.setValueAt(lista2.get(i).getEmail(), i, 9);
+            tablet.setValueAt(lista2.get(i).getEstatus(), i, 10);
+          
+            tablet.addRow(new Object[]{"","","","","","","",});
+    }
+        }*/
+       
+        //</editor-fold>
+   
+    //<editor-fold defaultstate="collapsed" desc=" Cargar Tabla V02 Anterior">
+       //metodo para empleado
+      /* {  
+        DefaultTableModel tablet = (DefaultTableModel) mainPage.tblEmployee.getModel();
+        
+        
+        lista2 = empC.lista2(emp);
+        int total = lista2.size();
+        for (int i = 0; i < total ; i++) {
+            
+            tablet.setValueAt(lista2.get(i).getId(), i, 1);
+            tablet.setValueAt(lista2.get(i).getPosition_id(), i, 2);
+            tablet.setValueAt(lista2.get(i).getBranch_id(), i, 3);
+            tablet.setValueAt(lista2.get(i).getName(), i, 4);
+            tablet.setValueAt(lista2.get(i).getSurname(), i, 5);
+            tablet.setValueAt(lista2.get(i).getPhone(), i, 6);
+            tablet.setValueAt(lista2.get(i).getDirection(), i, 7);
+            tablet.setValueAt(lista2.get(i).getBirth_date(), i, 8);
+            tablet.setValueAt(lista2.get(i).getAdmission_date(), i, 9);
+            tablet.setValueAt(lista2.get(i).getEmail(), i, 10);
+            tablet.setValueAt(lista2.get(i).getEstatus(), i, 11);
+          
+            tablet.addRow(new Object[]{"","","","","","","","","","",""});            
+        }
+    }*/
+       //</editor-fold>
+
+
+    //</editor-fold>
+    
 
     /**
      * Método que determina las acciones a realizar por la aplicación según el 
@@ -92,16 +205,8 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         // Salir de la aplicación.
         else if(evt.getSource() == mainPage.btnExit){
             System.exit(0);
-        } 
-        
-        // Cerar Sesión.
-        else if(evt.getSource() == mainPage.btnOut){
-            
-            ctrlLogin = new ControllerLogin();
-            
-            mainPage.dispose();
-            
         }
+        
 
         //</editor-fold>
         
@@ -114,6 +219,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         } 
 
         // Menú Lateral -> Ventas
+
         else if(evt.getSource() == mainPage.btnOptionLateral2){
             suport.cardSelection(mainPage.panContent, mainPage.panOption2);
             suport.cardSelection(mainPage.panOption2, mainPage.panDecisionOption2);
@@ -128,7 +234,9 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         
         // Menú Lateral -> Empleados
         else if(evt.getSource() == mainPage.btnOptionLateral4){
+            //this.CargarEmpleados();
             suport.cardSelection(mainPage.panContent, mainPage.panOption4);
+            
             
         }
         
@@ -168,7 +276,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         // Opción 4 -> Empleados
         else if(evt.getSource() == mainPage.btnBodyOption4){
             mainPage.panBodyOption4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239,232,244)));
-            
+            this.CargarEmpleados();
             suport.cardSelection(mainPage.panContent, mainPage.panOption4);
             
         }
@@ -190,7 +298,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         }
         
         //</editor-fold>
-        
+       
         //<editor-fold defaultstate="collapsed" desc=" Botones del MainPage Option 2 ">
         
         //<editor-fold defaultstate="collapsed" desc=" Decisión en la Opción 2 ">
@@ -227,40 +335,6 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
             changeBranch.dispose();
             
         }
-        
-        //Buscar si el cliente esta registrado
-        else if(evt.getSource()==mainPage.btnSearchClientCandySell){
-            cli= new ClientCRUD();
-            
-           // Se obtienen los datos de la cedula.
-            String id = mainPage.txtIdClientCandySell.getText();
-            
-            // Si el contenido del campo id es vacio
-             if(id.isEmpty() || id.equals("Cédula del cliente")){
-                 
-                 // Se muestra un mensaje emergente de "Ingrese la cédula del cliente".
-                popup = new PopupMessage(mainPage, true, 1, 
-                        "Debe ingresar la cédula del cliente");
-             }else {
-                 if(cli.signer(id)==true){
-            
-                 // Se muestra si se encontro la cedula en el sistema.
-                        System.out.println("El cliente con la cédula'" + id + 
-                                "' ha sido encontrado.");
-
-                        // Se muestra un mensaje emergente de "Cliente Encontrado".
-                        popup = new PopupMessage(mainPage, true, 4, 
-                                "Cliente Encontrado");
-                 } else{
-                      // Se muestra un mensaje emergente de "Cliente no encontrado".
-                        popup = new PopupMessage(mainPage, true, 1, 
-                                "Cliente no Encontrado.");
-                        
-                      //SI NO SE ENCUENTRA, REGISTRAR
-                 }
-            }
-        }
-        
         
         // Agregar golosinas
         else if(evt.getSource() == mainPage.btnAddCandySell){
@@ -974,6 +1048,32 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         
         //</editor-fold>
         
+        //<editor-fold defaultstate="collapsed" desc=" Botones del MainPage Option 4 ">
+  
+        
+        //<editor-fold defaultstate="collapsed" desc=" Boton Añadir Empleado ">
+                
+            // Añadir Empleado
+            else if(evt.getSource() == mainPage.btnAddEmployee){
+            mainPage.panAddEmployee.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239,232,244)));
+            
+           
+            // Instanciar la clase
+            registerModify = new RegisterModify();
+            registerModify.setVisible(true);
+            suport.cardSelection(registerModify.panData, registerModify.panDataEmployee);
+            suport.cardSelection(registerModify.panButtonsModifyRegister, registerModify.panButton);
+            
+            
+            //mainPage.dispose();
+               
+        }
+        
+        //</editor-fold>
+        
+        //</editor-fold>
+        
+        
     }
     
     /**
@@ -1160,6 +1260,20 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         }
         
         //</editor-fold>
+        
+        //<editor-fold defaultstate="collapsed" desc=" EMPLEADO">
+
+        //<editor-fold defaultstate="collapsed" desc=" Seccion de Empleado ">
+                
+        // Añadir Empleado
+        
+         
+   
+        
+        //</editor-fold>
+        
+        //</editor-fold>
+        
         
     }
         

@@ -16,7 +16,12 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import lib.SuportFunctions;
+import lib.TheaterSeatingChart;
 import views.RegisterModify;
+import views.PopupMessage;
+import views.SelectOption;
+import views.MainPage;
 
 
 //models
@@ -29,24 +34,26 @@ public class ControllerEmployeeCRUD implements ActionListener, ItemListener {
     
     private RegisterModify registerModify;
     private EmployeeCRUD   empc;
+    private PopupMessage popup;
+    private SelectOption selectop;
+    private SuportFunctions suport;
+    private MainPage mainpage;
+    private TheaterSeatingChart seatingChart;
     
-   
-   
-    
-    //Controlador
+
+    //Constructor
     public ControllerEmployeeCRUD(){
       
       registerModify = new RegisterModify();
-      registerModify.setVisible(true);
-      registerModify.addEvents(this);
-      registerModify.modificarCampos(false);
+      
 
       empc = new EmployeeCRUD();
+      
+      
+      suport          = new SuportFunctions();
+      seatingChart    = new TheaterSeatingChart();
     }
-    
-    
-    
-    
+
 //<editor-fold defaultstate="collapsed" desc=" metodo de seteo ">
   /* private void SetMedico(Employee emp)
     {
@@ -84,75 +91,124 @@ public class ControllerEmployeeCRUD implements ActionListener, ItemListener {
   
 //<editor-fold defaultstate="collapsed" desc=" AcctionPerformed ">
    
-    
-  public void actionPerformed(ActionEvent e){
       
-        //Boton de Registro del Nuevo Paciente
-         if(e.getSource()==registerModify.btnRegisterEmployee)
-        {
+    public void actionPerformed(java.awt.event.ActionEvent evt){
+  
+      
+                     //Registrar Empleado
+                    /* if(e.getSource()== registerModify.btnRegisterEmployee){
+                     {
+                         if(CamposVacios()==1)
+                         {
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                        String fechaN = sdf.format(registerModify.jCalendarbirth_dateEmployee.getDate());
+                        SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
+                        String ingreso = sdf1.format(registerModify.jCalendarAdmission_dateEmployee1.getDate());
+                    
+                    
+                            Employee emp;
+                             emp = new Employee(registerModify.txtIdEmployee1.getText(), 
+                                     registerModify.txtposition_idEmployee1.getText(),
+                                     registerModify.txtbranch_idEmploye1.getText(),
+                                     registerModify.txtNameEmployee1.getText(),
+                                     registerModify.txtSurnameEmployee1.getText(),
+                                     registerModify.txtPhoneEmployee1.getText(),
+                                     registerModify.txtDirectionEmployee1.getText(),
+                                     fechaN,ingreso,
+                                     registerModify.txtMailEmployee1.getText(),1);
+                             empc.registrarEployee(emp);
+                             
+                             //mensaje de error por campos vacios
+                             popup = new PopupMessage(registerModify, true, 4, 
+                             "Empleado Registrado Exitosamente");
+                             
+                         }
+                         
+                          else{
+                             
+                             //mensaje de error por campos vacios
+                             popup = new PopupMessage(registerModify, true, 1, 
+                             "Debe ingresar todos los datos correspondientes.");
+                             
+                              }
+                         
+                     }*/
+        
+                  
+         
+        //<editor-fold defaultstate="collapsed" desc=" Accion Actualizar Empleado ">
             
-        }
-       
-       
-       
-            // Actualizar Empleado
-              if(e.getSource()== registerModify.btnRegisterEmployee){
+
+             // Actualizar Empleado
+            
+            
+            if(evt.getSource()== registerModify.btnCancel){
             registerModify.modificarCampos(true);
             registerModify.jCalendarbirth_dateEmployee.setEnabled(false);
-                        // Conversion Metodo
+            
+            
+                    // Conversion Metodo
                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                     String fechaN = sdf.format(registerModify.jCalendarbirth_dateEmployee.getDate());
                     SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
                     String ingreso = sdf1.format(registerModify.jCalendarAdmission_dateEmployee1.getDate());
-                    
-          
-            if(CamposVacios()==2)
+
+            if(CamposVacios()==1)
             {
-                            EmployeeCRUD.ActualizarEployee(registerModify.txtIdEmployee1.getText(), 
+                            empc.ActualizarEployee(registerModify.txtIdEmployee1.getText(), 
                             registerModify.txtposition_idEmployee1.getText(),
                             registerModify.txtbranch_idEmploye1.getText(),
                             registerModify.txtNameEmployee1.getText(),
                             registerModify.txtSurnameEmployee1.getText(),
                             registerModify.txtPhoneEmployee1.getText(),
                             registerModify.txtDirectionEmployee1.getText(),
-                            fechaN, ingreso,  //solo me reconoce uno 
+                            fechaN, ingreso,  
                             registerModify.txtMailEmployee1.getText());
+                            
+                            
+                            //mensaje de error por campos vacios
+                             popup = new PopupMessage(registerModify, true, 4, 
+                             "Empleado Actualizado Exitosamente");
                             
             }
             else{
-                //mensaje de Error
+               
+                             //mensaje de error por campos vacios
+                             popup = new PopupMessage(registerModify, true, 1, 
+                             "Debe ingresar todos los datos correspondientes.");
                 
             }
         }
+            
+
+              //</editor-fold> 
+
+        //<editor-fold defaultstate="collapsed" desc=" Accion Eliminar Empleado ">
               
-              
-              //Eliminar Empleado
-              else if(e.getSource()== registerModify.btnEliminarEmployeer)
-              {
-                EmployeeCRUD.EliminarEployee(registerModify.txtIdEmployee1.getText(),);
-              }
-   
-         if(e.getSource() == registerModify.btnMin){
-            registerModify.setExtendedState(java.awt.Frame.ICONIFIED);
-            registerModify.btnMin.setBackground(new java.awt.Color(249,249,249));
-        } 
-        
-        // Salir de la aplicación.
-        else if(e.getSource() == registerModify.btnExitt){
-            registerModify.dispose();
-            //mainPage.setVisible(true);
-        } 
-     
-    }
-    
-    
-    //</editor-fold>
-  
-  
+        //Eliminar Empleado
+
+         else if(evt.getSource()==registerModify.btnCancel)
+            {
+               
+                    selectop = new SelectOption(registerModify, true, 1, 
+                    "Empleado Actualizado Exitosamente", "Aceptar", "Cancelar");
  
+                    if ( selectop.getOpc() == true)
+                    {
+                         //Eliminar Empleado       
+                          empc.EliminarEmployee(registerModify.txtIdEmployee1.getText());
+                    }
+             
+        }
+             //</editor-fold>   
+             
+ //</editor-fold> 
+    }
   
+  //</editor-fold>
+    
 //<editor-fold defaultstate="collapsed" desc=" Metodo Validar Campos ">
-    public int CamposVacios()
+  public int CamposVacios()
     {       
         int campos;
     
@@ -174,44 +230,15 @@ public class ControllerEmployeeCRUD implements ActionListener, ItemListener {
             
         return campos;
     }
-     //</editor-fold>
-    
-public void registrarEmpleado(int tipoPaciente){
-    
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-    Date fecha = registerModify.jCalendarbirth_dateEmployee.getDate();
-    String fechaNacimiento = "";
-    try {
-        fechaNacimiento = sdf.format(fecha);
-        registerModify.jCalendarbirth_dateEmployee.setDate(fecha);
-    } catch (Exception e) 
-    {
-    }
-           String Id, position_id, branch_id, name, surname, phone, direccion, mail;
-            Id = registerModify.txtIdEmployee1.getText();
-            branch_id = registerModify.txtbranch_idEmploye1.getText();
-            position_id = registerModify.txtposition_idEmployee1.getText();
-            name =  registerModify.txtNameEmployee1.getText();
-            phone = registerModify.txtPhoneEmployee1.getText();
-            direccion = registerModify.txtDirectionEmployee1.getText();
-            mail = registerModify.txtMailEmployee1.getText();
-            
-           
-            PacienteAsegurado a = new PacienteAsegurado(nombre, apellido, cedula, telefono, direccion,fechaNacimiento, numeroHistoria, antFamiliares, antPersonales, tipoPaciente, numeroSeguro);
-            
-            pacienteCrud.setEstadoRegistroPaciente(asegurado);
-            pacienteCrud.RegistroPaciente(a, null);
-    
+  
+   //</editor-fold>
+
+
+  
     
 }
+  
+  
+  
 
-
-
-    
-
-    
-    
-}
-         
-            
-        
+  

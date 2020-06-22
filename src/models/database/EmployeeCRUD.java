@@ -7,12 +7,14 @@ package models.database;
 
 
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import models.Employee;
+
 
 /**
  *
@@ -88,11 +90,90 @@ con.desconectar();
 
 //</editor-fold>
 
+
+
+
+
+
+
+
+
+
+
+
+public Employee consultarEmpleado(String id){
+
+            String sql = "SELECT * FROM  \"Empleadito\" WHERE \"Cedula\" = "+id+"';";
+                
+         String  position_id = ""
+                ,branch_id = ""
+                ,name = ""
+                ,surname = ""
+                ,phone = ""
+                ,fechaNacimiento = ""
+                ,direction = ""
+                ,birth_date = ""
+                ,admission_date = ""
+                ,email = "";
+                int tipo = 0;
+                 
+                
+ConnectionDB con = new ConnectionDB();
+con.conectar();
+ResultSet rs = con.queryConsultar(sql);
+con.desconectar();
+
+  try {
+        rs.next();
+        SimpleDateFormat frt = new SimpleDateFormat("dd-MMM-yyyy");
+        SimpleDateFormat frt2 = new SimpleDateFormat("dd-MMM-yyyy");
+        Date dateIngreso;
+        Date dateBirhtday;
+
+            if( Integer.parseInt(rs.getString("Estado"))==1){
+                
+                id = rs.getString("Cedula");
+                position_id = rs.getString("CargoCodigo");
+                branch_id = rs.getString("SucursalCodigo");
+                name = rs.getString("Nombre");
+                surname = rs.getString("Apellido");
+                phone = rs.getString("Telefono");
+                direction = rs.getString("Direccion");
+                dateBirhtday = frt.parse(rs.getString("FechaIngreso"));
+                dateIngreso = frt2.parse(rs.getString("FechaIngreso"));
+                email = rs.getString("Correo");
+                tipo = Integer.parseInt(rs.getString("tipo"));
+            }
+            else if(Integer.parseInt(rs.getString("status"))==0){
+                
+            }
+        } catch (Exception e) 
+        {
+        }
+    
+  
+        Employee emp = new Employee (id, position_id, branch_id, name, surname, fechaNacimiento, 
+                phone, direction, admission_date, tipo, birth_date);
+        return emp;
+
+    
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 //<editor-fold defaultstate="collapsed" desc="Eliminar Empleado "> 
     
- public void EliminarEployee(String ced, int i) {
+ public void EliminarEmployee(String ced) {
 
-if(i==1){
 String sql=  "UPDATE \"Empleadito\" SET \"Estado\" = '0' "
              + "WHERE \"Cedula\" ='" + ced + "';";
 ConnectionDB con = new ConnectionDB();
@@ -100,20 +181,11 @@ con.conectar();
 con.queryInsert(sql);
 con.desconectar();
 }
-else{
-String sql= "UPDATE \"Empleadito\" SET \"Estado\" = '1' "
-             + "WHERE \"Cedula\" ='" + ced + "';";
 
-ConnectionDB con = new ConnectionDB();
-con.conectar();
-con.queryInsert(sql);
-con.desconectar();
- 
-}
-    
-}
-//</editor-fold>
-     
+
+
+
+
 //<editor-fold defaultstate="collapsed" desc=" Cargar Tabla FINAL ">       
    
   //Metodo de Cargar Tabla super Comprimido
@@ -131,6 +203,13 @@ public ResultSet listaEmployee()
 }
 
  //</editor-fold>
+}
+//</editor-fold>
+
+
+ 
+     
+
 
 
 
@@ -230,7 +309,7 @@ return lista;
 }*/
      //</editor-fold>      
          
- }
+ 
     
     
  
