@@ -38,6 +38,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
             // Models.DataBase testing this thing. d fijdiofjdofdfj
 
             private CandyCRUD can;
+            // one more time
             private ClientCRUD cli;
             private EmployeeCRUD empc;
             private EnterpriseCRUD ent;
