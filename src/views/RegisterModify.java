@@ -1,15 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package views;
 import views.tables.Table;
 
-import lib.SuportFunctions;
+import lib.SupportFunctions;
+
 /**
- *
- * @author Marihec
+ *  Materia: Laboratorio I
+ *  Sección: 1
+ *      Integrantes:
+ *          @author Brizuela, Yurisbellys   C.I: 27.142.239
+ *          @author Miranda, Marihec        C.I: 26.120.075
+ *          @author Montero, Michael        C.I: 26.561.077
+ *          @author Rivero, Gustavo         C.I: 26.772.857
+ *          @author Torrealba, Luis         C.I: 26.121.249
  */
 public class RegisterModify extends javax.swing.JFrame {
     // Variables de apoyo para conocer la ubicación de la aplicación.
@@ -22,7 +25,7 @@ public class RegisterModify extends javax.swing.JFrame {
     Table table = new Table();
     
     // Se instancia la clase de soporte.
-    private SuportFunctions suport;
+    private SupportFunctions suport;
     
     /**
      * Creates new form ConsultList
@@ -31,7 +34,7 @@ public class RegisterModify extends javax.swing.JFrame {
      */
     public RegisterModify() {
         initComponents();
-                suport = new SuportFunctions();
+                suport = new SupportFunctions();
         
         // Ubica el JFrame en el centro de la pantalla.
         setLocationRelativeTo(null);

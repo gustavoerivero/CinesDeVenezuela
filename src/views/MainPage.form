@@ -325,17 +325,12 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="btnOptionLateral6" alignment="1" max="32767" attributes="0"/>
-                              <Component id="btnOptionLateral5" alignment="1" max="32767" attributes="0"/>
-                              <Component id="btnOptionLateral4" alignment="1" max="32767" attributes="0"/>
-                              <Component id="btnOptionLateral3" alignment="1" max="32767" attributes="0"/>
-                              <Component id="btnOptionLateral2" alignment="1" max="32767" attributes="0"/>
-                              <Component id="btnOptionLateral1" max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
+                      <Component id="btnOptionLateral1" max="32767" attributes="0"/>
+                      <Component id="btnOptionLateral2" alignment="1" max="32767" attributes="0"/>
+                      <Component id="btnOptionLateral3" alignment="1" max="32767" attributes="0"/>
+                      <Component id="btnOptionLateral4" alignment="1" max="32767" attributes="0"/>
+                      <Component id="btnOptionLateral5" max="32767" attributes="0"/>
+                      <Component id="btnOptionLateral6" alignment="1" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
@@ -1440,7 +1435,7 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
-                                          <EmptySpace min="0" pref="44" max="32767" attributes="0"/>
+                                          <EmptySpace min="0" pref="52" max="32767" attributes="0"/>
                                           <Component id="lblTittleOption2" min="-2" pref="635" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
@@ -1468,7 +1463,7 @@
                                   <Component id="panCapsuleCinemaDecision" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="sepCinemaDecision" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="391" max="32767" attributes="0"/>
+                                  <EmptySpace pref="366" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1542,6 +1537,7 @@
                                 <Property name="borderPainted" type="boolean" value="false"/>
                                 <Property name="contentAreaFilled" type="boolean" value="false"/>
                                 <Property name="focusPainted" type="boolean" value="false"/>
+                                <Property name="horizontalAlignment" type="int" value="2"/>
                                 <Property name="iconTextGap" type="int" value="25"/>
                               </Properties>
                               <Events>
@@ -1622,6 +1618,7 @@
                                 <Property name="borderPainted" type="boolean" value="false"/>
                                 <Property name="contentAreaFilled" type="boolean" value="false"/>
                                 <Property name="focusPainted" type="boolean" value="false"/>
+                                <Property name="horizontalAlignment" type="int" value="2"/>
                                 <Property name="iconTextGap" type="int" value="25"/>
                               </Properties>
                               <Events>
@@ -2641,7 +2638,7 @@
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="pgrCinemaTickets" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="panStepsCinemaTickets" max="32767" attributes="0"/>
+                                  <Component id="panStepsCinemaTickets" pref="492" max="32767" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -2858,7 +2855,7 @@
                                           <Component id="lblFunctionSelector" min="-2" pref="37" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="scpFunctionSelector" min="-2" pref="154" max="-2" attributes="0"/>
-                                          <EmptySpace pref="38" max="32767" attributes="0"/>
+                                          <EmptySpace pref="78" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                 </DimensionLayout>
@@ -3116,7 +3113,7 @@
                                                       <Component id="lblIVAKinderTicket" pref="65" max="32767" attributes="0"/>
                                                       <Component id="lblTotalKinderTicket" max="32767" attributes="0"/>
                                                   </Group>
-                                                  <EmptySpace pref="18" max="32767" attributes="0"/>
+                                                  <EmptySpace max="32767" attributes="0"/>
                                                   <Group type="103" groupAlignment="0" attributes="0">
                                                       <Component id="lblSubtotalAmountKinderTicket" alignment="1" min="-2" pref="67" max="-2" attributes="0"/>
                                                       <Component id="lblIVAAmountKinderTicket" alignment="1" min="-2" pref="67" max="-2" attributes="0"/>
@@ -3382,7 +3379,7 @@
                                               <Component id="lblAmountOldTicket" alignment="3" min="-2" max="-2" attributes="0"/>
                                               <Component id="lblPriceTicketOld" alignment="3" min="-2" max="-2" attributes="0"/>
                                           </Group>
-                                          <EmptySpace pref="39" max="32767" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Group type="102" attributes="0">
                                                   <Group type="103" groupAlignment="3" attributes="0">
@@ -4758,7 +4755,7 @@
                                               </Group>
                                               <Component id="txtSubTotalCinema" alignment="0" min="-2" pref="45" max="-2" attributes="0"/>
                                           </Group>
-                                          <EmptySpace pref="33" max="32767" attributes="0"/>
+                                          <EmptySpace pref="58" max="32767" attributes="0"/>
                                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                               <Component id="btnCinemaSell" alignment="0" pref="62" max="32767" attributes="0"/>
                                               <Component id="btnCinemaSellBackStep" alignment="0" max="32767" attributes="0"/>
@@ -5195,19 +5192,17 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
                               <Component id="panDecisionOption4" min="-2" pref="686" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="panDecisionOption4" min="-2" pref="624" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -5233,19 +5228,11 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  <Component id="sepTittleOption7" min="-2" pref="686" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
+                              <Group type="102" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="sepBranchDecision1" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="sepCinemaRoomDecision1" alignment="1" max="32767" attributes="0"/>
-                                              <Component id="panCapsuleUserDecision" alignment="0" pref="674" max="32767" attributes="0"/>
-                                          </Group>
+                                          <Component id="panCapsuleUserDecision" pref="674" max="32767" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="1" attributes="0">
@@ -5260,6 +5247,14 @@
                                       </Group>
                                   </Group>
                               </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="sepCinemaRoomDecision1" max="32767" attributes="0"/>
+                                      <Component id="sepBranchDecision1" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="sepTittleOption7" alignment="1" pref="686" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
@@ -5268,15 +5263,15 @@
                                   <Component id="lblEmployeeeDecision" min="-2" pref="44" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="sepTittleOption7" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                                   <Component id="panCapsuleEmployeeDecision" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="sepBranchDecision1" min="-2" pref="10" max="-2" attributes="0"/>
+                                  <Component id="sepBranchDecision1" min="-2" pref="4" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="panCapsuleUserDecision" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="sepCinemaRoomDecision1" min="-2" pref="10" max="-2" attributes="0"/>
-                                  <EmptySpace pref="377" max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="sepCinemaRoomDecision1" min="-2" pref="2" max="-2" attributes="0"/>
+                                  <EmptySpace pref="394" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -5329,7 +5324,7 @@
                           <Layout>
                             <DimensionLayout dim="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="btnEmployeeDecision" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="btnEmployeeDecision" alignment="0" max="32767" attributes="0"/>
                               </Group>
                             </DimensionLayout>
                             <DimensionLayout dim="1">
@@ -5351,9 +5346,9 @@
                                   <Font name="Arial" size="12" style="0"/>
                                 </Property>
                                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                                  <Image iconType="3" name="/views/images/employedIcon.png"/>
+                                  <Image iconType="3" name="/views/images/empleado.png"/>
                                 </Property>
-                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;&lt;FONT SIZE=4&gt;Empleado&lt;/Font&gt;&lt;/b&gt;&lt;br&gt;&lt;p align=&#x2019;justify&#x2019;&gt;Gestiona los empleados&lt;/p&gt;&lt;/html&gt;"/>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;&lt;FONT SIZE=4&gt;Empleados&lt;/Font&gt;&lt;/b&gt;&lt;br&gt;&lt;p align=&#x2019;justify&#x2019;&gt;Gestiona la informaci&#xf3;n de los empleados que trabajan para Cines de Venezuela.&lt;/p&gt;&lt;/html&gt;"/>
                                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                                   <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                                     <LineBorder>
@@ -5363,6 +5358,9 @@
                                 </Property>
                                 <Property name="borderPainted" type="boolean" value="false"/>
                                 <Property name="contentAreaFilled" type="boolean" value="false"/>
+                                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                                  <Color id="Cursor de Mano"/>
+                                </Property>
                                 <Property name="focusPainted" type="boolean" value="false"/>
                                 <Property name="horizontalAlignment" type="int" value="2"/>
                                 <Property name="iconTextGap" type="int" value="25"/>
@@ -5426,7 +5424,7 @@
                                   <Font name="Arial" size="12" style="0"/>
                                 </Property>
                                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                                  <Image iconType="3" name="/views/images/employedIcon.png"/>
+                                  <Image iconType="3" name="/views/images/Usuario.png"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;&lt;FONT SIZE=4&gt;Usuarios&lt;/Font&gt;&lt;/b&gt;&lt;br&gt;&lt;p align=&#x2019;justify&#x2019;&gt;Gestiona los usuarios.&lt;/p&gt;&lt;/html&gt;"/>
                                 <Property name="actionCommand" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;&lt;FONT SIZE=4&gt;Salas&lt;/Font&gt;&lt;/b&gt;&lt;br&gt;&lt;p align=&#x2019;justify&#x2019;&gt;Modificar la informaci&#xf3;n de las salas.&lt;/p&gt;&lt;/html&gt;"/>
@@ -5439,8 +5437,11 @@
                                 </Property>
                                 <Property name="borderPainted" type="boolean" value="false"/>
                                 <Property name="contentAreaFilled" type="boolean" value="false"/>
+                                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                                  <Color id="Cursor de Mano"/>
+                                </Property>
                                 <Property name="focusPainted" type="boolean" value="false"/>
-                                <Property name="horizontalAlignment" type="int" value="2"/>
+                                <Property name="horizontalAlignment" type="int" value="10"/>
                                 <Property name="iconTextGap" type="int" value="25"/>
                               </Properties>
                               <Events>
@@ -5485,19 +5486,17 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
                               <Component id="panDecisionOption5" min="-2" pref="686" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="panDecisionOption5" min="-2" pref="624" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -5523,33 +5522,31 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  <Component id="sepTittleOption8" min="-2" pref="686" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
+                              <Group type="102" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="sepBranchDecision" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="sepCinemaRoomDecision" alignment="1" max="32767" attributes="0"/>
-                                              <Component id="panCapsuleEnterpriseDecision" alignment="1" pref="674" max="32767" attributes="0"/>
-                                              <Component id="panCapsuleCinemaRoomDecision" alignment="0" pref="674" max="32767" attributes="0"/>
-                                              <Component id="sepEnterpriseDecision" alignment="1" max="32767" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                          <Component id="lblTittleOption7" min="-2" pref="631" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="1" attributes="0">
                                           <Group type="103" groupAlignment="1" attributes="0">
-                                              <Component id="panCapsuleBranchDecision" alignment="1" pref="671" max="32767" attributes="0"/>
-                                              <Group type="102" alignment="1" attributes="0">
-                                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                                  <Component id="lblTittleOption7" min="-2" pref="631" max="-2" attributes="0"/>
-                                              </Group>
+                                              <Component id="panCapsuleBranchDecision" alignment="0" pref="674" max="32767" attributes="0"/>
+                                              <Component id="panCapsuleEnterpriseDecision" alignment="1" pref="674" max="32767" attributes="0"/>
+                                              <Component id="panCapsuleCinemaRoomDecision" alignment="0" pref="674" max="32767" attributes="0"/>
                                           </Group>
-                                          <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
                                       </Group>
+                                      <Component id="sepBranchDecision" alignment="1" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="sepEnterpriseDecision" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="sepCinemaRoomDecision" max="32767" attributes="0"/>
+                                      <Component id="sepTittleOption8" pref="686" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -5560,19 +5557,19 @@
                                   <Component id="lblTittleOption7" min="-2" pref="44" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="sepTittleOption8" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                                   <Component id="panCapsuleBranchDecision" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="sepBranchDecision" min="-2" pref="10" max="-2" attributes="0"/>
+                                  <Component id="sepBranchDecision" min="-2" pref="4" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="panCapsuleCinemaRoomDecision" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="sepCinemaRoomDecision" min="-2" pref="10" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="sepCinemaRoomDecision" min="-2" pref="4" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="panCapsuleEnterpriseDecision" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="sepEnterpriseDecision" min="-2" pref="10" max="-2" attributes="0"/>
-                                  <EmptySpace pref="281" max="32767" attributes="0"/>
+                                  <EmptySpace pref="296" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -5625,7 +5622,7 @@
                           <Layout>
                             <DimensionLayout dim="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="btnBranchDecision" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="btnBranchDecision" alignment="0" max="32767" attributes="0"/>
                               </Group>
                             </DimensionLayout>
                             <DimensionLayout dim="1">
@@ -5647,7 +5644,7 @@
                                   <Font name="Arial" size="12" style="0"/>
                                 </Property>
                                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                                  <Image iconType="3" name="/views/images/shopIcon.png"/>
+                                  <Image iconType="3" name="/views/images/sucursal.png"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;&lt;FONT SIZE=4&gt;Sucursal&lt;/Font&gt;&lt;/b&gt;&lt;br&gt;&lt;p align=&#x2019;justify&#x2019;&gt;Gestiona los datos de la sucursal&lt;/p&gt;&lt;/html&gt;"/>
                                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -5659,6 +5656,9 @@
                                 </Property>
                                 <Property name="borderPainted" type="boolean" value="false"/>
                                 <Property name="contentAreaFilled" type="boolean" value="false"/>
+                                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                                  <Color id="Cursor de Mano"/>
+                                </Property>
                                 <Property name="focusPainted" type="boolean" value="false"/>
                                 <Property name="horizontalAlignment" type="int" value="2"/>
                                 <Property name="iconTextGap" type="int" value="25"/>
@@ -5700,7 +5700,7 @@
                           <Layout>
                             <DimensionLayout dim="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="btnCinemaRoomDecision" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="btnCinemaRoomDecision" alignment="0" max="32767" attributes="0"/>
                               </Group>
                             </DimensionLayout>
                             <DimensionLayout dim="1">
@@ -5722,7 +5722,7 @@
                                   <Font name="Arial" size="12" style="0"/>
                                 </Property>
                                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                                  <Image iconType="3" name="/views/images/ticketBuyIcon.png"/>
+                                  <Image iconType="3" name="/views/images/sala.png"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;&lt;FONT SIZE=4&gt;Salas&lt;/Font&gt;&lt;/b&gt;&lt;br&gt;&lt;p align=&#x2019;justify&#x2019;&gt;Gestiona la informaci&#xf3;n de las salas.&lt;/p&gt;&lt;/html&gt;"/>
                                 <Property name="actionCommand" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;&lt;FONT SIZE=4&gt;Salas&lt;/Font&gt;&lt;/b&gt;&lt;br&gt;&lt;p align=&#x2019;justify&#x2019;&gt;Modificar la informaci&#xf3;n de las salas.&lt;/p&gt;&lt;/html&gt;"/>
@@ -5735,6 +5735,9 @@
                                 </Property>
                                 <Property name="borderPainted" type="boolean" value="false"/>
                                 <Property name="contentAreaFilled" type="boolean" value="false"/>
+                                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                                  <Color id="Cursor de Mano"/>
+                                </Property>
                                 <Property name="focusPainted" type="boolean" value="false"/>
                                 <Property name="horizontalAlignment" type="int" value="2"/>
                                 <Property name="iconTextGap" type="int" value="25"/>
@@ -5798,7 +5801,7 @@
                                   <Font name="Arial" size="12" style="0"/>
                                 </Property>
                                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                                  <Image iconType="3" name="/views/images/shopIcon.png"/>
+                                  <Image iconType="3" name="/views/images/empresa.png"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;&lt;FONT SIZE=4&gt;Empresa&lt;/Font&gt;&lt;/b&gt;&lt;br&gt;&lt;p align=&#x2019;justify&#x2019;&gt;Gestiona la informaci&#xf3;n de la empresa&lt;/p&gt;&lt;/html&gt;"/>
                                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -5810,6 +5813,9 @@
                                 </Property>
                                 <Property name="borderPainted" type="boolean" value="false"/>
                                 <Property name="contentAreaFilled" type="boolean" value="false"/>
+                                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                                  <Color id="Cursor de Mano"/>
+                                </Property>
                                 <Property name="focusPainted" type="boolean" value="false"/>
                                 <Property name="horizontalAlignment" type="int" value="2"/>
                                 <Property name="iconTextGap" type="int" value="25"/>
@@ -5856,19 +5862,14 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="panDecisionOption6" min="-2" pref="686" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="panDecisionOption6" min="-2" pref="686" max="-2" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="panDecisionOption6" min="-2" pref="624" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -5894,33 +5895,31 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  <Component id="sepTittleOption9" min="-2" pref="686" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
+                              <Group type="102" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="sepBranchDecision2" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="sepCinemaRoomDecision2" alignment="1" max="32767" attributes="0"/>
-                                              <Component id="panCapsuleClientDecision" alignment="1" pref="674" max="32767" attributes="0"/>
-                                              <Component id="panCapsuleCandyDecisionCL" alignment="0" pref="674" max="32767" attributes="0"/>
-                                              <Component id="sepEnterpriseDecision1" alignment="1" max="32767" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="sepBranchDecision2" max="32767" attributes="0"/>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                          <Component id="lblTittleOption8" min="-2" pref="631" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="1" attributes="0">
                                           <Group type="103" groupAlignment="1" attributes="0">
-                                              <Component id="panCapsuleFilmDecision" alignment="1" pref="671" max="32767" attributes="0"/>
-                                              <Group type="102" alignment="1" attributes="0">
-                                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                                  <Component id="lblTittleOption8" min="-2" pref="631" max="-2" attributes="0"/>
-                                              </Group>
+                                              <Component id="panCapsuleFilmDecision" alignment="0" pref="674" max="32767" attributes="0"/>
+                                              <Component id="panCapsuleClientDecision" alignment="1" pref="674" max="32767" attributes="0"/>
+                                              <Component id="panCapsuleCandyDecisionCL" alignment="0" pref="674" max="32767" attributes="0"/>
                                           </Group>
-                                          <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
                                       </Group>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="sepCinemaRoomDecision2" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="sepTittleOption9" alignment="1" pref="686" max="32767" attributes="0"/>
+                                      <Component id="sepEnterpriseDecision1" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -5931,19 +5930,19 @@
                                   <Component id="lblTittleOption8" min="-2" pref="44" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="sepTittleOption9" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                                   <Component id="panCapsuleFilmDecision" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="sepBranchDecision2" min="-2" pref="10" max="-2" attributes="0"/>
+                                  <Component id="sepBranchDecision2" min="-2" pref="4" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="panCapsuleCandyDecisionCL" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="sepCinemaRoomDecision2" min="-2" pref="10" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="sepCinemaRoomDecision2" min="-2" pref="2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="panCapsuleClientDecision" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="sepEnterpriseDecision1" min="-2" pref="10" max="-2" attributes="0"/>
-                                  <EmptySpace pref="281" max="32767" attributes="0"/>
+                                  <EmptySpace pref="298" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -6018,7 +6017,7 @@
                                   <Font name="Arial" size="12" style="0"/>
                                 </Property>
                                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                                  <Image iconType="3" name="/views/images/ticketBuyIcon.png"/>
+                                  <Image iconType="3" name="/views/images/peliculas.png"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;&lt;FONT SIZE=4&gt;Peliculas&lt;/Font&gt;&lt;/b&gt;&lt;br&gt;&lt;p align=&#x2019;justify&#x2019;&gt;Gestiona las peliculas&lt;/p&gt;&lt;/html&gt;"/>
                                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -6030,6 +6029,9 @@
                                 </Property>
                                 <Property name="borderPainted" type="boolean" value="false"/>
                                 <Property name="contentAreaFilled" type="boolean" value="false"/>
+                                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                                  <Color id="Cursor de Mano"/>
+                                </Property>
                                 <Property name="focusPainted" type="boolean" value="false"/>
                                 <Property name="horizontalAlignment" type="int" value="2"/>
                                 <Property name="iconTextGap" type="int" value="25"/>
@@ -6106,6 +6108,9 @@
                                 </Property>
                                 <Property name="borderPainted" type="boolean" value="false"/>
                                 <Property name="contentAreaFilled" type="boolean" value="false"/>
+                                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                                  <Color id="Cursor de Mano"/>
+                                </Property>
                                 <Property name="focusPainted" type="boolean" value="false"/>
                                 <Property name="horizontalAlignment" type="int" value="2"/>
                                 <Property name="iconTextGap" type="int" value="25"/>
@@ -6169,7 +6174,7 @@
                                   <Font name="Arial" size="12" style="0"/>
                                 </Property>
                                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                                  <Image iconType="3" name="/views/images/employedIcon.png"/>
+                                  <Image iconType="3" name="/views/images/cliente1.png"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;&lt;FONT SIZE=4&gt;Cliente&lt;/Font&gt;&lt;/b&gt;&lt;br&gt;&lt;p align=&#x2019;justify&#x2019;&gt;Gestiona la informaci&#xf3;n de los clientes&lt;/p&gt;&lt;/html&gt;"/>
                                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -6181,6 +6186,9 @@
                                 </Property>
                                 <Property name="borderPainted" type="boolean" value="false"/>
                                 <Property name="contentAreaFilled" type="boolean" value="false"/>
+                                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                                  <Color id="Cursor de Mano"/>
+                                </Property>
                                 <Property name="focusPainted" type="boolean" value="false"/>
                                 <Property name="horizontalAlignment" type="int" value="2"/>
                                 <Property name="iconTextGap" type="int" value="25"/>

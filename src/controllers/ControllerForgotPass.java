@@ -2,7 +2,7 @@
 package controllers;
 
 // Se importan las librerías de apoyo.
-import lib.SuportFunctions;
+import lib.SupportFunctions;
 import lib.Mail;
 
 // Se importan los models a utilizar.
@@ -14,8 +14,14 @@ import views.PopupMessage;
 import views.SelectOption;
 
 /**
- *
- * @author Gustavo
+ *  Materia: Laboratorio I
+ *  Sección: 1
+ *      Integrantes:
+ *          @author Brizuela, Yurisbellys   C.I: 27.142.239
+ *          @author Miranda, Marihec        C.I: 26.120.075
+ *          @author Montero, Michael        C.I: 26.561.077
+ *          @author Rivero, Gustavo         C.I: 26.772.857
+ *          @author Torrealba, Luis         C.I: 26.121.249
  */
 public class ControllerForgotPass implements java.awt.event.ActionListener{
     
@@ -27,7 +33,7 @@ public class ControllerForgotPass implements java.awt.event.ActionListener{
         private SelectOption select;
         
         // Librerías de soporte
-        private SuportFunctions suport;
+        private SupportFunctions support;
         private Mail mail;
         
         // Models
@@ -40,7 +46,7 @@ public class ControllerForgotPass implements java.awt.event.ActionListener{
     public ControllerForgotPass(){
     
         // Se instancia clase de soporte.
-        suport = new SuportFunctions();
+        support = new SupportFunctions();
         user = new UserCRUD();
         mail = new Mail();
         
@@ -103,7 +109,7 @@ public class ControllerForgotPass implements java.awt.event.ActionListener{
             else {
             
                 // Si ambos correos electrónicos tienen formato válido.
-                if(suport.verifyEmail(email) && suport.verifyEmail(emailConfirmation)){
+                if(support.verifyEmail(email) && support.verifyEmail(emailConfirmation)){
                     
                     // Si los correos electrónicos son iguales y existe el usuario.
                     if(email.equals(emailConfirmation) && user.signer(email)){
@@ -118,7 +124,7 @@ public class ControllerForgotPass implements java.awt.event.ActionListener{
                                 pass = "cines1234venezuela";
 
                         // Obtener el código de confirmación.
-                        codex = suport.randomCharacterString('1', 6);
+                        codex = support.randomCharacterString('1', 6);
                             
                         // Se procede a enviar el mensaje con el código de verificación.
                         if(mail.sendMessage(mail.authentication(from, pass), 
@@ -131,7 +137,7 @@ public class ControllerForgotPass implements java.awt.event.ActionListener{
                                 + "código de verificación ha sido enviado");
                             
                             // Se cambia la pantalla.
-                            suport.cardSelection(forgot.panContent, forgot.panStepTwo);
+                            support.cardSelection(forgot.panContent, forgot.panStepTwo);
                             
                         } else
                             
@@ -181,7 +187,7 @@ public class ControllerForgotPass implements java.awt.event.ActionListener{
                     "¿Está seguro que desea volver al paso anterior?", null, null);
             
             if(select.getOpc() == true)
-                suport.cardSelection(forgot.panContent, forgot.panStepOne);
+                support.cardSelection(forgot.panContent, forgot.panStepOne);
             
         }
         
@@ -205,7 +211,7 @@ public class ControllerForgotPass implements java.awt.event.ActionListener{
             
             else{
                 
-                suport.cardSelection(forgot.panContent, forgot.panStepThree);
+                support.cardSelection(forgot.panContent, forgot.panStepThree);
                 
             }
             
@@ -258,7 +264,7 @@ public class ControllerForgotPass implements java.awt.event.ActionListener{
                     + " que la segunda es: " + passConfirmation);
             
             // Se comprueba de que las contraseñas sean iguales.
-            if(suport.isPasswordCorrect(forgot.pssPasswordField.getPassword(), 
+            if(support.isPasswordCorrect(forgot.pssPasswordField.getPassword(), 
                     forgot.pssPasswordField1.getPassword())){
                 
                 // Se muestra el aviso de que las contraseñas son iguales.

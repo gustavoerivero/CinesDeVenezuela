@@ -5,8 +5,14 @@ package views;
 import java.util.ArrayList;
 
 /**
- *
- * @author Gustavo
+ *  Materia: Laboratorio I
+ *  Sección: 1
+ *      Integrantes:
+ *          @author Brizuela, Yurisbellys   C.I: 27.142.239
+ *          @author Miranda, Marihec        C.I: 26.120.075
+ *          @author Montero, Michael        C.I: 26.561.077
+ *          @author Rivero, Gustavo         C.I: 26.772.857
+ *          @author Torrealba, Luis         C.I: 26.121.249
  */
 public class ChangeBranch extends javax.swing.JDialog {
     
@@ -22,12 +28,14 @@ public class ChangeBranch extends javax.swing.JDialog {
          * Para los casos en donde la clase padre es un JFrame, se utilizará
          * la clase PopupMessage.
          */
-    private PopupDialogMessage popup;
+    private PopupMessage popup;
     
     private ArrayList<String> cityNames, branchNames;
     
+    private String rolUser;
+    
     public ChangeBranch(java.awt.Frame parent, boolean modal, ArrayList<String> city, 
-            ArrayList<String> cityNames, ArrayList<String> branchNames) {
+            ArrayList<String> cityNames, ArrayList<String> branchNames, String rolUser) {
         
         // Relaciona elementos y decide si es un contenedor modal o no.
         super(parent, modal);
@@ -40,6 +48,7 @@ public class ChangeBranch extends javax.swing.JDialog {
         
         this.cityNames = cityNames;
         this.branchNames = branchNames;
+        this.rolUser = rolUser;
         
         chargeCityNames(city);
         
@@ -383,7 +392,7 @@ public class ChangeBranch extends javax.swing.JDialog {
     
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
         // Si los combobox no se encuentran en su estado inicial.
-        if( cmbCity.getSelectedIndex() != 0 || cmbBranch.getSelectedIndex() != 0  ){
+        if( cmbCity.getSelectedIndex() != 0 && cmbBranch.getSelectedIndex() != 0  ){
             
             // Se indica el valor de la sucursal seleccionada
             sucursal = cmbBranch.getSelectedItem().toString();
@@ -394,7 +403,7 @@ public class ChangeBranch extends javax.swing.JDialog {
         } else{
                 
             // Si no se ha seleccionado algún dato (Ciudad o Sucursal)
-            popup = new PopupDialogMessage(this, true, 1, "Faltan datos por seleccionar");
+            popup = new PopupMessage(this, true, 1, "Faltan datos por seleccionar");
                 
         }
     }//GEN-LAST:event_btnOkActionPerformed
@@ -417,6 +426,9 @@ public class ChangeBranch extends javax.swing.JDialog {
         
         cmbCity.removeAllItems();
         cmbCity.addItem(" - Seleccione - ");
+        
+        if(rolUser.equals("ROL-01"))
+            cmbCity.addItem(" Administrador ");
         
         for(int i = 0; i < cityNames.size(); i++){
             
@@ -448,6 +460,9 @@ public class ChangeBranch extends javax.swing.JDialog {
         
         cmbBranch.removeAllItems();
         cmbBranch.addItem(" - Seleccione - ");
+        
+        if(rolUser.equals("ROL-01"))
+            cmbBranch.addItem("Cines de Venezuela");
         
         for(int i = 0; i < list.size(); i++){
             

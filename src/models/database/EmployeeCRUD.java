@@ -1,15 +1,19 @@
 
 package models.database;
 
-
 import java.sql.ResultSet;
 import models.Employee;
 
 /**
- *
- * @author Luis David
+ *  Materia: Laboratorio I
+ *  Sección: 1
+ *      Integrantes:
+ *          @author Brizuela, Yurisbellys   C.I: 27.142.239
+ *          @author Miranda, Marihec        C.I: 26.120.075
+ *          @author Montero, Michael        C.I: 26.561.077
+ *          @author Rivero, Gustavo         C.I: 26.772.857
+ *          @author Torrealba, Luis         C.I: 26.121.249
  */
-//public class EmployeeCRUD extends conecionLuis
 public class EmployeeCRUD {
 
     private ConnectionDB con;
@@ -221,6 +225,44 @@ return lista;
          
 //</editor-fold>
 
+    /**
+     * Método para obtener los datos de un empleado.
+     * @return Devuelve consulta.
+     */
+    public ResultSet readEmployeeData(String idEmployee){
+        
+        // Se declara una variable de tipo 'ResultSet' para realizar la consulta.
+        ResultSet result;
+        
+        // Se define la sentencia SQL a aplicar en la BD.
+        String SQL = "SELECT \"cedula\", sucursal.\"nombre\" as \"NombreSucursal\", "
+                        + "empleado.\"nombre\", \"apellido\", empleado.\"telefono\", "
+                        + "empleado.\"direccion\", \"fecha_nacimiento\", \"fecha_ingreso\", "
+                        + "\"correo\", \"cargo\" FROM \"empleado\", \"sucursal\" "
+                        + "WHERE \"cedula\" = '" + idEmployee + "' AND \"sucursal_codigo\" = \"codigo\" "
+                        + "AND empleado.\"estado\" = 'A' AND sucursal.\"estado\" = 'A';";
+        
+        // Se instancia y se establece una conexión con la BD.
+        con = new ConnectionDB();
+        con.conectar();
+        
+        // Se realiza y se recibe la consulta.
+        result = con.queryConsultar(SQL);
+        
+        System.out.println("La consulta se realizó con éxito.");
+        
+        // Se desconecta la BD.
+        con.desconectar();
+        
+        // Retorna consulta.
+        return result;
+        
+    }
+
+    /**
+     * Método para obtener a todos los empleados.
+     * @return Devuelve consulta.
+     */
     public ResultSet readAllEmployee(){
         
         // Se declara una variable de tipo 'ResultSet' para realizar la consulta.
@@ -246,7 +288,11 @@ return lista;
         
     }
     
-    
+    /**
+     * Método para obtener todos los empleados de una sucursal.
+     * @param branch Nombre de la sucursal.
+     * @return Devuelve consulta.
+     */
     public ResultSet readAllEmployeeOnBranch(String branch){
         
         // Se declara una variable de tipo 'ResultSet' para realizar la consulta.
@@ -276,11 +322,39 @@ return lista;
     }
     
     /**
+     * Método para realizar una consulta en la BD.
+     * @param SQL Sentencia SQL.
+     * @return Consulta.
+     */
+    public ResultSet readEmployees(String SQL){
+        
+        // Se declara una variable de tipo 'ResultSet' para realizar la consulta.
+        ResultSet result;
+                
+        // Se instancia y se establece una conexión con la BD.
+        con = new ConnectionDB();
+        con.conectar();
+        
+        // Se realiza y se recibe la consulta.
+        result = con.queryConsultar(SQL);
+        
+        System.out.println("La consulta se realizó con éxito.");
+        
+        // Se desconecta la BD.
+        con.desconectar();
+        
+        // Retorna consulta.
+        return result;
+        
+    }
+    
+    /**
      * Método para buscar vendedores según su tipo.
+     * @param branch Para buscar según la rama seleccionada.
      * @param type '1' para vendedor de golosinas y cualquier otro int para vendedor de boletos.
      * @return Consulta.
      */
-    public ResultSet readSellerForType(int type){
+    public ResultSet readSellerForType(String branch, int type){
         
         // Se declara una variable de tipo 'ResultSet' para realizar la consulta.
         ResultSet result;
@@ -289,11 +363,18 @@ return lista;
         String SQL = null;
         
         if(type == 1)
-            SQL = "SELECT * FROM \"empleado\" WHERE "
-                    + "\"cargo\" = 'Vendedor de golosinas' AND \"estado\" = 'A';";
+            SQL = "SELECT empleado.\"nombre\", empleado.\"apellido\" FROM \"empleado\", \"sucursal\" "
+                    + "WHERE \"cargo\" = 'Vendedor de golosinas' AND empleado.\"estado\" = 'A' "
+                    + "AND sucursal.\"estado\" = 'A' AND \"sucursal_codigo\" = \"codigo\"";
         else
-            SQL = "SELECT * FROM \"empleado\" WHERE "
-                    + "\"cargo\" = 'Vendedor de boletos' AND \"estado\" = 'A';";
+            SQL = "SELECT empleado.\"nombre\", empleado.\"apellido\" FROM \"empleado\", \"sucursal\" "
+                    + "WHERE \"cargo\" = 'Vendedor de boletos' AND empleado.\"estado\" = 'A' "
+                    + "AND sucursal.\"estado\" = 'A' AND \"sucursal_codigo\" = \"codigo\"";
+        
+        if(!branch.equals("Cines de Venezuela") && !branch.equals("") && !branch.equals(" - Seleccione - "))
+            SQL += " AND sucursal.\"nombre\" = '" + branch + "'";
+        
+        SQL += ";";
         
         // Se instancia y se establece una conexión con la BD.
         con = new ConnectionDB();

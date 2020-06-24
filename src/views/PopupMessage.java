@@ -2,13 +2,26 @@
 package views;
 
 /**
- *
- * @author Gustavo
+ *  Materia: Laboratorio I
+ *  Sección: 1
+ *      Integrantes:
+ *          @author Brizuela, Yurisbellys   C.I: 27.142.239
+ *          @author Miranda, Marihec        C.I: 26.120.075
+ *          @author Montero, Michael        C.I: 26.561.077
+ *          @author Rivero, Gustavo         C.I: 26.772.857
+ *          @author Torrealba, Luis         C.I: 26.121.249
  */
 public class PopupMessage extends javax.swing.JDialog {
 
     int xx = 0, xy = 0;
     
+    /**
+     * Constructor de mensaje emergente dedicado a Frames.
+     * @param parent Pariente del mensaje emergente.
+     * @param modal Indicar si el mensaje emergente es o no modal.
+     * @param type El tipo de mensaje emergente.
+     * @param message El mensaje a mostrar.
+     */
     public PopupMessage(java.awt.Frame parent, boolean modal, int type, String message) {
         
         super(parent, modal);
@@ -47,6 +60,52 @@ public class PopupMessage extends javax.swing.JDialog {
         setVisible(true);
         
     }
+    
+    /**
+     * Constructor de mensaje emergente dedicado a Mensajes de Dialogos.
+     * @param parent Pariente del mensaje emergente.
+     * @param modal Indicar si el mensaje emergente es o no modal.
+     * @param type El tipo de mensaje emergente.
+     * @param message El mensaje a mostrar.
+     */
+    public PopupMessage(java.awt.Dialog parent, boolean modal, int type, String message) {
+        
+        super(parent, modal);
+        
+        initComponents();
+        
+        // Identificar el tipo de mensaje
+        switch(type){
+            // type == 1 -> Error
+            case 1:
+                lblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("images/errorIcon.png")));
+                break;
+            // type == 2 -> High Priority
+            case 2:
+                lblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("images/highPriorityIcon.png")));
+                break;
+            // type == 3 -> Help
+            case 3:
+                lblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("images/helpIcon.png")));
+                break;
+            // type == 4 -> Ok
+            case 4:
+                lblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("images/okIcon.png")));
+        }
+        
+        // Colocar el mensaje pasado por parámetro en el JDialog
+        lblMessage.setText("<html><p align='center'>" + message + "</p></html>");
+                
+        // Cambia el ícono del JDialog.
+        this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("images/CDV-icon.png")).getImage());
+        
+        // Ubicar el JDialog en el centro de la pantalla.
+        setLocationRelativeTo(null);
+        
+        // Hacer visible el JDialog
+        setVisible(true);
+        
+    }    
 
     /**
      * This method is called from within the constructor to initialize the form.

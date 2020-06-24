@@ -2,6 +2,7 @@
 package controllers;
 
 // Se importan las views a utilizar
+import java.util.ArrayList;
 import views.Login;
 import views.PopupMessage;
 
@@ -10,11 +11,17 @@ import models.database.ConnectionDB;
 import models.database.UserCRUD;
 
 // Se importan las clases de soporte.
-import lib.SuportFunctions;
+import lib.SupportFunctions;
 
 /**
- *
- * @author Gustavo
+ *  Materia: Laboratorio I
+ *  Sección: 1
+ *      Integrantes:
+ *          @author Brizuela, Yurisbellys   C.I: 27.142.239
+ *          @author Miranda, Marihec        C.I: 26.120.075
+ *          @author Montero, Michael        C.I: 26.561.077
+ *          @author Rivero, Gustavo         C.I: 26.772.857
+ *          @author Torrealba, Luis         C.I: 26.121.249
  */
 public class ControllerLogin implements java.awt.event.ActionListener {
     
@@ -26,7 +33,7 @@ public class ControllerLogin implements java.awt.event.ActionListener {
         
         // Models
         private ConnectionDB con;
-        private UserCRUD user;
+        private UserCRUD        userCRUD;
         
         // Controllers
         private ControllerForgotPass forgot;
@@ -34,14 +41,14 @@ public class ControllerLogin implements java.awt.event.ActionListener {
     
         
     // Se declaran clases de soporte.
-    private SuportFunctions suport;
+    private SupportFunctions support;
         
     // Constructor del Login
     public ControllerLogin(){
         
         // Se instancian las clases de soporte.
-        suport = new SuportFunctions();
-        user = new UserCRUD();
+        support = new SupportFunctions();
+        userCRUD = new UserCRUD();
                 
         // Se instancia la view de Login.
         login = new Login();
@@ -108,10 +115,10 @@ public class ControllerLogin implements java.awt.event.ActionListener {
             } else{
                                 
                 // Se verifica el formato del correo ingresado.
-                if(suport.verifyEmail(email)){
+                if(support.verifyEmail(email)){
                     
                     // Si el usuario y la contraseña son correctos.
-                    if(user.signer(email, pass) == true){
+                    if(userCRUD.signer(email, pass) == true){
                         
                         // Se muestra quién ingresó al sistema.
                         System.out.println("El usuario '" + email + "' ha ingresado al"
@@ -120,12 +127,20 @@ public class ControllerLogin implements java.awt.event.ActionListener {
                         // Se muestra un mensaje emergente de "Bienvenido".
                         popup = new PopupMessage(login, true, 4, 
                                 "Bienvenido");
-
+                        
+                        ArrayList<String> support = new ArrayList<>();
+                        
+                        // Se obtienen los datos de acceso del usuario.
+                        support = getDataAccess(email);
+                        
+                        System.out.println("Los datos de acceso del usuario son: " +
+                                "Rol: " + support.get(1) + ". Nombre: " + support.get(0) + ". Sucursal: " + support.get(2));
+                        
                         // Se oculta la view de Login.
                         login.dispose();
 
                         // Se instancia el Controlador de MainMenu.
-                        mainMenu = new ControllerMainMenu();
+                        mainMenu = new ControllerMainMenu(support.get(1), support.get(0), support.get(2));
 
                     } 
                     
@@ -174,5 +189,41 @@ public class ControllerLogin implements java.awt.event.ActionListener {
         }
         
     }
+     
+    /**
+     * Método para obtener los datos de acceso de un usuario.
+     * @param email Correo electrónico del usuario que va a ingresar al sistema.
+     */
+    private ArrayList<String> getDataAccess(String email){
         
+        // Se instancia la clase a utilizar.
+        userCRUD = new UserCRUD();
+        
+        // Se declara la variable que devuelve el resultado.
+        java.sql.ResultSet result;
+        
+        ArrayList<String> support = new ArrayList<>();
+        
+        try {
+            result = userCRUD.getDataAccess(email);
+            while(result.next()){
+                support.add(result.getString("NombreEmpleado") + " " + result.getString("ApellidoEmpleado"));
+                support.add(result.getString("CodigoRol"));
+                support.add(result.getString("NombreSucursal"));
+            }
+                                    
+            System.out.println("Éxito.");
+            
+            return support;
+                                    
+        } catch (java.sql.SQLException e) {
+            
+            System.out.println("Error: " + e);
+            
+        }
+        
+        return null;
+        
+    }
+    
 }

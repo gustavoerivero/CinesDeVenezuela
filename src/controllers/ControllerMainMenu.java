@@ -10,7 +10,7 @@ import models.*;
 import models.database.*;
 
 // Se importan las clases de soporte a utilizar
-import lib.SuportFunctions;
+import lib.SupportFunctions;
 import lib.PDFGenerator;
 import lib.TheaterSeatingChart;
 
@@ -18,72 +18,91 @@ import lib.TheaterSeatingChart;
 import java.util.ArrayList;
 import java.awt.event.*;
 import java.awt.Image;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author Gustavo
+ *  Materia: Laboratorio I
+ *  Sección: 1
+ *      Integrantes:
+ *          @author Brizuela, Yurisbellys   C.I: 27.142.239
+ *          @author Miranda, Marihec        C.I: 26.120.075
+ *          @author Montero, Michael        C.I: 26.561.077
+ *          @author Rivero, Gustavo         C.I: 26.772.857
+ *          @author Torrealba, Luis         C.I: 26.121.249
  */
 public class ControllerMainMenu implements ActionListener, MouseListener, ItemListener{
     
-    // Instanciar las clases necesarias para el funcionamiento.
+    //<editor-fold defaultstate="collapsed" desc=" Declaración de variables ">
                 
         // Models
         private Invoice invM;
     
             // Models.DataBase
-            private CandyCRUD can;
-            private ClientCRUD cli;
-            private EmployeeCRUD empc;
-            private EnterpriseCRUD ent;
-            private TicketCRUD tic;
-            private InvoiceCRUD inv;
-            private CityCRUD cit;
-            private BranchCRUD bra;
+            private CandyCRUD       canCRUD;
+            private ClientCRUD      cliCRUD;
+            private EmployeeCRUD    empCRUD;
+            private EnterpriseCRUD  entCRUD;
+            private TicketCRUD      ticCRUD;
+            private InvoiceCRUD     invCRUD;
+            private CityCRUD        citCRUD;
+            private BranchCRUD      braCRUD;
 
         // Controllers
         private ControllerLogin ctrlLogin;
         
         // Views
-        private MainPage mainPage;
-        private PopupMessage popup;
-        private SelectOption select;
-        private ChangeBranch changeBranch;
-        private ModifyCandy modifyCandy;
-        private ConsultList consulList;
-        private RegisterModify registerModify;
+        private MainPage        mainPage;
+        private PopupMessage    popup;
+        private SelectOption    select;
+        private ChangeBranch    changeBranch;
+        private ModifyCandy     modifyCandy;
+        private ConsultList     consulList;
+        private RegisterModify  registerModify;
         
-        // Suport Class
-        private SuportFunctions suport;
+        // Support Class
+        private SupportFunctions support;
         
         // Theater Seating Chart
         private TheaterSeatingChart seatingChart;
-                
-    // Instanciar las variables necesarias para el funcionamiento.
-                
+                                
     ArrayList<Object> objectList = new ArrayList<>();
     
     ArrayList<Integer> cantCinemaTickets = new ArrayList<>();
     
+    private String  rolUser,
+                    nameUser,
+                    nameBranch;
     
+    //</editor-fold>
     
-    // Constructor
-    public ControllerMainMenu(){
+    /**
+     * Constructor del Controlador del Menú Principal.
+     * @param rolUser Código del usuario que ha ingresado al sistema.
+     * @param nameUser Nombre y Apellido del usuario que ha ingresado al sistema.
+     * @param nameBranch Nombre de la Sucursal a la que pertenece el usuario que
+     * ha ingresado al sistema.
+     */
+    public ControllerMainMenu(String rolUser, String nameUser, String nameBranch){
         
         // Declarar la variable de las clases instanciadas.
         mainPage        = new MainPage();
-        suport          = new SuportFunctions();
+        support         = new SupportFunctions();
         seatingChart    = new TheaterSeatingChart();
+                
+        // Se inicializan las variables de apoyo.
+        this.rolUser    = rolUser;
+        this.nameUser   = nameUser;
+        this.nameBranch = nameBranch;
+        
+        // Se habilitan o deshabilitan los botónes según el rol del usuario.
+        enabledButtons(rolUser);
         
         // Activamos los eventos por las views.
         mainPage.addEvents(this);
         mainPage.addMouseEvents(this);
         mainPage.addItemEvents(this);
                 
-        empc = new EmployeeCRUD();
     }
     
     //<editor-fold defaultstate="collapsed" desc=" Cargar Tabla de EMPLEADO Funcional">
@@ -93,7 +112,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
           ResultSet resu;
         try {
             DefaultTableModel TablaEmployee = (DefaultTableModel) consulList.getTblEmployee().getModel();
-            resu = empc.listaEmployee();
+            resu = empCRUD.listaEmployee();
             ResultSetMetaData rMd = resu.getMetaData();
             int cantcolumnas = rMd.getColumnCount();
             
@@ -169,38 +188,38 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
         
         // Menú Lateral -> Inicio
         else if(evt.getSource() == mainPage.btnOptionLateral1){
-            suport.cardSelection(mainPage.panContent, mainPage.panOption1);
+            support.cardSelection(mainPage.panContent, mainPage.panOption1);
             
         } 
 
         // Menú Lateral -> Ventas
         else if(evt.getSource() == mainPage.btnOptionLateral2){
-            suport.cardSelection(mainPage.panContent, mainPage.panOption2);
-            suport.cardSelection(mainPage.panOption2, mainPage.panDecisionOption2);
+            support.cardSelection(mainPage.panContent, mainPage.panOption2);
+            support.cardSelection(mainPage.panOption2, mainPage.panDecisionOption2);
             
         }
         
         // Menú Lateral -> Reportes
         else if(evt.getSource() == mainPage.btnOptionLateral3){
-            suport.cardSelection(mainPage.panContent, mainPage.panOption3);
+            support.cardSelection(mainPage.panContent, mainPage.panOption3);
             
         }
         
         // Menú Lateral -> Empleados
         else if(evt.getSource() == mainPage.btnOptionLateral4){
-            suport.cardSelection(mainPage.panContent, mainPage.panOption4);
+            support.cardSelection(mainPage.panContent, mainPage.panOption4);
             
         }
         
         // Menú Lateral -> Sucursales
         else if(evt.getSource() == mainPage.btnOptionLateral5){
-            suport.cardSelection(mainPage.panContent, mainPage.panOption5);
+            support.cardSelection(mainPage.panContent, mainPage.panOption5);
             
         }
         
         // Menú Lateral -> Configuración
         else if(evt.getSource() == mainPage.btnOptionLateral6){
-            suport.cardSelection(mainPage.panContent, mainPage.panOption6);
+            support.cardSelection(mainPage.panContent, mainPage.panOption6);
             
         }
         
@@ -212,8 +231,8 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
         else if(evt.getSource() == mainPage.btnBodyOption2){
             mainPage.panBodyOption2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239,232,244)));
            
-            suport.cardSelection(mainPage.panContent, mainPage.panOption2);
-            suport.cardSelection(mainPage.panOption2, mainPage.panDecisionOption2);
+            support.cardSelection(mainPage.panContent, mainPage.panOption2);
+            support.cardSelection(mainPage.panOption2, mainPage.panDecisionOption2);
                         
         }
         
@@ -221,7 +240,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
         else if(evt.getSource() == mainPage.btnBodyOption3){
             mainPage.panBodyOption3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239,232,244)));
             
-            suport.cardSelection(mainPage.panContent, mainPage.panOption3);
+            support.cardSelection(mainPage.panContent, mainPage.panOption3);
             
         }
         
@@ -229,7 +248,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
         else if(evt.getSource() == mainPage.btnBodyOption4){
             mainPage.panBodyOption4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239,232,244)));
             
-            suport.cardSelection(mainPage.panContent, mainPage.panOption4);
+            support.cardSelection(mainPage.panContent, mainPage.panOption4);
             
         }
         
@@ -237,7 +256,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
         else if(evt.getSource() == mainPage.btnBodyOption5){
             mainPage.panBodyOption5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239,232,244)));
             
-            suport.cardSelection(mainPage.panContent, mainPage.panOption5);
+            support.cardSelection(mainPage.panContent, mainPage.panOption5);
             
         }
         
@@ -245,7 +264,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
         else if(evt.getSource() == mainPage.btnBodyOption6){
             mainPage.panBodyOption6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239,232,244)));
             
-            suport.cardSelection(mainPage.panContent, mainPage.panOption6);
+            support.cardSelection(mainPage.panContent, mainPage.panOption6);
             
         }
         
@@ -259,13 +278,20 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
         else if(evt.getSource() == mainPage.btnCandyDecision){
             mainPage.panCapsuleCandyDecision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239,232,244)));
         
-            suport.cardSelection(mainPage.panOption2, mainPage.panCandySell);
+            support.cardSelection(mainPage.panOption2, mainPage.panCandySell);
             
             mainPage.clearCandySell();
             
-            loadCandy();
+            loadCandy(nameBranch);
             
-            loadEmployeeOnComboBox(mainPage.cmbCandySeller, 1);
+            loadEmployeeOnComboBox(nameBranch, mainPage.cmbCandySeller, 1);
+            
+            mainPage.cmbCandySeller.setSelectedItem(nameUser);
+            
+            if(!rolUser.equals("ROL-01") && !rolUser.equals("ROL-02"))
+                mainPage.cmbCandySeller.setEnabled(false);
+            else
+                mainPage.cmbCandySeller.setEnabled(true);
                         
         }
         
@@ -275,7 +301,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
         else if(evt.getSource() == mainPage.btnBackToTicketDecision1){
             mainPage.btnBackToTicketDecision1.setBackground(new java.awt.Color(249,249,249));
             
-            suport.cardSelection(mainPage.panOption2, mainPage.panDecisionOption2);
+            support.cardSelection(mainPage.panOption2, mainPage.panDecisionOption2);
             
         }
         
@@ -289,7 +315,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
             loadBranch(cityBranch, branchNames);
                         
             // Instanciar la clase
-            changeBranch = new ChangeBranch(mainPage, true, cityNames, cityBranch, branchNames);
+            changeBranch = new ChangeBranch(mainPage, true, cityNames, cityBranch, branchNames, rolUser);
             
             // Se ubica el nombre de la sucursal.
             mainPage.lblSucursalNameCandySell.setText(changeBranch.getId_Sucursal());
@@ -299,21 +325,33 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
             mainPage.cmbCandySeller.removeAllItems();
             mainPage.cmbCandySeller.addItem(" - Seleccione - ");
             
+            int index = 0;
+            
             for(int i = 0; i < list.size(); i++){
                 
                 mainPage.cmbCandySeller.addItem(list.get(i));
+                
+                if(rolUser.equals("ROL-04") && list.get(i).equals(nameUser))
+                    index = i;
                 
             }
             
             mainPage.cmbCandySeller.repaint();
             
+            mainPage.cmbCandySeller.setSelectedIndex(index);
+            
+            if(!rolUser.equals("ROL-01") && !rolUser.equals("ROL-02"))
+                mainPage.cmbCandySeller.setEnabled(false);
+            else
+                mainPage.cmbCandySeller.setEnabled(true);
+                        
             changeBranch.dispose();
             
         }
         
         //Buscar si el cliente esta registrado
         else if(evt.getSource()==mainPage.btnSearchClientCandySell){
-            cli= new ClientCRUD();
+            cliCRUD= new ClientCRUD();
             
            // Se obtienen los datos de la cedula.
             String id = mainPage.txtIdClientCandySell.getText();
@@ -325,7 +363,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
                 popup = new PopupMessage(mainPage, true, 1, 
                         "Debe ingresar la cédula del cliente");
              }else {
-                 if(cli.signer(id)==true){
+                 if(cliCRUD.signer(id)==true){
             
                  // Se muestra si se encontro la cedula en el sistema.
                         System.out.println("El cliente con la cédula'" + id + 
@@ -578,8 +616,8 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
                         Date date = new Date();
                         Date fecha = sdf.parse(String.valueOf(date));
           
-                        amount = suport.numberDecimalFormat(amount, 2);
-                        iva = suport.numberDecimalFormat(amount * 0.16, 2);
+                        amount = support.numberDecimalFormat(amount, 2);
+                        iva = support.numberDecimalFormat(amount * 0.16, 2);
                         
                         Invoice invM = new Invoice(idInvoice, idEmployee, idClient, 
                                 fecha, iva, amount, 'A');
@@ -620,9 +658,9 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
         else if(evt.getSource() == mainPage.btnCinemaDecision){
             mainPage.panCapsuleCinemaDecision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239,232,244)));
         
-            suport.cardSelection(mainPage.panOption2, mainPage.panCinemaSell);
+            support.cardSelection(mainPage.panOption2, mainPage.panCinemaSell);
             
-            suport.cardSelection(mainPage.panStepsCinemaTickets, mainPage.panFirstStepCinemaTickets);
+            support.cardSelection(mainPage.panStepsCinemaTickets, mainPage.panFirstStepCinemaTickets);
             
             mainPage.clearMovieTable(mainPage.tblMovieSelector);
             
@@ -638,7 +676,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
         else if(evt.getSource() == mainPage.btnBackToTicketDecision2){
             mainPage.btnBackToTicketDecision2.setBackground(new java.awt.Color(249,249,249));
                         
-            suport.cardSelection(mainPage.panOption2, mainPage.panDecisionOption2);
+            support.cardSelection(mainPage.panOption2, mainPage.panDecisionOption2);
             
             
         }
@@ -653,7 +691,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
             loadBranch(cityBranch, branchNames);
                         
             // Instanciar la clase
-            changeBranch = new ChangeBranch(mainPage, true, cityNames, cityBranch, branchNames);
+            changeBranch = new ChangeBranch(mainPage, true, cityNames, cityBranch, branchNames, rolUser);
             
             // Se ubica el nombre de la sucursal.
             mainPage.lblSucursalNameCinemaTickets.setText(changeBranch.getId_Sucursal());
@@ -668,8 +706,13 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
                 mainPage.cmbCinemaSeller.addItem(list.get(i));
                 
             }
-            
+                        
             mainPage.cmbCinemaSeller.repaint();
+            
+            if(!rolUser.equals("ROL-01") && !rolUser.equals("ROL-02"))
+                mainPage.cmbCandySeller.setEnabled(false);
+            else
+                mainPage.cmbCandySeller.setEnabled(true);
             
             changeBranch.dispose();
             
@@ -699,7 +742,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
                 if(select.getOpc()){
 
                     // Se muestra el paso anterior para compra de boletos.
-                    suport.cardSelection(mainPage.panStepsCinemaTickets, 
+                    support.cardSelection(mainPage.panStepsCinemaTickets, 
                             mainPage.panFirstStepCinemaTickets);
 
                     /*
@@ -725,7 +768,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
             else {
                 
                 // Se muestra el paso anterior para compra de boletos.
-                suport.cardSelection(mainPage.panStepsCinemaTickets, 
+                support.cardSelection(mainPage.panStepsCinemaTickets, 
                         mainPage.panFirstStepCinemaTickets);
 
                 /*
@@ -793,7 +836,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
         else if(evt.getSource() == mainPage.btnBackToCantCinemaTickets){
                         
             // Se muestra el paso anterior para compra de boletos.
-            suport.cardSelection(mainPage.panStepsCinemaTickets, 
+            support.cardSelection(mainPage.panStepsCinemaTickets, 
                     mainPage.panSecondStepCinemaTickets);
 
             /*
@@ -829,7 +872,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
             if(seatingChart.getSeatsSelected().size() == cant){
                 
                 // Se muestra el paso anterior para compra de boletos.
-                suport.cardSelection(mainPage.panStepsCinemaTickets, 
+                support.cardSelection(mainPage.panStepsCinemaTickets, 
                         mainPage.panFourthStepCinemaTickets);
                       
                 // Se muestran los tickets a comprar.
@@ -1232,7 +1275,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
                 showAmountsOfCinemaTickets();
 
                 // Se muestra el paso anterior para compra de boletos.
-                suport.cardSelection(mainPage.panStepsCinemaTickets, 
+                support.cardSelection(mainPage.panStepsCinemaTickets, 
                         mainPage.panSecondStepCinemaTickets);
 
                 /*
@@ -1376,30 +1419,34 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
         //</editor-fold>
         
         //<editor-fold defaultstate="collapsed" desc=" Botones del MainPage Option 4 ">
-        //<editor-fold defaultstate="collapsed" desc=" CRUD Employee ">    
+        
+        //<editor-fold defaultstate="collapsed" desc=" CRUD Employee "> 
+        
         //Consultar listado ->  Empleado
-         else if(evt.getSource() == mainPage.btnEmployeeDecision)
-         {
-            consulList = new ConsultList();
-            consulList.lblEntityName.setText("Empleado");
-            suport.cardSelection(consulList.panTableConsultList, consulList.panTableConsultEmployeeList);   
-            suport.cardSelection(consulList.panFilter, consulList.panFilterEmployee);
-            consulList.addEvents(this);
-         }
+        else if(evt.getSource() == mainPage.btnEmployeeDecision)
+        {
+            
+            // Se instancia y se declara la clase.
+            ControllerEmployeeManagement contEmployeeManagement = 
+                    new ControllerEmployeeManagement(rolUser, nameUser, nameBranch);
+             
+        }
 
          //Añadir Empleado
          else if((evt.getSource() == consulList.btnAdd)&&("Empleado".equals(consulList.lblEntityName.getText())))
          {
                registerModify = new RegisterModify();
                registerModify.lblModifyRegistrer.setText("Registrar Empleado");
-               suport.cardSelection(registerModify.panButtonsModifyRegister, registerModify.panButtonRegister);    
-               suport.cardSelection(registerModify.panData, registerModify.panDataEmployee); 
+               support.cardSelection(registerModify.panButtonsModifyRegister, registerModify.panButtonRegister);    
+               support.cardSelection(registerModify.panData, registerModify.panDataEmployee); 
                registerModify.addEvents(this);
 
-         }
+        }
+         
         //</editor-fold>
+         
         //</editor-fold>
-        
+                 
         //<editor-fold defaultstate="collapsed" desc=" Botones del MainPage Option 5 ">
         
         //<editor-fold defaultstate="collapsed" desc=" CRUD Branch ">    
@@ -1408,8 +1455,8 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
          {
             consulList = new ConsultList();
             consulList.lblEntityName.setText("Sucursal");
-            suport.cardSelection(consulList.panTableConsultList, consulList.panTableConsultBranchList);   
-            suport.cardSelection(consulList.panFilter, consulList.panFilterBranch);
+            support.cardSelection(consulList.panTableConsultList, consulList.panTableConsultBranchList);   
+            support.cardSelection(consulList.panFilter, consulList.panFilterBranch);
             consulList.addEvents(this);
          }
         //Añadir Sucursal
@@ -1417,8 +1464,8 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
          {      
                registerModify = new RegisterModify();
                registerModify.lblModifyRegistrer.setText("Registrar Sucursal");
-               suport.cardSelection(registerModify.panButtonsModifyRegister, registerModify.panButtonRegister);    
-               suport.cardSelection(registerModify.panData, registerModify.panDataBranch); 
+               support.cardSelection(registerModify.panButtonsModifyRegister, registerModify.panButtonRegister);    
+               support.cardSelection(registerModify.panData, registerModify.panDataBranch); 
                registerModify.addEvents(this);
          }
         //</editor-fold>
@@ -1429,8 +1476,8 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
          {
             consulList = new ConsultList();
             consulList.lblEntityName.setText("Sala");
-            suport.cardSelection(consulList.panTableConsultList, consulList.panTableConsultCinemaRoomList);   
-            suport.cardSelection(consulList.panFilter, consulList.panFilterCinemaRoom);
+            support.cardSelection(consulList.panTableConsultList, consulList.panTableConsultCinemaRoomList);   
+            support.cardSelection(consulList.panFilter, consulList.panFilterCinemaRoom);
             consulList.addEvents(this);
          }
          //Añadir Sala
@@ -1438,8 +1485,8 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
          {
                registerModify = new RegisterModify();
                registerModify.lblModifyRegistrer.setText("Registrar Sala");
-               suport.cardSelection(registerModify.panButtonsModifyRegister, registerModify.panButtonRegister);    
-               suport.cardSelection(registerModify.panData, registerModify.panDataCinemaRoom); 
+               support.cardSelection(registerModify.panButtonsModifyRegister, registerModify.panButtonRegister);    
+               support.cardSelection(registerModify.panData, registerModify.panDataCinemaRoom); 
                registerModify.addEvents(this);
 
          }
@@ -1452,8 +1499,8 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
          {
             consulList = new ConsultList();
             consulList.lblEntityName.setText("Sala");
-            suport.cardSelection(consulList.panTableConsultList, consulList.panTableConsultEnterpriseList);   
-            suport.cardSelection(consulList.panFilter, consulList.panFilterEnterprise);
+            support.cardSelection(consulList.panTableConsultList, consulList.panTableConsultEnterpriseList);   
+            support.cardSelection(consulList.panFilter, consulList.panFilterEnterprise);
             consulList.addEvents(this);
          }
          //Añadir Empresa
@@ -1461,8 +1508,8 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
          {
                registerModify = new RegisterModify();
                registerModify.lblModifyRegistrer.setText("Registrar Empresa");
-               suport.cardSelection(registerModify.panButtonsModifyRegister, registerModify.panButtonRegister);    
-               suport.cardSelection(registerModify.panData, registerModify.panDataEnterprise); 
+               support.cardSelection(registerModify.panButtonsModifyRegister, registerModify.panButtonRegister);    
+               support.cardSelection(registerModify.panData, registerModify.panDataEnterprise); 
                registerModify.addEvents(this);
          }
 //michaelmontero.idb@gmail.com
@@ -1671,7 +1718,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
                         
                         mainPage.pgrCinemaTickets.setValue(25);
                         
-                        suport.cardSelection(mainPage.panStepsCinemaTickets, mainPage.panSecondStepCinemaTickets);
+                        support.cardSelection(mainPage.panStepsCinemaTickets, mainPage.panSecondStepCinemaTickets);
                         
                         /*
                          * Método para retornar los valores gráficos de los botones de 
@@ -1695,12 +1742,215 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
     //<editor-fold defaultstate="collapsed" desc=" Métodos para el funcionamiento del Controller ">
     
     /**
+     * Método para habilitar o deshabilitar botónes según el rol del usuario que
+     * ingresa al sistema.
+     * @param rol Rol del usuario que ingresa al sistema.
+     */
+    private void enabledButtons(String rol){
+        
+        switch(rol){
+            
+            // Rol: Administrador
+            case "ROL-01":
+                
+                // Menú Lateral:
+                mainPage.btnOptionLateral1.setEnabled(true);
+                mainPage.btnOptionLateral2.setEnabled(true);
+                mainPage.btnOptionLateral3.setEnabled(true);
+                mainPage.btnOptionLateral4.setEnabled(true);
+                mainPage.btnOptionLateral5.setEnabled(true);
+                mainPage.btnOptionLateral6.setEnabled(true);
+                
+                // Opción 1:
+                mainPage.btnBodyOption1.setEnabled(true);
+                mainPage.btnBodyOption2.setEnabled(true);
+                mainPage.btnBodyOption3.setEnabled(true);
+                mainPage.btnBodyOption4.setEnabled(true);
+                mainPage.btnBodyOption5.setEnabled(true);
+                mainPage.btnBodyOption6.setEnabled(true);
+                
+                // Opción 2:
+                mainPage.btnCandyDecision.setEnabled(true);
+                mainPage.btnCinemaDecision.setEnabled(true);
+                    // Candy Decision:
+                    mainPage.lblSucursalNameCandySell.setText(nameBranch);
+                    mainPage.btnChangeSucursalCandySell.setEnabled(true);
+                    // Cinema Decision:
+                    mainPage.lblSucursalNameCinemaTickets.setText(nameBranch);
+                    mainPage.btnChangeSucursalCinemaTickets.setEnabled(true);
+                    
+                // Opción 3:
+                    
+                // Opción 4:
+                mainPage.btnEmployeeDecision.setEnabled(true);
+                mainPage.btnUserDecision.setEnabled(true);
+                
+                // Opción 5:
+                mainPage.btnBranchDecision.setEnabled(true);
+                mainPage.btnCinemaRoomDecision.setEnabled(true);
+                mainPage.btnEnterpriseDecision.setEnabled(true);
+                
+                // Opción 6:
+                mainPage.btnFilmDecision.setEnabled(true);
+                mainPage.btnCandyDecisionCL.setEnabled(true);
+                mainPage.btnClientDecision.setEnabled(true);
+                
+                break;
+                
+            // Rol: Gerente
+            case "ROL-02":
+                
+                // Menú Lateral:
+                mainPage.btnOptionLateral1.setEnabled(true);
+                mainPage.btnOptionLateral2.setEnabled(true);
+                mainPage.btnOptionLateral3.setEnabled(true);
+                mainPage.btnOptionLateral4.setEnabled(true);
+                mainPage.btnOptionLateral5.setEnabled(true);
+                mainPage.btnOptionLateral6.setEnabled(true);
+                
+                // Opción 1:
+                mainPage.btnBodyOption1.setEnabled(true);
+                mainPage.btnBodyOption2.setEnabled(true);
+                mainPage.btnBodyOption3.setEnabled(true);
+                mainPage.btnBodyOption4.setEnabled(true);
+                mainPage.btnBodyOption5.setEnabled(true);
+                mainPage.btnBodyOption6.setEnabled(true);
+                    
+                // Opción 2:
+                mainPage.btnCandyDecision.setEnabled(true);
+                mainPage.btnCinemaDecision.setEnabled(true);
+                    // Candy Decision:
+                    mainPage.lblSucursalNameCandySell.setText(nameBranch);
+                    mainPage.btnChangeSucursalCandySell.setEnabled(false);
+                    // Cinema Decision:
+                    mainPage.lblSucursalNameCinemaTickets.setText(nameBranch);
+                    mainPage.btnChangeSucursalCinemaTickets.setEnabled(false);
+                    
+                // Opción 3:
+                    
+                // Opción 4:
+                mainPage.btnEmployeeDecision.setEnabled(true);
+                mainPage.btnUserDecision.setEnabled(true);
+                
+                // Opción 5:
+                mainPage.btnBranchDecision.setEnabled(true);
+                mainPage.btnCinemaRoomDecision.setEnabled(false);
+                mainPage.btnEnterpriseDecision.setEnabled(false);
+                
+                // Opción 6:
+                mainPage.btnFilmDecision.setEnabled(true);
+                mainPage.btnCandyDecisionCL.setEnabled(true);
+                mainPage.btnClientDecision.setEnabled(true);
+                
+                break;
+                
+            // Rol: Vendedor de boletos
+            case "ROL-03":
+                
+                // Menú Lateral:
+                mainPage.btnOptionLateral1.setEnabled(true);
+                mainPage.btnOptionLateral2.setEnabled(true);
+                mainPage.btnOptionLateral3.setEnabled(false);
+                mainPage.btnOptionLateral4.setEnabled(false);
+                mainPage.btnOptionLateral5.setEnabled(false);
+                mainPage.btnOptionLateral6.setEnabled(false);
+                
+                // Opción 1:
+                mainPage.btnBodyOption1.setEnabled(true);
+                mainPage.btnBodyOption2.setEnabled(true);
+                mainPage.btnBodyOption3.setEnabled(false);
+                mainPage.btnBodyOption4.setEnabled(false);
+                mainPage.btnBodyOption5.setEnabled(false);
+                mainPage.btnBodyOption6.setEnabled(false);
+                
+                // Opción 2:
+                mainPage.btnCandyDecision.setEnabled(false);
+                mainPage.btnCinemaDecision.setEnabled(true);
+                    // Candy Decision:
+                    mainPage.lblSucursalNameCandySell.setText(nameBranch);
+                    mainPage.btnChangeSucursalCandySell.setEnabled(false);
+                    mainPage.cmbCandySeller.setSelectedItem(nameUser);
+                    // Cinema Decision:
+                    mainPage.lblSucursalNameCinemaTickets.setText(nameBranch);
+                    mainPage.btnChangeSucursalCinemaTickets.setEnabled(false);
+                    
+                // Opción 3:
+                    
+                // Opción 4:
+                mainPage.btnEmployeeDecision.setEnabled(false);
+                mainPage.btnUserDecision.setEnabled(false);
+                
+                // Opción 5:
+                mainPage.btnBranchDecision.setEnabled(false);
+                mainPage.btnCinemaRoomDecision.setEnabled(false);
+                mainPage.btnEnterpriseDecision.setEnabled(false);
+                
+                // Opción 6:
+                mainPage.btnFilmDecision.setEnabled(false);
+                mainPage.btnCandyDecisionCL.setEnabled(false);
+                mainPage.btnClientDecision.setEnabled(false);
+                
+                break;
+                
+            // Rol: Vendedor de golosinas
+            case "ROL-04":
+                
+                // Menú Lateral:
+                mainPage.btnOptionLateral1.setEnabled(true);
+                mainPage.btnOptionLateral2.setEnabled(true);
+                mainPage.btnOptionLateral3.setEnabled(false);
+                mainPage.btnOptionLateral4.setEnabled(false);
+                mainPage.btnOptionLateral5.setEnabled(false);
+                mainPage.btnOptionLateral6.setEnabled(false);
+                
+                // Opción 1:
+                mainPage.btnBodyOption1.setEnabled(true);
+                mainPage.btnBodyOption2.setEnabled(true);
+                mainPage.btnBodyOption3.setEnabled(false);
+                mainPage.btnBodyOption4.setEnabled(false);
+                mainPage.btnBodyOption5.setEnabled(false);
+                mainPage.btnBodyOption6.setEnabled(false);
+                
+                // Opción 2:
+                mainPage.btnCandyDecision.setEnabled(true);
+                mainPage.btnCinemaDecision.setEnabled(false);
+                    // Candy Decision:
+                    mainPage.lblSucursalNameCandySell.setText(nameBranch);
+                    mainPage.btnChangeSucursalCandySell.setEnabled(false);
+                    mainPage.cmbCandySeller.setSelectedItem(nameUser);
+                    // Cinema Decision:
+                    mainPage.lblSucursalNameCinemaTickets.setText(nameBranch);
+                    mainPage.btnChangeSucursalCinemaTickets.setEnabled(false);
+                    
+                // Opción 3:
+                    
+                // Opción 4:
+                mainPage.btnEmployeeDecision.setEnabled(false);
+                mainPage.btnUserDecision.setEnabled(false);
+                
+                // Opción 5:
+                mainPage.btnBranchDecision.setEnabled(false);
+                mainPage.btnCinemaRoomDecision.setEnabled(false);
+                mainPage.btnEnterpriseDecision.setEnabled(false);
+                
+                // Opción 6:
+                mainPage.btnFilmDecision.setEnabled(false);
+                mainPage.btnCandyDecisionCL.setEnabled(false);
+                mainPage.btnClientDecision.setEnabled(false);
+                
+                break;
+            
+        }
+        
+    }
+    
+    /**
      * Método para añadir golosinas en una compra.
      * @param candyID id de la golosina comprada.
      * @param cant cantidad de las golosinas compradas
      * @param price precio (unidad) de las golosinas compradas
      */
-    public void addCandies(String candyID, int cant, double price){
+    private void addCandies(String candyID, int cant, double price){
         
         // Se instancia la clase de apoyo Table
         Table table = new Table();
@@ -1716,9 +1966,9 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
         table.addDeleteButton(btnDelete);
         
         // Variables para mostrar montos.
-        double  iva     = suport.numberDecimalFormat(price * 0.16, 2),
-                unidad  = suport.numberDecimalFormat(price * 1.16, 2),
-                total   = suport.numberDecimalFormat(price * 1.16 * cant, 2);
+        double  iva     = support.numberDecimalFormat(price * 0.16, 2),
+                unidad  = support.numberDecimalFormat(price * 1.16, 2),
+                total   = support.numberDecimalFormat(price * 1.16 * cant, 2);
             
         // Variables de tipo String, que serán utilizadas para mostrarse en la JTable.
         String  candyName   = candyID, // Sustituir por búsqueda de nombre en la BD.
@@ -1741,7 +1991,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
      * Método para mostrar los montos como 'Subtotal', 'IVA' y 'Total' que un 
      * cliente tiene que cancelar.
      */
-    public void showCandyAmounts(){
+    private void showCandyAmounts(){
         
         // Se obtiene el modelo de la JTable.
         DefaultTableModel dtm = (DefaultTableModel) mainPage.tblCandy.getModel();
@@ -1754,10 +2004,10 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
             
             // Se obtienen los valores y se hacen los respectivos cálculos
             int     cant    = Integer.valueOf(dtm.getValueAt(i, 1).toString());
-            double  price   = suport.numberDecimalFormat(Double.valueOf(
+            double  price   = support.numberDecimalFormat(Double.valueOf(
                                 dtm.getValueAt(i,2).toString()) * cant, 2),
-                    iva     = suport.numberDecimalFormat(price * 0.16, 2),
-                    total   = suport.numberDecimalFormat(price * 1.16, 2);
+                    iva     = support.numberDecimalFormat(price * 0.16, 2),
+                    total   = support.numberDecimalFormat(price * 1.16, 2);
             
             // Se llenan los acumuladores.
             acumSub     += price;
@@ -1776,7 +2026,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
     /**
      * Método que carga las películas correspondientes a una sucursal.
      */
-    public void showMovies(){
+    private void showMovies(){
         
         DefaultTableModel dtm = (DefaultTableModel) mainPage.tblMovieSelector.getModel();
         
@@ -1842,7 +2092,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
      * Método para mostrar las funciones correspondentes a una película.
      * @param idMovie Código de la película de la que se van a buscar sus funciones.
      */
-    public void showFunctions(String idMovie){
+    private void showFunctions(String idMovie){
         
         mainPage.clearFunctionSelectorTable(mainPage.tblFunctionSelector);
         
@@ -1875,7 +2125,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
      * Método utilizado para mostrar montos según la cantidad de tickets
      * seleccionados para la compra.
      */
-    public void showAmountsOfCinemaTickets(){
+    private void showAmountsOfCinemaTickets(){
         
         double price = 0, iva = 0, total = 0;
         
@@ -1886,17 +2136,17 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
         
         if(cantA >= 0){
             
-            double adultPrice = suport.numberDecimalFormat(
+            double adultPrice = support.numberDecimalFormat(
                     Double.valueOf(mainPage.lblPriceTicketAdult.getText()), 2);
             
-            double  aPrice  = suport.numberDecimalFormat(cantA * (adultPrice * 100 / 116), 2),
-                    aIva    = suport.numberDecimalFormat(
+            double  aPrice  = support.numberDecimalFormat(cantA * (adultPrice * 100 / 116), 2),
+                    aIva    = support.numberDecimalFormat(
                             (cantA * (adultPrice * 100 / 116)) * 0.16, 2),
-                    aTotal  = suport.numberDecimalFormat((cantA * adultPrice), 2);
+                    aTotal  = support.numberDecimalFormat((cantA * adultPrice), 2);
             
-            price   += suport.numberDecimalFormat(aPrice, 2);
-            iva     += suport.numberDecimalFormat(aIva, 2);
-            total   += suport.numberDecimalFormat(aTotal, 2);
+            price   += support.numberDecimalFormat(aPrice, 2);
+            iva     += support.numberDecimalFormat(aIva, 2);
+            total   += support.numberDecimalFormat(aTotal, 2);
             
             mainPage.lblSubtotalAmountAdultTicket.setText(String.valueOf(aPrice));
             mainPage.lblIVAAmountAdultTicket.setText(String.valueOf(aIva));
@@ -1906,17 +2156,17 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
         
         if(cantK >= 0){
             
-            double kinderPrice = suport.numberDecimalFormat(
+            double kinderPrice = support.numberDecimalFormat(
                     Double.valueOf(mainPage.lblPriceTicketKinder.getText()), 2);
             
-            double  kPrice  = suport.numberDecimalFormat(cantK * (kinderPrice * 100 / 116), 2),
-                    kIva    = suport.numberDecimalFormat(
+            double  kPrice  = support.numberDecimalFormat(cantK * (kinderPrice * 100 / 116), 2),
+                    kIva    = support.numberDecimalFormat(
                             (cantK * (kinderPrice * 100 / 116)) * 0.16, 2),
-                    kTotal  = suport.numberDecimalFormat((cantK * kinderPrice), 2);
+                    kTotal  = support.numberDecimalFormat((cantK * kinderPrice), 2);
             
-            price   += suport.numberDecimalFormat(kPrice, 2);
-            iva     += suport.numberDecimalFormat(kIva, 2);
-            total   += suport.numberDecimalFormat(kTotal, 2);
+            price   += support.numberDecimalFormat(kPrice, 2);
+            iva     += support.numberDecimalFormat(kIva, 2);
+            total   += support.numberDecimalFormat(kTotal, 2);
             
             mainPage.lblSubtotalAmountKinderTicket.setText(String.valueOf(kPrice));
             mainPage.lblIVAAmountKinderTicket.setText(String.valueOf(kIva));
@@ -1926,17 +2176,17 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
         
         if(cantC >= 0){
             
-            double childPrice = suport.numberDecimalFormat(
+            double childPrice = support.numberDecimalFormat(
                     Double.valueOf(mainPage.lblPriceTicketChild.getText()), 2);
             
-            double  cPrice  = suport.numberDecimalFormat(cantC * (childPrice * 100 / 116), 2),
-                    cIva    = suport.numberDecimalFormat(
+            double  cPrice  = support.numberDecimalFormat(cantC * (childPrice * 100 / 116), 2),
+                    cIva    = support.numberDecimalFormat(
                             (cantC * (childPrice * 100 / 116)) * 0.16, 2),
-                    cTotal  = suport.numberDecimalFormat((cantC * childPrice), 2);
+                    cTotal  = support.numberDecimalFormat((cantC * childPrice), 2);
             
-            price   += suport.numberDecimalFormat(cPrice, 2);
-            iva     += suport.numberDecimalFormat(cIva, 2);
-            total   += suport.numberDecimalFormat(cTotal, 2);
+            price   += support.numberDecimalFormat(cPrice, 2);
+            iva     += support.numberDecimalFormat(cIva, 2);
+            total   += support.numberDecimalFormat(cTotal, 2);
             
             mainPage.lblSubtotalAmountChildTicket.setText(String.valueOf(cPrice));
             mainPage.lblIVAAmountChildTicket.setText(String.valueOf(cIva));
@@ -1946,17 +2196,17 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
         
         if(cantO >= 0){
             
-            double oldPrice = suport.numberDecimalFormat(
+            double oldPrice = support.numberDecimalFormat(
                     Double.valueOf(mainPage.lblPriceTicketOld.getText()), 2);
             
-            double  oPrice  = suport.numberDecimalFormat(cantO * (oldPrice * 100 / 116), 2),
-                    oIva    = suport.numberDecimalFormat(
+            double  oPrice  = support.numberDecimalFormat(cantO * (oldPrice * 100 / 116), 2),
+                    oIva    = support.numberDecimalFormat(
                             (cantO * (oldPrice * 100 / 116)) * 0.16, 2),
-                    oTotal  = suport.numberDecimalFormat((cantO * oldPrice), 2);
+                    oTotal  = support.numberDecimalFormat((cantO * oldPrice), 2);
             
-            price   += suport.numberDecimalFormat(oPrice, 2);
-            iva     += suport.numberDecimalFormat(oIva, 2);
-            total   += suport.numberDecimalFormat(oTotal, 2);
+            price   += support.numberDecimalFormat(oPrice, 2);
+            iva     += support.numberDecimalFormat(oIva, 2);
+            total   += support.numberDecimalFormat(oTotal, 2);
             
             mainPage.lblSubtotalAmountOldTicket.setText(String.valueOf(oPrice));
             mainPage.lblIVAAmountOldTicket.setText(String.valueOf(oIva));
@@ -1964,19 +2214,16 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
             
         }
         
-        mainPage.lblSubtotalAmountTicket.setText(String.valueOf(
-                suport.numberDecimalFormat(price, 2)));
-        mainPage.lblIVAAmountTicket.setText(String.valueOf(
-                suport.numberDecimalFormat(iva, 2)));
-        mainPage.lblTotalAmountTicket.setText(String.valueOf(
-                suport.numberDecimalFormat(total, 2)));
+        mainPage.lblSubtotalAmountTicket.setText(String.valueOf(support.numberDecimalFormat(price, 2)));
+        mainPage.lblIVAAmountTicket.setText(String.valueOf(support.numberDecimalFormat(iva, 2)));
+        mainPage.lblTotalAmountTicket.setText(String.valueOf(support.numberDecimalFormat(total, 2)));
         
     }
     
     /**
      * Método para limpiar la cantidad de tickets seleccionados.
      */
-    public void clearCantsCinemaTickets(){
+    private void clearCantsCinemaTickets(){
         
         for(int i = 0; i < cantCinemaTickets.size(); i++)
             cantCinemaTickets.set(i, 0);
@@ -1993,7 +2240,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
      * Método que contiene le procedimiento a seguir para el tercer paso en la compra
      * de tickets para funciones.
      */
-    public void thirdStep(){
+    private void thirdStep(){
         
         // Se declara e inicializa una variable acumuladora.
         int cant = 0;
@@ -2003,7 +2250,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
             cant += cantCinemaTickets.get(i);
         
         // Se muestra el siguiente paso para compra de boletos.
-        suport.cardSelection(mainPage.panStepsCinemaTickets, 
+        support.cardSelection(mainPage.panStepsCinemaTickets, 
                 mainPage.panThirdStepCinemaTickets);
                 
             /*
@@ -2042,7 +2289,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
     /**
      * Método para mostrar todos los tickets y su información al respecto que se van a comprar.
      */
-    public void showFunctionsTicketsToBuy(){
+    private void showFunctionsTicketsToBuy(){
         
         // Se limpia la tabla de tickets a comprar.
         mainPage.clearCinemaSell();
@@ -2093,13 +2340,13 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
                             case 0:
 
                                 // Se obtiene el monto a pagar por el ticket.
-                                price = suport.numberDecimalFormat(
+                                price = support.numberDecimalFormat(
                                         Double.valueOf(mainPage.lblPriceTicketAdult.getText()), 2);
 
                                 // Se obtienen los montos del ticket de tipo Adulto.
-                                unit    = suport.numberDecimalFormat(price * 0.84, 2);
-                                iva     = suport.numberDecimalFormat(price * 0.16, 2);      
-                                total   = suport.numberDecimalFormat(price, 2);
+                                unit    = support.numberDecimalFormat(price * 0.84, 2);
+                                iva     = support.numberDecimalFormat(price * 0.16, 2);      
+                                total   = support.numberDecimalFormat(price, 2);
 
                                 // Se cataloga el ticket.
                                 type = "Adulto";
@@ -2111,13 +2358,13 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
                             case 1:
 
                                 // Se obtiene el monto a pagar por el ticket.
-                                price = suport.numberDecimalFormat(
+                                price = support.numberDecimalFormat(
                                         Double.valueOf(mainPage.lblPriceTicketKinder.getText()), 2);
 
                                 // Se obtienen los montos del ticket de tipo Adulto.
-                                unit    = suport.numberDecimalFormat(price * 0.84, 2);
-                                iva     = suport.numberDecimalFormat(price * 0.16, 2);
-                                total   = suport.numberDecimalFormat(price, 2);
+                                unit    = support.numberDecimalFormat(price * 0.84, 2);
+                                iva     = support.numberDecimalFormat(price * 0.16, 2);
+                                total   = support.numberDecimalFormat(price, 2);
 
                                 // Se cataloga el ticket.
                                 type = "Kinder";
@@ -2129,13 +2376,13 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
                             case 2:
 
                                 // Se obtiene el monto a pagar por el ticket.
-                                price = suport.numberDecimalFormat(
+                                price = support.numberDecimalFormat(
                                         Double.valueOf(mainPage.lblPriceTicketChild.getText()), 2);
 
                                 // Se obtienen los montos del ticket de tipo Adulto.
-                                unit    = suport.numberDecimalFormat(price * 0.84, 2);
-                                iva     = suport.numberDecimalFormat(price * 0.16, 2);
-                                total   = suport.numberDecimalFormat(price, 2);
+                                unit    = support.numberDecimalFormat(price * 0.84, 2);
+                                iva     = support.numberDecimalFormat(price * 0.16, 2);
+                                total   = support.numberDecimalFormat(price, 2);
 
                                 // Se cataloga el ticket.
                                 type = "Niño";
@@ -2147,13 +2394,13 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
                             case 3:
 
                                 // Se obtiene el monto a pagar por el ticket.
-                                price = suport.numberDecimalFormat(
+                                price = support.numberDecimalFormat(
                                         Double.valueOf(mainPage.lblPriceTicketOld.getText()), 2);
 
                                 // Se obtienen los montos del ticket de tipo Adulto.
-                                unit    = suport.numberDecimalFormat(price * 0.84, 2);
-                                iva     = suport.numberDecimalFormat(price * 0.16, 2);
-                                total   = suport.numberDecimalFormat(price, 2);
+                                unit    = support.numberDecimalFormat(price * 0.84, 2);
+                                iva     = support.numberDecimalFormat(price * 0.16, 2);
+                                total   = support.numberDecimalFormat(price, 2);
 
                                 // Se cataloga el ticket.
                                 type = "Tercera Edad";
@@ -2218,28 +2465,30 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
          * Se muestran en pantalla la información de los acumuladores ajustados 
          * (mostrando únicamente dos decimales).
          */
-        mainPage.txtSubTotalCinema.setText(String.valueOf(
-                suport.numberDecimalFormat(acumSub, 2)));   // -> SubTotal ajustado.
-        mainPage.txtIVACinema.setText(String.valueOf(
-                suport.numberDecimalFormat(acumIVA, 2)));   // -> IVA ajustado.
-        mainPage.txtTotalCinema.setText(String.valueOf(
-                suport.numberDecimalFormat(acumTotal, 2))); // -> Total ajustado.
+        mainPage.txtSubTotalCinema.setText(String.valueOf(support.numberDecimalFormat(acumSub, 2)));   // -> SubTotal ajustado.
+        mainPage.txtIVACinema.setText(String.valueOf(support.numberDecimalFormat(acumIVA, 2)));   // -> IVA ajustado.
+        mainPage.txtTotalCinema.setText(String.valueOf(support.numberDecimalFormat(acumTotal, 2))); // -> Total ajustado.
         
     }
     
     /**
      * Método para cargar todos las golosinas a vender.
      */
-    private void loadCandy(){
+    private void loadCandy(String branch){
         
         // Se instancia la clase a utilizar.
-        can = new CandyCRUD();
+        canCRUD = new CandyCRUD();
         
         // Se declara la variable que devuelve el resultado.
         java.sql.ResultSet result;
         
         try {
-            result = can.ReadAllCandy();
+            
+            if(!rolUser.equals("ROL-01") && !rolUser.equals("ROL-02"))
+                result = canCRUD.ReadAllCandy(branch);
+            else
+                result = canCRUD.ReadAllCandy();
+            
             mainPage.cmbCandySelection.removeAllItems();
             mainPage.cmbCandySelection.addItem(" - Seleccione - ");
             while(result.next()){
@@ -2257,13 +2506,13 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
     }
     
     /**
-     * Método para cargar todos las golosinas a vender.
+     * Método para cargar todas ciudades.
      * @return Listado de nombres de ciudades.
      */
     private ArrayList<String> loadCityNames(){
         
         // Se instancia la clase a utilizar.
-        cit = new CityCRUD();
+        citCRUD = new CityCRUD();
         
         // Se declara la variable que devuelve el resultado.
         java.sql.ResultSet result;
@@ -2272,7 +2521,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
         ArrayList<String> cityNames = new ArrayList<>();
         
         try {
-            result = cit.readAllCityNames();
+            result = citCRUD.readAllCityNames();
             while(result.next()){
                 cityNames.add(result.getString("nombre"));
             }
@@ -2293,18 +2542,19 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
     
     /**
      * Método para cargar sucursales.
-     * @return Devuelve matriz.
+     * @param firstList Primer listado con los nombres de ciudades.
+     * @param secondList Segundo listado con los nombres de sucursales.
      */
     private void loadBranch(ArrayList<String> firstList, ArrayList<String> secondList){
         
         // Se instancia la clase a utilizar.
-        bra = new BranchCRUD();
+        braCRUD = new BranchCRUD();
         
         // Se declara la variable que devuelve el resultado.
         java.sql.ResultSet result;
         
         try {
-            result = bra.readBranchForCity();
+            result = braCRUD.readBranchForCity();
             while(result.next()){
                 firstList.add(result.getString("NombreCiudad"));
                 secondList.add(result.getString("NombreSucursal"));
@@ -2328,7 +2578,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
     private double loadPrice(String nameCandy){
         
         // Se instancia la clase a utilizar.
-        can = new CandyCRUD();
+        canCRUD = new CandyCRUD();
         
         double price = 0;
         
@@ -2336,7 +2586,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
         java.sql.ResultSet result;
         
         try {
-            result = can.searchPrice(nameCandy);
+            result = canCRUD.searchPrice(nameCandy);
             while(result.next()){
                  price = Double.valueOf(result.getString("precio"));
             }
@@ -2359,16 +2609,16 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
      * @param cmb Combobox a cargar.
      * @param type Indica que tipo de empleado se va a cargar.
      */
-    private void loadEmployeeOnComboBox(JComboBox cmb, int type){
+    private void loadEmployeeOnComboBox(String branch, JComboBox cmb, int type){
         
         // Se instancia la clase a utilizar.
-        empc = new EmployeeCRUD();
+        empCRUD = new EmployeeCRUD();
         
         // Se declara la variable que devuelve el resultado.
         java.sql.ResultSet result;
         
         try {
-            result = empc.readSellerForType(type);
+            result = empCRUD.readSellerForType(branch, type);
             cmb.removeAllItems();
             cmb.addItem(" - Seleccione - ");
             while(result.next()){
@@ -2385,10 +2635,15 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
         
     }
     
+    /**
+     * Método para cargar los empleados de una Sucursal.
+     * @param branch Nombre de la sucursal.
+     * @return Listado de los empleados.
+     */
     private ArrayList<String> loadEmployeeBranch(String branch){
         
         // Se instancia la clase a utilizar.
-        empc = new EmployeeCRUD();
+        empCRUD = new EmployeeCRUD();
         
         ArrayList<String> list = new ArrayList<>();
         
@@ -2396,7 +2651,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
         java.sql.ResultSet result;
         
         try {
-            result = empc.readAllEmployeeOnBranch(branch);
+            result = empCRUD.readAllEmployeeOnBranch(branch);
             while(result.next()){
                  list.add(result.getString("nombre") + " " + result.getString("apellido"));
             }
@@ -2425,7 +2680,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
     private ArrayList<String> loadOnlyOneEmployee(String name, String lastName, int type){
         
         // Se instancia la clase a utilizar.
-        empc = new EmployeeCRUD();
+        empCRUD = new EmployeeCRUD();
         
         // Se declara e instancia un listado.
         ArrayList<String> employeeData = new ArrayList<>();
@@ -2434,7 +2689,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
         java.sql.ResultSet result;
         
         try {
-            result = empc.readOnlyOneSellerForType(name, lastName, type);
+            result = empCRUD.readOnlyOneSellerForType(name, lastName, type);
             while(result.next()){
                  employeeData.add(result.getString("cedula"));
                  employeeData.add(result.getString("nombre"));
@@ -2466,7 +2721,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
     private ArrayList<String> loadOnlyOneClient(String id){
         
         // Se instancia la clase a utilizar.
-        cli = new ClientCRUD();
+        cliCRUD = new ClientCRUD();
         
         // Se declara e instancia un listado.
         ArrayList<String> clientData = new ArrayList<>();
@@ -2475,7 +2730,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
         java.sql.ResultSet result;
         
         try {
-            result = cli.ReadOnlyOneClient(id);
+            result = cliCRUD.ReadOnlyOneClient(id);
             while(result.next()){
                  clientData.add(result.getString("cedula"));
                  clientData.add(result.getString("nombre"));
@@ -2503,10 +2758,10 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
      * Método para cargar la información de la empresa.
      * @return listado con la información de la empresa.
      */
-    public ArrayList<String> loadEnterprise(){
+    private ArrayList<String> loadEnterprise(){
         
         // Se instancia la clase a utilizar.
-        ent = new EnterpriseCRUD();
+        entCRUD = new EnterpriseCRUD();
         
         // Se declara e instancia el arreglo resultado.
         ArrayList<String> enterpriseData = new ArrayList<>();
@@ -2515,7 +2770,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
         java.sql.ResultSet result;
         
         try {
-            result = ent.readEnterprise();
+            result = entCRUD.readEnterprise();
             while(result.next()){
                  enterpriseData.add(result.getString("codigo"));
                  enterpriseData.add(result.getString("nombre"));
@@ -2539,12 +2794,13 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
     
     /**
      * Método para cargar los códigos de los tickets según el tipo.
+     * @param type Tipo del ticket que se va a cargar.
      * @return listado con la información de la empresa.
      */
-    public ArrayList<String> loadCodexOfTickets(int type){
+    private ArrayList<String> loadCodexOfTickets(int type){
         
         // Se instancia la clase a utilizar.
-        tic = new TicketCRUD();
+        ticCRUD = new TicketCRUD();
         
         // Se declara e instancia el arreglo resultado.
         ArrayList<String> codex = new ArrayList<>();
@@ -2553,7 +2809,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
         java.sql.ResultSet result;
         
         try {
-            result = tic.readCodexOfTickets(type);
+            result = ticCRUD.readCodexOfTickets(type);
             while(result.next()){
                  codex.add(result.getString("codigo"));
             }
@@ -2576,10 +2832,10 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
      * Método para cargar los códigos de las facturas.
      * @return listado..
      */
-    public ArrayList<String> loadCodexOfInvoice(){
+    private ArrayList<String> loadCodexOfInvoice(){
         
         // Se instancia la clase a utilizar.
-        inv = new InvoiceCRUD();
+        invCRUD = new InvoiceCRUD();
         
         // Se declara e instancia el arreglo resultado.
         ArrayList<String> codex = new ArrayList<>();
@@ -2588,7 +2844,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
         java.sql.ResultSet result;
         
         try {
-            result = inv.readCodexInvoice();
+            result = invCRUD.readCodexInvoice();
             while(result.next()){
                  codex.add(result.getString("codigo"));
             }
