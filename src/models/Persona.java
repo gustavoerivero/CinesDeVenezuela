@@ -18,14 +18,14 @@ public class Persona {
             id,
             name,
             surname,
-            phone,
             direction,
             email;
+    long    phone;   
     private Date birth_date;
     public char estatus;
     
     public Persona(String id, String name,String surname,
-            String phone,String direction,Date birth_date,
+            long phone,String direction,Date birth_date,
             String email, char estatus){
         
         super();
@@ -65,11 +65,11 @@ public class Persona {
         this.surname = surname;
     }
 
-    public String getPhone() {
+    public long getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(long phone) {
         this.phone = phone;
     }
 

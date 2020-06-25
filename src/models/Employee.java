@@ -19,7 +19,7 @@ public class Employee extends Persona{
             position;
     private Date admission_date;
     
-    public Employee(String id, String name,String surname, String phone,
+    public Employee(String id, String name,String surname, long phone,
             String direction,Date birth_date,String email, char estatus,
             String branch_id, String position, Date admission_date){
         

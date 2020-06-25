@@ -14,18 +14,15 @@ import models.database.CityCRUD;
 import views.EmployeeManagement;
 import views.ChangeBranch;
 import views.PopupMessage;
+import views.SelectOption;
 import views.tables.Table;
 
 // Se importan las librerías a utilizar.
 import java.awt.event.*;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
-import views.SelectOption;
 
 /**
  *  Materia: Laboratorio I
@@ -83,6 +80,9 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
     
     /**
      * Constructor del gestor de empleados.
+     * @param rolUser Rol del usuario que ha ingresado al sistema.
+     * @param nameUser Nombre del usuario que ha ingresado al sistema.
+     * @param branchUser Nombre de la sucursal del usuario que ha ingresado al sistema.
      */
     public ControllerEmployeeManagement(String rolUser, String nameUser, String branchUser){
         
@@ -90,6 +90,7 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
         empManagement   = new EmployeeManagement();
         support         = new SupportFunctions();
         
+        // Se inicializan las variables.
         this.rolUser    = rolUser;
         this.nameUser   = nameUser;
         this.branchUser = branchUser;
@@ -278,6 +279,178 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
         
         //</editor-fold>
         
+        //<editor-fold defaultstate="collapsed" desc=" Register or Update Employee ">
+        
+        // Registro o Modificación de empleado.
+        else if(evt.getSource() == empManagement.btnRegisterModifyEmployee){
+            
+            /**
+             * Si la variable global 'id' se encuentra vacía, se tiene que el caso
+             * es un registro.
+             */
+            if(id.equals("")){
+                
+                
+                // De no haber campos vacíos.
+                if( !empManagement.txtIdEmployee.getText().equals("") && 
+                    !empManagement.txtIdEmployee.getText().equals("Cédula del empleado") && 
+                    !empManagement.txtNameEmployee.getText().equals("") &&
+                    !empManagement.txtNameEmployee.getText().equals("Nombre del empleado") &&
+                    !empManagement.txtLastNameEmployee.getText().equals("") &&
+                    !empManagement.txtLastNameEmployee.getText().equals("Apellido del empleado") &&
+                    !empManagement.txtPhoneEmployee.getText().equals("") &&
+                    !empManagement.txtPhoneEmployee.getText().equals("Teléfono del empleado") &&
+                     empManagement.txtPhoneEmployee.getText().length() <= 10 &&
+                    !empManagement.txtDirectionEmployee.getText().equals("") &&
+                    !empManagement.txtDirectionEmployee.getText().equals("Dirección del empleado") &&
+                     empManagement.cmbBranchEmployee.getSelectedIndex() != 0 && 
+                     empManagement.cmbJobEmployee.getSelectedIndex() != 0){
+                
+                        // Se confirma que se desea eliminar el registro.
+                        SelectOption select = new SelectOption(empManagement, true, 2, 
+                                "¿Desea registrar a este empleado?", "Si", "No");
+
+                        // Si se confirma el registro.
+                        if(select.getOpc()){
+
+                            // Si el empleado ya existe pero se encuentra inactivo.
+                            if(empCRUD.employeeExist(empManagement.txtIdEmployee.getText(), 'I')){
+                                
+                                // Se cambia el estado del empleado a activo.
+                                empCRUD.DeleteEmployee(empManagement.txtIdEmployee.getText(), 1);
+                                
+                                // Se actualiza la información del empleado.
+                                updateEmployeeData(empManagement.txtIdEmployee.getText());
+                                
+                                // Se muestra la vista del CRUD.
+                                support.cardSelection(empManagement.panContainerEmployee, empManagement.panConsultList);
+
+                                // Se cargan los empleados.
+                                loadEmployeeTable();
+
+                                // Se inicializan las variables.
+                                clearVariables();
+                                
+                            }
+                            
+                            // Si el usuario no existe.
+                            else{
+                            
+                                // Se ejecuta el registro de información.
+                                registerEmployeeData();
+                                
+                                // Se muestra la vista del CRUD.
+                                support.cardSelection(empManagement.panContainerEmployee, empManagement.panConsultList);
+
+                                // Se cargan los empleados.
+                                loadEmployeeTable();
+
+                                // Se inicializan las variables.
+                                clearVariables();
+                                
+                            }
+                        }
+                    
+                }
+                
+                // Si hay campos vacíos.
+                else
+                    // Se muestra mensaje solicitando datos.
+                    popup = new PopupMessage(empManagement, true, 1, 
+                            "Debe ingresar datos en los campos solicitados.");
+      
+                
+            }
+            
+            /**
+             * Si la variable global 'id' posee algún dato, se tiene el caso de modificación
+             * de un registro.
+             */
+            else{
+                
+                // De no haber campos vacíos.
+                if( !empManagement.txtIdEmployee.getText().equals("") && 
+                    !empManagement.txtIdEmployee.getText().equals("Cédula del empleado") && 
+                    !empManagement.txtNameEmployee.getText().equals("") &&
+                    !empManagement.txtNameEmployee.getText().equals("Nombre del empleado") &&
+                    !empManagement.txtLastNameEmployee.getText().equals("") &&
+                    !empManagement.txtLastNameEmployee.getText().equals("Apellido del empleado") &&
+                    !empManagement.txtPhoneEmployee.getText().equals("") &&
+                    !empManagement.txtPhoneEmployee.getText().equals("Teléfono del empleado") &&
+                     empManagement.txtPhoneEmployee.getText().length() <= 10 &&
+                    !empManagement.txtDirectionEmployee.getText().equals("") &&
+                    !empManagement.txtDirectionEmployee.getText().equals("Dirección del empleado") &&
+                     empManagement.cmbBranchEmployee.getSelectedIndex() != 0 && 
+                     empManagement.cmbJobEmployee.getSelectedIndex() != 0){
+                
+                        // Se confirma que se desea eliminar el registro.
+                        SelectOption select = new SelectOption(empManagement, true, 2, 
+                                "¿Desea actualizar los datos de este empleado?", "Si", "No");
+
+                        // Si se confirma la actualización.
+                        if(select.getOpc()){
+
+                            // Se ejecuta la actualización de información.
+                            updateEmployeeData(id);
+                            
+                            // Se muestra la vista del CRUD.
+                            support.cardSelection(empManagement.panContainerEmployee, empManagement.panConsultList);
+
+                            // Se cargan los empleados.
+                            loadEmployeeTable();
+
+                            // Se inicializan las variables.
+                            clearVariables();
+                            
+                        }
+                    
+                }
+                
+                // Si hay campos vacíos.
+                else
+                    // Se muestra mensaje solicitando datos.
+                    popup = new PopupMessage(empManagement, true, 1, 
+                            "Debe ingresar datos en los campos solicitados.");
+                                    
+            }
+            
+        }
+        
+        //</editor-fold>
+        
+        //<editor-fold defaultstate="collapsed" desc=" Delete Employee ">
+        
+        // Eliminación de un empleado.
+        else if(evt.getSource() == empManagement.btnDeleteEmployee){
+            
+            // Se pregunta al usuario si desea realmente eliminar al empleado.
+            SelectOption select = new SelectOption(empManagement, true, 2, 
+                    "¿Está seguro que desea eliminar a este empleado?", "Si", "No");
+            
+            // Si la respuesta es afirmativa.
+            if(select.getOpc()){
+                
+                // Se realiza la eliminación lógica.
+                empCRUD.DeleteEmployee(id, 0);
+                
+                // Se muestra un mensaje de eliminación exitosa.
+                popup = new PopupMessage(empManagement, true, 4, "El empleado se ha eliminado con éxito.");
+                
+                // Se muestra la vista del CRUD.
+                support.cardSelection(empManagement.panContainerEmployee, empManagement.panConsultList);
+                    
+                // Se cargan los empleados.
+                loadEmployeeTable();
+                    
+                // Se inicializan las variables.
+                clearVariables();
+                
+            }
+            
+        }
+        
+        //</editor-fold>
+        
     }
 
     /**
@@ -352,7 +525,7 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                         
                         // Se limpian todos los aspectos visuales.
                         empManagement.clearView();
-                        
+                                                
                         // Se muestran los datos obtenidos.
                         empManagement.txtIdEmployee.setText(id);
                         empManagement.cmbBranchEmployee.setSelectedItem(branch);
@@ -364,6 +537,9 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                         empManagement.dchEntranceDateEmployee.setDate(entrance);
                         empManagement.txtEmailEmployee.setText(email);
                         empManagement.cmbJobEmployee.setSelectedItem(job);
+                        
+                        // Se bloquea el campo de cédula.
+                        empManagement.txtIdEmployee.setEnabled(false);
                         
                     }
                     
@@ -500,6 +676,40 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
             System.out.println("Error: " + e);
             
         }
+        
+    }
+    
+    /**
+     * Método para buscar el código de una sucursal.
+     * @param branchName Nombre de la sucursal.
+     * @return Devuelve el código de la sucursal.
+     */
+    private String loadBranch(String branchName){
+        
+                // Se instancia la clase a utilizar.
+        braCRUD = new BranchCRUD();
+        
+        // Se declara la variable que devuelve el resultado.
+        java.sql.ResultSet result;
+        
+        // Variable de soporte.
+        String codex;
+        
+        try {
+            result = braCRUD.readOnlyBranch(branchName);
+            while(result.next()){
+                codex = result.getString("codigo");
+            }
+                        
+            System.out.println("Éxito.");
+                                    
+        } catch (java.sql.SQLException e) {
+            
+            System.out.println("Error: " + e);
+            
+        }
+        
+        return null;
         
     }
     
@@ -683,6 +893,61 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
             System.out.println("Error: " + e);
             
         }
+        
+    }
+    
+    /**
+     * Método para registrar a un nuevo empleado.
+     */
+    private void registerEmployeeData(){
+                        
+        // Se carga la nueva información del empleado.
+        Employee emp = new Employee(empManagement.txtIdEmployee.getText(), 
+                                    empManagement.txtNameEmployee.getText(), 
+                                    empManagement.txtLastNameEmployee.getText(), 
+                                    Long.valueOf(empManagement.txtPhoneEmployee.getText()), 
+                                    empManagement.txtDirectionEmployee.getText(), 
+                                    empManagement.dchBirthEmployee.getDate(), 
+                                    empManagement.txtEmailEmployee.getText(), 
+                                    'A', 
+                                    loadBranch(empManagement.cmbBranchEmployee.getSelectedItem().toString()), 
+                                    empManagement.cmbJobEmployee.getSelectedItem().toString(),    
+                                    empManagement.dchEntranceDateEmployee.getDate());
+        
+        // Se ejecuta el registro de datos.
+        empCRUD.registerEployee(emp);
+        
+        // Se muestra mensaje de éxito.
+        popup = new PopupMessage(empManagement, true, 4, 
+                "El empleado se ha registrado con éxito");
+        
+    }
+    
+    /**
+     * Método para actualizar la información de un empleado.
+     * @param id cédula del empleado a actualizar.
+     */
+    private void updateEmployeeData(String id){
+                        
+        // Se carga la nueva información del empleado.
+        Employee emp = new Employee(empManagement.txtIdEmployee.getText(), 
+                                    empManagement.txtNameEmployee.getText(), 
+                                    empManagement.txtLastNameEmployee.getText(), 
+                                    Long.valueOf(empManagement.txtPhoneEmployee.getText()), 
+                                    empManagement.txtDirectionEmployee.getText(), 
+                                    empManagement.dchBirthEmployee.getDate(), 
+                                    empManagement.txtEmailEmployee.getText(), 
+                                    'A', 
+                                    loadBranch(empManagement.cmbBranchEmployee.getSelectedItem().toString()), 
+                                    empManagement.cmbJobEmployee.getSelectedItem().toString(),    
+                                    empManagement.dchEntranceDateEmployee.getDate());
+        
+        // Se ejecuta la actualización de datos.
+        empCRUD.UpdateEmployee(emp, id);
+        
+        // Se muestra mensaje de éxito.
+        popup = new PopupMessage(empManagement, true, 4, 
+                "Los datos del empleados se han actualizado con éxito.");
         
     }
     

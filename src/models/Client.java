@@ -17,7 +17,7 @@ public class Client extends Persona{
     private char type;
     
     public Client(String id, String name,String surname,
-            String phone,String direction,Date birth_date, 
+            long phone,String direction,Date birth_date, 
             String email, char estatus, char type){
         super(id, name, surname, phone, direction, birth_date, email, estatus);
            
