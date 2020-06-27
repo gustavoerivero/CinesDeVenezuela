@@ -1,8 +1,12 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
 package models.database;
-
 import java.sql.ResultSet;
-import models.Enterprise;
+import models.Film;
 
 /**
  *  Materia: Laboratorio I
@@ -14,96 +18,25 @@ import models.Enterprise;
  *          @author Rivero, Gustavo         C.I: 26.772.857
  *          @author Torrealba, Luis         C.I: 26.121.249
  */
-public class EnterpriseCRUD {
-    
+public class FilmCRUD {
+
     private ConnectionDB con;
-    
-    //constructor
-    public EnterpriseCRUD(){}
-    
-        public ResultSet readEnterprise(){
-        
-        // Se declara una variable de tipo 'ResultSet' para realizar la consulta.
-        ResultSet result;
-        
-        // Se define la sentencia SQL a aplicar en la BD.
-        String SQL = "SELECT * FROM \"empresa\" WHERE \"estado\" = 'A';";
-        
-        // Se instancia y se establece una conexión con la BD.
-        con = new ConnectionDB();
-        con.conectar();
-        
-        // Se realiza y se recibe la consulta.
-        result = con.queryConsultar(SQL);
-        
-        System.out.println("La consulta se realizó con éxito.");
-        
-        // Se desconecta la BD.
-        con.desconectar();
-        
-        // Retorna consulta.
-        return result;
-        
-    }
-        public ResultSet readOnlyEnterprise(String enterpriseName){
-        
-        // Se declara una variable de tipo 'ResultSet' para realizar la consulta.
-        ResultSet result;
-        
-        // Se define la sentencia SQL a aplicar en la BD.
-        String SQL  = "SELECT * FROM \"empresa\" WHERE \"nombre\" = '" + enterpriseName + "' "
-                    + "AND \"estado\" = 'A';";
-        
-        // Se instancia y se establece una conexión con la BD.
-        con = new ConnectionDB();
-        con.conectar();
-        
-        // Se realiza y se recibe la consulta.
-        result = con.queryConsultar(SQL);
-        
-        // Se desconecta la BD.
-        con.desconectar();
-        
-        // Retorna consulta.
-        return result;
-        
-    }
-        
-    public ResultSet readEnterpriseCN(){
-        
-        // Se declara una variable de tipo 'ResultSet' para realizar la consulta.
-        ResultSet result;
-        
-        // Se define la sentencia SQL a aplicar en la BD.
-        String SQL  = "SELECT codigo,nombre FROM \"empresa\" WHERE \"estado\" = 'A';";
-        
-        // Se instancia y se establece una conexión con la BD.
-        con = new ConnectionDB();
-        con.conectar();
-        
-        // Se realiza y se recibe la consulta.
-        result = con.queryConsultar(SQL);
-        
-        // Se desconecta la BD.
-        con.desconectar();
-        
-        // Retorna consulta.
-        return result;
-        
-    }
-    
+  
+//constructor
+    public FilmCRUD(){}
+  
     /**
-     * Método para obtener los datos de una empresa.
+     * Método para obtener los datos de una pelicula.
      * @return Devuelve consulta.
      */
-    public ResultSet readEnterpriseData(String idEnterprise){
+    public ResultSet readFilmData(String idFilm){
         
         // Se declara una variable de tipo 'ResultSet' para realizar la consulta.
         ResultSet result;
         
         // Se define la sentencia SQL a aplicar en la BD.
-        String SQL = "SELECT \"codigo\",\"nombre\", \"descripcion\",\"correo\",\"precio_boleto\" FROM \"empresa\"" 
-                        + "WHERE \"codigo\" = '" + idEnterprise + "' AND \"estado\" = 'A';";
+        String SQL = "SELECT \"codigo\",\"nombre\", \"sinopsis\",\"duracion\",\"clasificacion\",\"fecha_estreno\",\"genero\" FROM \"pelicula\"" 
+                        + "WHERE \"codigo\" = '" + idFilm + "' AND \"estado\" = 'A';";
         
         // Se instancia y se establece una conexión con la BD.
         con = new ConnectionDB();
@@ -122,17 +55,17 @@ public class EnterpriseCRUD {
         
     }
     
-    /**
-     * Método para obtener a todas las empresa.
+   /**
+     * Método para obtener a todas las peliculas.
      * @return Devuelve consulta.
      */
-    public ResultSet readAllEnterprise(){
+    public ResultSet readAllFilm(){
         
         // Se declara una variable de tipo 'ResultSet' para realizar la consulta.
         ResultSet result;
         
         // Se define la sentencia SQL a aplicar en la BD.
-        String SQL = "SELECT * FROM \"empresa\" WHERE \"estado\" = 'A';";
+        String SQL = "SELECT * FROM \"pelicula\" WHERE \"estado\" = 'A';";
         
         // Se instancia y se establece una conexión con la BD.
         con = new ConnectionDB();
@@ -149,14 +82,14 @@ public class EnterpriseCRUD {
         // Retorna consulta.
         return result;
         
-    }
+    } 
     
-     /**
+/**
      * Método para realizar una consulta en la BD.
      * @param SQL Sentencia SQL.
      * @return Consulta.
      */
-    public ResultSet readEnterprise(String SQL){
+    public ResultSet readFilm(String SQL){
         
         // Se declara una variable de tipo 'ResultSet' para realizar la consulta.
         ResultSet result;
@@ -177,21 +110,23 @@ public class EnterpriseCRUD {
         return result;
         
     }
-    
-    /**
-     * Método para registrar a una empresa.
-     * @param enter Clase empleado a registrar
+
+/**
+     * Método para registrar a una pelicula.
+     * @param fi Clase pelicula a registrar
      */
-    public void registerEnterprise(Enterprise enter) {
+    public void registerFilm(Film fi) {
 
         // Se declara la sentencia SQL a aplicar.
-        String SQL = "INSERT INTO \"empresa\" (\"codigo\",\"nombre\",\"descripcion\","
-                + "\"correo\", \"precio_boleto\", \"estado\") values ("
-                + "'" + enter.getId()+ "',"
-                + "'" + enter.getName() +"',"
-                + "'" + enter.getDescrip() + "',"
-                + "'" + enter.getEmail() + "',"
-                + "'" + enter.getPriceTicket() +"',"
+        String SQL = "INSERT INTO \"pelicula\" (\"codigo\",\"nombre\",\"sinopsis\","
+                + "\"duracion\", \"clasificacion\", \"fecha_estreno\" , \"genero\", \"estado\") values ("
+                + "'" + fi.getId()+ "',"
+                + "'" + fi.getName() +"',"
+                + "'" + fi.getSynopsis()+ "',"
+                + "'" + fi.getDuration()+ "',"
+                + "'" + fi.getClassification()+"',"
+                + "'" + fi.getPremiere()+"',"
+                + "'" + fi.getType()+"',"
                 + "'A');";
         
         // Se instancia y se establece una conexión con la BD.
@@ -208,20 +143,21 @@ public class EnterpriseCRUD {
         con.desconectar();
 
     }
-    
-    /**
-     * Método para actualizar un registro de una Empresa.
-     * @param enter Clase Empleado.
-     * @param id codigo de la empresa a actualizar.
+/**
+     * Método para actualizar un registro de una pelicula.
+     * @param fi Clase Film.
+     * @param id codigo de la pelicula a actualizar.
      */
-    public void UpdateEnterprise(Enterprise enter, String id) {
+    public void UpdateFilm(Film fi, String id) {
 
         // Se declara la sentencia SQL.
-        String  SQL = "UPDATE \"empresa\" SET "
-                + "\"nombre\" = '" + enter.getName() + "',"
-                +  "\"descripcion\" = '" + enter.getDescrip()+ "',"
-                +  "\"correo\" = '" + enter.getEmail() + "',"
-                +  "\"precio_boleto\" = " + enter.getPriceTicket()+ ","
+        String  SQL = "UPDATE \"pelicula\" SET "
+                + "\"nombre\" = '" + fi.getName() + "',"
+                +  "\"sinopsis\" = '" + fi.getSynopsis()+ "',"
+                +  "\"duracion\" = '" + fi.getDuration()+ "',"
+                +  "\"clasificacion\" = " + fi.getClassification()+ ","
+                +  "\"fecha_estreno\" = " + fi.getPremiere()+ ","
+                +  "\"genero\" = " + fi.getType()+ ","
                 +  " WHERE \"codigo\" = '" + id + "';";
 
         // Se instancia y se establece una conexión con la BD.
@@ -232,31 +168,30 @@ public class EnterpriseCRUD {
         con.queryInsert(SQL);
         
         // Se muestra mensaje de éxito.
-        System.out.println("La actualización de datos de la empresa '" + id + "' se realizó con éxito.");
+        System.out.println("La actualización de datos de la pelicula '" + id + "' se realizó con éxito.");
         
         // Se desconecta la BD.
         con.desconectar();
         
     }
-    
-    /**
-     * Método para eliminar/reactivar una Empresa.
-     * @param id codigo de la empresa.
+/**
+     * Método para eliminar/reactivar una pelicula.
+     * @param id codigo de la pelicula.
      * @param type Eliminación o Reactivación de la empresa:
      * '0' para eliminación.
      * Cualquier otro entero para reactivación.
      */
-    public void DeleteEnterprise(String id, int type) {
+    public void DeleteFilm(String id, int type) {
         
         // Se declara la variable de sentencia SQL.
         String SQL = "";
         
-        // Dependiendo del valor de type, se elimina (lógica) o se reactiva la empresa.
+        // Dependiendo del valor de type, se elimina (lógica) o se reactiva la pelicula.
         if(type == 0)
-            SQL     = "UPDATE \"empresa\" SET \"estado\" = 'I' "
+            SQL     = "UPDATE \"pelicula\" SET \"estado\" = 'I' "
                     + "WHERE \"codigo\" = '" + id + "';";
         else
-            SQL     = "UPDATE \"empresa\" SET \"estado\" = 'A' "
+            SQL     = "UPDATE \"pelicula\" SET \"estado\" = 'A' "
                     + "WHERE \"codigo\" = '" + id + "';";
         
         // Se instancia y se establece una conexión con la BD.
@@ -267,18 +202,18 @@ public class EnterpriseCRUD {
         con.queryInsert(SQL);
         
         // Se muestra mensaje de éxito.
-        System.out.println("La eliminación de la empresa '" + id + "' se ha efectuado con éxito.");
+        System.out.println("La eliminación de la pelicula '" + id + "' se ha efectuado con éxito.");
         
         // Se desconecta la BD.
         con.desconectar();
     }
-    
-     /**
-     * Método para comprobar la existencia de una empresa activa.
-     * @param id codigo de la empresa a buscar.
+
+/**
+     * Método para comprobar la existencia de una pelicula activa.
+     * @param id codigo de la pelicula a buscar.
      * @return variable booleana.
      */
-    public boolean enterpriseExist(String id){
+    public boolean filmExist(String id){
         
         try{
             
@@ -287,7 +222,7 @@ public class EnterpriseCRUD {
             con.conectar();
           
             // Se declara una sentencia SQL.
-            String SQL =    "SELECT * FROM \"empresa\" WHERE \"codigo\" = '"
+            String SQL =    "SELECT * FROM \"pelicula\" WHERE \"codigo\" = '"
                             + id + "' AND \"estado\" = 'A';";
             
             // Se realiza la consulta y se obtiene el resultado.
@@ -301,7 +236,7 @@ public class EnterpriseCRUD {
             
             
         } catch (java.sql.SQLException ex){
-            System.out.println("No se pudo encontrar la empresa. Error: " + ex);
+            System.out.println("No se pudo encontrar la pelicula. Error: " + ex);
         }
         
         // Si el usuario no existe, retorna 'false'.
@@ -310,12 +245,12 @@ public class EnterpriseCRUD {
     }
     
     /**
-     * Método para comprobar la existencia de una empresa según su codigo y estado.
-     * @param id codigo de la empresa a buscar.
-     * @param estatus De la empresa a buscar.
+     * Método para comprobar la existencia de una pelicula según su codigo y estado.
+     * @param id codigo de la pelicula a buscar.
+     * @param estatus De la pelicula a buscar.
      * @return variable booleana.
      */
-    public boolean enterpriseExist(String id, char estatus){
+    public boolean filmExist(String id, char estatus){
         
         try{
             
@@ -324,7 +259,7 @@ public class EnterpriseCRUD {
             con.conectar();
           
             // Se declara una sentencia SQL.
-            String SQL =    "SELECT * FROM \"empresa\" WHERE \"codigo\" = '"
+            String SQL =    "SELECT * FROM \"pelicula\" WHERE \"codigo\" = '"
                             + id + "' AND \"estado\" = '" + estatus + "';";
             
             // Se realiza la consulta y se obtiene el resultado.
@@ -338,12 +273,16 @@ public class EnterpriseCRUD {
             
             
         } catch (java.sql.SQLException ex){
-            System.out.println("No se pudo encontrar la empresa. Error: " + ex);
+            System.out.println("No se pudo encontrar la pelicula. Error: " + ex);
         }
         
         // Si el usuario no existe, retorna 'false'.
         return false;
         
     }
-    
+
+
+
+
+
 }

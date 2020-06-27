@@ -49,8 +49,13 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
             private BranchCRUD      braCRUD;
 
         // Controllers
-        private ControllerLogin ctrlLogin;
-        private ControllerBranchManagement ctrlBM;
+        private ControllerLogin                 ctrlLogin;
+        private ControllerEmployeeManagement    ctrlEmployeeManagement;
+        private ControllerBranchManagement      ctrlBM;
+        private ControllerCinemaRoomManagement  ctrlCiRoomManagement;
+        private ControllerClientManagement      ctrClientManagement;
+        private ControllerEnterpriseManagement  ctrlEnterpriseManagement;
+        private ControllerFilmManagement        ctrlFilmManagement;
         
         // Views
         private MainPage        mainPage;
@@ -1369,6 +1374,12 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         
         //</editor-fold>
         
+        //<editor-fold defaultstate="collapsed" desc=" Botones del MainPage Option 3 ">
+        
+        
+        
+        //</editor-fold>
+        
         //<editor-fold defaultstate="collapsed" desc=" Botones del MainPage Option 4 ">
         
         //<editor-fold defaultstate="collapsed" desc=" CRUD Employee "> 
@@ -1378,8 +1389,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         {
             
             // Se instancia y se declara la clase.
-            ControllerEmployeeManagement contEmployeeManagement = 
-                    new ControllerEmployeeManagement(rolUser, nameUser, nameBranch);
+            ctrlEmployeeManagement = new ControllerEmployeeManagement(rolUser, nameUser, nameBranch);
              
         }
         //</editor-fold>
@@ -1400,8 +1410,57 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
 
         //</editor-fold>
         
+        //<editor-fold defaultstate="collapsed" desc=" CRUD CinemaRoom "> 
+        
+        //Consultar listado ->  Sala
+        else if(evt.getSource() == mainPage.btnCinemaRoomDecision){
+            
+            // Se instancia y se declara la clase.
+            ctrlCiRoomManagement = new ControllerCinemaRoomManagement(rolUser, nameUser, nameBranch);
+            
+        }
+         
+        //</editor-fold>
+        
+        //<editor-fold defaultstate="collapsed" desc=" CRUD Enterprise ">
+
+         //Consultar listado ->  Empresa
+         else if(evt.getSource() == mainPage.btnEnterpriseDecision){
+             // Se instancia y se declara la clase.
+            ctrlEnterpriseManagement = new ControllerEnterpriseManagement(rolUser, nameUser, nameBranch);
+            
+        }
+        
+        //</editor-fold>
+        
         //</editor-fold>
        
+        //<editor-fold defaultstate="collapsed" desc=" Botones del MainPage Option 6 ">
+        
+        //<editor-fold defaultstate="collapsed" desc=" CRUD Client "> 
+        
+        //Consultar listado ->  Cliente
+        else if(evt.getSource() == mainPage.btnClientDecision){
+            
+            // Se instancia y se declara la clase.
+            ctrClientManagement = new ControllerClientManagement(rolUser, nameUser, nameBranch);
+             
+        }
+         
+        //</editor-fold>
+        
+        //<editor-fold defaultstate="collapsed" desc=" CRUD Film "> 
+        
+        else if(evt.getSource() == mainPage.btnFilmDecision){
+            // Se instancia y se declara la clase.
+            ctrlFilmManagement = new ControllerFilmManagement(rolUser, nameUser, nameBranch);
+             
+        }
+        
+        //</editor-fold>
+        
+        //</editor-fold>
+        
     }
     
     /**
