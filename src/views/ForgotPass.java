@@ -1,17 +1,23 @@
 
 package views;
 
-import lib.SuportFunctions;
+import lib.SupportFunctions;
 
 /**
- *
- * @author Gustavo
+ *  Materia: Laboratorio I
+ *  Sección: 1
+ *      Integrantes:
+ *          @author Brizuela, Yurisbellys   C.I: 27.142.239
+ *          @author Miranda, Marihec        C.I: 26.120.075
+ *          @author Montero, Michael        C.I: 26.561.077
+ *          @author Rivero, Gustavo         C.I: 26.772.857
+ *          @author Torrealba, Luis         C.I: 26.121.249
  */
 public class ForgotPass extends javax.swing.JFrame {
 
     int xx = 0, xy = 0;
     
-    private SuportFunctions suport;
+    private SupportFunctions suport;
     
     public ForgotPass() {
                 
@@ -19,7 +25,7 @@ public class ForgotPass extends javax.swing.JFrame {
         initComponents();
         
         // Se instancia la clase de Soporte.
-        suport = new SuportFunctions();
+        suport = new SupportFunctions();
         
         // Ubica el JFrame en el centro de la pantalla.
         setLocationRelativeTo(null);

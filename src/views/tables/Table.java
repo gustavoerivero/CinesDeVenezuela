@@ -3,9 +3,16 @@ package views.tables;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+
 /**
- *
- * @author Gustavo
+ *  Materia: Laboratorio I
+ *  Sección: 1
+ *      Integrantes:
+ *          @author Brizuela, Yurisbellys   C.I: 27.142.239
+ *          @author Miranda, Marihec        C.I: 26.120.075
+ *          @author Montero, Michael        C.I: 26.561.077
+ *          @author Rivero, Gustavo         C.I: 26.772.857
+ *          @author Torrealba, Luis         C.I: 26.121.249
  */
 public class Table {
     
@@ -76,6 +83,23 @@ public class Table {
         btnDelete.setBackground(new java.awt.Color(245, 245, 245));
         btnDelete.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnDelete.setContentAreaFilled(false);
+                
+    }
+    
+    /**
+     * Método para dar formato a un JButton con características de "Buscar"
+     * @param btnDelete JButton que se le desea dar un formato.
+     */
+    public void addSearchButton(JButton btnSearch){
+        
+        btnSearch.setName("s");
+        ImageIcon deleteIcon = new ImageIcon(getClass().getResource(
+                "/views/images/okIcon-small.png"));
+        btnSearch.setIcon(deleteIcon);
+        btnSearch.setToolTipText("Buscar");
+        btnSearch.setBackground(new java.awt.Color(245, 245, 245));
+        btnSearch.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSearch.setContentAreaFilled(false);
                 
     }
     
@@ -211,7 +235,167 @@ public class Table {
         }
         
     }
+    
+    /**
+     * Método para construir una JTable con formato para visualizar los tickets
+     * a comprar
+     * @param table JTable que se le dará formato.
+     * @param matrix Datos que se van a incorporar a la JTable.
+     */
+     
+    public void buildCinemaTicketsTable(javax.swing.JTable table, Object[][] matrix){
+        
+        table.setDefaultRenderer(Object.class, new Render());
+        
+        DefaultTableModel functionSelectorTableModel = new DefaultTableModel(
+        matrix,
+        new Object[]{
+            "Tipo", "Butaca", "Precio", "IVA (16%)", "Monto"
+        }
+    )
+    {
+        public boolean isCellEditable(int row, int colum){
+            return false;
+            }
+        };
+        table.setModel(functionSelectorTableModel);
+        
+        table.setPreferredScrollableViewportSize(table.getPreferredSize());
+        
+    }
+    
+    /**
+     * Método para construir una JTable con formato para la búsqueda de empleados.
+     * @param table JTable que se le dará formato.
+     * @param matrix Datos que se van a incorporar a la JTable.
+     */
+    public void buildEmployeeTable(javax.swing.JTable table, Object[][] matrix){
+        
+        table.setDefaultRenderer(Object.class, new Render());
+               
+        DefaultTableModel employeeTableModel = new  DefaultTableModel(
+            matrix,
+            new Object[]{
+                "Cédula", "Nombre y Apellido", "Sucursal", "Cargo", "Consultar"
+            }
+        )
+        {
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        };
+        
+        table.setModel(employeeTableModel);
+        
+        table.setPreferredScrollableViewportSize(table.getPreferredSize());
+             
+        table.setRowHeight(32);
+        
+        if (table.getColumnModel().getColumnCount() > 0) {
+            table.getColumnModel().getColumn(4).setResizable(false);
+            table.getColumnModel().getColumn(4).setPreferredWidth(32);
+        }
+        }
+        
+        /**
+     * MÃ©todo para construir una JTable con formato para la busqueda de clientes.
+     * @param table JTable que se le dará formato.
+     * @param matrix Datos que se van a incorporar a la JTable.
+     */
+    public void buildClientTable(javax.swing.JTable table, Object[][] matrix){
+        
+        table.setDefaultRenderer(Object.class, new Render());
+               
+        DefaultTableModel clientTableModel = new  DefaultTableModel(
+            matrix,
+            new Object[]{
+                "Cédula", "Nombre y Apellido", "Dirección", 
+                "Correo", "Teléfono", "Tipo","Consultar"
+            }
+        )
+        {
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        };
+        
+        table.setModel(clientTableModel);
+        
+        table.setPreferredScrollableViewportSize(table.getPreferredSize());
+             
+        table.setRowHeight(32);
+        
+        if (table.getColumnModel().getColumnCount() > 0) {
+            table.getColumnModel().getColumn(6).setResizable(false);
+            table.getColumnModel().getColumn(6).setPreferredWidth(32);
+        }
+}
+        
+        
+         /**
+     * MÃ©todo para construir una JTable con formato para la busqueda de usuarios.
+     * @param table JTable que se le dará formato.
+     * @param matrix Datos que se van a incorporar a la JTable.
+     */
+    public void buildUserTable(javax.swing.JTable table, Object[][] matrix){
+        
+        table.setDefaultRenderer(Object.class, new Render());
+               
+        DefaultTableModel userTableModel = new  DefaultTableModel(
+            matrix,
+            new Object[]{
+                "Correo", "Cédula", "Rol","Consultar"
+            }
+        )
+        {
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        };
+        
+        table.setModel(userTableModel);
+        
+        table.setPreferredScrollableViewportSize(table.getPreferredSize());
+             
+        table.setRowHeight(32);
+        
+        if (table.getColumnModel().getColumnCount() > 0) {
+            table.getColumnModel().getColumn(3).setResizable(false);
+            table.getColumnModel().getColumn(3).setPreferredWidth(32);
+        }
+        }
 
+        
+        public void buildCinemaRoomTable(javax.swing.JTable table, Object[][] matrix){
+        
+        table.setDefaultRenderer(Object.class, new Render());
+               
+        DefaultTableModel userTableModel = new  DefaultTableModel(
+            matrix,
+            new Object[]{
+                "Código", "Sucursal", "Fila","Columna","Consultar"
+            }
+        )
+        {
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        };
+        
+        table.setModel(userTableModel);
+        
+        table.setPreferredScrollableViewportSize(table.getPreferredSize());
+             
+        table.setRowHeight(32);
+        
+        if (table.getColumnModel().getColumnCount() > 0) {
+            table.getColumnModel().getColumn(4).setResizable(false);
+            table.getColumnModel().getColumn(4).setPreferredWidth(32);
+        }
+
+        
+    }
+    
     //</editor-fold>
     
 }

@@ -4,23 +4,29 @@ package models;
 import java.util.Date;
 
 /**
- *
- * @author Gustavo
+ *  Materia: Laboratorio I
+ *  Sección: 1
+ *      Integrantes:
+ *          @author Brizuela, Yurisbellys   C.I: 27.142.239
+ *          @author Miranda, Marihec        C.I: 26.120.075
+ *          @author Montero, Michael        C.I: 26.561.077
+ *          @author Rivero, Gustavo         C.I: 26.772.857
+ *          @author Torrealba, Luis         C.I: 26.121.249
  */
 public class Invoice {
     
-    private String id, id_employee;
+    private String id, id_employee, id_client;
     private Date date_purchase;
-    private double discount, iva, amount;
+    private double iva, amount;
     private char estatus;
 
-    public Invoice(String id, String id_employee, Date date_purchase, 
-                   double discount, double iva, double amount, char estatus) {
+    public Invoice(String id, String id_employee, String id_client, Date date_purchase, 
+                   double iva, double amount, char estatus) {
         
         this.id = id;
         this.id_employee = id_employee;
+        this.id_client = id_client;
         this.date_purchase = date_purchase;
-        this.discount = discount;
         this.iva = iva;
         this.amount = amount;
         this.estatus = estatus;
@@ -42,6 +48,14 @@ public class Invoice {
     public void setId_employee(String id_employee) {
         this.id_employee = id_employee;
     }
+    
+        public String getId_client() {
+        return id_client;
+    }
+
+    public void setId_client(String id_client) {
+        this.id_client = id_client;
+    }
 
     public Date getDate_purchase() {
         return date_purchase;
@@ -49,14 +63,6 @@ public class Invoice {
 
     public void setDate_purchase(Date date_purchase) {
         this.date_purchase = date_purchase;
-    }
-
-    public double getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(double discount) {
-        this.discount = discount;
     }
 
     public double getIva() {

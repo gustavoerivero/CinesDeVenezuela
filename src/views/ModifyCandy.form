@@ -77,10 +77,8 @@
                               <Group type="102" alignment="1" attributes="0">
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="lblBuy" max="32767" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="lblIVA" max="32767" attributes="0"/>
-                                          <Component id="lblTotal" max="32767" attributes="0"/>
-                                      </Group>
+                                      <Component id="lblIVA" max="32767" attributes="0"/>
+                                      <Component id="lblTotal" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">

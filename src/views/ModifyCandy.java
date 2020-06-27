@@ -2,11 +2,17 @@
 package views;
 
 // Se importa librería de soporte.
-import lib.SuportFunctions;
+import lib.SupportFunctions;
 
 /**
- *
- * @author Gustavo
+ *  Materia: Laboratorio I
+ *  Sección: 1
+ *      Integrantes:
+ *          @author Brizuela, Yurisbellys   C.I: 27.142.239
+ *          @author Miranda, Marihec        C.I: 26.120.075
+ *          @author Montero, Michael        C.I: 26.561.077
+ *          @author Rivero, Gustavo         C.I: 26.772.857
+ *          @author Torrealba, Luis         C.I: 26.121.249
  */
 public class ModifyCandy extends javax.swing.JDialog {
 
@@ -18,8 +24,8 @@ public class ModifyCandy extends javax.swing.JDialog {
     double price = 0, iva = 0, total = 0, buy = 0;
         
     // Se declaran las clases de apoyo
-    private SuportFunctions suport;
-    private PopupDialogMessage popup;
+    private SupportFunctions suport;
+    private PopupMessage popup;
     
     /**
      * Constructor
@@ -36,7 +42,7 @@ public class ModifyCandy extends javax.swing.JDialog {
         initComponents();
         
         // Se inicializa la clase de soporte
-        suport = new SuportFunctions();
+        suport = new SupportFunctions();
         
         // Se indican los valores iniciales del JDialog
         lblCandyName.setText(name);
@@ -499,7 +505,7 @@ public class ModifyCandy extends javax.swing.JDialog {
             // Se cierra el JDialog
             dispose();
         else // De lo contrario, muestra mensaje de error.
-            popup = new PopupDialogMessage(this, true, 1, "Debe indicar una cantidad de golosinas");
+            popup = new PopupMessage(this, true, 1, "Debe indicar una cantidad de golosinas");
     }//GEN-LAST:event_btnOkActionPerformed
 
     /**
