@@ -298,6 +298,43 @@ public class Table {
         
     }
     
+    
+            /**
+     * Método para construir una JTable con formato de Sucursal.
+     * @param table JTable que se le dará formato.
+     * @param matrix Datos que se van a incorporar a la JTable.
+     */
+        public void buildBranchTable(javax.swing.JTable table, Object[][] matrix){
+        
+        table.setDefaultRenderer(Object.class, new Render());
+               
+        DefaultTableModel branchTableModel = new  DefaultTableModel(
+            matrix,
+            new Object[]{
+                            "Codigo", "Nombre", "Ciudad", 
+                            "Dirección", "Telefono", "Consultar"
+            }
+        )
+        {
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        };
+        
+        table.setModel(branchTableModel);
+        
+        table.setPreferredScrollableViewportSize(table.getPreferredSize());
+             
+        table.setRowHeight(32);
+        
+        if (table.getColumnModel().getColumnCount() > 0) {
+            table.getColumnModel().getColumn(5).setResizable(false);
+            table.getColumnModel().getColumn(5).setPreferredWidth(32);
+            
+        }
+        
+    }
+    
     //</editor-fold>
     
 }
