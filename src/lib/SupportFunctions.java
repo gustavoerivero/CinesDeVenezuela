@@ -10,7 +10,7 @@ import javax.swing.JPanel;
  *
  * @author Gustavo
  */
-public class SuportFunctions {
+public class SupportFunctions {
         
     /**
      * Método para utilizar de manera cómoda y rápida el CardLayout.
@@ -122,8 +122,8 @@ public class SuportFunctions {
          *  $ especifica el fin de la entrada.
          */
         //</editor-fold>
-        String emailPattern =   "^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@" +
-                                "[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,4})$";
+        String emailPattern =   "^[_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@" +
+                                "[a-zA-Z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,4})$";
         
         // Se compila la expresión.
         Pattern pattern = Pattern.compile(emailPattern);

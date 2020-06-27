@@ -4,22 +4,28 @@ package models;
 import java.util.Date;
 
 /**
- *
- * @author Gustavo Rivero
+ *  Materia: Laboratorio I
+ *  Sección: 1
+ *      Integrantes:
+ *          @author Brizuela, Yurisbellys   C.I: 27.142.239
+ *          @author Miranda, Marihec        C.I: 26.120.075
+ *          @author Montero, Michael        C.I: 26.561.077
+ *          @author Rivero, Gustavo         C.I: 26.772.857
+ *          @author Torrealba, Luis         C.I: 26.121.249
  */
 public class Persona {
     private String
             id,
             name,
             surname,
-            phone,
             direction,
             email;
+    long    phone;   
     private Date birth_date;
     public char estatus;
     
     public Persona(String id, String name,String surname,
-            String phone,String direction,Date birth_date,
+            long phone,String direction,Date birth_date,
             String email, char estatus){
         
         super();
@@ -59,11 +65,11 @@ public class Persona {
         this.surname = surname;
     }
 
-    public String getPhone() {
+    public long getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(long phone) {
         this.phone = phone;
     }
 
