@@ -2,11 +2,17 @@
 package views;
 
 import views.tables.Table;
-import lib.SuportFunctions;
+import lib.SupportFunctions;
 
 /**
- *
- * @author Marihec
+ *  Materia: Laboratorio I
+ *  Sección: 1
+ *      Integrantes:
+ *          @author Brizuela, Yurisbellys   C.I: 27.142.239
+ *          @author Miranda, Marihec        C.I: 26.120.075
+ *          @author Montero, Michael        C.I: 26.561.077
+ *          @author Rivero, Gustavo         C.I: 26.772.857
+ *          @author Torrealba, Luis         C.I: 26.121.249
  */
 public class ConsultList extends javax.swing.JFrame {
 
@@ -20,7 +26,7 @@ public class ConsultList extends javax.swing.JFrame {
     Table table = new Table();
     
     // Se instancia la clase de soporte.
-    private SuportFunctions suport;
+    private SupportFunctions suport;
     
     /**
      * Creates new form ConsultList
@@ -31,7 +37,7 @@ public class ConsultList extends javax.swing.JFrame {
         initComponents();
         
         // Se instancia la clase de soporte.
-        suport = new SuportFunctions();
+        suport = new SupportFunctions();
         
         // Ubica el JFrame en el centro de la pantalla.
         setLocationRelativeTo(null);
@@ -67,6 +73,7 @@ public class ConsultList extends javax.swing.JFrame {
     public void addMouseEvents(java.awt.event.MouseListener evt)
     {
         tblConsultBranchList.addMouseListener(evt);
+        tblEmployee.addMouseListener(evt);
     }
     //</editor-fold>
     
