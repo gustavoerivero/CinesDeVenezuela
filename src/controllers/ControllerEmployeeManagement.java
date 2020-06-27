@@ -185,8 +185,10 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
         // Limpiar el consultar listado.
         else if(evt.getSource() == empManagement.btnClearSearchEmployee){
             
+            // Se limpia la tabla de empleados.
             empManagement.clearEmployeeSearch();
             
+            // Se muestra el listado por defecto que debe contener la tabla.
             loadEmployeeTable();
             
         }
@@ -225,7 +227,7 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                     support.cardSelection(empManagement.panContainerEmployee, empManagement.panConsultList);
                     
                     // Se cargan los empleados.
-                    loadEmployeeTable();
+                    //loadEmployeeTable();
                     
                     // Se inicializan las variables.
                     clearVariables();
@@ -241,7 +243,7 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                 support.cardSelection(empManagement.panContainerEmployee, empManagement.panConsultList);
                     
                 // Se cargan los empleados.
-                loadEmployeeTable();
+                //loadEmployeeTable();
                 
                 // Se inicializan las variables.
                 clearVariables();
@@ -326,7 +328,7 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                                 support.cardSelection(empManagement.panContainerEmployee, empManagement.panConsultList);
 
                                 // Se cargan los empleados.
-                                loadEmployeeTable();
+                                //loadEmployeeTable();
 
                                 // Se inicializan las variables.
                                 clearVariables();
@@ -343,7 +345,7 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                                 support.cardSelection(empManagement.panContainerEmployee, empManagement.panConsultList);
 
                                 // Se cargan los empleados.
-                                loadEmployeeTable();
+                                //loadEmployeeTable();
 
                                 // Se inicializan las variables.
                                 clearVariables();
@@ -378,6 +380,8 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                     !empManagement.txtPhoneEmployee.getText().equals("") &&
                     !empManagement.txtPhoneEmployee.getText().equals("Teléfono del empleado") &&
                      empManagement.txtPhoneEmployee.getText().length() <= 10 &&
+                      // !empManagement.txtEmailEmployee.getText().equals("Correo electrónico del empleado") &&
+                     //empManagement.txtEmailEmployee.getText().length() <= 10 &&
                     !empManagement.txtDirectionEmployee.getText().equals("") &&
                     !empManagement.txtDirectionEmployee.getText().equals("Dirección del empleado") &&
                      empManagement.cmbBranchEmployee.getSelectedIndex() != 0 && 
@@ -397,7 +401,7 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                             support.cardSelection(empManagement.panContainerEmployee, empManagement.panConsultList);
 
                             // Se cargan los empleados.
-                            loadEmployeeTable();
+                            //loadEmployeeTable();
 
                             // Se inicializan las variables.
                             clearVariables();
@@ -440,7 +444,7 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                 support.cardSelection(empManagement.panContainerEmployee, empManagement.panConsultList);
                     
                 // Se cargan los empleados.
-                loadEmployeeTable();
+                //loadEmployeeTable();
                     
                 // Se inicializan las variables.
                 clearVariables();
@@ -597,6 +601,7 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                 
                 empManagement.btnChangeBranch.setEnabled(true);
                 empManagement.lblSucursalName.setText(branchUser);
+                empManagement.btnDeleteEmployee.setEnabled(true);
                 
                 break;
                 
@@ -605,6 +610,7 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                 
                 empManagement.btnChangeBranch.setEnabled(false);
                 empManagement.lblSucursalName.setText(branchUser);
+                empManagement.btnDeleteEmployee.setEnabled(false);
                 
                 break;
             
@@ -686,7 +692,7 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
      */
     private String loadBranch(String branchName){
         
-                // Se instancia la clase a utilizar.
+        // Se instancia la clase a utilizar.
         braCRUD = new BranchCRUD();
         
         // Se declara la variable que devuelve el resultado.
@@ -756,7 +762,7 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
         
         // Se declaran e inicializan las variables que servirán para buscar empleados.
         String  initSQL     = "SELECT empleado.\"cedula\", empleado.\"nombre\", empleado.\"apellido\", "
-                                    + "sucursal.\"nombre\" as \"nombreSucursal\", \"cargo\" "
+                                    + "sucursal.\"nombre\" as \"nombreSucursal\", empleado.\"cargo\" "
                                     + "FROM \"empleado\", \"sucursal\" WHERE \"sucursal_codigo\" = sucursal.\"codigo\" "
                                     + "AND empleado.\"estado\" = 'A' AND sucursal.\"estado\" = 'A'",
                 finalSQL    = ";",

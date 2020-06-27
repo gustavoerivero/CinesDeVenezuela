@@ -35,25 +35,33 @@ import javax.swing.table.DefaultTableModel;
  *          @author Torrealba, Luis         C.I: 26.121.249
  */
 public class ControllerBranchManagement implements ActionListener, MouseListener{
-      //<editor-fold defaultstate="collapsed" desc=" Declaración de variables ">
+    
+    //<editor-fold defaultstate="collapsed" desc=" Declaración de variables ">
+    
     // Models
     private Branch branch;
-    // Models.database
-    private BranchCRUD bCRUD;
-    private CityCRUD cCRUD;
-    private EnterpriseCRUD eCRUD;
+        // Models.database
+        private BranchCRUD bCRUD;
+        private CityCRUD cCRUD;
+        private EnterpriseCRUD eCRUD;
+        
     // Views
     private BranchManagement braManagement;
     private PopupMessage popup;
+    
     // Controllers
     private ControllerMainMenu contMainMenu;    
+    
     // Librerías de soporte
     private SupportFunctions support;   
+    
     // Variables del usuario.
     private int auxM;
+    
     private String  rolUser,
                     nameUser,
-                    branchUser;    
+                    branchUser;   
+    
     // Variables para CRUD del empleado.
     private String  id,
                     enterprise,
@@ -61,6 +69,7 @@ public class ControllerBranchManagement implements ActionListener, MouseListener
                     direction,
                     city,
                     phone;
+    
     //</editor-fold>
     
     /**
@@ -73,7 +82,8 @@ public class ControllerBranchManagement implements ActionListener, MouseListener
         
         // Declarar la variable de las clases instanciadas.
         braManagement   = new BranchManagement();
-        support         = new SupportFunctions();       
+        support         = new SupportFunctions();  
+        
         // Se inicializan las variables.
         this.rolUser    = rolUser;
         this.nameUser   = nameUser;
@@ -81,6 +91,7 @@ public class ControllerBranchManagement implements ActionListener, MouseListener
         
         // Se muestra la primera pantalla.
         support.cardSelection(braManagement.panContainerBranch, braManagement.panConsultList);
+        
         // Se cargan los empleados.
         loadBranchTable();
         

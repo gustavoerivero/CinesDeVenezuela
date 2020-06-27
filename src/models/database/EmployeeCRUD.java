@@ -21,46 +21,6 @@ public class EmployeeCRUD {
     //Constructor    
     public EmployeeCRUD(){}
 
-    //<editor-fold>
-
-    //<editor-fold defaultstate="collapsed" desc=" Metodo de Cargar Tabla, no sirve pero tiene buena logica ">       
-
-
-    /*public ArrayList<Object>listaEmployee2()
-     {
-            ArrayList<Object>lista; 
-            lista = new ArrayList<>();
-            try{
-                con = new ConnectionDB();
-                con.conectar();
-                String SQL = "SELECT * FROM \"Empleadito\"";
-
-                java.sql.ResultSet rs = con.queryConsultar(SQL);
-                ResultSetMetaData rMd = rs.getMetaData();
-                int cantcolumnas = rMd.getColumnCount();
-                while(rs.next())
-                    {
-                        Object[] filas = new Object[cantcolumnas];
-                        for (int i = 0; i < cantcolumnas ; i++) 
-                        {
-                            filas[i] = rs.getObject(i+1);
-                        }
-                        lista.add(filas);
-
-                    }
-
-            }
-            catch(Exception e)
-            {
-                System.out.println("No se pudo encontrar al Empleado. Error: " + e);;
-            }
-    return lista;
-
-    }*/
-         //</editor-fold>      
-
-    //</editor-fold>
-
     /**
      * Método para obtener los datos de un empleado.
      * @return Devuelve consulta.
@@ -450,11 +410,3 @@ public class EmployeeCRUD {
     }
     
 }
-    
-    
- 
-  
-
-    
-    
-     
