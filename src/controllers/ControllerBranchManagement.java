@@ -10,8 +10,7 @@ import models.database.EnterpriseCRUD;
 import models.database.CityCRUD;
 
 // Se importan las views a utilizar.
-import views.BranchMangent;
-import views.ChangeBranch;
+import views.BranchManagement;
 import views.PopupMessage;
 import views.SelectOption;
 import views.tables.Table;
@@ -19,7 +18,6 @@ import views.tables.Table;
 // Se importan las librerías a utilizar.
 import java.awt.event.*;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,25 +35,33 @@ import javax.swing.table.DefaultTableModel;
  *          @author Torrealba, Luis         C.I: 26.121.249
  */
 public class ControllerBranchManagement implements ActionListener, MouseListener{
-      //<editor-fold defaultstate="collapsed" desc=" Declaración de variables ">
+    
+    //<editor-fold defaultstate="collapsed" desc=" Declaración de variables ">
+    
     // Models
     private Branch branch;
-    // Models.database
-    private BranchCRUD bCRUD;
-    private CityCRUD cCRUD;
-    private EnterpriseCRUD eCRUD;
+        // Models.database
+        private BranchCRUD bCRUD;
+        private CityCRUD cCRUD;
+        private EnterpriseCRUD eCRUD;
+        
     // Views
-    private BranchMangent braManagement;
+    private BranchManagement braManagement;
     private PopupMessage popup;
+    
     // Controllers
     private ControllerMainMenu contMainMenu;    
+    
     // Librerías de soporte
     private SupportFunctions support;   
+    
     // Variables del usuario.
     private int auxM;
+    
     private String  rolUser,
                     nameUser,
-                    branchUser;    
+                    branchUser;   
+    
     // Variables para CRUD del empleado.
     private String  id,
                     enterprise,
@@ -63,6 +69,7 @@ public class ControllerBranchManagement implements ActionListener, MouseListener
                     direction,
                     city,
                     phone;
+    
     //</editor-fold>
     
     /**
@@ -74,20 +81,20 @@ public class ControllerBranchManagement implements ActionListener, MouseListener
     public ControllerBranchManagement(String rolUser, String nameUser, String branchUser){
         
         // Declarar la variable de las clases instanciadas.
-        braManagement   = new BranchMangent();
-        support         = new SupportFunctions();       
+        braManagement   = new BranchManagement();
+        support         = new SupportFunctions();  
+        
         // Se inicializan las variables.
         this.rolUser    = rolUser;
         this.nameUser   = nameUser;
         this.branchUser = branchUser;
         
         // Se muestra la primera pantalla.
-        support.cardSelection(braManagement.panContainerBranch, braManagement.panConsultList);
-        // Se cargan los empleados.
-        loadBranchTable();
-        
+        //support.cardSelection(braManagement.panContainerBranch, braManagement.panConsultList);
+                
         // Se habilitan o deshabilitan los botónes según tipo de usuario.
-        enabledButtons(this.rolUser);
+        typeUser(this.rolUser);
+        
         
         // Se inicializan las variables.
         clearVariables();
@@ -261,7 +268,7 @@ public class ControllerBranchManagement implements ActionListener, MouseListener
         
         //<editor-fold defaultstate="collapsed" desc=" Register or Update Branch ">
         
-        // Registro o Modificación de empleado.
+        // Registro o Modificación de sucursal.
         else if(evt.getSource() == braManagement.btnRegisterModifyBranch){
             
             /**
@@ -270,8 +277,7 @@ public class ControllerBranchManagement implements ActionListener, MouseListener
              */
             if(id.equals("")){
                 
-                
-                // De no haber campos vacíos.
+            // De no haber campos vacíos.
             if(!braManagement.txtIdBranch.getText().equals("Codigo de la sucursal") && 
                     !braManagement.txtIdBranch.getText().equals("") &&
                     !braManagement.txtNameBranch.getText().equals("Nombre de la sucursal") &&
@@ -283,17 +289,17 @@ public class ControllerBranchManagement implements ActionListener, MouseListener
                     braManagement.cmbCityBranch.getSelectedIndex() != 0 &&
                     braManagement.cmbEnterpriseBranch.getSelectedIndex() != 0){
                 
-                        // Se confirma que se desea eliminar el registro.
+                        // Se confirma que se desea registrar la sucursal
                         SelectOption select = new SelectOption(braManagement, true, 2, 
                                 "¿Desea registrar esta sucursal?", "Si", "No");
 
                         // Si se confirma el registro.
                         if(select.getOpc()){
 
-                            // Si el empleado ya existe pero se encuentra inactivo.
+                            // Si la sucursal ya existe pero se encuentra inactivo.
                             if(bCRUD.branchExist(braManagement.txtIdBranch.getText(), 'I')){
                                 
-                                // Se cambia el estado del empleado a activo.
+                                // Se cambia el estado de la sucursal a activo.
                                 bCRUD.DeleteBranch(braManagement.txtIdBranch.getText(), 1);
                                 
                                 // Se actualiza la información del empleado.
@@ -307,6 +313,7 @@ public class ControllerBranchManagement implements ActionListener, MouseListener
 
                                 // Se inicializan las variables.
                                 clearVariables();
+                                
                                 
                             }
                             
@@ -366,8 +373,9 @@ public class ControllerBranchManagement implements ActionListener, MouseListener
 
                             // Se ejecuta la actualización de información.
                             updateBranchData(id);
-                            
-                            // Se muestra la vista del CRUD.
+                            if("ROL-01".equals(rolUser))
+                            {
+                                                            // Se muestra la vista del CRUD.
                             support.cardSelection(braManagement.panContainerBranch, braManagement.panConsultList);
 
                             // Se cargan las sucursales.
@@ -375,6 +383,11 @@ public class ControllerBranchManagement implements ActionListener, MouseListener
 
                             // Se inicializan las variables.
                             clearVariables();
+                            }
+                            else
+                            {
+                                braManagement.dispose();
+                            }
                             
                         }
                     
@@ -394,7 +407,7 @@ public class ControllerBranchManagement implements ActionListener, MouseListener
         
         //<editor-fold defaultstate="collapsed" desc=" Delete Branch ">
         
-        // Eliminación de un empleado.
+        // Eliminación de una sucursal.
         else if(evt.getSource() == braManagement.btnDeleteBranch){
             
             // Se pregunta al usuario si desea realmente eliminar la sucursal.
@@ -462,7 +475,7 @@ public class ControllerBranchManagement implements ActionListener, MouseListener
                     
                     JButton btn = (JButton) value;
 
-                    //<editor-fold defaultstate="collapsed" desc=" Proceso para consultar un empleado ">
+                    //<editor-fold defaultstate="collapsed" desc=" Proceso para consultar una sucursal ">
                     
                     // Si el JButton se llama "s";
                     if(btn.getName().equals("s")){
@@ -501,7 +514,7 @@ public class ControllerBranchManagement implements ActionListener, MouseListener
                         // Se muestra la vista del CRUD.
                         support.cardSelection(braManagement.panContainerBranch, braManagement.panCRUD);
                         
-                        // Se bloquea el botón de 'eliminar'.
+                        // Se desbloquea el botón de 'eliminar'.
                         braManagement.btnDeleteBranch.setEnabled(true);
                         
                         // Se configura el texto del botón.
@@ -540,6 +553,9 @@ public class ControllerBranchManagement implements ActionListener, MouseListener
                         // Se bloquea el botón de 'eliminar'.
                         braManagement.btnDeleteBranch.setEnabled(false);
                         
+                        // Se desbloquea el campo de codigo.
+                        braManagement.txtIdBranch.setEnabled(true);
+                                                
                         // Se configura el texto del botón.
                         braManagement.btnRegisterModifyBranch.setText("Registrar");
                         
@@ -569,7 +585,7 @@ public class ControllerBranchManagement implements ActionListener, MouseListener
      * Método para habilitar o deshabilitar botónes según tipo de usuario.
      * @param rol Rol del usuario que ha ingresado al sistema.
      */
-    private void enabledButtons(String rol){
+    private void typeUser(String rol){
         
         switch(rol){
             
@@ -577,13 +593,60 @@ public class ControllerBranchManagement implements ActionListener, MouseListener
             case "ROL-01":
                 
                 braManagement.lblSucursalName.setText(branchUser);
-                
+                support.cardSelection(braManagement.panContainerBranch, braManagement.panConsultList);
+                loadBranchTable();
                 break;
                 
             // Rol: Gerente
             case "ROL-02":
-                
                 braManagement.lblSucursalName.setText(branchUser);
+                String idBranch = codBranch(branchUser);
+                        // Se buscan los datos de la sucursal.
+                        loadBranch(idBranch);
+                                                             
+                        // Variables de apoyo para construir el comboBox de sucursales.
+                        ArrayList<String>   codexCity = new ArrayList<>(),
+                                            codexEnterprise= new ArrayList<>(),
+                                            nameCity = new ArrayList<>(),
+                                            nameEnterprise = new ArrayList<>();
+                        
+                        // Se obtienen los datos de las sucursales.
+                        loadCity(codexCity, nameCity);
+                        loadEnterprise(codexEnterprise,nameEnterprise);
+                        // Se llena el combobox de las sucursales.
+                        braManagement.cmbCityBranch.removeAllItems();
+                        braManagement.cmbCityBranch.addItem(" - Seleccionar una Ciudad - ");
+                        braManagement.cmbEnterpriseBranch.removeAllItems();
+                        braManagement.cmbEnterpriseBranch.addItem(" - Seleccionar una Empresa - ");                        
+                        for(int i = 0; i < codexCity.size(); i++)
+                            braManagement.cmbCityBranch.addItem(nameCity.get(i));
+                        for(int i = 0; i < codexEnterprise.size(); i++)
+                            braManagement.cmbEnterpriseBranch.addItem(nameEnterprise.get(i));
+                                                    
+                        // Se muestra la vista del CRUD.
+                        support.cardSelection(braManagement.panContainerBranch, braManagement.panCRUD);
+                        
+                        // Se desbloquea el botón de 'eliminar'.
+                        braManagement.btnDeleteBranch.setEnabled(false);
+                        braManagement.btnBackBranch.setEnabled(false);
+                        braManagement.btnClearBranch.setEnabled(false);
+
+                        // Se configura el texto del botón.
+                        braManagement.btnRegisterModifyBranch.setText("Modificar");
+                        // Se limpian todos los aspectos visuales.
+                        braManagement.clearView();
+                                                
+                        // Se muestran los datos obtenidos.
+                        braManagement.txtIdBranch.setText(id);
+                        braManagement.cmbCityBranch.setSelectedItem(city);    
+                        braManagement.cmbEnterpriseBranch.setSelectedItem(enterprise);
+                        braManagement.txtNameBranch.setText(name);
+                        braManagement.txtDirectionBranch.setText(direction);
+                        braManagement.txtPhoneBranch.setText(String.valueOf(phone));
+
+                        
+                        // Se bloquea el campo de codigo.
+                        braManagement.txtIdBranch.setEnabled(false);
                 
                 break;
             
@@ -725,7 +788,7 @@ public class ControllerBranchManagement implements ActionListener, MouseListener
         java.sql.ResultSet result;
         
         // Variable de soporte.
-        String codex;
+        String codex="";
         
         try {
             result = cCRUD.readOnlyCity(cityName);
@@ -741,7 +804,7 @@ public class ControllerBranchManagement implements ActionListener, MouseListener
             
         }
         
-        return null;
+        return codex;
         
     }
     
@@ -759,7 +822,7 @@ public class ControllerBranchManagement implements ActionListener, MouseListener
         java.sql.ResultSet result;
         
         // Variable de soporte.
-        String codex;
+        String codex="";
         
         try {
             result = eCRUD.readOnlyEnterprise(enterpriseName);
@@ -775,7 +838,41 @@ public class ControllerBranchManagement implements ActionListener, MouseListener
             
         }
         
-        return null;
+        return codex;
+        
+    }
+    
+            /**
+     * Método para buscar el código de una sucursal.
+     * @param nameBranch Nombre de la ciudad.
+     * @return Devuelve el código de la ciudad.
+     */
+    private String codBranch(String nameBranch){
+        
+                // Se instancia la clase a utilizar.
+        bCRUD  = new BranchCRUD();
+        
+        // Se declara la variable que devuelve el resultado.
+        java.sql.ResultSet result;
+        
+        // Variable de soporte.
+        String codex="";
+        
+        try {
+            result = bCRUD.readOnlyBranch(nameBranch);
+            while(result.next()){
+                codex = result.getString("codigo");
+            }
+                        
+            System.out.println("Éxito.");
+                                    
+        } catch (java.sql.SQLException e) {
+            
+            System.out.println("Error: " + e);
+            
+        }
+        
+        return codex;
         
     }
     
@@ -1011,19 +1108,8 @@ public class ControllerBranchManagement implements ActionListener, MouseListener
     
     //</editor-fold>
     
+    //<editor-fold defaultstate="collapsed" desc=" PROHIBIDO TOCAR ">
     
-    
-/*
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-*/
     @Override
     public void mousePressed(MouseEvent e) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -1043,5 +1129,7 @@ public class ControllerBranchManagement implements ActionListener, MouseListener
     public void mouseExited(MouseEvent e) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    //</editor-fold>
     
 }

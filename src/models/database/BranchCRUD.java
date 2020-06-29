@@ -153,7 +153,7 @@ public class BranchCRUD {
     }
         
         
-            public boolean branchExist(String id){
+    public boolean branchExist(String id){
         
         try{
             
@@ -182,7 +182,7 @@ public class BranchCRUD {
         
     }
             
-                public boolean branchExist(String id, char estatus){
+    public boolean branchExist(String id, char estatus){
         
         try{
             
@@ -250,9 +250,9 @@ public class BranchCRUD {
         String  SQL = "UPDATE \"sucursal\" SET "
                 +  "\"empresa_codigo\" = '" + bran.getEnterprise_id()+ "',"
                 +  "\"ciudad_codigo\" = '" + bran.getCity_Id()+ "',"
-                +  "\"nombre\" = " + bran.getPhone() + ","
+                +  "\"nombre\" = '" + bran.getName() + "',"
                 +  "\"direccion\" = '" + bran.getDirec()+ "',"
-                +  "\"telefono\" = " + bran.getPhone()+ ","
+                +  "\"telefono\" = '" + bran.getPhone()+ "'"
                 +  " WHERE \"codigo\" = '" + id + "';";
 
         // Se instancia y se establece una conexión con la BD.
@@ -295,7 +295,7 @@ public class BranchCRUD {
         con.queryInsert(SQL);
         
         // Se muestra mensaje de éxito.
-        System.out.println("La consulta se realizó con éxito.");
+        System.out.println("El registro se realizó con éxito.");
         
         // Se desconecta la BD.
         con.desconectar();

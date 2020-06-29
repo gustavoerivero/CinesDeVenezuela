@@ -5,7 +5,7 @@ package models.database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-//michaelmontero.idb@gmail.com
+
 /**
  *  Materia: Laboratorio I
  *  Sección: 1

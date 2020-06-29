@@ -1,7 +1,10 @@
+
 package views;
+
 // Se importan las librerías a utilizar.
 import views.tables.*;
 import lib.SupportFunctions;
+
 /**
  *  Materia: Laboratorio I
  *  Sección: 1
@@ -12,30 +15,38 @@ import lib.SupportFunctions;
  *          @author Rivero, Gustavo         C.I: 26.772.857
  *          @author Torrealba, Luis         C.I: 26.121.249
  */
-public class BranchMangent extends javax.swing.JFrame {
+public class BranchManagement extends javax.swing.JFrame {
+    
     // Se declaran e inicializan las variables a utilizar.
     int xx = 0, xy = 0, row = 0, column = 0;    
+
     // Se declaran e instancian las clases a utilizar.
     private SupportFunctions support;
     private Table table = new Table();   
+
     /**
      * Constructor del gestor de empleados.
      */
-    public BranchMangent() 
-    {
+    public BranchManagement(){
+        
         initComponents();                
+        
         // Ubica el JFrame en el centro de la pantalla.
         setLocationRelativeTo(null);        
+        
         // Muestra el JFrame.
         setVisible(true);        
+        
         // Se limpia la view inicial.
         clearBranchSearch();
+        
         // Cambia el ícono del JFrame.
         this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("images/CDV-icon.png")).getImage());
+    
     }
 
     
-     //<editor-fold defaultstate="collapsed" desc=" Métodos para manipular tablas ">
+    //<editor-fold defaultstate="collapsed" desc=" Métodos para manipular tablas ">
     
     /**
      * Método que retorna los valores iniciales de los componentes 
@@ -132,8 +143,6 @@ public class BranchMangent extends javax.swing.JFrame {
     }
     
     //</editor-fold>
-    
-    
     /**
      * Método para devolver a los valores por defecto a los elementos de la view.
      */

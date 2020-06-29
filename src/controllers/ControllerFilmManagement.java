@@ -5,14 +5,14 @@ package controllers;
 import lib.SupportFunctions;
 
 // Se importan los models a utilizar.
-import models.Employee;
-import models.database.EmployeeCRUD;
-import models.database.BranchCRUD;
-import models.database.CityCRUD;
+import models.Film;
+import models.database.FilmCRUD;
+//import models.database.BranchCRUD;
+//import models.database.CityCRUD;
 
 // Se importan las views a utilizar.
-import views.EmployeeManagement;
-import views.ChangeBranch;
+import views.FilmManagement;
+//import views.ChangeBranch;
 import views.PopupMessage;
 import views.SelectOption;
 import views.tables.Table;
@@ -34,20 +34,19 @@ import javax.swing.table.DefaultTableModel;
  *          @author Rivero, Gustavo         C.I: 26.772.857
  *          @author Torrealba, Luis         C.I: 26.121.249
  */
-public class ControllerEmployeeManagement implements ActionListener, MouseListener{
-    
-    //<editor-fold defaultstate="collapsed" desc=" Declaración de variables ">
+public class ControllerFilmManagement implements ActionListener, MouseListener{
+     //<editor-fold defaultstate="collapsed" desc=" Declaración de variables ">
     
     // Models
-    private Employee employee;
+    private Film film;
         // Models.database
-        private EmployeeCRUD empCRUD;
-        private BranchCRUD braCRUD;
-        private CityCRUD citCRUD;
+        private FilmCRUD filmCRUD;
+       // private BranchCRUD braCRUD;
+        //private CityCRUD citCRUD;
     
     // Views
-    private EmployeeManagement empManagement;
-    private ChangeBranch changeBranch;
+    private FilmManagement filmManagement;
+    //private ChangeBranch changeBranch;
     private PopupMessage popup;
     
     // Controllers
@@ -63,31 +62,29 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
     
     // Variables para CRUD del empleado.
     private String  id,
-                    branch,
                     name,
-                    lastName,
-                    direction,
-                    email,
-                    job;
+                    synopsis,
+                    duration,
+                    type,
+                    classification;
     
-    private long    phone;
+    //private char    classification;
     
-    private Date    birth,
-                    entrance;
+    private Date    premiere;
                     
     
     //</editor-fold>
-    
+
     /**
-     * Constructor del gestor de empleados.
+     * Constructor del gestor de peliculas.
      * @param rolUser Rol del usuario que ha ingresado al sistema.
      * @param nameUser Nombre del usuario que ha ingresado al sistema.
      * @param branchUser Nombre de la sucursal del usuario que ha ingresado al sistema.
      */
-    public ControllerEmployeeManagement(String rolUser, String nameUser, String branchUser){
+    public ControllerFilmManagement(String rolUser, String nameUser, String branchUser){
         
         // Declarar la variable de las clases instanciadas.
-        empManagement   = new EmployeeManagement();
+        filmManagement   = new FilmManagement();
         support         = new SupportFunctions();
         
         // Se inicializan las variables.
@@ -96,50 +93,52 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
         this.branchUser = branchUser;
         
         // Se muestra la primera pantalla.
-        support.cardSelection(empManagement.panContainerEmployee, empManagement.panConsultList);
+        support.cardSelection(filmManagement.panContainerFilm, filmManagement.panConsultList);
         
         // Se cargan los empleados.
-        loadEmployeeTable();
+        loadFilmTable();
         
         // Se habilitan o deshabilitan los botónes según tipo de usuario.
-        enabledButtons(this.rolUser);
+        //enabledButtons(this.rolUser);
         
         // Se inicializan las variables.
         clearVariables();
         
         // Activamos los eventos por las views.
-        empManagement.addEvents(this);
-        empManagement.addMouseEvents(this);
+        filmManagement.addEvents(this);
+        filmManagement.addMouseEvents(this);
         
     }
-
-    /**
+     /**
      * Método que determina las acciones a realizar por la aplicación según el 
      * botón presionado.
      * @param evt indica los eventos posibles a ocurrir (click en botónes).
      */
+    
+    
     @Override
     public void actionPerformed(ActionEvent evt) {
-        
-        //<editor-fold defaultstate="collapsed" desc=" Botones de la Barra Superior ">
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    //<editor-fold defaultstate="collapsed" desc=" Botones de la Barra Superior ">
         
         // Minimizar aplicación.
-        if(evt.getSource() == empManagement.btnMin){
-            empManagement.setExtendedState(java.awt.Frame.ICONIFIED);
-            empManagement.btnMin.setBackground(new java.awt.Color(249,249,249));
+        if(evt.getSource() == filmManagement.btnMin){
+            filmManagement.setExtendedState(java.awt.Frame.ICONIFIED);
+            filmManagement.btnMin.setBackground(new java.awt.Color(249,249,249));
         } 
         
         // Salir de la aplicación.
-        else if(evt.getSource() == empManagement.btnExit){
-            empManagement.dispose();
+        else if(evt.getSource() == filmManagement.btnExit){
+            filmManagement.dispose();
         } 
         
         //</editor-fold>
         
-        //<editor-fold defaultstate="collapsed" desc=" Branch Change ">
+    //<editor-fold defaultstate="collapsed" desc=" Branch Change ">
         
         // Cambiar de sucursal a gestionar
-        else if(evt.getSource() == empManagement.btnChangeBranch){
+       /* else if(evt.getSource() == empManagement.btnChangeBranch){
             
             ArrayList<String>   cityNames   = loadCityNames(),
                                 cityBranch  = new ArrayList<>(),
@@ -155,79 +154,74 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                         
             changeBranch.dispose();
             
-        }
+        }*/
         
         //</editor-fold>
         
-        //<editor-fold defaultstate="collapsed" desc=" Employee Search ">
+    //<editor-fold defaultstate="collapsed" desc=" Film Search ">
         
         // Buscar a un empleado.
-        else if(evt.getSource() == empManagement.btnSearchEmployee){
+        else if(evt.getSource() == filmManagement.btnSearchFilm){
             
             // Si no se ingresó información para filtrar.
-            if  ((empManagement.txtSearchIdEmployee.getText().equals("") || 
-                    empManagement.txtSearchIdEmployee.getText().equals("Cédula del empleado")) &&
-                (empManagement.txtSearchNameEmployee.getText().equals("") ||
-                    empManagement.txtSearchNameEmployee.getText().equals("Nombre y apellido del empleado")) &&
-                (empManagement.cmbSearchJobEmployee.getSelectedIndex() == 0))
-                    popup = new PopupMessage(empManagement, true, 1, "Debe ingresar al menos un dato para filtrar.");
+            if  ((filmManagement.txtSearchIdFilm.getText().equals("") || 
+                    filmManagement.txtSearchIdFilm.getText().equals("Codigo de la película")) &&
+                (filmManagement.txtSearchNameFilm.getText().equals("") ||
+                    filmManagement.txtSearchNameFilm.getText().equals("Nombre de la película")) &&
+                (filmManagement.cmbSearchCensureFilm.getSelectedIndex() == 0))
+                    popup = new PopupMessage(filmManagement, true, 1, "Debe ingresar al menos un dato para filtrar.");
             
             // Si al menos se ingresó algún dato para filtrar.
             else
-                loadEmployeeTable();
+                loadFilmTable();
                 
         }
         
         //</editor-fold>
-        
-        //<editor-fold defaultstate="collapsed" desc=" Employee Table Clear ">
+    
+    //<editor-fold defaultstate="collapsed" desc=" Film Table Clear ">
         
         // Limpiar el consultar listado.
-        else if(evt.getSource() == empManagement.btnClearSearchEmployee){
+        else if(evt.getSource() == filmManagement.btnClearSearchFilm){
             
-            // Se limpia la tabla de empleados.
-            empManagement.clearEmployeeSearch();
+            filmManagement.clearFilmSearch();
             
-            // Se muestra el listado por defecto que debe contener la tabla.
-            loadEmployeeTable();
+            loadFilmTable();
             
         }
         
         //</editor-fold>
-        
-        //<editor-fold defaultstate="collapsed" desc=" Back to Consult List ">
+    
+    //<editor-fold defaultstate="collapsed" desc=" Back to Consult List ">
         
         // Para volver a la view de consulta.
-        else if(evt.getSource() == empManagement.btnBackEmployee){
+        else if(evt.getSource() == filmManagement.btnBackFilm){
             
             // Se validan todos los campos.
-            if(!empManagement.txtIdEmployee.getText().equals("Cédula del empleado") && 
-                    !empManagement.txtIdEmployee.getText().equals("") &&
-                    !empManagement.txtNameEmployee.getText().equals("Nombre del empleado") &&
-                    !empManagement.txtNameEmployee.getText().equals("") &&
-                    !empManagement.txtLastNameEmployee.getText().equals("Apellido del empleado") &&
-                    !empManagement.txtLastNameEmployee.getText().equals("") &&
-                    !empManagement.txtPhoneEmployee.getText().equals("Teléfono del empleado") &&
-                    !empManagement.txtPhoneEmployee.getText().equals("") &&
-                    !empManagement.txtDirectionEmployee.getText().equals("Dirección del empleado") &&
-                    !empManagement.txtDirectionEmployee.getText().equals("") &&
-                    !empManagement.txtEmailEmployee.getText().equals("Correo electrónico del empleado") &&
-                    !empManagement.txtEmailEmployee.getText().equals("") &&
-                    empManagement.cmbBranchEmployee.getSelectedIndex() != 0 &&
-                    empManagement.cmbJobEmployee.getSelectedIndex() != 0){
+            if(!filmManagement.txtIdFilm.getText().equals("Codigo de la película") && 
+                    !filmManagement.txtIdFilm.getText().equals("") &&
+                    !filmManagement.txtNameFilm.getText().equals("Nombre de la película") &&
+                    !filmManagement.txtNameFilm.getText().equals("") &&
+                    !filmManagement.txtSynopsisFilm.getText().equals("Sinopsis de la película") &&
+                    !filmManagement.txtSynopsisFilm.getText().equals("") &&
+                    !filmManagement.txtDurationFilm.getText().equals("Duración de la película") &&
+                    !filmManagement.txtDurationFilm.getText().equals("") &&
+                    !filmManagement.txtTypeFilm.getText().equals("Género de la película") &&
+                    !filmManagement.txtTypeFilm.getText().equals("") &&
+                    filmManagement.cmbCensureFilm.getSelectedIndex() != 0){
                 
                 // Se pregunta al usuario si desea abandonar la consulta.
-                SelectOption select = new SelectOption(empManagement, true, 1, 
+                SelectOption select = new SelectOption(filmManagement, true, 1, 
                         "¿Está seguro que desea abandonar la consulta?", "Si", "No");
                 
                 // Si la respuesta es afirmativa.
                 if(select.getOpc()){
                     
                     // Se muestra la vista del CRUD.
-                    support.cardSelection(empManagement.panContainerEmployee, empManagement.panConsultList);
+                    support.cardSelection(filmManagement.panContainerFilm, filmManagement.panConsultList);
                     
                     // Se cargan los empleados.
-                    //loadEmployeeTable();
+                    loadFilmTable();
                     
                     // Se inicializan las variables.
                     clearVariables();
@@ -240,10 +234,10 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
             else{
                 
                 // Se muestra la vista del CRUD.
-                support.cardSelection(empManagement.panContainerEmployee, empManagement.panConsultList);
+                support.cardSelection(filmManagement.panContainerFilm, filmManagement.panConsultList);
                     
                 // Se cargan los empleados.
-                //loadEmployeeTable();
+                loadFilmTable();
                 
                 // Se inicializan las variables.
                 clearVariables();
@@ -254,37 +248,35 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
         
         //</editor-fold>
         
-        //<editor-fold defaultstate="collapsed" desc=" Clear form ">
+    //<editor-fold defaultstate="collapsed" desc=" Clear form ">
         
         // Si se desea limpiar un empleado.
-        else if(evt.getSource() == empManagement.btnClearEmployee){
+        else if(evt.getSource() == filmManagement.btnClearFilm){
             
             if(id.equals(""))
-                empManagement.clearView();
+                filmManagement.clearView();
             else{
                 
                 // Se muestran los datos obtenidos.
-                empManagement.txtIdEmployee.setText(id);
-                empManagement.cmbBranchEmployee.setSelectedItem(branch);
-                empManagement.txtNameEmployee.setText(name);
-                empManagement.txtLastNameEmployee.setText(lastName);
-                empManagement.txtPhoneEmployee.setText(String.valueOf(phone));
-                empManagement.txtDirectionEmployee.setText(direction);
-                empManagement.dchBirthEmployee.setDate(birth);
-                empManagement.dchEntranceDateEmployee.setDate(entrance);
-                empManagement.txtEmailEmployee.setText(email);
-                empManagement.cmbJobEmployee.setSelectedItem(job);
+                filmManagement.txtIdFilm.setText(id);
+                //filmManagement.cmbBranchEmployee.setSelectedItem(branch);
+                filmManagement.txtNameFilm.setText(name);
+                filmManagement.txtSynopsisFilm.setText(synopsis);
+                filmManagement.txtDurationFilm.setText(duration);
+                filmManagement.txtTypeFilm.setText(type);
+                filmManagement.dchPremiereFilm.setDate(premiere);
+                filmManagement.cmbCensureFilm.setSelectedItem(classification);
                 
             }
                 
         }
         
         //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc=" Register or Update Film ">
         
-        //<editor-fold defaultstate="collapsed" desc=" Register or Update Employee ">
-        
-        // Registro o Modificación de empleado.
-        else if(evt.getSource() == empManagement.btnRegisterModifyEmployee){
+        // Registro o Modificación de pelicula.
+        else if(evt.getSource() == filmManagement.btnRegisterModifyFilm){
             
             /**
              * Si la variable global 'id' se encuentra vacía, se tiene que el caso
@@ -294,41 +286,39 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                 
                 
                 // De no haber campos vacíos.
-                if( !empManagement.txtIdEmployee.getText().equals("") && 
-                    !empManagement.txtIdEmployee.getText().equals("Cédula del empleado") && 
-                    !empManagement.txtNameEmployee.getText().equals("") &&
-                    !empManagement.txtNameEmployee.getText().equals("Nombre del empleado") &&
-                    !empManagement.txtLastNameEmployee.getText().equals("") &&
-                    !empManagement.txtLastNameEmployee.getText().equals("Apellido del empleado") &&
-                    !empManagement.txtPhoneEmployee.getText().equals("") &&
-                    !empManagement.txtPhoneEmployee.getText().equals("Teléfono del empleado") &&
-                     empManagement.txtPhoneEmployee.getText().length() <= 10 &&
-                    !empManagement.txtDirectionEmployee.getText().equals("") &&
-                    !empManagement.txtDirectionEmployee.getText().equals("Dirección del empleado") &&
-                     empManagement.cmbBranchEmployee.getSelectedIndex() != 0 && 
-                     empManagement.cmbJobEmployee.getSelectedIndex() != 0){
+                if( !filmManagement.txtIdFilm.getText().equals("") && 
+                    !filmManagement.txtIdFilm.getText().equals("Codigo de la película") && 
+                    !filmManagement.txtNameFilm.getText().equals("") &&
+                    !filmManagement.txtNameFilm.getText().equals("Nombre de la película") &&
+                    !filmManagement.txtSynopsisFilm.getText().equals("") &&
+                    !filmManagement.txtSynopsisFilm.getText().equals("Sinopsis de la película") &&
+                    !filmManagement.txtDurationFilm.getText().equals("") &&
+                    !filmManagement.txtDurationFilm.getText().equals("Duración de la película") &&
+                    !filmManagement.txtTypeFilm.getText().equals("") &&
+                    !filmManagement.txtTypeFilm.getText().equals("Género de la película") &&
+                     filmManagement.cmbCensureFilm.getSelectedIndex() != 0){
                 
                         // Se confirma que se desea eliminar el registro.
-                        SelectOption select = new SelectOption(empManagement, true, 2, 
-                                "¿Desea registrar a este empleado?", "Si", "No");
+                        SelectOption select = new SelectOption(filmManagement, true, 2, 
+                                "¿Desea registrar esta película?", "Si", "No");
 
                         // Si se confirma el registro.
                         if(select.getOpc()){
 
                             // Si el empleado ya existe pero se encuentra inactivo.
-                            if(empCRUD.employeeExist(empManagement.txtIdEmployee.getText(), 'I')){
+                            if(filmCRUD.filmExist(filmManagement.txtIdFilm.getText(), 'I')){
                                 
                                 // Se cambia el estado del empleado a activo.
-                                empCRUD.DeleteEmployee(empManagement.txtIdEmployee.getText(), 1);
+                                filmCRUD.DeleteFilm(filmManagement.txtIdFilm.getText(), 1);
                                 
                                 // Se actualiza la información del empleado.
-                                updateEmployeeData(empManagement.txtIdEmployee.getText());
+                                updateFilmData(filmManagement.txtIdFilm.getText());
                                 
                                 // Se muestra la vista del CRUD.
-                                support.cardSelection(empManagement.panContainerEmployee, empManagement.panConsultList);
+                                support.cardSelection(filmManagement.panContainerFilm, filmManagement.panConsultList);
 
                                 // Se cargan los empleados.
-                                //loadEmployeeTable();
+                                loadFilmTable();
 
                                 // Se inicializan las variables.
                                 clearVariables();
@@ -339,13 +329,13 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                             else{
                             
                                 // Se ejecuta el registro de información.
-                                registerEmployeeData();
+                                registerFilmData();
                                 
                                 // Se muestra la vista del CRUD.
-                                support.cardSelection(empManagement.panContainerEmployee, empManagement.panConsultList);
+                                support.cardSelection(filmManagement.panContainerFilm, filmManagement.panConsultList);
 
                                 // Se cargan los empleados.
-                                //loadEmployeeTable();
+                                loadFilmTable();
 
                                 // Se inicializan las variables.
                                 clearVariables();
@@ -358,7 +348,7 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                 // Si hay campos vacíos.
                 else
                     // Se muestra mensaje solicitando datos.
-                    popup = new PopupMessage(empManagement, true, 1, 
+                    popup = new PopupMessage(filmManagement, true, 1, 
                             "Debe ingresar datos en los campos solicitados.");
       
                 
@@ -371,37 +361,33 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
             else{
                 
                 // De no haber campos vacíos.
-                if( !empManagement.txtIdEmployee.getText().equals("") && 
-                    !empManagement.txtIdEmployee.getText().equals("Cédula del empleado") && 
-                    !empManagement.txtNameEmployee.getText().equals("") &&
-                    !empManagement.txtNameEmployee.getText().equals("Nombre del empleado") &&
-                    !empManagement.txtLastNameEmployee.getText().equals("") &&
-                    !empManagement.txtLastNameEmployee.getText().equals("Apellido del empleado") &&
-                    !empManagement.txtPhoneEmployee.getText().equals("") &&
-                    !empManagement.txtPhoneEmployee.getText().equals("Teléfono del empleado") &&
-                     empManagement.txtPhoneEmployee.getText().length() <= 10 &&
-                      // !empManagement.txtEmailEmployee.getText().equals("Correo electrónico del empleado") &&
-                     //empManagement.txtEmailEmployee.getText().length() <= 10 &&
-                    !empManagement.txtDirectionEmployee.getText().equals("") &&
-                    !empManagement.txtDirectionEmployee.getText().equals("Dirección del empleado") &&
-                     empManagement.cmbBranchEmployee.getSelectedIndex() != 0 && 
-                     empManagement.cmbJobEmployee.getSelectedIndex() != 0){
+                if( !filmManagement.txtIdFilm.getText().equals("") && 
+                    !filmManagement.txtIdFilm.getText().equals("Codigo de la película") && 
+                    !filmManagement.txtNameFilm.getText().equals("") &&
+                    !filmManagement.txtNameFilm.getText().equals("Nombre de la película") &&
+                    !filmManagement.txtSynopsisFilm.getText().equals("") &&
+                    !filmManagement.txtSynopsisFilm.getText().equals("Sinopsis de la película") &&
+                    !filmManagement.txtDurationFilm.getText().equals("") &&
+                    !filmManagement.txtDurationFilm.getText().equals("Duración de la película") &&
+                    !filmManagement.txtTypeFilm.getText().equals("") &&
+                    !filmManagement.txtTypeFilm.getText().equals("Género de la película") &&
+                     filmManagement.cmbCensureFilm.getSelectedIndex() != 0){
                 
                         // Se confirma que se desea eliminar el registro.
-                        SelectOption select = new SelectOption(empManagement, true, 2, 
-                                "¿Desea actualizar los datos de este empleado?", "Si", "No");
+                        SelectOption select = new SelectOption(filmManagement, true, 2, 
+                                "¿Desea actualizar los datos de esta película?", "Si", "No");
 
                         // Si se confirma la actualización.
                         if(select.getOpc()){
 
                             // Se ejecuta la actualización de información.
-                            updateEmployeeData(id);
+                            updateFilmData(id);
                             
                             // Se muestra la vista del CRUD.
-                            support.cardSelection(empManagement.panContainerEmployee, empManagement.panConsultList);
+                            support.cardSelection(filmManagement.panContainerFilm, filmManagement.panConsultList);
 
                             // Se cargan los empleados.
-                            //loadEmployeeTable();
+                            loadFilmTable();
 
                             // Se inicializan las variables.
                             clearVariables();
@@ -413,7 +399,7 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                 // Si hay campos vacíos.
                 else
                     // Se muestra mensaje solicitando datos.
-                    popup = new PopupMessage(empManagement, true, 1, 
+                    popup = new PopupMessage(filmManagement, true, 1, 
                             "Debe ingresar datos en los campos solicitados.");
                                     
             }
@@ -422,29 +408,29 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
         
         //</editor-fold>
         
-        //<editor-fold defaultstate="collapsed" desc=" Delete Employee ">
+    //<editor-fold defaultstate="collapsed" desc=" Delete Film ">
         
         // Eliminación de un empleado.
-        else if(evt.getSource() == empManagement.btnDeleteEmployee){
+        else if(evt.getSource() == filmManagement.btnDeleteFilm){
             
             // Se pregunta al usuario si desea realmente eliminar al empleado.
-            SelectOption select = new SelectOption(empManagement, true, 2, 
-                    "¿Está seguro que desea eliminar a este empleado?", "Si", "No");
+            SelectOption select = new SelectOption(filmManagement, true, 2, 
+                    "¿Está seguro que desea eliminar esta película?", "Si", "No");
             
             // Si la respuesta es afirmativa.
             if(select.getOpc()){
                 
                 // Se realiza la eliminación lógica.
-                empCRUD.DeleteEmployee(id, 0);
+                filmCRUD.DeleteFilm(id, 0);
                 
                 // Se muestra un mensaje de eliminación exitosa.
-                popup = new PopupMessage(empManagement, true, 4, "El empleado se ha eliminado con éxito.");
+                popup = new PopupMessage(filmManagement, true, 4, "La película se ha eliminado con éxito.");
                 
                 // Se muestra la vista del CRUD.
-                support.cardSelection(empManagement.panContainerEmployee, empManagement.panConsultList);
+                support.cardSelection(filmManagement.panContainerFilm, filmManagement.panConsultList);
                     
                 // Se cargan los empleados.
-                //loadEmployeeTable();
+                loadFilmTable();
                     
                 // Se inicializan las variables.
                 clearVariables();
@@ -453,29 +439,28 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
             
         }
         
-        //</editor-fold>
-        
+        //</editor-fold>    
+            
     }
-
-    /**
+/**
      * Eventos provocados por el escuchador de Mouse (MouseListener)
      * @param evt son aquellos eventos que ocurren con acciones del Mouse.
      */
     @Override
     public void mouseClicked(MouseEvent evt) {
-       
-        // Si se hace click sobre la tabla de empleados.
-        if(evt.getSource() == empManagement.tblEmployeeList){
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         // Si se hace click sobre la tabla de empleados.
+        if(evt.getSource() == filmManagement.tblFilmList){
                                               
             // Se obtienen los valores de la fila y columna seleccionada.
-            int column = empManagement.getColumnTable(), row = empManagement.getRowTable();
+            int column = filmManagement.getColumnTable(), row = filmManagement.getRowTable();
 
             // Se valida que el evento del Mouse fue provocado dentro del JTable.
-            if(row < empManagement.tblEmployeeList.getRowCount() && row >= 0 && 
-                    column < empManagement.tblEmployeeList.getColumnCount() && column >= 0){
+            if(row < filmManagement.tblFilmList.getRowCount() && row >= 0 && 
+                    column < filmManagement.tblFilmList.getColumnCount() && column >= 0){
                 
                 // Se obtiene el valor de la celda seleccionada.
-                Object value = empManagement.tblEmployeeList.getValueAt(row, column);
+                Object value = filmManagement.tblFilmList.getValueAt(row, column);
                 
                 // Si el valor de la celda seleccionada es un JButton;
                 if(value instanceof JButton){
@@ -493,17 +478,17 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                         System.out.println("Click en el boton modificar en la celda: " + row + ";" + column);
                                       
                         // Se obtiene el modelo de la JTable.
-                        DefaultTableModel dtm = (DefaultTableModel) empManagement.tblEmployeeList.getModel();
+                        DefaultTableModel dtm = (DefaultTableModel) filmManagement.tblFilmList.getModel();
                                                 
                         // Se obtiene el id del empleado en cuestión.
-                        String idEmployee = dtm.getValueAt(row, 0).toString();
+                        String idFilm = dtm.getValueAt(row, 0).toString();
                         
                         // Se buscan los datos del empleado.
-                        loadEmployee(idEmployee);
+                        loadFilm(idFilm);
                         
                         // Se crea la variable de formato de fechas.
                         SimpleDateFormat sdt = new SimpleDateFormat("yyyy-MM-dd");
-                                       
+                       /*                
                         // Variables de apoyo para construir el comboBox de sucursales.
                         ArrayList<String>   codexBranch = new ArrayList<>(),
                                             namesBranch = new ArrayList<>();
@@ -517,33 +502,30 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                         
                         for(int i = 0; i < codexBranch.size(); i++)
                             empManagement.cmbBranchEmployee.addItem(namesBranch.get(i));
-                                                    
+                         */                           
                         // Se muestra la vista del CRUD.
-                        support.cardSelection(empManagement.panContainerEmployee, empManagement.panCRUD);
+                        support.cardSelection(filmManagement.panContainerFilm, filmManagement.panCRUD);
                         
                         // Se bloquea el botón de 'eliminar'.
-                        empManagement.btnDeleteEmployee.setEnabled(false);
+                        filmManagement.btnDeleteFilm.setEnabled(true);
                         
                         // Se configura el texto del botón.
-                        empManagement.btnRegisterModifyEmployee.setText("Modificar");
+                        filmManagement.btnRegisterModifyFilm.setText("Modificar");
                         
                         // Se limpian todos los aspectos visuales.
-                        empManagement.clearView();
+                        filmManagement.clearView();
                                                 
                         // Se muestran los datos obtenidos.
-                        empManagement.txtIdEmployee.setText(id);
-                        empManagement.cmbBranchEmployee.setSelectedItem(branch);
-                        empManagement.txtNameEmployee.setText(name);
-                        empManagement.txtLastNameEmployee.setText(lastName);
-                        empManagement.txtPhoneEmployee.setText(String.valueOf(phone));
-                        empManagement.txtDirectionEmployee.setText(direction);
-                        empManagement.dchBirthEmployee.setDate(birth);
-                        empManagement.dchEntranceDateEmployee.setDate(entrance);
-                        empManagement.txtEmailEmployee.setText(email);
-                        empManagement.cmbJobEmployee.setSelectedItem(job);
+                        filmManagement.txtIdFilm.setText(id);
+                        filmManagement.txtNameFilm.setText(name);
+                        filmManagement.txtSynopsisFilm.setText(synopsis);
+                        filmManagement.txtDurationFilm.setText(duration);
+                        filmManagement.txtTypeFilm.setText(type);
+                        filmManagement.dchPremiereFilm.setDate(premiere);
+                        filmManagement.cmbCensureFilm.setSelectedItem(classification);
                         
-                        // Se bloquea el campo de cédula.
-                        empManagement.txtIdEmployee.setEnabled(false);
+                        // Se bloquea el campo de codigo.
+                        filmManagement.txtIdFilm.setEnabled(false);
                         
                     }
                     
@@ -558,16 +540,16 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                         System.out.println("Click en el boton modificar en la celda: " + row + ";" + column);
                                      
                         // Se muestra la vista del CRUD.
-                        support.cardSelection(empManagement.panContainerEmployee, empManagement.panCRUD);
+                        support.cardSelection(filmManagement.panContainerFilm, filmManagement.panCRUD);
                         
                         // Se bloquea el botón de 'eliminar'.
-                        empManagement.btnDeleteEmployee.setEnabled(true);
+                        filmManagement.btnDeleteFilm.setEnabled(true);
                         
                         // Se configura el texto del botón.
-                        empManagement.btnRegisterModifyEmployee.setText("Registrar");
+                        filmManagement.btnRegisterModifyFilm.setText("Registrar");
                         
                         // Se limpian todos los aspectos visuales.
-                        empManagement.clearView();
+                        filmManagement.clearView();
                         
                         // Se limpian las variables
                         clearVariables();
@@ -582,8 +564,8 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
 
             }
 
-        }
-        
+        }  
+   
     }
     
     //<editor-fold defaultstate="collapsed" desc=" Métodos para el funcionamiento del Controller ">
@@ -592,7 +574,7 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
      * Método para habilitar o deshabilitar botónes según tipo de usuario.
      * @param rol Rol del usuario que ha ingresado al sistema.
      */
-    private void enabledButtons(String rol){
+    /*private void enabledButtons(String rol){
         
         switch(rol){
             
@@ -601,7 +583,6 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                 
                 empManagement.btnChangeBranch.setEnabled(true);
                 empManagement.lblSucursalName.setText(branchUser);
-                empManagement.btnDeleteEmployee.setEnabled(true);
                 
                 break;
                 
@@ -610,39 +591,37 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                 
                 empManagement.btnChangeBranch.setEnabled(false);
                 empManagement.lblSucursalName.setText(branchUser);
-                empManagement.btnDeleteEmployee.setEnabled(false);
                 
                 break;
             
         }
         
-    }
+    }*/
     
     /**
      * Método para cargar todas ciudades.
      * @return Listado de nombres de ciudades.
      */
-    private void loadEmployee(String idEmployee){
+    private void loadFilm(String idFilm){
         
         // Se instancia la clase a utilizar.
-        empCRUD = new EmployeeCRUD();
+        filmCRUD = new FilmCRUD();
         
         // Se declara la variable que devuelve el resultado.
         java.sql.ResultSet result;
                 
         try {
-            result = empCRUD.readEmployeeData(idEmployee);
+            result = filmCRUD.readFilmData(idFilm);
             while(result.next()){
-                id = result.getString("cedula");
-                branch = result.getString("NombreSucursal");
+                id = result.getString("codigo");
                 name = result.getString("nombre");
-                lastName = result.getString("apellido");
-                phone = result.getLong("telefono");
-                direction = result.getString("direccion");
-                birth = result.getDate("fecha_nacimiento");
-                entrance = result.getDate("fecha_ingreso");
-                email = result.getString("correo");
-                job = result.getString("cargo");
+                synopsis = result.getString("sinopsis");
+                duration = result.getString("duracion");
+               // phone = result.getLong("telefono");
+                type = result.getString("genero");
+                premiere = result.getDate("fecha_estreno");
+                classification = result.getString("clasificacion");
+                
             }
             
             System.out.println("Éxito.");
@@ -660,7 +639,7 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
      * @param firstList Primer listado con los nombres de ciudades.
      * @param secondList Segundo listado con los nombres de sucursales.
      */
-    private void loadBranch(ArrayList<String> firstList, ArrayList<String> secondList){
+   /* private void loadBranch(ArrayList<String> firstList, ArrayList<String> secondList){
         
         // Se instancia la clase a utilizar.
         braCRUD = new BranchCRUD();
@@ -683,16 +662,16 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
             
         }
         
-    }
+    }*/
     
     /**
      * Método para buscar el código de una sucursal.
      * @param branchName Nombre de la sucursal.
      * @return Devuelve el código de la sucursal.
      */
-    private String loadBranch(String branchName){
+   /* private String loadBranch(String branchName){
         
-        // Se instancia la clase a utilizar.
+                // Se instancia la clase a utilizar.
         braCRUD = new BranchCRUD();
         
         // Se declara la variable que devuelve el resultado.
@@ -717,13 +696,13 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
         
         return null;
         
-    }
+    }*/
     
     /**
      * Método para cargar todas ciudades.
      * @return Listado de nombres de ciudades.
      */
-    private ArrayList<String> loadCityNames(){
+    /*private ArrayList<String> loadCityNames(){
         
         // Se instancia la clase a utilizar.
         citCRUD = new CityCRUD();
@@ -752,40 +731,41 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
         
         return null;
         
-    }
+    }*/
     
     /**
-     * Método para construir la sentencia de búsqueda del empleado.
+     * Método para construir la sentencia de búsqueda de la pelicula.
      * @return Sentencia SQL.
      */
     private String buildSentenceSQL(){
         
-        // Se declaran e inicializan las variables que servirán para buscar empleados.
-        String  initSQL     = "SELECT empleado.\"cedula\", empleado.\"nombre\", empleado.\"apellido\", "
-                                    + "sucursal.\"nombre\" as \"nombreSucursal\", empleado.\"cargo\" "
-                                    + "FROM \"empleado\", \"sucursal\" WHERE \"sucursal_codigo\" = sucursal.\"codigo\" "
-                                    + "AND empleado.\"estado\" = 'A' AND sucursal.\"estado\" = 'A'",
+        // Se declaran e inicializan las variables que servirán para buscar peliculas.
+        String  initSQL     = "SELECT \"codigo\", \"nombre\", \"sinopsis\", \"duracion\", \"clasificacion\", \"fecha_estreno\", \"genero\""      
+                                    + "FROM \"pelicula\" WHERE \"estado\" = 'A'",
                 finalSQL    = ";",
-                nameSQL     = " AND empleado.\"nombre\" = ",
-                lastNameSQL = " AND empleado.\"apellido\" = ",
-                idSQL       = " AND empleado.\"cedula\" = ",
-                jobSQL      = " AND empleado.\"cargo\" = ",
-                branchSQL   = " AND sucursal.\"nombre\" = ",
+                nameSQL     = " AND \"nombre\" = ",
+                synopsisSQL = " AND \"sinopsis\" = ",
+                idSQL       = " AND \"codigo\" = ",
+                censureSQL      = " AND \"clasificacion\" = ",
+                durationSQL   = " AND \"duracion\" = ",
+                premiereSQL   = " AND \"fecha_estreno\" = ",
+                typeSQL   = " AND \"genero\" = ",
                 SQL         = "";
          
         // Se inicia la sentencia SQL;
         SQL += initSQL;
         
-        // Si se ingresó la cédula de un empleado.
-        if(!empManagement.txtSearchIdEmployee.getText().equals("Cédula del empleado") && 
-                !empManagement.txtSearchIdEmployee.getText().equals(""))
-            SQL += idSQL + "'" + empManagement.txtSearchIdEmployee.getText() + "'";
+        // Si se ingresó el codigo de una pelicula.
+        if(!filmManagement.txtSearchIdFilm.getText().equals("Codigo de la película") && 
+                !filmManagement.txtSearchIdFilm.getText().equals(""))
+            SQL += idSQL + "'" + filmManagement.txtSearchIdFilm.getText() + "'";
                 
-        // Si se ingresó el nombre y apellido de un empleado.
-        if(!empManagement.txtSearchNameEmployee.getText().equals("") &&
-                !empManagement.txtSearchNameEmployee.getText().equals("Nombre y apellido del empleado")){
-                   
-            // Se fragmenta el dato proporcionado.
+        // Si se ingresó el nombre de una pelicula.
+        if(!filmManagement.txtSearchNameFilm.getText().equals("") &&
+                !filmManagement.txtSearchNameFilm.getText().equals("Nombre de la película"))
+                SQL += idSQL + "'" + filmManagement.txtSearchNameFilm.getText() + "'";    
+           /*
+                // Se fragmenta el dato proporcionado.
             String[] names = empManagement.txtSearchNameEmployee.getText().split(" ");
                  
             // Se construye la sentencia.
@@ -802,10 +782,10 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                 !empManagement.lblSucursalName.getText().equals("Cines de Venezuela") && 
                 !empManagement.lblSucursalName.getText().equals(" Administrador "))
             SQL += branchSQL + "'" + empManagement.lblSucursalName.getText() + "'";
-         
-        // Si se ingresó un cargo.
-        if(empManagement.cmbSearchJobEmployee.getSelectedIndex() != 0)
-            SQL += jobSQL + "'" + empManagement.cmbSearchJobEmployee.getSelectedItem().toString() + "'";
+         */
+        // Si se ingresó la censura de la pelicula.
+        if(filmManagement.cmbSearchCensureFilm.getSelectedIndex() != 0)
+            SQL += censureSQL + "'" + filmManagement.cmbSearchCensureFilm.getSelectedItem().toString() + "'";
           
         // Se culmina la sentencia.
         return SQL += finalSQL;
@@ -813,19 +793,22 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
     }
     
     /**
-     * Método para cargar la información de la empresa.
-     * @return listado con la información de la empresa.
+     * Método para cargar la información de la pelicula.
+     * @return listado con la información de la pelicula.
      */
-    private void loadEmployeeTable(){
+    private void loadFilmTable(){
                 
         // Se instancia la clase a utilizar.
-        empCRUD = new EmployeeCRUD();
+        filmCRUD = new FilmCRUD();
         
         // Se declaran los arreglos a utilizar
-        ArrayList<String>   idEmployee      = new ArrayList<>(),
-                            namesEmployee   = new ArrayList<>(),
-                            branchEmployee  = new ArrayList<>(),
-                            jobEmployee     = new ArrayList<>();
+        ArrayList<String>   idFilm      = new ArrayList<>(),
+                            nameFilm   = new ArrayList<>(),
+                            synopsisFilm   = new ArrayList<>(),
+                            durationFilm   = new ArrayList<>(),
+                            classificationFilm   = new ArrayList<>(),
+                            premiereFilm  = new ArrayList<>(),
+                            typeFilm     = new ArrayList<>();
                 
         // Se declara la variable que devuelve el resultado.
         java.sql.ResultSet result;
@@ -833,28 +816,31 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
         try {
             
             // Se realiza la búsqueda de empleados.
-            result = empCRUD.readEmployees(buildSentenceSQL());
+            result = filmCRUD.readFilm(buildSentenceSQL());
             
             // Se obtienen los resultados.
             while(result.next()){
                 
-                idEmployee.add(result.getString("cedula"));
-                namesEmployee.add(result.getString("nombre") + " " + result.getString("apellido"));
-                branchEmployee.add(result.getString("nombreSucursal"));
-                jobEmployee.add(result.getString("cargo"));
+                idFilm.add(result.getString("codigo"));
+               nameFilm.add(result.getString("nombre"));
+                synopsisFilm.add(result.getString("sinopsis"));
+                durationFilm.add(result.getString("duracion"));
+                classificationFilm.add(result.getString("clasificacion"));
+                premiereFilm.add(result.getString("fecha_estreno"));
+                typeFilm.add(result.getString("genero"));
                                    
             }
             
-            System.out.println("Carga exitosa. Cantidad de empleados encontrados: " + idEmployee.size());
+            System.out.println("Carga exitosa. Cantidad de películas encontradas: " + idFilm.size());
             
             // Se obtuvo al menos un resultado.
-            if(idEmployee.size() > 0){
+            if(idFilm.size() > 0){
                 
                 // Se limpia la tabla de empleados.
-                empManagement.clearEmployeeTable(empManagement.tblEmployeeList);
+                filmManagement.clearFilmTable(filmManagement.tblFilmList);
                 
                 // Se obtiene el modelo de la tabla de empleados.
-                DefaultTableModel dtm = (DefaultTableModel) empManagement.tblEmployeeList.getModel();
+                DefaultTableModel dtm = (DefaultTableModel) filmManagement.tblFilmList.getModel();
 
                 // Se declara e instancia la clase Table.
                 Table table = new Table();
@@ -872,17 +858,23 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                     " . . . ",
                     " . . . ",
                     " . . . ",
+                    " . . . ",
+                    " . . . ",
+                    " . . . ",
                     btnI
                 });
                 
                 // Se añaden todos los resultados obtenidos a la tabla.
-                for(int i = 0; i < idEmployee.size(); i++){
+                for(int i = 0; i < idFilm.size(); i++){
 
                     dtm.addRow(new Object[]{
-                        idEmployee.get(i),
-                        namesEmployee.get(i),
-                        branchEmployee.get(i),
-                        jobEmployee.get(i),
+                        idFilm.get(i),
+                        nameFilm.get(i),
+                        synopsisFilm.get(i),
+                        durationFilm.get(i),
+                        classificationFilm.get(i),
+                        premiereFilm.get(i),
+                        typeFilm.get(i),
                         btnR
                     });
 
@@ -892,7 +884,7 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
             
             // No se obtuvo ningún resultado.
             else
-                popup = new PopupMessage(empManagement, true, 1, "No se encontraron empleados.");
+                popup = new PopupMessage(filmManagement, true, 1, "No se encontraron peliculas.");
                             
         } catch (java.sql.SQLException e) {
             
@@ -905,27 +897,25 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
     /**
      * Método para registrar a un nuevo empleado.
      */
-    private void registerEmployeeData(){
+    private void registerFilmData(){
                         
         // Se carga la nueva información del empleado.
-        Employee emp = new Employee(empManagement.txtIdEmployee.getText(), 
-                                    empManagement.txtNameEmployee.getText(), 
-                                    empManagement.txtLastNameEmployee.getText(), 
-                                    Long.valueOf(empManagement.txtPhoneEmployee.getText()), 
-                                    empManagement.txtDirectionEmployee.getText(), 
-                                    empManagement.dchBirthEmployee.getDate(), 
-                                    empManagement.txtEmailEmployee.getText(), 
-                                    'A', 
-                                    loadBranch(empManagement.cmbBranchEmployee.getSelectedItem().toString()), 
-                                    empManagement.cmbJobEmployee.getSelectedItem().toString(),    
-                                    empManagement.dchEntranceDateEmployee.getDate());
+        Film film = new Film(filmManagement.txtIdFilm.getText(), 
+                                    filmManagement.txtNameFilm.getText(), 
+                                    filmManagement.txtSynopsisFilm.getText(), 
+                                    //Long.valueOf(empManagement.txtPhoneEmployee.getText()), 
+                                    filmManagement.txtDurationFilm.getText(), 
+                                    filmManagement.txtTypeFilm.getText(), 
+                                    filmManagement.cmbCensureFilm.getSelectedItem().toString(),
+                                    'A',
+                                    filmManagement.dchPremiereFilm.getDate());
         
         // Se ejecuta el registro de datos.
-        empCRUD.registerEployee(emp);
+        filmCRUD.registerFilm(film);
         
         // Se muestra mensaje de éxito.
-        popup = new PopupMessage(empManagement, true, 4, 
-                "El empleado se ha registrado con éxito");
+        popup = new PopupMessage(filmManagement, true, 4, 
+                "La pelicula se ha registrado con éxito");
         
     }
     
@@ -933,27 +923,25 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
      * Método para actualizar la información de un empleado.
      * @param id cédula del empleado a actualizar.
      */
-    private void updateEmployeeData(String id){
+    private void updateFilmData(String id){
                         
         // Se carga la nueva información del empleado.
-        Employee emp = new Employee(empManagement.txtIdEmployee.getText(), 
-                                    empManagement.txtNameEmployee.getText(), 
-                                    empManagement.txtLastNameEmployee.getText(), 
-                                    Long.valueOf(empManagement.txtPhoneEmployee.getText()), 
-                                    empManagement.txtDirectionEmployee.getText(), 
-                                    empManagement.dchBirthEmployee.getDate(), 
-                                    empManagement.txtEmailEmployee.getText(), 
-                                    'A', 
-                                    loadBranch(empManagement.cmbBranchEmployee.getSelectedItem().toString()), 
-                                    empManagement.cmbJobEmployee.getSelectedItem().toString(),    
-                                    empManagement.dchEntranceDateEmployee.getDate());
+        Film film = new Film(filmManagement.txtIdFilm.getText(), 
+                                    filmManagement.txtNameFilm.getText(), 
+                                    filmManagement.txtSynopsisFilm.getText(), 
+                                    //Long.valueOf(empManagement.txtPhoneEmployee.getText()), 
+                                    filmManagement.txtDurationFilm.getText(), 
+                                    filmManagement.txtTypeFilm.getText(), 
+                                    filmManagement.cmbCensureFilm.getSelectedItem().toString(),
+                                    'A',
+                                    filmManagement.dchPremiereFilm.getDate());
         
         // Se ejecuta la actualización de datos.
-        empCRUD.UpdateEmployee(emp, id);
+        filmCRUD.UpdateFilm(film, id);
         
         // Se muestra mensaje de éxito.
-        popup = new PopupMessage(empManagement, true, 4, 
-                "Los datos del empleados se han actualizado con éxito.");
+        popup = new PopupMessage(filmManagement, true, 4, 
+                "Los datos de la pelicula se han actualizado con éxito.");
         
     }
     
@@ -963,25 +951,22 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
     private void clearVariables(){
         
         id          = "";
-        branch      = "";
         name        = "";
-        lastName    = "";
-        direction   = "";
-        email       = "";
-        phone       = 0;
-        job         = "";
-        birth       = null;
-        entrance    = null;
+        synopsis    = "";
+        duration   = "";
+        classification = "";
+        premiere       = null;
+        type         = "";
         
     }
     
     //</editor-fold>
     
-    //<editor-fold defaultstate="collapsed" desc=" PROHIBIDO TOCAR ">
     
+ //<editor-fold defaultstate="collapsed" desc=" PROHIBIDO TOCAR ">
     @Override
     public void mousePressed(MouseEvent e) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -991,14 +976,13 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
     //</editor-fold>
     
 }

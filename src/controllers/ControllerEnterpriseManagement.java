@@ -5,21 +5,19 @@ package controllers;
 import lib.SupportFunctions;
 
 // Se importan los models a utilizar.
-import models.Employee;
-import models.database.EmployeeCRUD;
-import models.database.BranchCRUD;
-import models.database.CityCRUD;
+import models.Enterprise;
+import models.database.EnterpriseCRUD;
 
 // Se importan las views a utilizar.
-import views.EmployeeManagement;
-import views.ChangeBranch;
+import views.EnterpriseManagement;
+//import views.ChangeBranch;
 import views.PopupMessage;
 import views.SelectOption;
 import views.tables.Table;
 
 // Se importan las librerías a utilizar.
 import java.awt.event.*;
-import java.text.SimpleDateFormat;
+//import java.text.SimpleDateFormat;
 import java.util.*;
 import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
@@ -34,20 +32,18 @@ import javax.swing.table.DefaultTableModel;
  *          @author Rivero, Gustavo         C.I: 26.772.857
  *          @author Torrealba, Luis         C.I: 26.121.249
  */
-public class ControllerEmployeeManagement implements ActionListener, MouseListener{
+public class ControllerEnterpriseManagement implements ActionListener, MouseListener{
     
-    //<editor-fold defaultstate="collapsed" desc=" Declaración de variables ">
-    
-    // Models
-    private Employee employee;
+//<editor-fold defaultstate="collapsed" desc=" Declaración de variables ">
+// Models
+    private Enterprise enterprise;
         // Models.database
-        private EmployeeCRUD empCRUD;
-        private BranchCRUD braCRUD;
-        private CityCRUD citCRUD;
+        private EnterpriseCRUD enterCRUD;
+        //private BranchCRUD braCRUD;
     
     // Views
-    private EmployeeManagement empManagement;
-    private ChangeBranch changeBranch;
+    private EnterpriseManagement enterManagement;
+    //private ChangeBranch changeBranch;
     private PopupMessage popup;
     
     // Controllers
@@ -63,31 +59,23 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
     
     // Variables para CRUD del empleado.
     private String  id,
-                    branch,
                     name,
-                    lastName,
-                    direction,
-                    email,
-                    job;
+                    description,
+                    enteremail; 
     
-    private long    phone;
-    
-    private Date    birth,
-                    entrance;
-                    
-    
+    private double    priceticket;
+ 
     //</editor-fold>
-    
     /**
-     * Constructor del gestor de empleados.
+     * Constructor del gestor de empresas.
      * @param rolUser Rol del usuario que ha ingresado al sistema.
      * @param nameUser Nombre del usuario que ha ingresado al sistema.
      * @param branchUser Nombre de la sucursal del usuario que ha ingresado al sistema.
      */
-    public ControllerEmployeeManagement(String rolUser, String nameUser, String branchUser){
+    public ControllerEnterpriseManagement(String rolUser, String nameUser, String branchUser){
         
         // Declarar la variable de las clases instanciadas.
-        empManagement   = new EmployeeManagement();
+        enterManagement = new EnterpriseManagement();
         support         = new SupportFunctions();
         
         // Se inicializan las variables.
@@ -96,48 +84,48 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
         this.branchUser = branchUser;
         
         // Se muestra la primera pantalla.
-        support.cardSelection(empManagement.panContainerEmployee, empManagement.panConsultList);
+        support.cardSelection(enterManagement.panContainerEnterprise, enterManagement.panConsultList);
         
-        // Se cargan los empleados.
-        loadEmployeeTable();
+        // Se cargan las empresas.
+        loadEnterpriseTable();
         
         // Se habilitan o deshabilitan los botónes según tipo de usuario.
-        enabledButtons(this.rolUser);
+        //enabledButtons(this.rolUser);
         
         // Se inicializan las variables.
         clearVariables();
         
         // Activamos los eventos por las views.
-        empManagement.addEvents(this);
-        empManagement.addMouseEvents(this);
+        enterManagement.addEvents(this);
+        enterManagement.addMouseEvents(this);
         
     }
-
-    /**
+  /**
      * Método que determina las acciones a realizar por la aplicación según el 
      * botón presionado.
      * @param evt indica los eventos posibles a ocurrir (click en botónes).
-     */
+     */  
+
     @Override
     public void actionPerformed(ActionEvent evt) {
-        
-        //<editor-fold defaultstate="collapsed" desc=" Botones de la Barra Superior ">
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    //<editor-fold defaultstate="collapsed" desc=" Botones de la Barra Superior ">
         
         // Minimizar aplicación.
-        if(evt.getSource() == empManagement.btnMin){
-            empManagement.setExtendedState(java.awt.Frame.ICONIFIED);
-            empManagement.btnMin.setBackground(new java.awt.Color(249,249,249));
+        if(evt.getSource() == enterManagement.btnMin){
+            enterManagement.setExtendedState(java.awt.Frame.ICONIFIED);
+            enterManagement.btnMin.setBackground(new java.awt.Color(249,249,249));
         } 
         
         // Salir de la aplicación.
-        else if(evt.getSource() == empManagement.btnExit){
-            empManagement.dispose();
+        else if(evt.getSource() == enterManagement.btnExit){
+            enterManagement.dispose();
         } 
         
         //</editor-fold>
-        
-        //<editor-fold defaultstate="collapsed" desc=" Branch Change ">
-        
+    
+     //<editor-fold defaultstate="collapsed" desc=" Branch Change ">
+      /*  
         // Cambiar de sucursal a gestionar
         else if(evt.getSource() == empManagement.btnChangeBranch){
             
@@ -155,79 +143,74 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                         
             changeBranch.dispose();
             
-        }
+        }*/
         
         //</editor-fold>
+    
+     //<editor-fold defaultstate="collapsed" desc=" Enterprise Search ">
         
-        //<editor-fold defaultstate="collapsed" desc=" Employee Search ">
-        
-        // Buscar a un empleado.
-        else if(evt.getSource() == empManagement.btnSearchEmployee){
+        // Buscar a una empresa.
+        else if(evt.getSource() == enterManagement.btnSearchEnterprise){
             
             // Si no se ingresó información para filtrar.
-            if  ((empManagement.txtSearchIdEmployee.getText().equals("") || 
-                    empManagement.txtSearchIdEmployee.getText().equals("Cédula del empleado")) &&
-                (empManagement.txtSearchNameEmployee.getText().equals("") ||
-                    empManagement.txtSearchNameEmployee.getText().equals("Nombre y apellido del empleado")) &&
-                (empManagement.cmbSearchJobEmployee.getSelectedIndex() == 0))
-                    popup = new PopupMessage(empManagement, true, 1, "Debe ingresar al menos un dato para filtrar.");
+            if  ((enterManagement.txtSearchIdEnterprise.getText().equals("") || 
+                    enterManagement.txtSearchIdEnterprise.getText().equals("Codigo de la empresa")) &&
+                (enterManagement.txtSearchNameEnterprise.getText().equals("") ||
+                    enterManagement.txtSearchNameEnterprise.getText().equals("Nombre de la empresa"))) 
+                
+                //&&(enterManagement.cmbSearchJobEmployee.getSelectedIndex() == 0))
+                    popup = new PopupMessage(enterManagement, true, 1, "Debe ingresar al menos un dato para filtrar.");
             
             // Si al menos se ingresó algún dato para filtrar.
             else
-                loadEmployeeTable();
+                loadEnterpriseTable();
                 
         }
         
         //</editor-fold>
-        
-        //<editor-fold defaultstate="collapsed" desc=" Employee Table Clear ">
+    
+     //<editor-fold defaultstate="collapsed" desc=" Enterprise Table Clear ">
         
         // Limpiar el consultar listado.
-        else if(evt.getSource() == empManagement.btnClearSearchEmployee){
+        else if(evt.getSource() == enterManagement.btnClearSearchEnterprise){
             
-            // Se limpia la tabla de empleados.
-            empManagement.clearEmployeeSearch();
+            enterManagement.clearEnterpriseSearch();
             
-            // Se muestra el listado por defecto que debe contener la tabla.
-            loadEmployeeTable();
+            loadEnterpriseTable();
             
         }
         
         //</editor-fold>
-        
-        //<editor-fold defaultstate="collapsed" desc=" Back to Consult List ">
+    
+    //<editor-fold defaultstate="collapsed" desc=" Back to Consult List ">
         
         // Para volver a la view de consulta.
-        else if(evt.getSource() == empManagement.btnBackEmployee){
+        else if(evt.getSource() == enterManagement.btnBackEnterprise){
             
             // Se validan todos los campos.
-            if(!empManagement.txtIdEmployee.getText().equals("Cédula del empleado") && 
-                    !empManagement.txtIdEmployee.getText().equals("") &&
-                    !empManagement.txtNameEmployee.getText().equals("Nombre del empleado") &&
-                    !empManagement.txtNameEmployee.getText().equals("") &&
-                    !empManagement.txtLastNameEmployee.getText().equals("Apellido del empleado") &&
-                    !empManagement.txtLastNameEmployee.getText().equals("") &&
-                    !empManagement.txtPhoneEmployee.getText().equals("Teléfono del empleado") &&
-                    !empManagement.txtPhoneEmployee.getText().equals("") &&
-                    !empManagement.txtDirectionEmployee.getText().equals("Dirección del empleado") &&
-                    !empManagement.txtDirectionEmployee.getText().equals("") &&
-                    !empManagement.txtEmailEmployee.getText().equals("Correo electrónico del empleado") &&
-                    !empManagement.txtEmailEmployee.getText().equals("") &&
-                    empManagement.cmbBranchEmployee.getSelectedIndex() != 0 &&
-                    empManagement.cmbJobEmployee.getSelectedIndex() != 0){
+            if(!enterManagement.txtIdEnterprise.getText().equals("Codigo de la empresa") && 
+                    !enterManagement.txtIdEnterprise.getText().equals("") &&
+                    !enterManagement.txtNameEnterprise.getText().equals("Nombre de la empresa") &&
+                    !enterManagement.txtNameEnterprise.getText().equals("") &&
+                    !enterManagement.txtDescriptionEnterprise.getText().equals("Descripcion de la empresa") &&
+                    !enterManagement.txtDescriptionEnterprise.getText().equals("") &&
+                    !enterManagement.txtEmailEnterprise.getText().equals("Correo electronico de la empresa") &&
+                    !enterManagement.txtEmailEnterprise.getText().equals("") &&
+                    !enterManagement.txtPriceTicketEnterprise.getText().equals("Precio base boleto de funciones") &&
+                    !enterManagement.txtPriceTicketEnterprise.getText().equals("") ){
                 
                 // Se pregunta al usuario si desea abandonar la consulta.
-                SelectOption select = new SelectOption(empManagement, true, 1, 
+                SelectOption select = new SelectOption(enterManagement, true, 1, 
                         "¿Está seguro que desea abandonar la consulta?", "Si", "No");
                 
                 // Si la respuesta es afirmativa.
                 if(select.getOpc()){
                     
                     // Se muestra la vista del CRUD.
-                    support.cardSelection(empManagement.panContainerEmployee, empManagement.panConsultList);
+                    support.cardSelection(enterManagement.panContainerEnterprise, enterManagement.panConsultList);
                     
                     // Se cargan los empleados.
-                    //loadEmployeeTable();
+                    loadEnterpriseTable();
                     
                     // Se inicializan las variables.
                     clearVariables();
@@ -240,10 +223,10 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
             else{
                 
                 // Se muestra la vista del CRUD.
-                support.cardSelection(empManagement.panContainerEmployee, empManagement.panConsultList);
+                support.cardSelection(enterManagement.panContainerEnterprise, enterManagement.panConsultList);
                     
                 // Se cargan los empleados.
-                //loadEmployeeTable();
+                loadEnterpriseTable();
                 
                 // Se inicializan las variables.
                 clearVariables();
@@ -253,38 +236,35 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
         }
         
         //</editor-fold>
-        
-        //<editor-fold defaultstate="collapsed" desc=" Clear form ">
+    
+    //<editor-fold defaultstate="collapsed" desc=" Clear form ">
         
         // Si se desea limpiar un empleado.
-        else if(evt.getSource() == empManagement.btnClearEmployee){
+        else if(evt.getSource() == enterManagement.btnClearEnterprise){
             
             if(id.equals(""))
-                empManagement.clearView();
+                enterManagement.clearView();
             else{
                 
                 // Se muestran los datos obtenidos.
-                empManagement.txtIdEmployee.setText(id);
-                empManagement.cmbBranchEmployee.setSelectedItem(branch);
-                empManagement.txtNameEmployee.setText(name);
-                empManagement.txtLastNameEmployee.setText(lastName);
-                empManagement.txtPhoneEmployee.setText(String.valueOf(phone));
-                empManagement.txtDirectionEmployee.setText(direction);
-                empManagement.dchBirthEmployee.setDate(birth);
-                empManagement.dchEntranceDateEmployee.setDate(entrance);
-                empManagement.txtEmailEmployee.setText(email);
-                empManagement.cmbJobEmployee.setSelectedItem(job);
+                enterManagement.txtIdEnterprise.setText(id);
+                //enterManagement.cmbBranchEmployee.setSelectedItem(branch);
+                enterManagement.txtNameEnterprise.setText(name);
+                enterManagement.txtDescriptionEnterprise.setText(description);
+                enterManagement.txtEmailEnterprise.setText(enteremail);
+                enterManagement.txtPriceTicketEnterprise.setText(String.valueOf(priceticket));
+                
                 
             }
                 
         }
         
-        //</editor-fold>
-        
-        //<editor-fold defaultstate="collapsed" desc=" Register or Update Employee ">
+        //</editor-fold>      
+ 
+    //<editor-fold defaultstate="collapsed" desc=" Register or Update Enterprise ">
         
         // Registro o Modificación de empleado.
-        else if(evt.getSource() == empManagement.btnRegisterModifyEmployee){
+        else if(evt.getSource() == enterManagement.btnRegisterModifyEnterprise){
             
             /**
              * Si la variable global 'id' se encuentra vacía, se tiene que el caso
@@ -294,41 +274,38 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                 
                 
                 // De no haber campos vacíos.
-                if( !empManagement.txtIdEmployee.getText().equals("") && 
-                    !empManagement.txtIdEmployee.getText().equals("Cédula del empleado") && 
-                    !empManagement.txtNameEmployee.getText().equals("") &&
-                    !empManagement.txtNameEmployee.getText().equals("Nombre del empleado") &&
-                    !empManagement.txtLastNameEmployee.getText().equals("") &&
-                    !empManagement.txtLastNameEmployee.getText().equals("Apellido del empleado") &&
-                    !empManagement.txtPhoneEmployee.getText().equals("") &&
-                    !empManagement.txtPhoneEmployee.getText().equals("Teléfono del empleado") &&
-                     empManagement.txtPhoneEmployee.getText().length() <= 10 &&
-                    !empManagement.txtDirectionEmployee.getText().equals("") &&
-                    !empManagement.txtDirectionEmployee.getText().equals("Dirección del empleado") &&
-                     empManagement.cmbBranchEmployee.getSelectedIndex() != 0 && 
-                     empManagement.cmbJobEmployee.getSelectedIndex() != 0){
+                if( !enterManagement.txtIdEnterprise.getText().equals("") && 
+                    !enterManagement.txtIdEnterprise.getText().equals("Codigo de la empresa") && 
+                    !enterManagement.txtNameEnterprise.getText().equals("") &&
+                    !enterManagement.txtNameEnterprise.getText().equals("Nombre de la empresa") &&
+                    !enterManagement.txtDescriptionEnterprise.getText().equals("") &&
+                    !enterManagement.txtDescriptionEnterprise.getText().equals("Descripcion de la empresa") &&
+                    !enterManagement.txtEmailEnterprise.getText().equals("") &&
+                    !enterManagement.txtEmailEnterprise.getText().equals("Correo electronico de la empresa") &&
+                    !enterManagement.txtPriceTicketEnterprise.getText().equals("") &&
+                    !enterManagement.txtPriceTicketEnterprise.getText().equals("Precio base boleto de funciones")){
                 
                         // Se confirma que se desea eliminar el registro.
-                        SelectOption select = new SelectOption(empManagement, true, 2, 
-                                "¿Desea registrar a este empleado?", "Si", "No");
+                        SelectOption select = new SelectOption(enterManagement, true, 2, 
+                                "¿Desea registrar a esta empresa?", "Si", "No");
 
                         // Si se confirma el registro.
                         if(select.getOpc()){
 
                             // Si el empleado ya existe pero se encuentra inactivo.
-                            if(empCRUD.employeeExist(empManagement.txtIdEmployee.getText(), 'I')){
+                            if(enterCRUD.enterpriseExist(enterManagement.txtIdEnterprise.getText(), 'I')){
                                 
                                 // Se cambia el estado del empleado a activo.
-                                empCRUD.DeleteEmployee(empManagement.txtIdEmployee.getText(), 1);
+                                enterCRUD.DeleteEnterprise(enterManagement.txtIdEnterprise.getText(), 1);
                                 
                                 // Se actualiza la información del empleado.
-                                updateEmployeeData(empManagement.txtIdEmployee.getText());
+                                updateEnterpriseData(enterManagement.txtIdEnterprise.getText());
                                 
                                 // Se muestra la vista del CRUD.
-                                support.cardSelection(empManagement.panContainerEmployee, empManagement.panConsultList);
+                                support.cardSelection(enterManagement.panContainerEnterprise, enterManagement.panConsultList);
 
                                 // Se cargan los empleados.
-                                //loadEmployeeTable();
+                                loadEnterpriseTable();
 
                                 // Se inicializan las variables.
                                 clearVariables();
@@ -339,13 +316,13 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                             else{
                             
                                 // Se ejecuta el registro de información.
-                                registerEmployeeData();
+                                registerEnterpriseData();
                                 
                                 // Se muestra la vista del CRUD.
-                                support.cardSelection(empManagement.panContainerEmployee, empManagement.panConsultList);
+                                support.cardSelection(enterManagement.panContainerEnterprise, enterManagement.panConsultList);
 
                                 // Se cargan los empleados.
-                                //loadEmployeeTable();
+                                loadEnterpriseTable();
 
                                 // Se inicializan las variables.
                                 clearVariables();
@@ -358,7 +335,7 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                 // Si hay campos vacíos.
                 else
                     // Se muestra mensaje solicitando datos.
-                    popup = new PopupMessage(empManagement, true, 1, 
+                    popup = new PopupMessage(enterManagement, true, 1, 
                             "Debe ingresar datos en los campos solicitados.");
       
                 
@@ -371,37 +348,32 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
             else{
                 
                 // De no haber campos vacíos.
-                if( !empManagement.txtIdEmployee.getText().equals("") && 
-                    !empManagement.txtIdEmployee.getText().equals("Cédula del empleado") && 
-                    !empManagement.txtNameEmployee.getText().equals("") &&
-                    !empManagement.txtNameEmployee.getText().equals("Nombre del empleado") &&
-                    !empManagement.txtLastNameEmployee.getText().equals("") &&
-                    !empManagement.txtLastNameEmployee.getText().equals("Apellido del empleado") &&
-                    !empManagement.txtPhoneEmployee.getText().equals("") &&
-                    !empManagement.txtPhoneEmployee.getText().equals("Teléfono del empleado") &&
-                     empManagement.txtPhoneEmployee.getText().length() <= 10 &&
-                      // !empManagement.txtEmailEmployee.getText().equals("Correo electrónico del empleado") &&
-                     //empManagement.txtEmailEmployee.getText().length() <= 10 &&
-                    !empManagement.txtDirectionEmployee.getText().equals("") &&
-                    !empManagement.txtDirectionEmployee.getText().equals("Dirección del empleado") &&
-                     empManagement.cmbBranchEmployee.getSelectedIndex() != 0 && 
-                     empManagement.cmbJobEmployee.getSelectedIndex() != 0){
+                if( !enterManagement.txtIdEnterprise.getText().equals("") && 
+                    !enterManagement.txtIdEnterprise.getText().equals("Codigo de la empresa") && 
+                    !enterManagement.txtNameEnterprise.getText().equals("") &&
+                    !enterManagement.txtNameEnterprise.getText().equals("Nombre de la empresa") &&
+                    !enterManagement.txtDescriptionEnterprise.getText().equals("") &&
+                    !enterManagement.txtDescriptionEnterprise.getText().equals("Descripcion de la empresa") &&
+                    !enterManagement.txtEmailEnterprise.getText().equals("") &&
+                    !enterManagement.txtEmailEnterprise.getText().equals("Correo electronico de la empresa") &&
+                    !enterManagement.txtPriceTicketEnterprise.getText().equals("") &&
+                    !enterManagement.txtPriceTicketEnterprise.getText().equals("Precio base boleto de funciones")){
                 
                         // Se confirma que se desea eliminar el registro.
-                        SelectOption select = new SelectOption(empManagement, true, 2, 
-                                "¿Desea actualizar los datos de este empleado?", "Si", "No");
+                        SelectOption select = new SelectOption(enterManagement, true, 2, 
+                                "¿Desea actualizar los datos de esta empresa?", "Si", "No");
 
                         // Si se confirma la actualización.
                         if(select.getOpc()){
 
                             // Se ejecuta la actualización de información.
-                            updateEmployeeData(id);
+                            updateEnterpriseData(id);
                             
                             // Se muestra la vista del CRUD.
-                            support.cardSelection(empManagement.panContainerEmployee, empManagement.panConsultList);
+                            support.cardSelection(enterManagement.panContainerEnterprise, enterManagement.panConsultList);
 
                             // Se cargan los empleados.
-                            //loadEmployeeTable();
+                            loadEnterpriseTable();
 
                             // Se inicializan las variables.
                             clearVariables();
@@ -413,7 +385,7 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                 // Si hay campos vacíos.
                 else
                     // Se muestra mensaje solicitando datos.
-                    popup = new PopupMessage(empManagement, true, 1, 
+                    popup = new PopupMessage(enterManagement, true, 1, 
                             "Debe ingresar datos en los campos solicitados.");
                                     
             }
@@ -421,30 +393,30 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
         }
         
         //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc=" Delete Enterprise ">
         
-        //<editor-fold defaultstate="collapsed" desc=" Delete Employee ">
-        
-        // Eliminación de un empleado.
-        else if(evt.getSource() == empManagement.btnDeleteEmployee){
+        // Eliminación de una empresa.
+        else if(evt.getSource() == enterManagement.btnDeleteEnterprise){
             
             // Se pregunta al usuario si desea realmente eliminar al empleado.
-            SelectOption select = new SelectOption(empManagement, true, 2, 
-                    "¿Está seguro que desea eliminar a este empleado?", "Si", "No");
+            SelectOption select = new SelectOption(enterManagement, true, 2, 
+                    "¿Está seguro que desea eliminar a esta empresa?", "Si", "No");
             
             // Si la respuesta es afirmativa.
             if(select.getOpc()){
                 
                 // Se realiza la eliminación lógica.
-                empCRUD.DeleteEmployee(id, 0);
+                enterCRUD.DeleteEnterprise(id, 0);
                 
                 // Se muestra un mensaje de eliminación exitosa.
-                popup = new PopupMessage(empManagement, true, 4, "El empleado se ha eliminado con éxito.");
+                popup = new PopupMessage(enterManagement, true, 4, "La empresa se ha eliminado con éxito.");
                 
                 // Se muestra la vista del CRUD.
-                support.cardSelection(empManagement.panContainerEmployee, empManagement.panConsultList);
+                support.cardSelection(enterManagement.panContainerEnterprise, enterManagement.panConsultList);
                     
                 // Se cargan los empleados.
-                //loadEmployeeTable();
+                loadEnterpriseTable();
                     
                 // Se inicializan las variables.
                 clearVariables();
@@ -454,28 +426,27 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
         }
         
         //</editor-fold>
-        
+    
     }
-
-    /**
+ /**
      * Eventos provocados por el escuchador de Mouse (MouseListener)
      * @param evt son aquellos eventos que ocurren con acciones del Mouse.
      */
     @Override
     public void mouseClicked(MouseEvent evt) {
-       
-        // Si se hace click sobre la tabla de empleados.
-        if(evt.getSource() == empManagement.tblEmployeeList){
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+   // Si se hace click sobre la tabla de empresas.
+        if(evt.getSource() == enterManagement.tblEnterpriseList){
                                               
             // Se obtienen los valores de la fila y columna seleccionada.
-            int column = empManagement.getColumnTable(), row = empManagement.getRowTable();
+            int column = enterManagement.getColumnTable(), row = enterManagement.getRowTable();
 
             // Se valida que el evento del Mouse fue provocado dentro del JTable.
-            if(row < empManagement.tblEmployeeList.getRowCount() && row >= 0 && 
-                    column < empManagement.tblEmployeeList.getColumnCount() && column >= 0){
+            if(row < enterManagement.tblEnterpriseList.getRowCount() && row >= 0 && 
+                    column < enterManagement.tblEnterpriseList.getColumnCount() && column >= 0){
                 
                 // Se obtiene el valor de la celda seleccionada.
-                Object value = empManagement.tblEmployeeList.getValueAt(row, column);
+                Object value = enterManagement.tblEnterpriseList.getValueAt(row, column);
                 
                 // Si el valor de la celda seleccionada es un JButton;
                 if(value instanceof JButton){
@@ -484,7 +455,7 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                     
                     JButton btn = (JButton) value;
 
-                    //<editor-fold defaultstate="collapsed" desc=" Proceso para consultar un empleado ">
+                    //<editor-fold defaultstate="collapsed" desc=" Proceso para consultar una empresa ">
                     
                     // Si el JButton se llama "s";
                     if(btn.getName().equals("s")){
@@ -493,15 +464,15 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                         System.out.println("Click en el boton modificar en la celda: " + row + ";" + column);
                                       
                         // Se obtiene el modelo de la JTable.
-                        DefaultTableModel dtm = (DefaultTableModel) empManagement.tblEmployeeList.getModel();
+                        DefaultTableModel dtm = (DefaultTableModel) enterManagement.tblEnterpriseList.getModel();
                                                 
-                        // Se obtiene el id del empleado en cuestión.
-                        String idEmployee = dtm.getValueAt(row, 0).toString();
+                        // Se obtiene el id de la empresa en cuestión.
+                        String idEnterprise = dtm.getValueAt(row, 0).toString();
                         
-                        // Se buscan los datos del empleado.
-                        loadEmployee(idEmployee);
+                        // Se buscan los datos de la empresa.
+                        loadEnterprise(idEnterprise);
                         
-                        // Se crea la variable de formato de fechas.
+                        /*// Se crea la variable de formato de fechas.
                         SimpleDateFormat sdt = new SimpleDateFormat("yyyy-MM-dd");
                                        
                         // Variables de apoyo para construir el comboBox de sucursales.
@@ -516,40 +487,35 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                         empManagement.cmbBranchEmployee.addItem(" - Seleccionar una Sucursal - ");
                         
                         for(int i = 0; i < codexBranch.size(); i++)
-                            empManagement.cmbBranchEmployee.addItem(namesBranch.get(i));
+                            empManagement.cmbBranchEmployee.addItem(namesBranch.get(i));*/
                                                     
                         // Se muestra la vista del CRUD.
-                        support.cardSelection(empManagement.panContainerEmployee, empManagement.panCRUD);
+                        support.cardSelection(enterManagement.panContainerEnterprise, enterManagement.panCRUD);
                         
                         // Se bloquea el botón de 'eliminar'.
-                        empManagement.btnDeleteEmployee.setEnabled(false);
+                        enterManagement.btnDeleteEnterprise.setEnabled(true);
                         
                         // Se configura el texto del botón.
-                        empManagement.btnRegisterModifyEmployee.setText("Modificar");
+                        enterManagement.btnRegisterModifyEnterprise.setText("Modificar");
                         
                         // Se limpian todos los aspectos visuales.
-                        empManagement.clearView();
+                        enterManagement.clearView();
                                                 
                         // Se muestran los datos obtenidos.
-                        empManagement.txtIdEmployee.setText(id);
-                        empManagement.cmbBranchEmployee.setSelectedItem(branch);
-                        empManagement.txtNameEmployee.setText(name);
-                        empManagement.txtLastNameEmployee.setText(lastName);
-                        empManagement.txtPhoneEmployee.setText(String.valueOf(phone));
-                        empManagement.txtDirectionEmployee.setText(direction);
-                        empManagement.dchBirthEmployee.setDate(birth);
-                        empManagement.dchEntranceDateEmployee.setDate(entrance);
-                        empManagement.txtEmailEmployee.setText(email);
-                        empManagement.cmbJobEmployee.setSelectedItem(job);
+                        enterManagement.txtIdEnterprise.setText(id);
+                        enterManagement.txtNameEnterprise.setText(name);
+                        enterManagement.txtDescriptionEnterprise.setText(description);
+                        enterManagement.txtEmailEnterprise.setText(enteremail);
+                        enterManagement.txtPriceTicketEnterprise.setText(String.valueOf(priceticket));
                         
                         // Se bloquea el campo de cédula.
-                        empManagement.txtIdEmployee.setEnabled(false);
+                        enterManagement.txtIdEnterprise.setEnabled(false);
                         
                     }
                     
                     //</editor-fold>
                     
-                    //<editor-fold defaultstate="collapsed" desc=" Proceso para crear un empleado ">
+                    //<editor-fold defaultstate="collapsed" desc=" Proceso para crear una empresa ">
                     
                     // Si el JButton se llama "i";
                     if(btn.getName().equals("i")){
@@ -558,16 +524,16 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                         System.out.println("Click en el boton modificar en la celda: " + row + ";" + column);
                                      
                         // Se muestra la vista del CRUD.
-                        support.cardSelection(empManagement.panContainerEmployee, empManagement.panCRUD);
+                        support.cardSelection(enterManagement.panContainerEnterprise, enterManagement.panCRUD);
                         
                         // Se bloquea el botón de 'eliminar'.
-                        empManagement.btnDeleteEmployee.setEnabled(true);
+                        enterManagement.btnDeleteEnterprise.setEnabled(true);
                         
                         // Se configura el texto del botón.
-                        empManagement.btnRegisterModifyEmployee.setText("Registrar");
+                        enterManagement.btnRegisterModifyEnterprise.setText("Registrar");
                         
                         // Se limpian todos los aspectos visuales.
-                        empManagement.clearView();
+                        enterManagement.clearView();
                         
                         // Se limpian las variables
                         clearVariables();
@@ -582,17 +548,17 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
 
             }
 
-        }
-        
+        } 
+    
     }
     
-    //<editor-fold defaultstate="collapsed" desc=" Métodos para el funcionamiento del Controller ">
+ //<editor-fold defaultstate="collapsed" desc=" Métodos para el funcionamiento del Controller ">
     
     /**
      * Método para habilitar o deshabilitar botónes según tipo de usuario.
      * @param rol Rol del usuario que ha ingresado al sistema.
      */
-    private void enabledButtons(String rol){
+    /*private void enabledButtons(String rol){
         
         switch(rol){
             
@@ -601,7 +567,6 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                 
                 empManagement.btnChangeBranch.setEnabled(true);
                 empManagement.lblSucursalName.setText(branchUser);
-                empManagement.btnDeleteEmployee.setEnabled(true);
                 
                 break;
                 
@@ -610,39 +575,34 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                 
                 empManagement.btnChangeBranch.setEnabled(false);
                 empManagement.lblSucursalName.setText(branchUser);
-                empManagement.btnDeleteEmployee.setEnabled(false);
                 
                 break;
             
         }
         
-    }
+    }*/
     
     /**
-     * Método para cargar todas ciudades.
-     * @return Listado de nombres de ciudades.
+     * Método para cargar todas las empresas.
+     * @return Listado de nombres de empresas.
      */
-    private void loadEmployee(String idEmployee){
+    private void loadEnterprise(String idEnterprise){
         
         // Se instancia la clase a utilizar.
-        empCRUD = new EmployeeCRUD();
+        enterCRUD = new EnterpriseCRUD();
         
         // Se declara la variable que devuelve el resultado.
         java.sql.ResultSet result;
                 
         try {
-            result = empCRUD.readEmployeeData(idEmployee);
+            result = enterCRUD.readEnterpriseData(idEnterprise);
             while(result.next()){
-                id = result.getString("cedula");
-                branch = result.getString("NombreSucursal");
+                id = result.getString("codigo");
                 name = result.getString("nombre");
-                lastName = result.getString("apellido");
-                phone = result.getLong("telefono");
-                direction = result.getString("direccion");
-                birth = result.getDate("fecha_nacimiento");
-                entrance = result.getDate("fecha_ingreso");
-                email = result.getString("correo");
-                job = result.getString("cargo");
+                description = result.getString("descripcion");
+                enteremail = result.getString("correo");
+                priceticket = result.getDouble("precio_boleto");
+                
             }
             
             System.out.println("Éxito.");
@@ -660,7 +620,7 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
      * @param firstList Primer listado con los nombres de ciudades.
      * @param secondList Segundo listado con los nombres de sucursales.
      */
-    private void loadBranch(ArrayList<String> firstList, ArrayList<String> secondList){
+    /*private void loadBranch(ArrayList<String> firstList, ArrayList<String> secondList){
         
         // Se instancia la clase a utilizar.
         braCRUD = new BranchCRUD();
@@ -683,16 +643,16 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
             
         }
         
-    }
+    }*/
     
     /**
      * Método para buscar el código de una sucursal.
      * @param branchName Nombre de la sucursal.
      * @return Devuelve el código de la sucursal.
      */
-    private String loadBranch(String branchName){
+   /* private String loadBranch(String branchName){
         
-        // Se instancia la clase a utilizar.
+                // Se instancia la clase a utilizar.
         braCRUD = new BranchCRUD();
         
         // Se declara la variable que devuelve el resultado.
@@ -717,13 +677,13 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
         
         return null;
         
-    }
+    }*/
     
     /**
      * Método para cargar todas ciudades.
      * @return Listado de nombres de ciudades.
      */
-    private ArrayList<String> loadCityNames(){
+   /* private ArrayList<String> loadCityNames(){
         
         // Se instancia la clase a utilizar.
         citCRUD = new CityCRUD();
@@ -752,7 +712,7 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
         
         return null;
         
-    }
+    }*/
     
     /**
      * Método para construir la sentencia de búsqueda del empleado.
@@ -761,30 +721,30 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
     private String buildSentenceSQL(){
         
         // Se declaran e inicializan las variables que servirán para buscar empleados.
-        String  initSQL     = "SELECT empleado.\"cedula\", empleado.\"nombre\", empleado.\"apellido\", "
-                                    + "sucursal.\"nombre\" as \"nombreSucursal\", empleado.\"cargo\" "
-                                    + "FROM \"empleado\", \"sucursal\" WHERE \"sucursal_codigo\" = sucursal.\"codigo\" "
-                                    + "AND empleado.\"estado\" = 'A' AND sucursal.\"estado\" = 'A'",
+        String  initSQL     = "SELECT \"codigo\", \"nombre\", \"descripcion\", \"correo\", \"precio_boleto\""      
+                                    + "FROM \"empresa\" WHERE \"estado\" = 'A'",
                 finalSQL    = ";",
-                nameSQL     = " AND empleado.\"nombre\" = ",
-                lastNameSQL = " AND empleado.\"apellido\" = ",
-                idSQL       = " AND empleado.\"cedula\" = ",
-                jobSQL      = " AND empleado.\"cargo\" = ",
-                branchSQL   = " AND sucursal.\"nombre\" = ",
+                nameSQL     = " AND \"nombre\" = ",
+                idSQL       = " AND \"codigo\" = ",
+                decripSQL       = " AND \"descripcion\" = ",
+                emailSQL       = " AND \"correo\" = ",
+                priceSQL       = " AND \"precio_boleto\" = ",
+               // branchSQL   = " AND sucursal.\"nombre\" = ",
                 SQL         = "";
          
         // Se inicia la sentencia SQL;
         SQL += initSQL;
         
-        // Si se ingresó la cédula de un empleado.
-        if(!empManagement.txtSearchIdEmployee.getText().equals("Cédula del empleado") && 
-                !empManagement.txtSearchIdEmployee.getText().equals(""))
-            SQL += idSQL + "'" + empManagement.txtSearchIdEmployee.getText() + "'";
+        // Si se ingresó el codigo de una empresa.
+        if(!enterManagement.txtSearchIdEnterprise.getText().equals("Codigo de la empresa") && 
+                !enterManagement.txtSearchIdEnterprise.getText().equals(""))
+            SQL += idSQL + "'" + enterManagement.txtSearchIdEnterprise.getText() + "'";
                 
-        // Si se ingresó el nombre y apellido de un empleado.
-        if(!empManagement.txtSearchNameEmployee.getText().equals("") &&
-                !empManagement.txtSearchNameEmployee.getText().equals("Nombre y apellido del empleado")){
-                   
+        // Si se ingresó el nombre de la empresa.
+        if(!enterManagement.txtSearchNameEnterprise.getText().equals("") &&
+                !enterManagement.txtSearchNameEnterprise.getText().equals("Nombre de la empresa"))
+            SQL += idSQL + "'" + enterManagement.txtSearchNameEnterprise.getText() + "'";       
+           /*
             // Se fragmenta el dato proporcionado.
             String[] names = empManagement.txtSearchNameEmployee.getText().split(" ");
                  
@@ -805,7 +765,7 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
          
         // Si se ingresó un cargo.
         if(empManagement.cmbSearchJobEmployee.getSelectedIndex() != 0)
-            SQL += jobSQL + "'" + empManagement.cmbSearchJobEmployee.getSelectedItem().toString() + "'";
+            SQL += jobSQL + "'" + empManagement.cmbSearchJobEmployee.getSelectedItem().toString() + "'";*/
           
         // Se culmina la sentencia.
         return SQL += finalSQL;
@@ -816,16 +776,19 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
      * Método para cargar la información de la empresa.
      * @return listado con la información de la empresa.
      */
-    private void loadEmployeeTable(){
+    private void loadEnterpriseTable(){
                 
         // Se instancia la clase a utilizar.
-        empCRUD = new EmployeeCRUD();
+        enterCRUD = new EnterpriseCRUD();
         
         // Se declaran los arreglos a utilizar
-        ArrayList<String>   idEmployee      = new ArrayList<>(),
-                            namesEmployee   = new ArrayList<>(),
-                            branchEmployee  = new ArrayList<>(),
-                            jobEmployee     = new ArrayList<>();
+        ArrayList<String>   idEnterprise      = new ArrayList<>(),
+                            nameEnterprise   = new ArrayList<>(),
+                            descriptionEnterprise   = new ArrayList<>(),
+                            emailEnterprise   = new ArrayList<>(),
+                            priceticketEnterprise   = new ArrayList<>();
+                            //branchEmployee  = new ArrayList<>(),
+                            //jobEmployee     = new ArrayList<>();
                 
         // Se declara la variable que devuelve el resultado.
         java.sql.ResultSet result;
@@ -833,28 +796,33 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
         try {
             
             // Se realiza la búsqueda de empleados.
-            result = empCRUD.readEmployees(buildSentenceSQL());
+            result = enterCRUD.readEnterprise(buildSentenceSQL());
             
             // Se obtienen los resultados.
             while(result.next()){
                 
-                idEmployee.add(result.getString("cedula"));
-                namesEmployee.add(result.getString("nombre") + " " + result.getString("apellido"));
-                branchEmployee.add(result.getString("nombreSucursal"));
-                jobEmployee.add(result.getString("cargo"));
+                idEnterprise.add(result.getString("codigo"));
+                nameEnterprise.add(result.getString("nombre"));
+                descriptionEnterprise.add(result.getString("descripcion"));
+                emailEnterprise.add(result.getString("correo"));
+                priceticketEnterprise.add(result.getString("precio_boleto"));
+                
+
+//branchEmployee.add(result.getString("nombreSucursal"));
+                //jobEmployee.add(result.getString("cargo"));
                                    
             }
             
-            System.out.println("Carga exitosa. Cantidad de empleados encontrados: " + idEmployee.size());
+            System.out.println("Carga exitosa. Cantidad de empresas encontradas: " + idEnterprise.size());
             
             // Se obtuvo al menos un resultado.
-            if(idEmployee.size() > 0){
+            if(idEnterprise.size() > 0){
                 
-                // Se limpia la tabla de empleados.
-                empManagement.clearEmployeeTable(empManagement.tblEmployeeList);
+                // Se limpia la tabla de empresas.
+                enterManagement.clearEnterpriseTable(enterManagement.tblEnterpriseList);
                 
-                // Se obtiene el modelo de la tabla de empleados.
-                DefaultTableModel dtm = (DefaultTableModel) empManagement.tblEmployeeList.getModel();
+                // Se obtiene el modelo de la tabla de empresas
+                DefaultTableModel dtm = (DefaultTableModel) enterManagement.tblEnterpriseList.getModel();
 
                 // Se declara e instancia la clase Table.
                 Table table = new Table();
@@ -872,17 +840,21 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                     " . . . ",
                     " . . . ",
                     " . . . ",
+                    " . . . ",
                     btnI
                 });
                 
                 // Se añaden todos los resultados obtenidos a la tabla.
-                for(int i = 0; i < idEmployee.size(); i++){
+                for(int i = 0; i < idEnterprise.size(); i++){
 
                     dtm.addRow(new Object[]{
-                        idEmployee.get(i),
-                        namesEmployee.get(i),
-                        branchEmployee.get(i),
-                        jobEmployee.get(i),
+                        idEnterprise.get(i),
+                        nameEnterprise.get(i),
+                        descriptionEnterprise.get(i),
+                        emailEnterprise.get(i),
+                        priceticketEnterprise.get(i),
+                        //branchEmployee.get(i),
+                        //jobEmployee.get(i),
                         btnR
                     });
 
@@ -892,7 +864,7 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
             
             // No se obtuvo ningún resultado.
             else
-                popup = new PopupMessage(empManagement, true, 1, "No se encontraron empleados.");
+                popup = new PopupMessage(enterManagement, true, 1, "No se encontraron empresas.");
                             
         } catch (java.sql.SQLException e) {
             
@@ -903,56 +875,54 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
     }
     
     /**
-     * Método para registrar a un nuevo empleado.
+     * Método para registrar a una nueva empresa.
      */
-    private void registerEmployeeData(){
+    private void registerEnterpriseData(){
                         
         // Se carga la nueva información del empleado.
-        Employee emp = new Employee(empManagement.txtIdEmployee.getText(), 
-                                    empManagement.txtNameEmployee.getText(), 
-                                    empManagement.txtLastNameEmployee.getText(), 
-                                    Long.valueOf(empManagement.txtPhoneEmployee.getText()), 
-                                    empManagement.txtDirectionEmployee.getText(), 
-                                    empManagement.dchBirthEmployee.getDate(), 
-                                    empManagement.txtEmailEmployee.getText(), 
-                                    'A', 
-                                    loadBranch(empManagement.cmbBranchEmployee.getSelectedItem().toString()), 
+        Enterprise enter = new Enterprise(
+                                    enterManagement.txtIdEnterprise.getText(), 
+                                    enterManagement.txtNameEnterprise.getText(), 
+                                    enterManagement.txtDescriptionEnterprise.getText(),
+                                    enterManagement.txtEmailEnterprise.getText(),
+                                    Double.valueOf(enterManagement.txtPriceTicketEnterprise.getText()), 
+                                    'A' 
+                                    /*loadBranch(empManagement.cmbBranchEmployee.getSelectedItem().toString()), 
                                     empManagement.cmbJobEmployee.getSelectedItem().toString(),    
-                                    empManagement.dchEntranceDateEmployee.getDate());
+                                    empManagement.dchEntranceDateEmployee.getDate()*/ );
         
         // Se ejecuta el registro de datos.
-        empCRUD.registerEployee(emp);
+        enterCRUD.registerEnterprise(enter);
         
         // Se muestra mensaje de éxito.
-        popup = new PopupMessage(empManagement, true, 4, 
-                "El empleado se ha registrado con éxito");
+        popup = new PopupMessage(enterManagement, true, 4, 
+                "La empresa se ha registrado con éxito");
         
     }
     
     /**
-     * Método para actualizar la información de un empleado.
+     * Método para actualizar la información de una empresa.
      * @param id cédula del empleado a actualizar.
      */
-    private void updateEmployeeData(String id){
+    private void updateEnterpriseData(String id){
                         
         // Se carga la nueva información del empleado.
-        Employee emp = new Employee(empManagement.txtIdEmployee.getText(), 
-                                    empManagement.txtNameEmployee.getText(), 
-                                    empManagement.txtLastNameEmployee.getText(), 
-                                    Long.valueOf(empManagement.txtPhoneEmployee.getText()), 
-                                    empManagement.txtDirectionEmployee.getText(), 
-                                    empManagement.dchBirthEmployee.getDate(), 
-                                    empManagement.txtEmailEmployee.getText(), 
-                                    'A', 
-                                    loadBranch(empManagement.cmbBranchEmployee.getSelectedItem().toString()), 
+        Enterprise enter = new Enterprise(
+                                    enterManagement.txtIdEnterprise.getText(), 
+                                    enterManagement.txtNameEnterprise.getText(), 
+                                    enterManagement.txtDescriptionEnterprise.getText(),
+                                    enterManagement.txtEmailEnterprise.getText(),
+                                    Double.valueOf(enterManagement.txtPriceTicketEnterprise.getText()), 
+                                    'A' 
+                                    /*loadBranch(empManagement.cmbBranchEmployee.getSelectedItem().toString()), 
                                     empManagement.cmbJobEmployee.getSelectedItem().toString(),    
-                                    empManagement.dchEntranceDateEmployee.getDate());
+                                    empManagement.dchEntranceDateEmployee.getDate()*/ );
         
         // Se ejecuta la actualización de datos.
-        empCRUD.UpdateEmployee(emp, id);
+        enterCRUD.UpdateEnterprise(enter, id);
         
         // Se muestra mensaje de éxito.
-        popup = new PopupMessage(empManagement, true, 4, 
+        popup = new PopupMessage(enterManagement, true, 4, 
                 "Los datos del empleados se han actualizado con éxito.");
         
     }
@@ -963,22 +933,16 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
     private void clearVariables(){
         
         id          = "";
-        branch      = "";
         name        = "";
-        lastName    = "";
-        direction   = "";
-        email       = "";
-        phone       = 0;
-        job         = "";
-        birth       = null;
-        entrance    = null;
+        description  = "";
+        enteremail   = "";
+        priceticket  = 0; 
         
     }
     
     //</editor-fold>
     
-    //<editor-fold defaultstate="collapsed" desc=" PROHIBIDO TOCAR ">
-    
+//<editor-fold defaultstate="collapsed" desc=" PROHIBIDO TOCAR ">
     @Override
     public void mousePressed(MouseEvent e) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -986,19 +950,24 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+ //</editor-fold>    
     
-    //</editor-fold>
+    
+    
+    
+    
+    
     
 }
