@@ -324,8 +324,8 @@ public class EmployeeCRUD {
                 +  "\"fecha_nacimiento\" = " + emp.getBirth_date() + ","
                 +  "\"fecha_ingreso\" = " + emp.getAdmission_date() + ","
                 +  "\"correo\" = '" + emp.getEmail() + "',"
-                +  "\"cargo\" = '" + emp.getPosition() + "',"
-                +  " WHERE \"cedula\" = '" + id + "';";
+                +  "\"cargo\" = '" + emp.getPosition() + "' "
+                + "WHERE \"cedula\" = '" + id + "';";
 
         // Se instancia y se establece una conexión con la BD.
         con = new ConnectionDB();

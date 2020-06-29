@@ -1451,14 +1451,22 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
         //<editor-fold defaultstate="collapsed" desc=" CRUD User "> 
         
         //Consultar listado ->  User
+        /*else if(evt.getSource() == mainPage.btnUserDecision)
+        {
+            
+            // Se instancia y se declara la clase.
+            ControllerUserManagement contUserManagement = 
+                    new ControllerUserManagement (rolUser, nameUser, nameBranch);*/
         else if(evt.getSource() == mainPage.btnUserDecision)
         {
             
             // Se instancia y se declara la clase.
             ControllerUserManagement contUserManagement = 
                     new ControllerUserManagement(rolUser, nameUser, nameBranch);
+            //ctrUserManagement= new ControllerUserManagement(rolUser, nameUser, nameBranch);
              
         }
+        
 
          //Añadir Empleado
         /* else if((evt.getSource() == consulList.btnAdd)&&("Empleado".equals(consulList.lblEntityName.getText())))

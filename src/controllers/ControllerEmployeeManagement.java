@@ -40,10 +40,11 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
     
     // Models
     private Employee employee;
-        // Models.database
-        private EmployeeCRUD empCRUD;
-        private BranchCRUD braCRUD;
-        private CityCRUD citCRUD;
+    
+    // Models.database
+    private EmployeeCRUD empCRUD;
+    private BranchCRUD braCRUD;
+    private CityCRUD citCRUD;
     
     // Views
     private EmployeeManagement empManagement;

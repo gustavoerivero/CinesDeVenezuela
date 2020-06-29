@@ -91,6 +91,8 @@ public class ClientManagement extends javax.swing.JFrame {
         btnClearSearchClient = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
+        setResizable(false);
 
         panClientManagement.setBackground(new java.awt.Color(249, 249, 249));
         panClientManagement.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75, 0, 145)));

@@ -344,7 +344,7 @@ public class Table {
         DefaultTableModel userTableModel = new  DefaultTableModel(
             matrix,
             new Object[]{
-                "Correo", "Cédula", "Rol","Consultar"
+                "Correo", "Cédula", "Nombre y Apellido", "Rol","Consultar"
             }
         )
         {
@@ -360,8 +360,8 @@ public class Table {
         table.setRowHeight(32);
         
         if (table.getColumnModel().getColumnCount() > 0) {
-            table.getColumnModel().getColumn(3).setResizable(false);
-            table.getColumnModel().getColumn(3).setPreferredWidth(32);
+            table.getColumnModel().getColumn(4).setResizable(false);
+            table.getColumnModel().getColumn(4).setPreferredWidth(32);
         }
         }
 
@@ -373,7 +373,7 @@ public class Table {
         DefaultTableModel userTableModel = new  DefaultTableModel(
             matrix,
             new Object[]{
-                "Código", "Sucursal", "Fila","Columna","Consultar"
+                "Código", "nombreSucursal", "Fila","Columna","Consultar"
             }
         )
         {

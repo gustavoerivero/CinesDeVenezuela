@@ -124,16 +124,16 @@ public class ClientCRUD {
             con.conectar();
           
             // Se descrie la sentencia SQL.
-    String SQL = "INSERT INTO \"cliente\" (\"cedula\",\"nombre\","
-            + "\"apellido\",\"direccion\",\"correo\", \"telefono\", \"fecha_nacimiento\" ) "
+    String SQL = "INSERT INTO \"cliente\" (\"cedula\", \"nombre\", "
+            + "\"apellido\", \"direccion\", \"correo\", \"telefono\", \"fecha_nacimiento\" ) "
             + "values ("
-            + "'" + cli.getId()+ "',"
-            + "'" + cli.getName() + "',"
-            + "'" + cli.getSurname() + "',"
-            + "'" + cli.getDirection() + "',"
-            + "'" + cli.getEmail() + "',"
-            + "'" + cli.getPhone() +"',"
-            + "'" + cli.getBirth_date()+"');";
+            + "'" + cli.getId()+ "', "
+            + "'" + cli.getName() + "', "
+            + "'" + cli.getSurname() + "', "
+            + "'" + cli.getDirection() + "', "
+            + "'" + cli.getEmail() + "', "
+            + "'" + cli.getPhone() +"', "
+            + "'" + cli.getBirth_date()+"' );";
     
      con.queryInsert(SQL);
      
@@ -151,15 +151,14 @@ public class ClientCRUD {
             con.conectar(); 
 
             // Se descrie la sentencia SQL.
-            String SQL = "UPDATE \"cliente\" SET \"nombre\" = "
-                       + "'" + cli.getName() + "',"
-                       +  "\"apellido\" = " + cli.getSurname() + "',"
-                       +  "\"direccion\" = " + cli.getDirection() + "',"
-                       +  "\"correo\" = " + cli.getEmail() + "',"
-                       +  "\"telefono\" = " + cli.getPhone() + "',"
-                       +  "\"fecha_nacimiento\" = " + cli.getBirth_date() + "',"
-                       +  "\"tipo\" = " + cli.getType() + "',"
-                       +  " WHERE \"Cedula\" = " + cli.getId() + "',";
+            String SQL = "UPDATE \"cliente\" SET \"nombre\" = '" + cli.getName() + "',"
+                       + "\"apellido\" = '" + cli.getSurname() + "',"
+                       +  "\"direccion\" = '" + cli.getDirection() + "',"
+                       +  "\"correo\" = '" + cli.getEmail() + "',"
+                       +  "\"telefono\" = '" + cli.getPhone() + "',"
+                       +  "\"fecha_nacimiento\" = '" + cli.getBirth_date() + "',"
+                       +  "\"tipo\" = '" + cli.getType() + "',"
+                       +  " WHERE \"Cedula\" = '" + cli.getId() + "',";
             
             con.queryInsert(SQL);
             
@@ -167,7 +166,6 @@ public class ClientCRUD {
             con.desconectar();
 }
 //</editor-fold>
-     
      
     //<editor-fold defaultstate="collapsed" desc="Eliminar Cliente"> 
     
@@ -267,7 +265,7 @@ public class ClientCRUD {
         // Se define la sentencia SQL a aplicar en la BD.
         String SQL = "SELECT \"cedula\", \"nombre\", \"apellido\", \"direccion\","
                 + " \"correo\",\"telefono\",\" tipo\" FROM\" cliente\" WHERE"
-                + "\" cedula\" = \'"+idClient+"'\"AND \"estado\" = 'A';";
+                + "\" cedula\" = '"+ idClient +"' \" AND \"estado\" = 'A';";
         
         // Se instancia y se establece una conexión con la BD.
         con = new ConnectionDB();

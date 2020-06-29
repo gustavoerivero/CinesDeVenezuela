@@ -40,10 +40,11 @@ public class ControllerClientManagement implements ActionListener, MouseListener
     
     // Models
     private Client cli;
-        // Models.database
-        private ClientCRUD cliCRUD;
-        private BranchCRUD braCRUD;
-        private CityCRUD citCRUD;
+    
+    // Models.database
+    private ClientCRUD cliCRUD;
+    private BranchCRUD braCRUD;
+    private CityCRUD citCRUD;
     
     // Views
     private ClientManagement cliManagement;
@@ -142,7 +143,7 @@ public class ControllerClientManagement implements ActionListener, MouseListener
                                 cityBranch  = new ArrayList<>(),
                                 branchNames = new ArrayList<>();
             
-            /*loadBranch(cityBranch, branchNames);*/
+            loadBranch(cityBranch, branchNames);
                         
             // Instanciar la clase
             changeBranch = new ChangeBranch(cliManagement, true, cityNames, cityBranch, branchNames, rolUser);
@@ -165,8 +166,9 @@ public class ControllerClientManagement implements ActionListener, MouseListener
             if  ((cliManagement.txtSearchIdClient.getText().equals("") || 
                     cliManagement.txtSearchIdClient.getText().equals("Cédula del cliente")) &&
                 (cliManagement.txtSearchNameClient.getText().equals("") ||
-                    cliManagement.txtSearchNameClient.getText().equals("Nombre y apellido del cliente")));
-            
+                    cliManagement.txtSearchNameClient.getText().equals("Nombre y apellido del cliente")))
+                 popup = new PopupMessage(cliManagement, true, 1, "Debe ingresar al menos un dato para filtrar.");
+                 
             // Si al menos se ingresó algún dato para filtrar.
             else
                 loadClientTable();   
@@ -482,7 +484,7 @@ public class ControllerClientManagement implements ActionListener, MouseListener
                         // Se obtiene el id del empleado en cuestión.
                         String idClient = dtm.getValueAt(row, 0).toString();
                         
-                        // Se buscan los datos del empleado.
+                        // Se buscan los datos del cliente.
                         loadClient(idClient);
                         
                         // Se crea la variable de formato de fechas.
@@ -538,9 +540,7 @@ public class ControllerClientManagement implements ActionListener, MouseListener
                         
                         // Se limpian las variables
                         clearVariables();
-                        
-                        
-                        
+                       
                     }
                         
                     //</editor-fold>
@@ -619,6 +619,36 @@ public class ControllerClientManagement implements ActionListener, MouseListener
     }
         
     /**
+     * Método para cargar sucursales.
+     * @param firstList Primer listado con los nombres de ciudades.
+     * @param secondList Segundo listado con los nombres de sucursales.
+     */
+    private void loadBranch(ArrayList<String> firstList, ArrayList<String> secondList){
+        
+        // Se instancia la clase a utilizar.
+        braCRUD = new BranchCRUD();
+        
+        // Se declara la variable que devuelve el resultado.
+        java.sql.ResultSet result;
+        
+        try {
+            result = braCRUD.readBranchForCity();
+            while(result.next()){
+                firstList.add(result.getString("NombreCiudad"));
+                secondList.add(result.getString("NombreSucursal"));
+            }
+                        
+            System.out.println("Éxito.");
+                                    
+        } catch (java.sql.SQLException e) {
+            
+            System.out.println("Error: " + e);
+            
+        }
+        
+    }
+    
+    /**
      * Método para cargar todas ciudades.
      * @return Listado de nombres de ciudades.
      */
@@ -661,7 +691,7 @@ public class ControllerClientManagement implements ActionListener, MouseListener
         
         // Se declaran e inicializan las variables que servirán para buscar empleados.
         String  initSQL     = "SELECT \"cedula\", \"nombre\", \"apellido\", "
-                + "\"direccion\", \"correo\", \"telefono\", \"tipo \" "
+                + "\"direccion\", \"correo\", \"telefono\", \"tipo\" "
                 + "FROM \"cliente\" WHERE \"estado\" = 'A'", 
                 
                 finalSQL    = ";",
