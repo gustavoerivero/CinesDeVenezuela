@@ -96,7 +96,7 @@ public class ControllerCinemaRoomManagement implements ActionListener, MouseList
         
         // Se muestra la primera pantalla.
         support.cardSelection(ciRoomManagement .panContainerCinemaRoom, ciRoomManagement .panConsultList);
-        
+        ciRoomManagement.lblSucursalName.setText(branchUser);
         // Se cargan las salas.
         loadCinemaRoomTable();
         
@@ -524,9 +524,23 @@ public class ControllerCinemaRoomManagement implements ActionListener, MouseList
                         // Se configura el texto del botón.
                         ciRoomManagement.btnRegisterModifyCinemaRoom.setText("Registrar");
                         
+                                                // Variables de apoyo para construir el comboBox de sucursales.
+                        ArrayList<String>   codexBranch = new ArrayList<>(),
+                                            namesBranch = new ArrayList<>();
+                        
+                        // Se obtienen los datos de las sucursales.
+                        loadBranch(codexBranch, namesBranch);
+                        
+                        // Se llena el combobox de las sucursales.
+                        ciRoomManagement.cmbBranchCinemaRoom.removeAllItems();
+                        ciRoomManagement.cmbBranchCinemaRoom.addItem(" - Seleccionar una Sucursal - ");
+                        
+                        for(int i = 0; i < codexBranch.size(); i++)
+                            ciRoomManagement.cmbBranchCinemaRoom.addItem(namesBranch.get(i));
+                        
                         // Se limpian todos los aspectos visuales.
                         ciRoomManagement.clearView();
-                        
+                        ciRoomManagement.txtIdCinemaRoom.setEnabled(true);
                         // Se limpian las variables
                         clearVariables();
                         
@@ -712,13 +726,13 @@ public class ControllerCinemaRoomManagement implements ActionListener, MouseList
         
         // Se declaran e inicializan las variables que servirán para buscar salas.
         String  initSQL     = "SELECT sala.\"codigo\", sucursal.\"nombre\" as \"nombreSucursal\", "
-                            + "sala.\"fila\", \"columna\" FROM \"sala\", \"sucursal\" "
-                            + "WHERE sucursal.\"codigo\" = \"sucursal_codigo\" AND sala.\"estado\" = 'A' "
+                            + "sala.\"fila\", sala.\"columna\" FROM \"sala\", \"sucursal\" "
+                            + "WHERE \"sucursal_codigo\" = sucursal.\"codigo\" AND sala.\"estado\" = 'A' "
                             + "AND sucursal.\"estado\" = 'A'",
                 
                 finalSQL    = ";",
                 idSQL     = " AND sala.\"codigo\" = ",
-                //branchSQL   = " AND sucursal.\"nombre\" = ",
+                nameBranchSQL   = " AND sucursal.\"nombre\" = ",
                 SQL         = "";
          
         // Se inicia la sentencia SQL;
@@ -731,12 +745,12 @@ public class ControllerCinemaRoomManagement implements ActionListener, MouseList
                 
         
         
-        /*if(!empManagement.lblSucursalName.getText().equals("") &&
-                !empManagement.lblSucursalName.getText().equals("Sucursal ") &&
-                !empManagement.lblSucursalName.getText().equals(" - Seleccione - ") &&
-                !empManagement.lblSucursalName.getText().equals("Cines de Venezuela") && 
-                !empManagement.lblSucursalName.getText().equals(" Administrador "))
-            SQL += branchSQL + "'" + empManagement.lblSucursalName.getText() + "'";*/
+        if(!ciRoomManagement.lblSucursalName.getText().equals("") &&
+                !ciRoomManagement.lblSucursalName.getText().equals("Sucursal ") &&
+                !ciRoomManagement.lblSucursalName.getText().equals(" - Seleccione - ") &&
+                !ciRoomManagement.lblSucursalName.getText().equals("Cines de Venezuela") && 
+                !ciRoomManagement.lblSucursalName.getText().equals(" Administrador "))
+            SQL += nameBranchSQL + "'" + ciRoomManagement.lblSucursalName.getText() + "'";
          
           
         // Se culmina la sentencia.
@@ -756,7 +770,7 @@ public class ControllerCinemaRoomManagement implements ActionListener, MouseList
         // Se declaran los arreglos a utilizar
         ArrayList<String>   idCinemaRoom     = new ArrayList<>(),
                             branchCinemaRoom  = new ArrayList<>();
-        ArrayList<Integer>   fila    = new ArrayList<>(),
+        ArrayList<Integer>  fila    = new ArrayList<>(),
                             column   = new ArrayList<>();
                 
         // Se declara la variable que devuelve el resultado.

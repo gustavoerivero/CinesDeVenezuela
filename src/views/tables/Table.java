@@ -373,7 +373,7 @@ public class Table {
         DefaultTableModel userTableModel = new  DefaultTableModel(
             matrix,
             new Object[]{
-                "Código", "nombreSucursal", "Fila","Columna","Consultar"
+                "Código", "Sucursal", "Fila","Columna","Consultar"
             }
         )
         {

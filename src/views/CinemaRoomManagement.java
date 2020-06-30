@@ -636,7 +636,7 @@ public class CinemaRoomManagement extends javax.swing.JFrame {
      */
     public void clearCinemaRoomSearch(){
         
-        txtSearchIdCinemaRoom.setText("Código de la sala");
+        txtSearchIdCinemaRoom.setText("Codigo de la sala");
         clearCinemaRoomTable(tblCinemaRoomList);
     }
      /**
