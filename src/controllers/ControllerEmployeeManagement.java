@@ -186,8 +186,8 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
         else if(evt.getSource() == empManagement.btnClearSearchEmployee){
             
             empManagement.clearEmployeeSearch();
-            
-            //loadEmployeeTable();
+            //se carga actualización
+            loadEmployeeTable();
             
         }
         
@@ -306,7 +306,7 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                      empManagement.cmbBranchEmployee.getSelectedIndex() != 0 && 
                      empManagement.cmbJobEmployee.getSelectedIndex() != 0){
                 
-                        // Se confirma que se desea eliminar el registro.
+                        // Se confirma que se desea registrar el empleado.
                         SelectOption select = new SelectOption(empManagement, true, 2, 
                                 "¿Desea registrar a este empleado?", "Si", "No");
 
@@ -343,7 +343,7 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                                 support.cardSelection(empManagement.panContainerEmployee, empManagement.panConsultList);
 
                                 // Se cargan los empleados.
-                                //loadEmployeeTable();
+                                loadEmployeeTable();
 
                                 // Se inicializan las variables.
                                 clearVariables();
@@ -378,8 +378,6 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                     !empManagement.txtPhoneEmployee.getText().equals("") &&
                     !empManagement.txtPhoneEmployee.getText().equals("Teléfono del empleado") &&
                      empManagement.txtPhoneEmployee.getText().length() <= 10 &&
-                      // !empManagement.txtEmailEmployee.getText().equals("Correo electrónico del empleado") &&
-                     //empManagement.txtEmailEmployee.getText().length() <= 10 &&
                     !empManagement.txtDirectionEmployee.getText().equals("") &&
                     !empManagement.txtDirectionEmployee.getText().equals("Dirección del empleado") &&
                      empManagement.cmbBranchEmployee.getSelectedIndex() != 0 && 
@@ -399,7 +397,7 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                             support.cardSelection(empManagement.panContainerEmployee, empManagement.panConsultList);
 
                             // Se cargan los empleados.
-                            //loadEmployeeTable();
+                            loadEmployeeTable();
 
                             // Se inicializan las variables.
                             clearVariables();
@@ -442,6 +440,7 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                 support.cardSelection(empManagement.panContainerEmployee, empManagement.panConsultList);
                     
                 // Se cargan los empleados.
+                clearEmployeetable();
                 //loadEmployeeTable();
                     
                 // Se inicializan las variables.
@@ -519,8 +518,8 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                         // Se muestra la vista del CRUD.
                         support.cardSelection(empManagement.panContainerEmployee, empManagement.panCRUD);
                         
-                        // Se bloquea el botón de 'eliminar'.
-                        empManagement.btnDeleteEmployee.setEnabled(false);
+                        // Se activa el botón de 'eliminar'.
+                        empManagement.btnDeleteEmployee.setEnabled(true);
                         
                         // Se configura el texto del botón.
                         empManagement.btnRegisterModifyEmployee.setText("Modificar");
@@ -563,6 +562,20 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                         
                         // Se configura el texto del botón.
                         empManagement.btnRegisterModifyEmployee.setText("Registrar");
+                        
+                        // Variables de apoyo para construir el comboBox de sucursales.
+                        ArrayList<String>   codexBranch = new ArrayList<>(),
+                                            namesBranch = new ArrayList<>();
+                        
+                        // Se obtienen los datos de las sucursales.
+                        loadBranch(codexBranch, namesBranch);
+                        
+                        // Se llena el combobox de las sucursales.
+                        empManagement.cmbBranchEmployee.removeAllItems();
+                        empManagement.cmbBranchEmployee.addItem(" - Seleccionar una Sucursal - ");
+                        
+                        for(int i = 0; i < codexBranch.size(); i++)
+                            empManagement.cmbBranchEmployee.addItem(namesBranch.get(i));
                         
                         // Se limpian todos los aspectos visuales.
                         empManagement.clearView();
@@ -811,8 +824,8 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
     }
     
     /**
-     * Método para cargar la información de la empresa.
-     * @return listado con la información de la empresa.
+     * Método para cargar la información del empleado
+     * @return listado con la información del empleado.
      */
     private void loadEmployeeTable(){
                 
@@ -954,6 +967,21 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                 "Los datos del empleados se han actualizado con éxito.");
         
     }
+    
+     /**
+     * Método para actualizar la información de un empleado.
+     * @param id cédula del empleado a actualizar.
+     */
+    private void clearEmployeetable(){
+                        
+        // Se limpia el panel
+        empManagement.clearEmployeeSearch();
+        //se carga actualización
+        loadEmployeeTable();
+        
+    }
+    
+   
     
     /**
      * Método para limpiar las variables.

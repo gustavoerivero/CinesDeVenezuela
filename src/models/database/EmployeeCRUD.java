@@ -184,6 +184,7 @@ public class EmployeeCRUD {
         
     }
     
+    
     /**
      * Método para buscar vendedores según su tipo.
      * @param branch Para buscar según la rama seleccionada.
