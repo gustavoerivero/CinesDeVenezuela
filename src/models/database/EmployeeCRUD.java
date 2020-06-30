@@ -2,6 +2,8 @@
 package models.database;
 
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import models.Employee;
 
 /**
@@ -322,10 +324,14 @@ public class EmployeeCRUD {
                 +  "\"apellido\" = '" + emp.getSurname() + "',"
                 +  "\"telefono\" = " + emp.getPhone() + ","
                 +  "\"direccion\" = '" + emp.getDirection() + "',"
-                +  "\"fecha_nacimiento\" = " + emp.getBirth_date() + ","
-                +  "\"fecha_ingreso\" = " + emp.getAdmission_date() + ","
+                
+                +  "\"fecha_nacimiento\" = CAST ('"+ convertirFechaString(emp.getBirth_date()) + "' as date), "
+                +  "\"fecha_ingreso\" = CAST ('"+ convertirFechaString(emp.getAdmission_date()) + "' as date), "
+                
+           //     +  "\"fecha_nacimiento\" = " + emp.getBirth_date() + ","
+           //     +  "\"fecha_ingreso\" = " + emp.getAdmission_date() + ","
                 +  "\"correo\" = '" + emp.getEmail() + "',"
-                +  "\"cargo\" = '" + emp.getPosition() + "',"
+                +  "\"cargo\" = '" + emp.getPosition() + "'"
                 +  " WHERE \"cedula\" = '" + id + "';";
 
         // Se instancia y se establece una conexión con la BD.
@@ -334,6 +340,7 @@ public class EmployeeCRUD {
         
         // Se realiza la actualización.
         con.queryInsert(SQL);
+        System.out.println("La actualización de datos del empleado '" + emp.getBirth_date() + "' se realizó con éxito.");
         
         // Se muestra mensaje de éxito.
         System.out.println("La actualización de datos del empleado '" + id + "' se realizó con éxito.");
@@ -342,6 +349,14 @@ public class EmployeeCRUD {
         con.desconectar();
         
     }
+    
+    	public String convertirFechaString(Date date)
+        {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+            String fechaComoCadena = sdf.format(new Date());
+            return fechaComoCadena;
+	}
+    
     
     /**
      * Método para eliminar/reactivar un Empleado.
