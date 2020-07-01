@@ -494,7 +494,7 @@ public class ControllerClientManagement implements ActionListener, MouseListener
                         support.cardSelection(cliManagement.panContainerClient, cliManagement.panCRUD);
                         
                         // Se bloquea el botón de 'eliminar'.
-                        cliManagement.btnDeleteClient.setEnabled(false);
+                        cliManagement.btnDeleteClient.setEnabled(true);
                         
                         // Se configura el texto del botón.
                         cliManagement.btnRegisterModifyClient.setText("Actualizar");
@@ -530,14 +530,14 @@ public class ControllerClientManagement implements ActionListener, MouseListener
                         support.cardSelection(cliManagement.panContainerClient, cliManagement.panCRUD);
                         
                         // Se bloquea el botón de 'eliminar'.
-                        cliManagement.btnDeleteClient.setEnabled(true);
+                        cliManagement.btnDeleteClient.setEnabled(false);
                         
                         // Se configura el texto del botón.
                         cliManagement.btnRegisterModifyClient.setText("Registrar");
                         
                         // Se limpian todos los aspectos visuales.
                         cliManagement.clearView();
-                        
+                        cliManagement.txtIdClient.setEnabled(true);
                         // Se limpian las variables
                         clearVariables();
                        

@@ -204,14 +204,14 @@ public class UserManagement extends javax.swing.JFrame {
         tblUserList.setBackground(new java.awt.Color(249, 249, 249));
         tblUserList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null}
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Correo", "Cédula", "Nombre y Apellido", "Rol"
+                "Cédula", "Correo", "Nombre y Apellido", "Rol", "Clave", "Consultar"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -320,7 +320,7 @@ public class UserManagement extends javax.swing.JFrame {
                     .addGroup(panConsultListLayout.createSequentialGroup()
                         .addGap(34, 34, 34)
                         .addComponent(scpUserList, javax.swing.GroupLayout.PREFERRED_SIZE, 719, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panConsultListLayout.setVerticalGroup(
             panConsultListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -400,7 +400,6 @@ public class UserManagement extends javax.swing.JFrame {
 
         btnClearUser.setBackground(new java.awt.Color(239, 232, 244));
         btnClearUser.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnClearUser.setForeground(new java.awt.Color(0, 0, 0));
         btnClearUser.setText("Limpiar");
         btnClearUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnClearUser.setBorderPainted(false);
@@ -421,7 +420,6 @@ public class UserManagement extends javax.swing.JFrame {
 
         btnRegisterModifyUser.setBackground(new java.awt.Color(239, 232, 244));
         btnRegisterModifyUser.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnRegisterModifyUser.setForeground(new java.awt.Color(0, 0, 0));
         btnRegisterModifyUser.setText("@Registrar/Actualizar");
         btnRegisterModifyUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnRegisterModifyUser.setBorderPainted(false);
@@ -442,7 +440,6 @@ public class UserManagement extends javax.swing.JFrame {
 
         btnBackUser.setBackground(new java.awt.Color(239, 232, 244));
         btnBackUser.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnBackUser.setForeground(new java.awt.Color(0, 0, 0));
         btnBackUser.setText("Atrás");
         btnBackUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnBackUser.setBorderPainted(false);
@@ -463,7 +460,6 @@ public class UserManagement extends javax.swing.JFrame {
 
         btnDeleteUser.setBackground(new java.awt.Color(239, 232, 244));
         btnDeleteUser.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnDeleteUser.setForeground(new java.awt.Color(0, 0, 0));
         btnDeleteUser.setText("Eliminar");
         btnDeleteUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnDeleteUser.setBorderPainted(false);
@@ -657,7 +653,7 @@ public class UserManagement extends javax.swing.JFrame {
      */
     public void clearUserSearch(){
         
-        txtSearchIdUser.setText("Cédula del cliente");
+        txtSearchIdUser.setText("Cédula del usuario");
         clearUserTable(tblUserList);
     }
      /**
@@ -665,7 +661,7 @@ public class UserManagement extends javax.swing.JFrame {
      * @param table parámetro JTable.
      */
     public void clearUserTable(javax.swing.JTable table){
-        this.table.buildClientTable(table, null);
+        this.table.buildUserTable(table, null);
     }
     
     /**

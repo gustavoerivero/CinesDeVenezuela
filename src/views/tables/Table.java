@@ -344,7 +344,7 @@ public class Table {
         DefaultTableModel userTableModel = new  DefaultTableModel(
             matrix,
             new Object[]{
-                "Correo", "Cédula", "Nombre y Apellido", "Rol","Consultar"
+                "Cédula", "Correo", "Nombre y Apellido", "Rol","Clave","Consultar"
             }
         )
         {

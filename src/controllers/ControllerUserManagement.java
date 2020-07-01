@@ -710,7 +710,7 @@ public class ControllerUserManagement implements ActionListener, MouseListener{
     private String buildSentenceSQL(){
         
         // Se declaran e inicializan las variables que servirán para buscar empleados.
-        String  initSQL     = "SELECT usuario.\"correo\", empleado.\"nombre\" as \"Nombre\", "
+        String  initSQL     = "SELECT \"empleado_cedula\", usuario.\"correo\" ,empleado.\"nombre\" as \"Nombre\", "
                             + "empleado.\"apellido\" as \"Apellido\", rol.\"nombre\" as \"rol\", "
                             + "usuario.\"clave\" FROM \"usuario\", \"empleado\", \"rol\" "
                             + "WHERE \"empleado_cedula\" = empleado.\"cedula\" AND \"rol_codigo\" = rol.\"codigo\" "
@@ -748,7 +748,8 @@ public class ControllerUserManagement implements ActionListener, MouseListener{
         usCRUD = new UserCRUD();
         
         // Se declaran los arreglos a utilizar
-        ArrayList<String>   emailUser     = new ArrayList<>(),
+        ArrayList<String>   cedulaUser = new  ArrayList<>(),
+                            emailUser     = new ArrayList<>(),
                             namesEmployee   = new ArrayList<>(),
                             nameRole  = new ArrayList<>(),
                             passwordUser    = new ArrayList<>();
@@ -763,8 +764,8 @@ public class ControllerUserManagement implements ActionListener, MouseListener{
             
             // Se obtienen los resultados.
             while(result.next()){
-                
-                emailUser.add(result.getString("codigo"));
+                cedulaUser.add(result.getString("empleado_cedula"));
+                emailUser.add(result.getString("correo"));
                 namesEmployee.add(result.getString("Nombre") + " " + result.getString("Apellido"));
                 nameRole.add(result.getString("rol"));
                 passwordUser.add(result.getString("clave"));
@@ -805,6 +806,7 @@ public class ControllerUserManagement implements ActionListener, MouseListener{
                 for(int i = 0; i < emailUser.size(); i++){
 
                     dtm.addRow(new Object[]{
+                        cedulaUser.get(i),
                         emailUser.get(i),
                         namesEmployee.get(i),
                         nameRole.get(i),

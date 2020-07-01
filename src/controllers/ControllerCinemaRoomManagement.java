@@ -285,7 +285,7 @@ public class ControllerCinemaRoomManagement implements ActionListener, MouseList
                 
                         // Se confirma que se desea eliminar el registro.
                         SelectOption select = new SelectOption(ciRoomManagement, true, 2, 
-                                "¿Desea registrar a este empleado?", "Si", "No");
+                                "¿Desea registrar la sala?", "Si", "No");
 
                         // Si se confirma el registro.
                         if(select.getOpc()){
@@ -389,7 +389,7 @@ public class ControllerCinemaRoomManagement implements ActionListener, MouseList
         
         //</editor-fold>
         
-        //<editor-fold defaultstate="collapsed" desc=" Delete Employee ">
+        //<editor-fold defaultstate="collapsed" desc=" Delete CinemaRoom ">
         
         // Eliminación de una sala.
         else if(evt.getSource() == ciRoomManagement.btnDeleteCinemaRoom){
@@ -486,7 +486,7 @@ public class ControllerCinemaRoomManagement implements ActionListener, MouseList
                         support.cardSelection(ciRoomManagement.panContainerCinemaRoom, ciRoomManagement.panCRUD);
                         
                         // Se bloquea el botón de 'eliminar'.
-                        ciRoomManagement.btnDeleteCinemaRoom.setEnabled(false);
+                        ciRoomManagement.btnDeleteCinemaRoom.setEnabled(true);
                         
                         // Se configura el texto del botón.
                         ciRoomManagement.btnRegisterModifyCinemaRoom.setText("Modificar");
@@ -519,12 +519,12 @@ public class ControllerCinemaRoomManagement implements ActionListener, MouseList
                         support.cardSelection(ciRoomManagement.panContainerCinemaRoom, ciRoomManagement.panCRUD);
                         
                         // Se bloquea el botón de 'eliminar'.
-                        ciRoomManagement.btnDeleteCinemaRoom.setEnabled(true);
+                        ciRoomManagement.btnDeleteCinemaRoom.setEnabled(false);
                         
                         // Se configura el texto del botón.
                         ciRoomManagement.btnRegisterModifyCinemaRoom.setText("Registrar");
                         
-                                                // Variables de apoyo para construir el comboBox de sucursales.
+                        // Variables de apoyo para construir el comboBox de sucursales.
                         ArrayList<String>   codexBranch = new ArrayList<>(),
                                             namesBranch = new ArrayList<>();
                         
@@ -663,7 +663,7 @@ public class ControllerCinemaRoomManagement implements ActionListener, MouseList
         java.sql.ResultSet result;
         
         // Variable de soporte.
-        String codex;
+        String codex="";
         
         try {
             result = braCRUD.readOnlyBranch(branchName);
@@ -672,14 +672,14 @@ public class ControllerCinemaRoomManagement implements ActionListener, MouseList
             }
                         
             System.out.println("Éxito.");
-                                    
+        return codex;
         } catch (java.sql.SQLException e) {
             
             System.out.println("Error: " + e);
             
         }
         
-        return null;
+        return codex;
         
     }
     
