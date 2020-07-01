@@ -712,24 +712,25 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
         java.sql.ResultSet result;
         
         // Variable de soporte.
-        String codex;
+        String codex="";
         
-        try {
+        try 
+        {
             result = braCRUD.readOnlyBranch(branchName);
-            while(result.next()){
+            while(result.next())
+            {
                 codex = result.getString("codigo");
             }
-                        
             System.out.println("Éxito.");
-                                    
-        } catch (java.sql.SQLException e) {
+            return codex;            
+                    
+        } 
+        catch (java.sql.SQLException e) 
+        {
             
             System.out.println("Error: " + e);
-            
         }
-        
-        return null;
-        
+        return codex;
     }
     
     /**

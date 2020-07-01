@@ -289,6 +289,8 @@ public class EmployeeCRUD {
                 + "'" + emp.getSurname() + "',"
                 + "'" + emp.getPhone() +"',"
                 + "'" + emp.getDirection() + "',"
+             // + "CAST ('"+ convertirFechaString(emp.getBirth_date()) + "' as date), "
+             // + "CAST ('"+ convertirFechaString(emp.getAdmission_date()) + "' as date), "  
                 + "'" + emp.getBirth_date() + "',"
                 + "'" + emp.getAdmission_date() + "',"
                 + "'" + emp.getEmail() + "',"
