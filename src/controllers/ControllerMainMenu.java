@@ -56,6 +56,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         private ControllerClientManagement      ctrClientManagement;
         private ControllerEnterpriseManagement  ctrlEnterpriseManagement;
         private ControllerFilmManagement        ctrlFilmManagement;
+        private ControllerListReport        ctrlReport;
         
         // Views
         private MainPage        mainPage;
@@ -158,6 +159,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         // Menú Lateral -> Reportes
         else if(evt.getSource() == mainPage.btnOptionLateral3){
             support.cardSelection(mainPage.panContent, mainPage.panOption3);
+            support.cardSelection(mainPage.panOption3, mainPage.panDecisionOption3);
             
         }
         
@@ -1376,8 +1378,35 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         
         //<editor-fold defaultstate="collapsed" desc=" Botones del MainPage Option 3 ">
         
+        //<editor-fold defaultstate="collapsed" desc=" Report "> 
         
+        else if(evt.getSource() == mainPage.btnListClientDecision){
+            // Se instancia y se declara la clase.
+            support.cardSelection(mainPage.panOption3, mainPage.panListClientDecision);
+            //ctrlFilmManagement = new ControllerFilmManagement(rolUser, nameUser, nameBranch);
+             
+        }        
+        //<editor-fold defaultstate="collapsed" desc=" Clientes frecuentes "> 
         
+        else if(evt.getSource() == mainPage.btnListClientDecision1){
+            // Se instancia y se declara la clase.
+            ctrlReport = new ControllerListReport(rolUser, nameUser, nameBranch,1);
+            //ctrlFilmManagement = new ControllerFilmManagement(rolUser, nameUser, nameBranch);
+             
+        }
+        
+        //</editor-fold>
+        //<editor-fold defaultstate="collapsed" desc=" Gastos de clientes en golosina "> 
+        
+        else if(evt.getSource() == mainPage.btnListClientDecision2){
+            // Se instancia y se declara la clase.
+            ctrlReport = new ControllerListReport(rolUser, nameUser, nameBranch,2);
+            //ctrlFilmManagement = new ControllerFilmManagement(rolUser, nameUser, nameBranch);
+             
+        }
+        
+        //</editor-fold>   
+        //</editor-fold>   
         //</editor-fold>
         
         //<editor-fold defaultstate="collapsed" desc=" Botones del MainPage Option 4 ">
@@ -1454,6 +1483,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         else if(evt.getSource() == mainPage.btnFilmDecision){
             // Se instancia y se declara la clase.
             ctrlFilmManagement = new ControllerFilmManagement(rolUser, nameUser, nameBranch);
+            //ctrlFilmManagement = new ControllerFilmManagement(rolUser, nameUser, nameBranch);
              
         }
         

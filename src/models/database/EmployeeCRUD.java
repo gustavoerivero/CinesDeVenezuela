@@ -293,7 +293,7 @@ public class EmployeeCRUD {
         
         // Se realiza la actualización.
         con.queryInsert(SQL);
-        
+        System.out.println("La actualización de datos del empleado '" + emp.getBirth_date() + "' se realizó con éxito.");
         // Se muestra mensaje de éxito.
         System.out.println("La actualización de datos del empleado '" + id + "' se realizó con éxito.");
         

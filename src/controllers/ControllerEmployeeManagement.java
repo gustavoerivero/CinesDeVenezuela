@@ -97,7 +97,7 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
         
         // Se muestra la primera pantalla.
         support.cardSelection(empManagement.panContainerEmployee, empManagement.panConsultList);
-        
+        empManagement.lblSucursalName.setText(branchUser);
         // Se cargan los empleados.
         loadEmployeeTable();
         
@@ -154,7 +154,7 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
             empManagement.lblSucursalName.setText(changeBranch.getId_Sucursal());
                         
             changeBranch.dispose();
-            
+            loadEmployeeTable();
         }
         
         //</editor-fold>
@@ -571,7 +571,8 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                         
                         // Se limpian las variables
                         clearVariables();
-                        
+                        empManagement.txtIdEmployee.setEnabled(true);
+
                         
                         
                     }

@@ -4,6 +4,8 @@ package views.tables;
 // Se importan las librerías a utilizar.
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableModel;
 
 /**
  *  Materia: Laboratorio I
@@ -506,4 +508,21 @@ public class Table {
     
     //</editor-fold>
     
+    
+        public static void setCellsAlignment(JTable table, int alignment)
+    {
+        DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
+        rightRenderer.setHorizontalAlignment(alignment);
+
+        TableModel tableModel = table.getModel();
+
+        for (int columnIndex = 0; columnIndex < tableModel.getColumnCount(); columnIndex++)
+        {
+            table.getColumnModel().getColumn(columnIndex).setCellRenderer(rightRenderer);
+            table.getColumnModel().getColumn(columnIndex).setResizable(false);
+            table.getColumnModel().getColumn(columnIndex).setPreferredWidth(32);
+        }
+    }
+
+   
 }
