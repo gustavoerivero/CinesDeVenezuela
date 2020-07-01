@@ -326,12 +326,10 @@ public class EmployeeCRUD {
                 +  "\"apellido\" = '" + emp.getSurname() + "',"
                 +  "\"telefono\" = " + emp.getPhone() + ","
                 +  "\"direccion\" = '" + emp.getDirection() + "',"
-                
-                +  "\"fecha_nacimiento\" = CAST ('"+ convertirFechaString(emp.getBirth_date()) + "' as date), "
-                +  "\"fecha_ingreso\" = CAST ('"+ convertirFechaString(emp.getAdmission_date()) + "' as date), "
-                
-           //     +  "\"fecha_nacimiento\" = " + emp.getBirth_date() + ","
-           //     +  "\"fecha_ingreso\" = " + emp.getAdmission_date() + ","
+           //     +  "\"fecha_nacimiento\" = CAST ('"+ convertirFechaString(emp.getBirth_date()) + "' as date), "
+           //     +  "\"fecha_ingreso\" = CAST ('"+ convertirFechaString(emp.getAdmission_date()) + "' as date), "
+                +  "\"fecha_nacimiento\" = '" + emp.getBirth_date() + "',"
+                +  "\"fecha_ingreso\" = '" + emp.getAdmission_date() + "',"
                 +  "\"correo\" = '" + emp.getEmail() + "',"
                 +  "\"cargo\" = '" + emp.getPosition() + "'"
                 +  " WHERE \"cedula\" = '" + id + "';";
@@ -341,9 +339,7 @@ public class EmployeeCRUD {
         con.conectar();
         
         // Se realiza la actualización.
-        con.queryInsert(SQL);
-        System.out.println("La actualización de datos del empleado '" + emp.getBirth_date() + "' se realizó con éxito.");
-        
+        con.queryInsert(SQL);        
         // Se muestra mensaje de éxito.
         System.out.println("La actualización de datos del empleado '" + id + "' se realizó con éxito.");
         
