@@ -25,14 +25,14 @@ public class EnterpriseCRUD {
      * Método para obtener los datos de una empresa.
      * @return Devuelve consulta.
      */
-    public ResultSet readEnterpriseData(String idEnterprise){
+    public ResultSet readEnterpriseData(){
         
         // Se declara una variable de tipo 'ResultSet' para realizar la consulta.
         ResultSet result;
         
         // Se define la sentencia SQL a aplicar en la BD.
         String SQL = "SELECT \"codigo\",\"nombre\", \"descripcion\",\"correo\",\"precio_boleto\" FROM \"empresa\"" 
-                        + "WHERE \"codigo\" = '" + idEnterprise + "' AND \"estado\" = 'A';";
+                        + "WHERE \"codigo\" = 'J-01234567-8' AND \"estado\" = 'A';";
         
         // Se instancia y se establece una conexión con la BD.
         con = new ConnectionDB();
@@ -55,7 +55,7 @@ public class EnterpriseCRUD {
      * Método para obtener a todas las empresa.
      * @return Devuelve consulta.
      */
-    public ResultSet readAllEnterprise(){
+   /* public ResultSet readAllEnterprise(){
         
         // Se declara una variable de tipo 'ResultSet' para realizar la consulta.
         ResultSet result;
@@ -78,7 +78,7 @@ public class EnterpriseCRUD {
         // Retorna consulta.
         return result;
         
-    }
+    }*/
      /**
      * Método para realizar una consulta en la BD.
      * @param SQL Sentencia SQL.
@@ -110,7 +110,7 @@ public class EnterpriseCRUD {
      * Método para registrar a una empresa.
      * @param enter Clase empleado a registrar
      */
-    public void registerEnterprise(Enterprise enter) {
+   /* public void registerEnterprise(Enterprise enter) {
 
         // Se declara la sentencia SQL a aplicar.
         String SQL = "INSERT INTO \"empresa\" (\"codigo\",\"nombre\",\"descripcion\","
@@ -135,22 +135,30 @@ public class EnterpriseCRUD {
         // Se desconecta la BD.
         con.desconectar();
 
-    }
+    }*/
     
     /**
      * Método para actualizar un registro de una Empresa.
      * @param enter Clase Empleado.
      * @param id codigo de la empresa a actualizar.
      */
-    public void UpdateEnterprise(Enterprise enter, String id) {
+    public void UpdateEnterprise(Enterprise enter) {
 
         // Se declara la sentencia SQL.
-        String  SQL = "UPDATE \"empresa\" SET "
+        /*String  SQL = "UPDATE \"empresa\" SET "
                 + "\"nombre\" = '" + enter.getName() + "',"
                 +  "\"descripcion\" = '" + enter.getDescrip()+ "',"
                 +  "\"correo\" = '" + enter.getEmail() + "',"
                 +  "\"precio_boleto\" = " + enter.getPriceTicket()+ ","
-                +  " WHERE \"codigo\" = '" + id + "';";
+                +  " WHERE \"codigo\" = '" + id + "';";*/
+
+        String  SQL = "UPDATE \"empresa\" SET \"nombre\" = '" + enter.getName() + "',"
+                +  "\"descripcion\" = '" + enter.getDescrip()+ "',"
+                +  "\"correo\" = '" + enter.getEmail() + "',"
+                +  "\"precio_boleto\" = " + enter.getPriceTicket()+ ""
+                +  " WHERE \"codigo\" = 'J-01234567-8';";
+        
+     
 
         // Se instancia y se establece una conexión con la BD.
         con = new ConnectionDB();
@@ -160,7 +168,7 @@ public class EnterpriseCRUD {
         con.queryInsert(SQL);
         
         // Se muestra mensaje de éxito.
-        System.out.println("La actualización de datos de la empresa '" + id + "' se realizó con éxito.");
+        System.out.println("La actualización de datos de la empresa se realizo con éxito.");
         
         // Se desconecta la BD.
         con.desconectar();
@@ -174,7 +182,7 @@ public class EnterpriseCRUD {
      * '0' para eliminación.
      * Cualquier otro entero para reactivación.
      */
-    public void DeleteEnterprise(String id, int type) {
+    /*public void DeleteEnterprise(String id, int type) {
         
         // Se declara la variable de sentencia SQL.
         String SQL = "";
@@ -199,7 +207,7 @@ public class EnterpriseCRUD {
         
         // Se desconecta la BD.
         con.desconectar();
-    }
+    }*/
     
      /**
      * Método para comprobar la existencia de una empresa activa.
