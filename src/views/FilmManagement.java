@@ -1,6 +1,10 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
 package views;
-
 // Se importan las librerías a utilizar.
 import views.tables.*;
 import lib.SupportFunctions;  
@@ -70,7 +74,7 @@ public class FilmManagement extends javax.swing.JFrame {
         txtSearchNameFilm = new javax.swing.JTextField();
         btnSearchFilm = new javax.swing.JButton();
         sepSearchNameFilm = new javax.swing.JSeparator();
-        cmbSearchCensureFilm = new javax.swing.JComboBox<>();
+        cmbSearchCensureFilm = new javax.swing.JComboBox<String>();
         btnClearSearchFilm = new javax.swing.JButton();
         panCRUD = new javax.swing.JPanel();
         lblTittle1 = new javax.swing.JLabel();
@@ -95,11 +99,10 @@ public class FilmManagement extends javax.swing.JFrame {
         btnRegisterModifyFilm = new javax.swing.JButton();
         btnBackFilm = new javax.swing.JButton();
         btnDeleteFilm = new javax.swing.JButton();
-        cmbCensureFilm = new javax.swing.JComboBox<>();
+        cmbCensureFilm = new javax.swing.JComboBox<String>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        setResizable(false);
 
         panFilmManagement.setBackground(new java.awt.Color(249, 249, 249));
         panFilmManagement.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75, 0, 145)));
@@ -300,7 +303,7 @@ public class FilmManagement extends javax.swing.JFrame {
 
         cmbSearchCensureFilm.setBackground(new java.awt.Color(249, 249, 249));
         cmbSearchCensureFilm.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        cmbSearchCensureFilm.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "- Seleccionar censura -", "A", "B", "C" }));
+        cmbSearchCensureFilm.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Seleccionar censura -", "A", "B", "C" }));
         cmbSearchCensureFilm.setBorder(null);
         cmbSearchCensureFilm.setLightWeightPopupEnabled(false);
 
@@ -581,7 +584,7 @@ public class FilmManagement extends javax.swing.JFrame {
 
         cmbCensureFilm.setBackground(new java.awt.Color(249, 249, 249));
         cmbCensureFilm.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        cmbCensureFilm.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "- Seleccionar censura -", "A", "B", "C" }));
+        cmbCensureFilm.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Seleccionar censura -", "A", "B", "C" }));
         cmbCensureFilm.setBorder(null);
         cmbCensureFilm.setLightWeightPopupEnabled(false);
         cmbCensureFilm.addActionListener(new java.awt.event.ActionListener() {
@@ -982,12 +985,12 @@ public class FilmManagement extends javax.swing.JFrame {
         btnChangeBranch.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
     }//GEN-LAST:event_btnChangeBranchMouseExited
  //</editor-fold>
-    /*
+    
     private void tblFilmListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblFilmListMouseClicked
         setColumnTable(tblFilmList.getColumnModel().getColumnIndexAtX(evt.getX()));
         setRowTable(evt.getY()/tblFilmList.getRowHeight());
     }//GEN-LAST:event_tblFilmListMouseClicked
- */
+ 
     //<editor-fold defaultstate="collapsed" desc=" Search Film ">
     private void txtSearchIdFilmMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSearchIdFilmMouseClicked
         txtSearchIdFilm.setText("");
@@ -1024,7 +1027,6 @@ public class FilmManagement extends javax.swing.JFrame {
         btnClearSearchFilm.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
     }//GEN-LAST:event_btnClearSearchFilmMouseExited
 //</editor-fold>
-    
     //<editor-fold defaultstate="collapsed" desc=" CRUD Film">
     private void btnChargePictureMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChargePictureMouseMoved
         btnChargePicture.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
@@ -1090,15 +1092,48 @@ public class FilmManagement extends javax.swing.JFrame {
         btnDeleteFilm.setBackground(new java.awt.Color(239,232,244));
     }//GEN-LAST:event_btnDeleteFilmMouseExited
 
-     private void tblFilmListMouseClicked(java.awt.event.MouseEvent evt) {                                         
+   /*  private void tblFilmListMouseClicked(java.awt.event.MouseEvent evt) {                                         
         setColumnTable(tblFilmList.getColumnModel().getColumnIndexAtX(evt.getX()));
         setRowTable(evt.getY()/tblFilmList.getRowHeight());
-    }   
+    }   */
     private void cmbCensureFilmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCensureFilmActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbCensureFilmActionPerformed
 //</editor-fold>
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(FilmManagement.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(FilmManagement.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(FilmManagement.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(FilmManagement.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
 
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new FilmManagement().setVisible(true);
+            }
+        });
+    }
  //<editor-fold defaultstate="collapsed" desc=" Declaración de variables ">
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnBackFilm;

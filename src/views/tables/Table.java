@@ -368,7 +368,7 @@ public class Table {
             table.getColumnModel().getColumn(6).setResizable(false);
             table.getColumnModel().getColumn(6).setPreferredWidth(32);
         }
-    }
+}
         
         
     /**
@@ -383,7 +383,7 @@ public class Table {
         DefaultTableModel userTableModel = new  DefaultTableModel(
             matrix,
             new Object[]{
-                "Correo", "Cédula", "Rol","Consultar"
+                "Cédula", "Correo", "Nombre y Apellido", "Rol","Clave","Consultar"
             }
         )
         {
@@ -399,17 +399,17 @@ public class Table {
         table.setRowHeight(32);
         
         if (table.getColumnModel().getColumnCount() > 0) {
-            table.getColumnModel().getColumn(3).setResizable(false);
-            table.getColumnModel().getColumn(3).setPreferredWidth(32);
+            table.getColumnModel().getColumn(4).setResizable(false);
+            table.getColumnModel().getColumn(4).setPreferredWidth(32);
         }
-    }
+        }
 
     /**
      * Método para construir una JTable con formato para la busqueda de salas de cine.
      * @param table JTable que se le dará formato.
      * @param matrix Datos que se van a incorporar a la JTable.
      */
-    public void buildCinemaRoomTable(javax.swing.JTable table, Object[][] matrix){
+            public void buildCinemaRoomTable(javax.swing.JTable table, Object[][] matrix){
         
         table.setDefaultRenderer(Object.class, new Render());
                
@@ -436,6 +436,7 @@ public class Table {
             table.getColumnModel().getColumn(4).setPreferredWidth(32);
         }
 
+        
     }
     
     /**
@@ -472,7 +473,7 @@ public class Table {
         
     }
     
-    /**
+  /**
      * Método para construir una JTable con formato para la búsqueda de peliculas.
      * @param table JTable que se le dará formato.
      * @param matrix Datos que se van a incorporar a la JTable.
@@ -502,6 +503,67 @@ public class Table {
         if (table.getColumnModel().getColumnCount() > 0) {
             table.getColumnModel().getColumn(7).setResizable(false);
             table.getColumnModel().getColumn(7).setPreferredWidth(32);
+        }
+        
+    }
+   
+    public void buildCandyCRUDTable(javax.swing.JTable table, Object[][] matrix){
+        
+        table.setDefaultRenderer(Object.class, new Render());
+               
+        DefaultTableModel filmTableModel = new  DefaultTableModel(
+            matrix,
+            new Object[]{
+                "Codigo", "Nombre", "Descripción", "Precio", "Consultar"
+            }
+        )
+        {
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        };
+        
+        table.setModel(filmTableModel);
+        
+        table.setPreferredScrollableViewportSize(table.getPreferredSize());
+             
+        table.setRowHeight(32);
+        
+        if (table.getColumnModel().getColumnCount() > 0) {
+            table.getColumnModel().getColumn(4).setResizable(false);
+            table.getColumnModel().getColumn(4).setPreferredWidth(32);
+        }
+        
+    }
+    
+        public void buildInventoryCandyCRUDTable(javax.swing.JTable table, Object[][] matrix){
+        
+        table.setDefaultRenderer(Object.class, new Render());
+               
+        DefaultTableModel filmTableModel = new  DefaultTableModel(
+            matrix,
+            new Object[]{
+                "Código", "Sucursal", "Golosina", "Precio(unitario)","Stock",
+                "Modificar", "Eliminar"
+            }
+        )
+        {
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        };
+        
+        table.setModel(filmTableModel);
+        
+        table.setPreferredScrollableViewportSize(table.getPreferredSize());
+             
+        table.setRowHeight(32);
+        
+        if (table.getColumnModel().getColumnCount() > 0) {
+            table.getColumnModel().getColumn(5).setResizable(false);
+            table.getColumnModel().getColumn(5).setPreferredWidth(40);
+            table.getColumnModel().getColumn(6).setResizable(false);
+            table.getColumnModel().getColumn(6).setPreferredWidth(40);
         }
         
     }

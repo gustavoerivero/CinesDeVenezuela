@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
 package views;
 
@@ -5,14 +10,8 @@ import lib.SupportFunctions;
 import views.tables.Table;
 
 /**
- *  Materia: Laboratorio I
- *  Sección: 1
- *      Integrantes:
- *          @author Brizuela, Yurisbellys   C.I: 27.142.239
- *          @author Miranda, Marihec        C.I: 26.120.075
- *          @author Montero, Michael        C.I: 26.561.077
- *          @author Rivero, Gustavo         C.I: 26.772.857
- *          @author Torrealba, Luis         C.I: 26.121.249
+ *
+ * @author Marihec
  */
 public class UserManagement extends javax.swing.JFrame {
     // Se declaran e inicializan las variables a utilizar.
@@ -84,6 +83,8 @@ public class UserManagement extends javax.swing.JFrame {
         btnDeleteUser = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
+        setResizable(false);
 
         panUserManagement.setBackground(new java.awt.Color(249, 249, 249));
         panUserManagement.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75, 0, 145)));
@@ -203,14 +204,14 @@ public class UserManagement extends javax.swing.JFrame {
         tblUserList.setBackground(new java.awt.Color(249, 249, 249));
         tblUserList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null}
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Correo", "Cédula", "Rol"
+                "Cédula", "Correo", "Nombre y Apellido", "Rol", "Clave", "Consultar"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -271,7 +272,7 @@ public class UserManagement extends javax.swing.JFrame {
 
         cmbSearchRoleUser.setBackground(new java.awt.Color(249, 249, 249));
         cmbSearchRoleUser.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        cmbSearchRoleUser.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "- Seleccionar un Rol -", "Gerente", "Vendedor de golosinas", "Vendedor de boletos" }));
+        cmbSearchRoleUser.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "- Seleccionar un Rol -", "Administrador", "Gerente", "Vendedor de golosinas", "Vendedor de boletos" }));
         cmbSearchRoleUser.setBorder(null);
         cmbSearchRoleUser.setLightWeightPopupEnabled(false);
         cmbSearchRoleUser.addActionListener(new java.awt.event.ActionListener() {
@@ -319,7 +320,7 @@ public class UserManagement extends javax.swing.JFrame {
                     .addGroup(panConsultListLayout.createSequentialGroup()
                         .addGap(34, 34, 34)
                         .addComponent(scpUserList, javax.swing.GroupLayout.PREFERRED_SIZE, 719, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panConsultListLayout.setVerticalGroup(
             panConsultListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -399,7 +400,6 @@ public class UserManagement extends javax.swing.JFrame {
 
         btnClearUser.setBackground(new java.awt.Color(239, 232, 244));
         btnClearUser.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnClearUser.setForeground(new java.awt.Color(0, 0, 0));
         btnClearUser.setText("Limpiar");
         btnClearUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnClearUser.setBorderPainted(false);
@@ -420,7 +420,6 @@ public class UserManagement extends javax.swing.JFrame {
 
         btnRegisterModifyUser.setBackground(new java.awt.Color(239, 232, 244));
         btnRegisterModifyUser.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnRegisterModifyUser.setForeground(new java.awt.Color(0, 0, 0));
         btnRegisterModifyUser.setText("@Registrar/Actualizar");
         btnRegisterModifyUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnRegisterModifyUser.setBorderPainted(false);
@@ -441,7 +440,6 @@ public class UserManagement extends javax.swing.JFrame {
 
         btnBackUser.setBackground(new java.awt.Color(239, 232, 244));
         btnBackUser.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnBackUser.setForeground(new java.awt.Color(0, 0, 0));
         btnBackUser.setText("Atrás");
         btnBackUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnBackUser.setBorderPainted(false);
@@ -462,7 +460,6 @@ public class UserManagement extends javax.swing.JFrame {
 
         btnDeleteUser.setBackground(new java.awt.Color(239, 232, 244));
         btnDeleteUser.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnDeleteUser.setForeground(new java.awt.Color(0, 0, 0));
         btnDeleteUser.setText("Eliminar");
         btnDeleteUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnDeleteUser.setBorderPainted(false);
@@ -485,52 +482,54 @@ public class UserManagement extends javax.swing.JFrame {
         panCRUD.setLayout(panCRUDLayout);
         panCRUDLayout.setHorizontalGroup(
             panCRUDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panCRUDLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(panCRUDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtPasswordUser, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panCRUDLayout.createSequentialGroup()
-                        .addComponent(lblIdUser, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtIdUser, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panCRUDLayout.createSequentialGroup()
-                        .addComponent(lblEmailUser, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtEmailUser, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(97, 97, 97))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panCRUDLayout.createSequentialGroup()
-                .addGroup(panCRUDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(panCRUDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(panCRUDLayout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(btnBackUser, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                        .addComponent(btnDeleteUser, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblPasswordUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(525, 525, 525))
                     .addGroup(panCRUDLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(panCRUDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblPasswordUser, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(panCRUDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(panCRUDLayout.createSequentialGroup()
+                                .addComponent(lblIdUser, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtIdUser, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panCRUDLayout.createSequentialGroup()
+                                .addComponent(lblEmailUser, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtEmailUser, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(panCRUDLayout.createSequentialGroup()
                                 .addComponent(lblRoleUser, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cmbRoleUser, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(36, 36, 36)
-                .addGroup(panCRUDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnRegisterModifyUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnClearUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43))
+                                .addGroup(panCRUDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtPasswordUser, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(panCRUDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(btnDeleteUser, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(cmbRoleUser, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(6, 6, 6)))
+                        .addGap(70, 70, 70))))
             .addGroup(panCRUDLayout.createSequentialGroup()
                 .addGap(34, 34, 34)
-                .addComponent(lblTittle1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panCRUDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTittle1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(panCRUDLayout.createSequentialGroup()
+                        .addGroup(panCRUDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnClearUser, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panCRUDLayout.createSequentialGroup()
+                                .addComponent(btnBackUser, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(262, 262, 262)
+                                .addComponent(btnRegisterModifyUser, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 43, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panCRUDLayout.setVerticalGroup(
             panCRUDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panCRUDLayout.createSequentialGroup()
                 .addComponent(lblTittle1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(panCRUDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblEmailUser, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtEmailUser, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16)
+                .addGroup(panCRUDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtEmailUser, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblEmailUser, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(49, 49, 49)
                 .addGroup(panCRUDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblIdUser, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -539,11 +538,11 @@ public class UserManagement extends javax.swing.JFrame {
                 .addGroup(panCRUDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPasswordUser, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPasswordUser, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                 .addGroup(panCRUDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnClearUser, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblRoleUser, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbRoleUser, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbRoleUser, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblRoleUser, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42)
                 .addGroup(panCRUDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBackUser, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -568,7 +567,7 @@ public class UserManagement extends javax.swing.JFrame {
                 .addComponent(lblTittle, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblSucursalName, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnChangeBranch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36))
             .addGroup(panUserManagementLayout.createSequentialGroup()
@@ -654,7 +653,7 @@ public class UserManagement extends javax.swing.JFrame {
      */
     public void clearUserSearch(){
         
-        txtSearchIdUser.setText("Cédula del cliente");
+        txtSearchIdUser.setText("Cédula del usuario");
         clearUserTable(tblUserList);
     }
      /**
@@ -662,7 +661,7 @@ public class UserManagement extends javax.swing.JFrame {
      * @param table parámetro JTable.
      */
     public void clearUserTable(javax.swing.JTable table){
-        this.table.buildClientTable(table, null);
+        this.table.buildUserTable(table, null);
     }
     
     /**
@@ -910,6 +909,8 @@ public class UserManagement extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEmailUserActionPerformed
 //</editor-fold>
+    
+
 
     //<editor-fold defaultstate="collapsed" desc=" Declaración de variables ">
     // Variables declaration - do not modify//GEN-BEGIN:variables

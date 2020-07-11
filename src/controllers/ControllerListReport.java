@@ -84,29 +84,22 @@ public class ControllerListReport implements ActionListener, MouseListener{
                     Table.setRowCount(0);
         }
     //</editor-fold>
+    
      public ControllerListReport(String rolUser, String nameUser, String branchUser, int numList){
-        
         // Declarar la variable de las clases instanciadas.
         report   = new ListReports();
         table = new Table();         
         support         = new SupportFunctions();  
         iCrud  = new InvoiceCRUD();
-        
         // Se inicializan las variables.
         this.rolUser    = rolUser;
         this.nameUser   = nameUser;
         this.branchUser = branchUser;
-        
         // Se muestra la primera pantalla.
         //support.cardSelection(braManagement.panContainerBranch, braManagement.panConsultList);
-                
          loadInterface(numList);
         report.addEvents(this);
     }
-     
-     
-
-
     @Override
     public void actionPerformed(ActionEvent e) {
             //<editor-fold defaultstate="collapsed" desc=" minimizar y salir del consult list ">
@@ -125,7 +118,6 @@ public class ControllerListReport implements ActionListener, MouseListener{
         } 
         //</editor-fold>
     }
-    
     public void loadInterface(int i)
     {
         switch(i)
@@ -172,6 +164,4 @@ public class ControllerListReport implements ActionListener, MouseListener{
     public void mouseExited(MouseEvent e) {
        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-     
-
 }

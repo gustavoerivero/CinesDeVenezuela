@@ -2,6 +2,8 @@
 package models.database;
 
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import models.Employee;
 
 /**
@@ -20,6 +22,46 @@ public class EmployeeCRUD {
         
     //Constructor    
     public EmployeeCRUD(){}
+
+    //<editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc=" Metodo de Cargar Tabla, no sirve pero tiene buena logica ">       
+
+
+    /*public ArrayList<Object>listaEmployee2()
+     {
+            ArrayList<Object>lista; 
+            lista = new ArrayList<>();
+            try{
+                con = new ConnectionDB();
+                con.conectar();
+                String SQL = "SELECT * FROM \"Empleadito\"";
+
+                java.sql.ResultSet rs = con.queryConsultar(SQL);
+                ResultSetMetaData rMd = rs.getMetaData();
+                int cantcolumnas = rMd.getColumnCount();
+                while(rs.next())
+                    {
+                        Object[] filas = new Object[cantcolumnas];
+                        for (int i = 0; i < cantcolumnas ; i++) 
+                        {
+                            filas[i] = rs.getObject(i+1);
+                        }
+                        lista.add(filas);
+
+                    }
+
+            }
+            catch(Exception e)
+            {
+                System.out.println("No se pudo encontrar al Empleado. Error: " + e);;
+            }
+    return lista;
+
+    }*/
+         //</editor-fold>      
+
+    //</editor-fold>
 
     /**
      * Método para obtener los datos de un empleado.
@@ -144,6 +186,7 @@ public class EmployeeCRUD {
         
     }
     
+    
     /**
      * Método para buscar vendedores según su tipo.
      * @param branch Para buscar según la rama seleccionada.
@@ -246,6 +289,8 @@ public class EmployeeCRUD {
                 + "'" + emp.getSurname() + "',"
                 + "'" + emp.getPhone() +"',"
                 + "'" + emp.getDirection() + "',"
+             // + "CAST ('"+ convertirFechaString(emp.getBirth_date()) + "' as date), "
+             // + "CAST ('"+ convertirFechaString(emp.getAdmission_date()) + "' as date), "  
                 + "'" + emp.getBirth_date() + "',"
                 + "'" + emp.getAdmission_date() + "',"
                 + "'" + emp.getEmail() + "',"
@@ -281,10 +326,12 @@ public class EmployeeCRUD {
                 +  "\"apellido\" = '" + emp.getSurname() + "',"
                 +  "\"telefono\" = " + emp.getPhone() + ","
                 +  "\"direccion\" = '" + emp.getDirection() + "',"
-                +  "\"fecha_nacimiento\" = " + emp.getBirth_date() + ","
-                +  "\"fecha_ingreso\" = " + emp.getAdmission_date() + ","
+           //     +  "\"fecha_nacimiento\" = CAST ('"+ convertirFechaString(emp.getBirth_date()) + "' as date), "
+           //     +  "\"fecha_ingreso\" = CAST ('"+ convertirFechaString(emp.getAdmission_date()) + "' as date), "
+                +  "\"fecha_nacimiento\" = '" + emp.getBirth_date() + "',"
+                +  "\"fecha_ingreso\" = '" + emp.getAdmission_date() + "',"
                 +  "\"correo\" = '" + emp.getEmail() + "',"
-                +  "\"cargo\" = '" + emp.getPosition() + "',"
+                +  "\"cargo\" = '" + emp.getPosition() + "'"
                 +  " WHERE \"cedula\" = '" + id + "';";
 
         // Se instancia y se establece una conexión con la BD.
@@ -292,8 +339,7 @@ public class EmployeeCRUD {
         con.conectar();
         
         // Se realiza la actualización.
-        con.queryInsert(SQL);
-        System.out.println("La actualización de datos del empleado '" + emp.getBirth_date() + "' se realizó con éxito.");
+        con.queryInsert(SQL);        
         // Se muestra mensaje de éxito.
         System.out.println("La actualización de datos del empleado '" + id + "' se realizó con éxito.");
         
@@ -301,6 +347,14 @@ public class EmployeeCRUD {
         con.desconectar();
         
     }
+    
+    	public String convertirFechaString(Date date)
+        {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+            String fechaComoCadena = sdf.format(new Date());
+            return fechaComoCadena;
+	}
+    
     
     /**
      * Método para eliminar/reactivar un Empleado.
@@ -410,3 +464,11 @@ public class EmployeeCRUD {
     }
     
 }
+    
+    
+ 
+  
+
+    
+    
+     

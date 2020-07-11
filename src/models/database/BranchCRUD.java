@@ -211,7 +211,7 @@ public class BranchCRUD {
         
     }
                 
-                   /**
+     /**
      * Método para eliminar/reactivar una sucursal.
      * @param id codigo de la sucursal.
      * @param type Eliminación o Reactivación de la sucursal:

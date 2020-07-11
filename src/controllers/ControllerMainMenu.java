@@ -57,7 +57,9 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         private ControllerEnterpriseManagement  ctrlEnterpriseManagement;
         private ControllerFilmManagement        ctrlFilmManagement;
         private ControllerListReport        ctrlReport;
-        
+        private ControllerCandyManagement ctrCandyManagement;
+        private ControllerCandyInventoryManagement  ctrCandyIManagement;
+        private ControllerFilmManagement contFilmManagement;
         // Views
         private MainPage        mainPage;
         private PopupMessage    popup;
@@ -1423,6 +1425,39 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         }
         //</editor-fold>
          
+        //<editor-fold defaultstate="collapsed" desc=" CRUD User "> 
+        
+        //Consultar listado ->  User
+        /*else if(evt.getSource() == mainPage.btnUserDecision)
+        {
+            
+            // Se instancia y se declara la clase.
+            ControllerUserManagement contUserManagement = 
+                    new ControllerUserManagement (rolUser, nameUser, nameBranch);*/
+        else if(evt.getSource() == mainPage.btnUserDecision)
+        {
+            
+            // Se instancia y se declara la clase.
+            ControllerUserManagement contUserManagement = 
+                    new ControllerUserManagement(rolUser, nameUser, nameBranch);
+            //ctrUserManagement= new ControllerUserManagement(rolUser, nameUser, nameBranch);
+             
+        }
+        
+
+         //Añadir Empleado
+        /* else if((evt.getSource() == consulList.btnAdd)&&("Empleado".equals(consulList.lblEntityName.getText())))
+         {
+               registerModify = new RegisterModify();
+               registerModify.lblModifyRegistrer.setText("Registrar Empleado");
+               support.cardSelection(registerModify.panButtonsModifyRegister, registerModify.panButtonRegister);    
+               support.cardSelection(registerModify.panData, registerModify.panDataEmployee); 
+               registerModify.addEvents(this);
+
+        }*/
+         
+        //</editor-fold>
+        
         //</editor-fold>
                  
         //<editor-fold defaultstate="collapsed" desc=" Botones del MainPage Option 5 ">
@@ -1461,10 +1496,33 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         }
         
         //</editor-fold>
+
+         //<editor-fold defaultstate="collapsed" desc=" CRUD Inventory Candy ">
+
+         //Consultar listado ->  Empresa
+         else if(evt.getSource() == mainPage.btnCandyInventory){
+             // Se instancia y se declara la clase.
+            ctrCandyIManagement = new ControllerCandyInventoryManagement(rolUser, nameUser, nameBranch);
+            
+        }
         
+        //</editor-fold>
+         
         //</editor-fold>
        
         //<editor-fold defaultstate="collapsed" desc=" Botones del MainPage Option 6 ">
+         
+         //<editor-fold defaultstate="collapsed" desc=" CRUD Candy "> 
+        
+        //Consultar listado ->  Cliente
+        else if(evt.getSource() == mainPage.btnCandyDecisionCL){
+            
+            // Se instancia y se declara la clase.
+            ctrCandyManagement = new ControllerCandyManagement(rolUser, nameUser, nameBranch);
+             
+        }
+         
+        //</editor-fold>
         
         //<editor-fold defaultstate="collapsed" desc=" CRUD Client "> 
         
@@ -1480,12 +1538,12 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         
         //<editor-fold defaultstate="collapsed" desc=" CRUD Film "> 
         
-        else if(evt.getSource() == mainPage.btnFilmDecision){
-            // Se instancia y se declara la clase.
-            ctrlFilmManagement = new ControllerFilmManagement(rolUser, nameUser, nameBranch);
-            //ctrlFilmManagement = new ControllerFilmManagement(rolUser, nameUser, nameBranch);
-             
-        }
+         else if(evt.getSource() == mainPage.btnFilmDecision)
+         {
+             // Se instancia y se declara la clase.
+            contFilmManagement = 
+                    new ControllerFilmManagement(rolUser, nameUser, nameBranch);
+         }
         
         //</editor-fold>
         
