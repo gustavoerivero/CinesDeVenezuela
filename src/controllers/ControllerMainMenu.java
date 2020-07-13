@@ -60,6 +60,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         private ControllerCandyManagement ctrCandyManagement;
         private ControllerCandyInventoryManagement  ctrCandyIManagement;
         private ControllerFilmManagement contFilmManagement;
+        private ControllerFunctionManagement ctrFunctionManagement;
         // Views
         private MainPage        mainPage;
         private PopupMessage    popup;
@@ -1511,12 +1512,23 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         
         //</editor-fold>
 
-         //<editor-fold defaultstate="collapsed" desc=" CRUD Inventory Candy ">
+        //<editor-fold defaultstate="collapsed" desc=" CRUD Inventory Candy ">
 
          //Consultar listado ->  Empresa
          else if(evt.getSource() == mainPage.btnCandyInventory){
              // Se instancia y se declara la clase.
             ctrCandyIManagement = new ControllerCandyInventoryManagement(rolUser, nameUser, nameBranch);
+            
+        }
+        
+        //</editor-fold>
+         
+        //<editor-fold defaultstate="collapsed" desc=" CRUD Inventory Candy ">
+
+         //Consultar listado ->  Empresa
+         else if(evt.getSource() == mainPage.btnFunction){
+             // Se instancia y se declara la clase.
+            ctrFunctionManagement = new ControllerFunctionManagement(rolUser, nameUser, nameBranch);
             
         }
         

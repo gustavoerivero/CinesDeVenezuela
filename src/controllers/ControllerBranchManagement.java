@@ -129,29 +129,6 @@ public class ControllerBranchManagement implements ActionListener, MouseListener
         
         //</editor-fold>
         
-        //<editor-fold defaultstate="collapsed" desc=" Branch Change ">
-        
-        // Cambiar de sucursal a gestionar
-       /* else if(evt.getSource() == braManagement.btnChangeBranch){
-            
-            ArrayList<String>   cityNames   = loadCityNames(),
-                                cityBranch  = new ArrayList<>(),
-                                branchNames = new ArrayList<>();
-            
-            loadBranch(cityBranch, branchNames);
-                        
-            // Instanciar la clase
-            changeBranch = new ChangeBranch(braManagement, true, cityNames, cityBranch, branchNames, rolUser);
-            
-            // Se ubica el nombre de la sucursal.
-            braManagement.lblSucursalName.setText(changeBranch.getId_Sucursal());
-                        
-            changeBranch.dispose();
-            
-        }*/
-        
-        //</editor-fold>
-        
         //<editor-fold defaultstate="collapsed" desc=" Branch Search ">
         
         // Buscar a un empleado.

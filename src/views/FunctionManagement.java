@@ -106,6 +106,7 @@ public class FunctionManagement extends javax.swing.JFrame {
         jFormattedTextField2 = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         panFunctionManagement.setBackground(new java.awt.Color(249, 249, 249));
         panFunctionManagement.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75, 0, 145)));
@@ -350,13 +351,13 @@ public class FunctionManagement extends javax.swing.JFrame {
         lblStartTime.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblStartTime.setText("Hora de inicio: ");
 
-        ftxtStartTime.setText("jFormattedTextField1");
+        ftxtStartTime.setText("                                  ");
         ftxtStartTime.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
         btnAdd.setText("jButton1");
 
         cmbCinemaRoom.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        cmbCinemaRoom.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "- Seleccionar Sala -" }));
+        cmbCinemaRoom.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " - Seleccionar - " }));
 
         sepSearchIdEmployee2.setBackground(new java.awt.Color(249, 249, 249));
         sepSearchIdEmployee2.setForeground(new java.awt.Color(75, 0, 145));
@@ -467,7 +468,7 @@ public class FunctionManagement extends javax.swing.JFrame {
                         .addGroup(panConsultListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnSearchEmployee, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnClearSearchEmployee, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(panAddFunction, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scpFunctionList, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1073,14 +1074,14 @@ public class FunctionManagement extends javax.swing.JFrame {
     public javax.swing.JButton btnExit;
     public javax.swing.JButton btnMin;
     public javax.swing.JButton btnRegisterModifyFunction;
-    private javax.swing.JButton btnReset;
+    public javax.swing.JButton btnReset;
     public javax.swing.JButton btnSearchEmployee;
-    private javax.swing.JComboBox<String> cmbCinemaRoom;
-    private com.toedter.calendar.JDateChooser dchDateSelected;
+    public javax.swing.JComboBox<String> cmbCinemaRoom;
+    public com.toedter.calendar.JDateChooser dchDateSelected;
     public com.toedter.calendar.JDateChooser dchFunctionDate;
-    private javax.swing.JFormattedTextField ftxtStartTime;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
-    private javax.swing.JFormattedTextField jFormattedTextField2;
+    public javax.swing.JFormattedTextField ftxtStartTime;
+    public javax.swing.JFormattedTextField jFormattedTextField1;
+    public javax.swing.JFormattedTextField jFormattedTextField2;
     private javax.swing.JLabel lblBirthEmployee;
     private javax.swing.JLabel lblDate;
     private javax.swing.JLabel lblEmailEmployee;

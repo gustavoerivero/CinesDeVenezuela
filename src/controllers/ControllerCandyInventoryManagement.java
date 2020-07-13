@@ -610,7 +610,7 @@ public void mouseClicked(MouseEvent evt) {
     }
 
     
-        /**
+    /**
      * MÃ©todo para cargar la informaciÃ³n de la sucursal.
      * @return listado con la informaciÃ³n de la sucursal.
      */
