@@ -819,7 +819,7 @@ public class ControllerBranchManagement implements ActionListener, MouseListener
         
     }
     
-            /**
+    /**
      * Método para buscar el código de una sucursal.
      * @param nameBranch Nombre de la ciudad.
      * @return Devuelve el código de la ciudad.
