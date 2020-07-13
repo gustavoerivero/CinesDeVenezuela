@@ -14,21 +14,21 @@ import java.util.Date;
  *          @author Torrealba, Luis         C.I: 26.121.249
  */
 public class Client extends Persona{
-    private char type;
+    private String type;
     
     public Client(String id, String name,String surname,
             long phone,String direction,Date birth_date, 
-            String email, char estatus, char type){
+            String email, char estatus, String type){
         super(id, name, surname, phone, direction, birth_date, email, estatus);
            
        this.type=type; 
     }
 
-    public char getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(char type) {
+    public void setType(String type) {
         this.type = type;
     }
     

@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package controllers;
+
 // Se importan las librerías de soporte.
 import lib.SupportFunctions;
 
@@ -183,7 +179,7 @@ public class ControllerFilmManagement implements ActionListener, MouseListener{
         
         //</editor-fold>
     
-   //<editor-fold defaultstate="collapsed" desc=" Film Table Clear ">
+    //<editor-fold defaultstate="collapsed" desc=" Film Table Clear ">
         
         // Limpiar el consultar listado.
         else if(evt.getSource() == filmManagement.btnClearSearchFilm){
@@ -252,7 +248,7 @@ public class ControllerFilmManagement implements ActionListener, MouseListener{
         
         //</editor-fold>
         
-   //<editor-fold defaultstate="collapsed" desc=" Clear form ">
+    //<editor-fold defaultstate="collapsed" desc=" Clear form ">
         
         // Si se desea limpiar un empleado.
         else if(evt.getSource() == filmManagement.btnClearFilm){
@@ -412,7 +408,7 @@ public class ControllerFilmManagement implements ActionListener, MouseListener{
         
         //</editor-fold>
         
-     //<editor-fold defaultstate="collapsed" desc=" Delete Film ">
+    //<editor-fold defaultstate="collapsed" desc=" Delete Film ">
         
         // Eliminación de un empleado.
         else if(evt.getSource() == filmManagement.btnDeleteFilm){
@@ -578,7 +574,7 @@ public class ControllerFilmManagement implements ActionListener, MouseListener{
      * Método para habilitar o deshabilitar botónes según tipo de usuario.
      * @param rol Rol del usuario que ha ingresado al sistema.
      */
-   /* private void enabledButtons(String rol){
+    /*private void enabledButtons(String rol){
         
         switch(rol){
             
@@ -810,8 +806,8 @@ public class ControllerFilmManagement implements ActionListener, MouseListener{
                             nameFilm   = new ArrayList<>(),
                             synopsisFilm   = new ArrayList<>(),
                             durationFilm   = new ArrayList<>(),
-                             classificationFilm   = new ArrayList<>(),
-                             premiereFilm  = new ArrayList<>(),
+                            classificationFilm   = new ArrayList<>(),
+                            premiereFilm  = new ArrayList<>(),
                             typeFilm     = new ArrayList<>();
                 
         // Se declara la variable que devuelve el resultado.

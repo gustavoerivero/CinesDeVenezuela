@@ -7,7 +7,6 @@ import views.Login;
 import views.PopupMessage;
 
 // Se importan los models a utilizar
-import models.database.ConnectionDB;
 import models.database.UserCRUD;
 
 // Se importan las clases de soporte.
@@ -32,8 +31,7 @@ public class ControllerLogin implements java.awt.event.ActionListener {
         private PopupMessage popup;
         
         // Models
-        private ConnectionDB con;
-        private UserCRUD        userCRUD;
+        private UserCRUD userCRUD;
         
         // Controllers
         private ControllerForgotPass forgot;

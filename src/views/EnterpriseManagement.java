@@ -1,12 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package views;
+
 // Se importan las librerías a utilizar.
-//import views.tables.*;
+import views.tables.*;
 import lib.SupportFunctions;
 
 /**
@@ -25,7 +21,7 @@ public class EnterpriseManagement extends javax.swing.JFrame {
     
     // Se declaran e instancian las clases a utilizar.
     private SupportFunctions support;
-    //private Table table = new Table();
+    private Table table = new Table();
     
     /**
      * Constructor del gestor de empresas.
@@ -41,7 +37,7 @@ public class EnterpriseManagement extends javax.swing.JFrame {
         setVisible(true);
         
         // Se limpia la view inicial.
-       // clearEnterpriseSearch();
+        clearEnterpriseSearch();
         
         // Cambia el ícono del JFrame.
         this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("images/CDV-icon.png")).getImage());
@@ -65,6 +61,15 @@ public class EnterpriseManagement extends javax.swing.JFrame {
         lblSucursalName = new javax.swing.JLabel();
         btnChangeBranch = new javax.swing.JButton();
         panContainerEnterprise = new javax.swing.JPanel();
+        panConsultList = new javax.swing.JPanel();
+        scpEnterpriseList = new javax.swing.JScrollPane();
+        tblEnterpriseList = new javax.swing.JTable();
+        txtSearchIdEnterprise = new javax.swing.JTextField();
+        sepSearchIdEnterprise = new javax.swing.JSeparator();
+        txtSearchNameEnterprise = new javax.swing.JTextField();
+        btnSearchEnterprise = new javax.swing.JButton();
+        sepSearchNameEnterprise = new javax.swing.JSeparator();
+        btnClearSearchEnterprise = new javax.swing.JButton();
         panCRUD = new javax.swing.JPanel();
         lblTittle1 = new javax.swing.JLabel();
         lblIdEnterprise = new javax.swing.JLabel();
@@ -83,9 +88,12 @@ public class EnterpriseManagement extends javax.swing.JFrame {
         btnClearPicture = new javax.swing.JButton();
         btnClearEnterprise = new javax.swing.JButton();
         btnRegisterModifyEnterprise = new javax.swing.JButton();
+        btnBackEnterprise = new javax.swing.JButton();
+        btnDeleteEnterprise = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        setResizable(false);
 
         panEnterpriseManagement.setBackground(new java.awt.Color(249, 249, 249));
         panEnterpriseManagement.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75, 0, 145)));
@@ -199,6 +207,165 @@ public class EnterpriseManagement extends javax.swing.JFrame {
 
         panContainerEnterprise.setBackground(new java.awt.Color(249, 249, 249));
         panContainerEnterprise.setLayout(new java.awt.CardLayout());
+
+        panConsultList.setBackground(new java.awt.Color(249, 249, 249));
+
+        tblEnterpriseList.setBackground(new java.awt.Color(249, 249, 249));
+        tblEnterpriseList.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Codigo", "Nombre", "Descripcion", "Correo", "Precio Boleto", "Consultar"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblEnterpriseList.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tblEnterpriseList.setSelectionBackground(new java.awt.Color(75, 0, 145));
+        tblEnterpriseList.getTableHeader().setReorderingAllowed(false);
+        tblEnterpriseList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblEnterpriseListMouseClicked(evt);
+            }
+        });
+        scpEnterpriseList.setViewportView(tblEnterpriseList);
+        if (tblEnterpriseList.getColumnModel().getColumnCount() > 0) {
+            tblEnterpriseList.getColumnModel().getColumn(5).setResizable(false);
+        }
+
+        txtSearchIdEnterprise.setBackground(new java.awt.Color(249, 249, 249));
+        txtSearchIdEnterprise.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtSearchIdEnterprise.setText("Codigo de la empresa");
+        txtSearchIdEnterprise.setBorder(null);
+        txtSearchIdEnterprise.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtSearchIdEnterpriseMouseClicked(evt);
+            }
+        });
+        txtSearchIdEnterprise.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtSearchIdEnterpriseKeyTyped(evt);
+            }
+        });
+
+        sepSearchIdEnterprise.setBackground(new java.awt.Color(249, 249, 249));
+        sepSearchIdEnterprise.setForeground(new java.awt.Color(75, 0, 145));
+
+        txtSearchNameEnterprise.setBackground(new java.awt.Color(249, 249, 249));
+        txtSearchNameEnterprise.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtSearchNameEnterprise.setText("Nombre de la empresa");
+        txtSearchNameEnterprise.setBorder(null);
+        txtSearchNameEnterprise.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtSearchNameEnterpriseMouseClicked(evt);
+            }
+        });
+        txtSearchNameEnterprise.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtSearchNameEnterpriseKeyTyped(evt);
+            }
+        });
+
+        btnSearchEnterprise.setBackground(new java.awt.Color(249, 249, 249));
+        btnSearchEnterprise.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/findUserIcon.png"))); // NOI18N
+        btnSearchEnterprise.setToolTipText(" Buscar");
+        btnSearchEnterprise.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(249, 249, 249), 1, true));
+        btnSearchEnterprise.setContentAreaFilled(false);
+        btnSearchEnterprise.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSearchEnterprise.setFocusPainted(false);
+        btnSearchEnterprise.setPreferredSize(new java.awt.Dimension(50, 50));
+        btnSearchEnterprise.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnSearchEnterpriseMouseMoved(evt);
+            }
+        });
+        btnSearchEnterprise.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnSearchEnterpriseMouseExited(evt);
+            }
+        });
+
+        sepSearchNameEnterprise.setBackground(new java.awt.Color(249, 249, 249));
+        sepSearchNameEnterprise.setForeground(new java.awt.Color(75, 0, 145));
+
+        btnClearSearchEnterprise.setBackground(new java.awt.Color(249, 249, 249));
+        btnClearSearchEnterprise.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/searchIcon.png"))); // NOI18N
+        btnClearSearchEnterprise.setToolTipText("Limpiar");
+        btnClearSearchEnterprise.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(249, 249, 249), 1, true));
+        btnClearSearchEnterprise.setContentAreaFilled(false);
+        btnClearSearchEnterprise.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnClearSearchEnterprise.setFocusPainted(false);
+        btnClearSearchEnterprise.setPreferredSize(new java.awt.Dimension(50, 50));
+        btnClearSearchEnterprise.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnClearSearchEnterpriseMouseMoved(evt);
+            }
+        });
+        btnClearSearchEnterprise.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnClearSearchEnterpriseMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panConsultListLayout = new javax.swing.GroupLayout(panConsultList);
+        panConsultList.setLayout(panConsultListLayout);
+        panConsultListLayout.setHorizontalGroup(
+            panConsultListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panConsultListLayout.createSequentialGroup()
+                .addGroup(panConsultListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panConsultListLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(scpEnterpriseList))
+                    .addGroup(panConsultListLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(panConsultListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(sepSearchIdEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtSearchIdEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(31, 31, 31)
+                        .addGroup(panConsultListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(sepSearchNameEnterprise, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+                            .addComponent(txtSearchNameEnterprise))
+                        .addGap(279, 279, 279)
+                        .addComponent(btnSearchEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnClearSearchEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 2, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        panConsultListLayout.setVerticalGroup(
+            panConsultListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panConsultListLayout.createSequentialGroup()
+                .addGroup(panConsultListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panConsultListLayout.createSequentialGroup()
+                        .addGroup(panConsultListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panConsultListLayout.createSequentialGroup()
+                                .addComponent(txtSearchNameEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(panConsultListLayout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addComponent(txtSearchIdEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(8, 8, 8)))
+                        .addGroup(panConsultListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(sepSearchIdEnterprise)
+                            .addComponent(sepSearchNameEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(panConsultListLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(panConsultListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnSearchEnterprise, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnClearSearchEnterprise, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18)
+                .addComponent(scpEnterpriseList, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        panContainerEnterprise.add(panConsultList, "card2");
 
         panCRUD.setBackground(new java.awt.Color(249, 249, 249));
 
@@ -345,6 +512,46 @@ public class EnterpriseManagement extends javax.swing.JFrame {
             }
         });
 
+        btnBackEnterprise.setBackground(new java.awt.Color(239, 232, 244));
+        btnBackEnterprise.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnBackEnterprise.setText("Atrás");
+        btnBackEnterprise.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnBackEnterprise.setBorderPainted(false);
+        btnBackEnterprise.setContentAreaFilled(false);
+        btnBackEnterprise.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBackEnterprise.setFocusPainted(false);
+        btnBackEnterprise.setOpaque(true);
+        btnBackEnterprise.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnBackEnterpriseMouseMoved(evt);
+            }
+        });
+        btnBackEnterprise.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnBackEnterpriseMouseExited(evt);
+            }
+        });
+
+        btnDeleteEnterprise.setBackground(new java.awt.Color(239, 232, 244));
+        btnDeleteEnterprise.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnDeleteEnterprise.setText("Eliminar");
+        btnDeleteEnterprise.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnDeleteEnterprise.setBorderPainted(false);
+        btnDeleteEnterprise.setContentAreaFilled(false);
+        btnDeleteEnterprise.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDeleteEnterprise.setFocusPainted(false);
+        btnDeleteEnterprise.setOpaque(true);
+        btnDeleteEnterprise.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnDeleteEnterpriseMouseMoved(evt);
+            }
+        });
+        btnDeleteEnterprise.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnDeleteEnterpriseMouseExited(evt);
+            }
+        });
+
         javax.swing.GroupLayout panCRUDLayout = new javax.swing.GroupLayout(panCRUD);
         panCRUD.setLayout(panCRUDLayout);
         panCRUDLayout.setHorizontalGroup(
@@ -355,37 +562,44 @@ public class EnterpriseManagement extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(panCRUDLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addGroup(panCRUDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(panCRUDLayout.createSequentialGroup()
-                        .addGroup(panCRUDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panCRUDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(lblNameEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(panCRUDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(lblDescriptionEnterprise, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblEmailEnterprise, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblPriceTicketEnterprise, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(lblIdEnterprise, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panCRUDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtIdEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNameEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtEmailEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPriceTicketEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDescriptionEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(panCRUDLayout.createSequentialGroup()
-                                .addComponent(btnClearEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnRegisterModifyEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(panCRUDLayout.createSequentialGroup()
-                        .addGap(454, 454, 454)
-                        .addComponent(lblPictureEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblPicture, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
                 .addGroup(panCRUDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnChargePicture, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnClearPicture, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 86, Short.MAX_VALUE))
+                    .addGroup(panCRUDLayout.createSequentialGroup()
+                        .addComponent(btnBackEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnDeleteEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnClearEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnRegisterModifyEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panCRUDLayout.createSequentialGroup()
+                        .addGroup(panCRUDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panCRUDLayout.createSequentialGroup()
+                                .addGroup(panCRUDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(panCRUDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(lblNameEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(panCRUDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(lblDescriptionEnterprise, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(lblEmailEnterprise, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(lblPriceTicketEnterprise, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(lblIdEnterprise, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(panCRUDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtIdEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtNameEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtEmailEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtPriceTicketEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtDescriptionEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(panCRUDLayout.createSequentialGroup()
+                                .addGap(454, 454, 454)
+                                .addComponent(lblPictureEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblPicture, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(panCRUDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnChargePicture, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnClearPicture, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(23, 23, 23))
         );
         panCRUDLayout.setVerticalGroup(
             panCRUDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -425,7 +639,9 @@ public class EnterpriseManagement extends javax.swing.JFrame {
                 .addGap(93, 93, 93)
                 .addGroup(panCRUDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnClearEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRegisterModifyEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnRegisterModifyEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBackEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDeleteEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28))
         );
 
@@ -487,54 +703,54 @@ public class EnterpriseManagement extends javax.swing.JFrame {
      * Método que retorna los valores iniciales de los componentes de 
      * JPanel de Enterprise Management.
      */
-  /*  public void clearEnterpriseSearch(){
+    public void clearEnterpriseSearch(){
         
         txtSearchIdEnterprise.setText("Codigo de la empresa");
         txtSearchNameEnterprise.setText("Nombre de la empresa");
         //cmbSearchJobEmployee.setSelectedIndex(0);
         clearEnterpriseTable(tblEnterpriseList);
         
-    }*/
+    }
  
     /**
      * Método que retorna los valores iniciales de un JTable.
      * @param table parámetro JTable.
      */
-  /*  public void clearEnterpriseTable(javax.swing.JTable table){
+    public void clearEnterpriseTable(javax.swing.JTable table){
         this.table.buildEnterpriseTable(table, null);
-    }*/
+    }
 
     /**
      * Método para indicar el valor de una columna en un JTable.
      * @param column 
      */
-  /*  public void setColumnTable(int column){
+    public void setColumnTable(int column){
         this.column = column;
-    }*/
+    }
     
     /**
      * Método para obtener el valor de una columna en un JTable.
      * @return el valor de la columna.
      */
-   /* public int getColumnTable(){
+    public int getColumnTable(){
         return column;
-    }*/
+    }
     
     /**
      * Método para indicar el valor de una fila en un JTable.
      * @param row 
      */
-   /* public void setRowTable(int row){
+    public void setRowTable(int row){
         this.row = row;
-    }*/
+    }
     
     /**
      * Método para obtener el valor de una columna en un JTable.
      * @return el valor de la fila.
      */
-  /*  public int getRowTable(){
+    public int getRowTable(){
         return row;
-    }*/
+    }
     
     
       //</editor-fold>
@@ -556,15 +772,15 @@ public class EnterpriseManagement extends javax.swing.JFrame {
         
         // Search
        // btnChangeBranch.addActionListener(evt);
-        /*btnSearchEnterprise.addActionListener(evt);
-        btnClearSearchEnterprise.addActionListener(evt);*/
+        btnSearchEnterprise.addActionListener(evt);
+        btnClearSearchEnterprise.addActionListener(evt);
         
         // CRUD
-       // btnBackEnterprise.addActionListener(evt);
+        btnBackEnterprise.addActionListener(evt);
         btnChargePicture.addActionListener(evt);
         btnClearEnterprise.addActionListener(evt);
         btnClearPicture.addActionListener(evt);
-       // btnDeleteEnterprise.addActionListener(evt);
+        btnDeleteEnterprise.addActionListener(evt);
         btnRegisterModifyEnterprise.addActionListener(evt);
         
     }
@@ -573,11 +789,11 @@ public class EnterpriseManagement extends javax.swing.JFrame {
      * Método que permite activar los eventos del escuchador Mouse.
      * @param evt parámetro que se activa cuando el Mouse reacciona a algo.
      */
-    /*public void addMouseEvents(java.awt.event.MouseListener evt){
+    public void addMouseEvents(java.awt.event.MouseListener evt){
         
         tblEnterpriseList.addMouseListener(evt);
         
-    }*/
+    }
     
      //</editor-fold>
     
@@ -586,9 +802,9 @@ public class EnterpriseManagement extends javax.swing.JFrame {
      */
     public void clearView(){
                
-       // btnBackEnterprise.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
-        //btnBackEnterprise.setForeground(new java.awt.Color(0,0,0));
-       // btnBackEnterprise.setBackground(new java.awt.Color(239,232,244));
+        btnBackEnterprise.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
+        btnBackEnterprise.setForeground(new java.awt.Color(0,0,0));
+        btnBackEnterprise.setBackground(new java.awt.Color(239,232,244));
         
         //btnChangeBranch.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
         //btnChangeBranch.setForeground(new java.awt.Color(0,0,0));
@@ -606,21 +822,21 @@ public class EnterpriseManagement extends javax.swing.JFrame {
         btnClearPicture.setForeground(new java.awt.Color(0,0,0));
         btnClearPicture.setBackground(new java.awt.Color(239,232,244));
         
-       /* btnClearSearchEnterprise.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
+        btnClearSearchEnterprise.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
         btnClearSearchEnterprise.setForeground(new java.awt.Color(0,0,0));
         btnClearSearchEnterprise.setBackground(new java.awt.Color(239,232,244));
         
         btnDeleteEnterprise.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
         btnDeleteEnterprise.setForeground(new java.awt.Color(0,0,0));
-        btnDeleteEnterprise.setBackground(new java.awt.Color(239,232,244));*/
+        btnDeleteEnterprise.setBackground(new java.awt.Color(239,232,244));
         
         btnRegisterModifyEnterprise.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
         btnRegisterModifyEnterprise.setForeground(new java.awt.Color(0,0,0));
         btnRegisterModifyEnterprise.setBackground(new java.awt.Color(239,232,244));
         
-       /* btnSearchEnterprise.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
+        btnSearchEnterprise.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
         btnSearchEnterprise.setForeground(new java.awt.Color(0,0,0));
-        btnSearchEnterprise.setBackground(new java.awt.Color(239,232,244));*/
+        btnSearchEnterprise.setBackground(new java.awt.Color(239,232,244));
         
         //cmbBranchEmployee.setSelectedIndex(0);
         //cmbJobEmployee.setSelectedIndex(0);
@@ -636,8 +852,8 @@ public class EnterpriseManagement extends javax.swing.JFrame {
         txtPriceTicketEnterprise.setText("Precio base boleto de funciones");
         
         // Búsqueda
-       // txtSearchIdEnterprise.setText("Código de la empresa");
-        //txtSearchNameEnterprise.setText("Nombre de la empresa");
+        txtSearchIdEnterprise.setText("Código de la empresa");
+        txtSearchNameEnterprise.setText("Nombre de la empresa");
         
     }
     //<editor-fold defaultstate="collapsed" desc=" Top Bar "> 
@@ -710,8 +926,50 @@ public class EnterpriseManagement extends javax.swing.JFrame {
         btnChangeBranch.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
     }//GEN-LAST:event_btnChangeBranchMouseExited
 //</editor-fold>
+    /*
+    private void tblEnterpriseListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEnterpriseListMouseClicked
+        setColumnTable(tblEnterpriseList.getColumnModel().getColumnIndexAtX(evt.getX()));
+        setRowTable(evt.getY()/tblEnterpriseList.getRowHeight());
+    }//GEN-LAST:event_tblEnterpriseListMouseClicked
+    */
+    //<editor-fold defaultstate="collapsed" desc=" Search Enterprise ">
+    private void txtSearchIdEnterpriseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSearchIdEnterpriseMouseClicked
+        txtSearchIdEnterprise.setText("");
+    }//GEN-LAST:event_txtSearchIdEnterpriseMouseClicked
+
+    private void txtSearchIdEnterpriseKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchIdEnterpriseKeyTyped
+        /*if(txtSearchIdEmployee.getText().length() < 10)
+        support.integerPositiveKeyTyped(evt);
+        else
+        evt.consume();*/
+    }//GEN-LAST:event_txtSearchIdEnterpriseKeyTyped
+
+    private void txtSearchNameEnterpriseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSearchNameEnterpriseMouseClicked
+        txtSearchNameEnterprise.setText("");
+    }//GEN-LAST:event_txtSearchNameEnterpriseMouseClicked
+
+    private void txtSearchNameEnterpriseKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchNameEnterpriseKeyTyped
+        //support.alphabetKeyTyped(evt);
+    }//GEN-LAST:event_txtSearchNameEnterpriseKeyTyped
+
+    private void btnSearchEnterpriseMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchEnterpriseMouseMoved
+        btnSearchEnterprise.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
+    }//GEN-LAST:event_btnSearchEnterpriseMouseMoved
+
+    private void btnSearchEnterpriseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchEnterpriseMouseExited
+        btnSearchEnterprise.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
+    }//GEN-LAST:event_btnSearchEnterpriseMouseExited
+
+    private void btnClearSearchEnterpriseMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClearSearchEnterpriseMouseMoved
+        btnClearSearchEnterprise.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
+    }//GEN-LAST:event_btnClearSearchEnterpriseMouseMoved
+
+    private void btnClearSearchEnterpriseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClearSearchEnterpriseMouseExited
+        btnClearSearchEnterprise.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
+    }//GEN-LAST:event_btnClearSearchEnterpriseMouseExited
+//</editor-fold>
  
-//<editor-fold defaultstate="collapsed" desc=" CRUD Enterprise">   
+    //<editor-fold defaultstate="collapsed" desc=" CRUD Enterprise">   
     private void btnChargePictureMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChargePictureMouseMoved
         btnChargePicture.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
     }//GEN-LAST:event_btnChargePictureMouseMoved
@@ -751,11 +1009,35 @@ public class EnterpriseManagement extends javax.swing.JFrame {
         btnRegisterModifyEnterprise.setForeground(new java.awt.Color(0,0,0));
         btnRegisterModifyEnterprise.setBackground(new java.awt.Color(239,232,244));
     }//GEN-LAST:event_btnRegisterModifyEnterpriseMouseExited
+
+    private void btnBackEnterpriseMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackEnterpriseMouseMoved
+        btnBackEnterprise.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
+        btnBackEnterprise.setForeground(new java.awt.Color(255,255,255));
+        btnBackEnterprise.setBackground(new java.awt.Color(66,0,124));
+    }//GEN-LAST:event_btnBackEnterpriseMouseMoved
+
+    private void btnBackEnterpriseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackEnterpriseMouseExited
+        btnBackEnterprise.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
+        btnBackEnterprise.setForeground(new java.awt.Color(0,0,0));
+        btnBackEnterprise.setBackground(new java.awt.Color(239,232,244));
+    }//GEN-LAST:event_btnBackEnterpriseMouseExited
+
+    private void btnDeleteEnterpriseMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteEnterpriseMouseMoved
+        btnDeleteEnterprise.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
+        btnDeleteEnterprise.setForeground(new java.awt.Color(255,255,255));
+        btnDeleteEnterprise.setBackground(new java.awt.Color(66,0,124));
+    }//GEN-LAST:event_btnDeleteEnterpriseMouseMoved
+
+    private void btnDeleteEnterpriseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteEnterpriseMouseExited
+        btnDeleteEnterprise.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
+        btnDeleteEnterprise.setForeground(new java.awt.Color(0,0,0));
+        btnDeleteEnterprise.setBackground(new java.awt.Color(239,232,244));
+    }//GEN-LAST:event_btnDeleteEnterpriseMouseExited
  
-  /*  private void tblEnterpriseListMouseClicked(java.awt.event.MouseEvent evt) {
+    private void tblEnterpriseListMouseClicked(java.awt.event.MouseEvent evt) {
     setColumnTable(tblEnterpriseList.getColumnModel().getColumnIndexAtX(evt.getX()));
         setRowTable(evt.getY()/tblEnterpriseList.getRowHeight());
-    }*/
+    }
 //</editor-fold>
     
     /*
@@ -763,49 +1045,20 @@ public class EnterpriseManagement extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIdEnterpriseActionPerformed
 */
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EnterpriseManagement.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EnterpriseManagement.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EnterpriseManagement.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EnterpriseManagement.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new EnterpriseManagement().setVisible(true);
-            }
-        });
-    }
 //<editor-fold defaultstate="collapsed" desc=" Declaración de variables ">
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton btnBackEnterprise;
     public javax.swing.JButton btnChangeBranch;
     public javax.swing.JButton btnChargePicture;
     public javax.swing.JButton btnClearEnterprise;
     public javax.swing.JButton btnClearPicture;
+    public javax.swing.JButton btnClearSearchEnterprise;
+    public javax.swing.JButton btnDeleteEnterprise;
     public javax.swing.JButton btnExit;
     public javax.swing.JButton btnMin;
     public javax.swing.JButton btnRegisterModifyEnterprise;
+    public javax.swing.JButton btnSearchEnterprise;
     private javax.swing.JLabel lblDescriptionEnterprise;
     private javax.swing.JLabel lblEmailEnterprise;
     private javax.swing.JLabel lblIdEnterprise;
@@ -818,14 +1071,21 @@ public class EnterpriseManagement extends javax.swing.JFrame {
     private javax.swing.JLabel lblTittle1;
     private javax.swing.JPanel panButtonsTopBar;
     public javax.swing.JPanel panCRUD;
+    public javax.swing.JPanel panConsultList;
     public javax.swing.JPanel panContainerEnterprise;
     public javax.swing.JPanel panEnterpriseManagement;
+    private javax.swing.JScrollPane scpEnterpriseList;
+    private javax.swing.JSeparator sepSearchIdEnterprise;
+    private javax.swing.JSeparator sepSearchNameEnterprise;
     private javax.swing.JSeparator sepTittle;
+    public javax.swing.JTable tblEnterpriseList;
     public javax.swing.JTextField txtDescriptionEnterprise;
     public javax.swing.JTextField txtEmailEnterprise;
     public javax.swing.JTextField txtIdEnterprise;
     public javax.swing.JTextField txtNameEnterprise;
     public javax.swing.JTextField txtPriceTicketEnterprise;
+    public javax.swing.JTextField txtSearchIdEnterprise;
+    public javax.swing.JTextField txtSearchNameEnterprise;
     // End of variables declaration//GEN-END:variables
 //</editor-fold>
 }

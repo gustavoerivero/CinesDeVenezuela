@@ -3,7 +3,7 @@ package views;
 
 // Se importan las librerías a utilizar.
 import views.tables.*;
-import lib.SupportFunctions;  
+import lib.SupportFunctions;
 
 /**
  *  Materia: Laboratorio I
@@ -72,7 +72,7 @@ public class EmployeeManagement extends javax.swing.JFrame {
         txtSearchNameEmployee = new javax.swing.JTextField();
         btnSearchEmployee = new javax.swing.JButton();
         sepSearchNameEmployee = new javax.swing.JSeparator();
-        cmbSearchJobEmployee = new javax.swing.JComboBox<String>();
+        cmbSearchJobEmployee = new javax.swing.JComboBox<>();
         btnClearSearchEmployee = new javax.swing.JButton();
         panCRUD = new javax.swing.JPanel();
         lblTittle1 = new javax.swing.JLabel();
@@ -96,8 +96,8 @@ public class EmployeeManagement extends javax.swing.JFrame {
         txtDirectionEmployee = new javax.swing.JTextField();
         txtPhoneEmployee = new javax.swing.JTextField();
         txtEmailEmployee = new javax.swing.JTextField();
-        cmbJobEmployee = new javax.swing.JComboBox<String>();
-        cmbBranchEmployee = new javax.swing.JComboBox<String>();
+        cmbJobEmployee = new javax.swing.JComboBox<>();
+        cmbBranchEmployee = new javax.swing.JComboBox<>();
         btnChargePicture = new javax.swing.JButton();
         btnClearPicture = new javax.swing.JButton();
         btnClearEmployee = new javax.swing.JButton();
@@ -312,7 +312,7 @@ public class EmployeeManagement extends javax.swing.JFrame {
 
         cmbSearchJobEmployee.setBackground(new java.awt.Color(249, 249, 249));
         cmbSearchJobEmployee.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        cmbSearchJobEmployee.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Seleccionar un cargo -", "Gerente", "Coordinador de áreas comúnes", "Vendedor de golosinas", "Vendedor de boletos", "Personal de limpieza" }));
+        cmbSearchJobEmployee.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "- Seleccionar un cargo -", "Gerente", "Coordinador de áreas comúnes", "Vendedor de golosinas", "Vendedor de boletos", "Personal de limpieza" }));
         cmbSearchJobEmployee.setBorder(null);
         cmbSearchJobEmployee.setLightWeightPopupEnabled(false);
 
@@ -502,18 +502,13 @@ public class EmployeeManagement extends javax.swing.JFrame {
 
         cmbJobEmployee.setBackground(new java.awt.Color(249, 249, 249));
         cmbJobEmployee.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        cmbJobEmployee.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " - Seleccionar un cargo - ", "Gerente", "Coordinador de áreas comúnes", "Vendedor de golosinas", "Vendedor de boletos", "Personal de limpieza" }));
+        cmbJobEmployee.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " - Seleccionar un cargo - ", "Gerente", "Coordinador de áreas comúnes", "Vendedor de golosinas", "Vendedor de boletos", "Personal de limpieza" }));
         cmbJobEmployee.setBorder(null);
         cmbJobEmployee.setLightWeightPopupEnabled(false);
-        cmbJobEmployee.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbJobEmployeeActionPerformed(evt);
-            }
-        });
 
         cmbBranchEmployee.setBackground(new java.awt.Color(249, 249, 249));
         cmbBranchEmployee.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        cmbBranchEmployee.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " - Seleccionar una Sucursal - ", "Cines de Venezuela" }));
+        cmbBranchEmployee.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " - Seleccionar una Sucursal - ", "Cines de Venezuela" }));
         cmbBranchEmployee.setBorder(null);
         cmbBranchEmployee.setLightWeightPopupEnabled(false);
 
@@ -557,6 +552,7 @@ public class EmployeeManagement extends javax.swing.JFrame {
 
         btnClearEmployee.setBackground(new java.awt.Color(239, 232, 244));
         btnClearEmployee.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnClearEmployee.setForeground(new java.awt.Color(0, 0, 0));
         btnClearEmployee.setText("Limpiar");
         btnClearEmployee.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnClearEmployee.setBorderPainted(false);
@@ -577,6 +573,7 @@ public class EmployeeManagement extends javax.swing.JFrame {
 
         btnRegisterModifyEmployee.setBackground(new java.awt.Color(239, 232, 244));
         btnRegisterModifyEmployee.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnRegisterModifyEmployee.setForeground(new java.awt.Color(0, 0, 0));
         btnRegisterModifyEmployee.setText("@Registrar/Actualizar");
         btnRegisterModifyEmployee.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnRegisterModifyEmployee.setBorderPainted(false);
@@ -597,6 +594,7 @@ public class EmployeeManagement extends javax.swing.JFrame {
 
         btnBackEmployee.setBackground(new java.awt.Color(239, 232, 244));
         btnBackEmployee.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnBackEmployee.setForeground(new java.awt.Color(0, 0, 0));
         btnBackEmployee.setText("Atrás");
         btnBackEmployee.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnBackEmployee.setBorderPainted(false);
@@ -617,6 +615,7 @@ public class EmployeeManagement extends javax.swing.JFrame {
 
         btnDeleteEmployee.setBackground(new java.awt.Color(239, 232, 244));
         btnDeleteEmployee.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnDeleteEmployee.setForeground(new java.awt.Color(0, 0, 0));
         btnDeleteEmployee.setText("Eliminar");
         btnDeleteEmployee.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnDeleteEmployee.setBorderPainted(false);
@@ -685,15 +684,13 @@ public class EmployeeManagement extends javax.swing.JFrame {
                             .addComponent(dchEntranceDateEmployee, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cmbBranchEmployee, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(panCRUDLayout.createSequentialGroup()
+                                .addComponent(lblPicture, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
                                 .addGroup(panCRUDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(panCRUDLayout.createSequentialGroup()
-                                        .addComponent(lblPicture, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addGroup(panCRUDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(btnChargePicture, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(btnClearPicture, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(txtEmailEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 2, Short.MAX_VALUE))))
+                                    .addComponent(btnChargePicture, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnClearPicture, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(txtEmailEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(panCRUDLayout.createSequentialGroup()
                         .addComponent(btnBackEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -768,7 +765,7 @@ public class EmployeeManagement extends javax.swing.JFrame {
         panEmployeeManagement.setLayout(panEmployeeManagementLayout);
         panEmployeeManagementLayout.setHorizontalGroup(
             panEmployeeManagementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panButtonsTopBar, javax.swing.GroupLayout.DEFAULT_SIZE, 920, Short.MAX_VALUE)
+            .addComponent(panButtonsTopBar, javax.swing.GroupLayout.DEFAULT_SIZE, 910, Short.MAX_VALUE)
             .addComponent(sepTittle)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panEmployeeManagementLayout.createSequentialGroup()
                 .addContainerGap()
@@ -1157,10 +1154,6 @@ public class EmployeeManagement extends javax.swing.JFrame {
         setColumnTable(tblEmployeeList.getColumnModel().getColumnIndexAtX(evt.getX()));
         setRowTable(evt.getY()/tblEmployeeList.getRowHeight());
     }//GEN-LAST:event_tblEmployeeListMouseClicked
-
-    private void cmbJobEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbJobEmployeeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbJobEmployeeActionPerformed
 
     //</editor-fold>
     

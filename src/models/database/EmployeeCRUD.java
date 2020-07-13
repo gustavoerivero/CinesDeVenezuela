@@ -21,46 +21,6 @@ public class EmployeeCRUD {
     //Constructor    
     public EmployeeCRUD(){}
 
-    //<editor-fold>
-
-    //<editor-fold defaultstate="collapsed" desc=" Metodo de Cargar Tabla, no sirve pero tiene buena logica ">       
-
-
-    /*public ArrayList<Object>listaEmployee2()
-     {
-            ArrayList<Object>lista; 
-            lista = new ArrayList<>();
-            try{
-                con = new ConnectionDB();
-                con.conectar();
-                String SQL = "SELECT * FROM \"Empleadito\"";
-
-                java.sql.ResultSet rs = con.queryConsultar(SQL);
-                ResultSetMetaData rMd = rs.getMetaData();
-                int cantcolumnas = rMd.getColumnCount();
-                while(rs.next())
-                    {
-                        Object[] filas = new Object[cantcolumnas];
-                        for (int i = 0; i < cantcolumnas ; i++) 
-                        {
-                            filas[i] = rs.getObject(i+1);
-                        }
-                        lista.add(filas);
-
-                    }
-
-            }
-            catch(Exception e)
-            {
-                System.out.println("No se pudo encontrar al Empleado. Error: " + e);;
-            }
-    return lista;
-
-    }*/
-         //</editor-fold>      
-
-    //</editor-fold>
-
     /**
      * Método para obtener los datos de un empleado.
      * @return Devuelve consulta.
@@ -333,7 +293,7 @@ public class EmployeeCRUD {
         
         // Se realiza la actualización.
         con.queryInsert(SQL);
-        
+        System.out.println("La actualización de datos del empleado '" + emp.getBirth_date() + "' se realizó con éxito.");
         // Se muestra mensaje de éxito.
         System.out.println("La actualización de datos del empleado '" + id + "' se realizó con éxito.");
         
@@ -448,13 +408,160 @@ public class EmployeeCRUD {
         return false;
         
     }
+    /**
+     * Método para consulta empleados que vendieron golosinas por semana.
+     * 
+     */
+     public ResultSet ListWeeklyCandySale(String StartDate, String EndDate){
+        
+        // Se declara una variable de tipo 'ResultSet' para realizar la consulta.
+        ResultSet result;
+        
+        /*String SQL = "SELECT "
+                + "factura.\"empleado_cedula\","
+                + "empleado.\"nombre\","
+                + "empleado.\"apellido\","
+                + "golosinas.\"nombre\","
+                + "factura.\"monto\","
+                + "factura.\"iva\","
+                + " SUM(\"monto\"+\"iva\"),"
+                + "factura.\"fecha_compra\""
+                + "FROM \"empleado\",\"factura\",\"ticket\",\"ticket_golosinas\","
+                + "\"inventario_golosina\",\"golosinas\" "
+                + "WHERE empleado.\"cedula\"=factura.\"empleado_cedula\" AND "
+                + "factura.\"estado\" = 'A' AND "
+                + "factura.\"fecha_compra\" >= '" + StartDate + "' AND "
+                + "factura.\"fecha_compra\" <= '" + EndDate + "' AND "
+                + "ticket.\"factura_codigo\" = factura.\"codigo\" AND "
+                + "ticket.\"tipo\" = '1' AND " 
+                + "ticket_golosinas.\"ticket_codigo\" = ticket.\"codigo\" AND "
+                + "inventario_golosina.\"Codigo\" = ticket_golosinas.\"inventario_gcodigo\" AND "
+                + "golosinas.\"codigo\" = inventario_golosina.\"GolosinaCodigo\" "
+                + "AND empleado.\"estado\" = 'A'"
+                + "GROUP BY factura.\"empleado_cedula\", empleado.\"nombre\",empleado.\"apellido\", golosinas.\"nombre\", factura.\"monto\", factura.\"iva\", factura.\"fecha_compra\""
+                + " ;";*/
+        
+        
+        
+        String SQL = "SELECT "
+                + "factura.\"empleado_cedula\","
+                + "empleado.\"nombre\","
+                + "empleado.\"apellido\","
+                + "golosinas.\"nombre\","
+                + "factura.\"monto\","
+                + "factura.\"iva\","
+                + " SUM(\"monto\"+\"iva\"),"
+                + "factura.\"fecha_compra\""
+                + "FROM \"empleado\",\"factura\",\"ticket\",\"ticket_golosinas\","
+                + "\"inventario_golosina\",\"golosinas\" "
+                + "WHERE empleado.\"cedula\"=factura.\"empleado_cedula\" AND "
+                + "factura.\"estado\" = 'A' AND "
+                + "factura.\"fecha_compra\" >= '" + StartDate + "' AND "
+                + "factura.\"fecha_compra\" < '" + EndDate + "' AND "
+                + "ticket.\"factura_codigo\" = factura.\"codigo\" AND "
+                + "ticket.\"tipo\" = '1' AND " 
+                + "ticket_golosinas.\"ticket_codigo\" = ticket.\"codigo\" AND "
+                + "inventario_golosina.\"Codigo\" = ticket_golosinas.\"inventario_gcodigo\" AND "
+                + "golosinas.\"codigo\" = inventario_golosina.\"GolosinaCodigo\" "
+                + "AND empleado.\"estado\" = 'A'"
+                + "GROUP BY factura.\"empleado_cedula\", empleado.\"nombre\",empleado.\"apellido\", golosinas.\"nombre\", factura.\"monto\", factura.\"iva\", factura.\"fecha_compra\""
+                + " ;";
+        
+        // la columna «empleado.cedula» debe aparecer en la cláusula GROUP BY o ser usada en una función de agregación
+        // Se instancia y se establece una conexión con la BD.
+        con = new ConnectionDB();
+        con.conectar();
+        
+        // Se realiza y se recibe la consulta.
+        result = con.queryConsultar(SQL);
+        
+        System.out.println("La consulta se realizó con éxito.");
+        
+        // Se desconecta la BD.
+        con.desconectar();
+        
+        // Retorna consulta.
+        return result;
+        
+    }
+    
+     /**
+     * Método para consulta empleados que mas golosinas un mes.
+     * 
+     */
+     public ResultSet ListMonthlyCandySale(Double SellGoal,String StartDate, String EndDate){
+        
+        // Se declara una variable de tipo 'ResultSet' para realizar la consulta.
+        ResultSet result;
+        
+        /*String SQL = "SELECT "
+                + "factura.\"empleado_cedula\","
+                + "empleado.\"nombre\","
+                + "empleado.\"apellido\","
+                + "golosinas.\"nombre\","
+                + "factura.\"monto\","
+                + "factura.\"iva\","
+                + " SUM(\"monto\"+\"iva\"),"
+                + "factura.\"fecha_compra\""
+                + "FROM \"empleado\",\"factura\",\"ticket\",\"ticket_golosinas\","
+                + "\"inventario_golosina\",\"golosinas\" "
+                + "WHERE empleado.\"cedula\"=factura.\"empleado_cedula\" AND "
+                + "factura.\"estado\" = 'A' AND "
+                + "factura.\"fecha_compra\" >= '" + StartDate + "' AND "
+                + "factura.\"fecha_compra\" <= '" + EndDate + "' AND "
+                + "ticket.\"factura_codigo\" = factura.\"codigo\" AND "
+                + "ticket.\"tipo\" = '1' AND " 
+                + "ticket_golosinas.\"ticket_codigo\" = ticket.\"codigo\" AND "
+                + "inventario_golosina.\"Codigo\" = ticket_golosinas.\"inventario_gcodigo\" AND "
+                + "golosinas.\"codigo\" = inventario_golosina.\"GolosinaCodigo\" "
+                + "AND empleado.\"estado\" = 'A'"
+                + "GROUP BY factura.\"empleado_cedula\", empleado.\"nombre\",empleado.\"apellido\", golosinas.\"nombre\", factura.\"monto\", factura.\"iva\", factura.\"fecha_compra\""
+                + " ;";*/
+        
+        
+        
+        String SQL = "SELECT "
+                + "factura.\"empleado_cedula\","
+                + "empleado.\"nombre\","
+                + "empleado.\"apellido\","
+                + " SUM(\"monto\") as \"montoVendido\","
+                + " SUM(\"iva\"),"
+                + " SUM(\"monto\"+\"iva\"),"
+                + " COUNT(\"empleado_cedula\")"
+                + "FROM \"empleado\",\"factura\",\"ticket\",\"ticket_golosinas\","
+                + "\"inventario_golosina\",\"golosinas\" "
+                + "WHERE empleado.\"cedula\"=factura.\"empleado_cedula\" AND "
+                + "factura.\"estado\" = 'A' AND "
+                + "factura.\"monto\" >= '" + SellGoal + "' AND "
+                + "factura.\"fecha_compra\" >= '" + StartDate + "' AND "
+                + "factura.\"fecha_compra\" < '" + EndDate + "' AND "
+                + "ticket.\"factura_codigo\" = factura.\"codigo\" AND "
+                + "ticket.\"tipo\" = '1' AND " 
+                + "ticket_golosinas.\"ticket_codigo\" = ticket.\"codigo\" AND "
+                + "inventario_golosina.\"Codigo\" = ticket_golosinas.\"inventario_gcodigo\" AND "
+                + "golosinas.\"codigo\" = inventario_golosina.\"GolosinaCodigo\" "
+                + "AND empleado.\"estado\" = 'A'"
+                + "GROUP BY factura.\"empleado_cedula\", empleado.\"nombre\",empleado.\"apellido\""
+                + " ;";
+        
+        // la columna «empleado.cedula» debe aparecer en la cláusula GROUP BY o ser usada en una función de agregación
+        // Se instancia y se establece una conexión con la BD.
+        con = new ConnectionDB();
+        con.conectar();
+        
+        // Se realiza y se recibe la consulta.
+        result = con.queryConsultar(SQL);
+        
+        System.out.println("La consulta se realizó con éxito.");
+        
+        // Se desconecta la BD.
+        con.desconectar();
+        
+        // Retorna consulta.
+        return result;
+        
+    }
+    
+    
     
 }
-    
-    
- 
-  
-
-    
-    
-     
