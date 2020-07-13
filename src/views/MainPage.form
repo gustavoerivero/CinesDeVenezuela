@@ -5100,8 +5100,18 @@
                                       <Component id="panCapsuleListClientDecision" alignment="0" max="32767" attributes="0"/>
                                       <Component id="panCapsuleListEmployeeDecision" alignment="0" max="32767" attributes="0"/>
                                       <Component id="panCapsuleListOtherDecision" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="sepCinemaRoomDecision3" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="sepCinemaRoomDecision4" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="sepCinemaRoomDecision5" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                                      <Component id="sepBranchDecision3" max="32767" attributes="0"/>
+                                      <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -5114,11 +5124,24 @@
                                   <Component id="sepTittleOption3" min="-2" pref="12" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="panCapsuleListClientDecision" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                                  <Component id="sepCinemaRoomDecision3" min="-2" pref="5" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="panCapsuleListEmployeeDecision" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                                  <Component id="sepCinemaRoomDecision4" min="-2" pref="5" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                                   <Component id="panCapsuleListOtherDecision" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="263" max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="sepCinemaRoomDecision5" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace pref="256" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="308" max="-2" attributes="0"/>
+                                      <Component id="sepBranchDecision3" min="-2" pref="4" max="-2" attributes="0"/>
+                                      <EmptySpace pref="268" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -5190,6 +5213,9 @@
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Arial" size="12" style="0"/>
                                 </Property>
+                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                                  <Image iconType="3" name="/views/images/client.png"/>
+                                </Property>
                                 <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;&lt;FONT SIZE=4&gt;Listados relacionados con clientes&lt;/Font&gt;&lt;/b&gt;&lt;br&gt;&lt;p align=&#x2019;justify&#x2019;&gt;Generar los listados relacionados con los clientes.&lt;/p&gt;&lt;/html&gt;"/>
                                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                                   <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -5257,6 +5283,9 @@
                                 </Property>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Arial" size="12" style="0"/>
+                                </Property>
+                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                                  <Image iconType="3" name="/views/images/employee.png"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;&lt;FONT SIZE=4&gt;Listados relacionados con empleados&lt;/Font&gt;&lt;/b&gt;&lt;br&gt;&lt;p align=&#x2019;justify&#x2019;&gt;Generar los listados relacionados con empleados.&lt;/p&gt;&lt;/html&gt;"/>
                                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -5327,6 +5356,9 @@
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Arial" size="12" style="0"/>
                                 </Property>
+                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                                  <Image iconType="3" name="/views/images/ticketGolosina.png"/>
+                                </Property>
                                 <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;&lt;FONT SIZE=4&gt;Tickets para golosinas&lt;/Font&gt;&lt;/b&gt;&lt;br&gt;&lt;p align=&#x2019;justify&#x2019;&gt;Gestiona la venta de las golosinas por medio de tickets &#xfa;nicos y personalizados para cada cliente.&lt;/p&gt;&lt;/html&gt;"/>
                                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                                   <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -5351,6 +5383,34 @@
                             </Component>
                           </SubComponents>
                         </Container>
+                        <Component class="javax.swing.JSeparator" name="sepBranchDecision3">
+                          <Properties>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="f4" green="e8" red="ef" type="rgb"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JSeparator" name="sepCinemaRoomDecision3">
+                          <Properties>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="f4" green="e8" red="ef" type="rgb"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JSeparator" name="sepCinemaRoomDecision4">
+                          <Properties>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="f4" green="e8" red="ef" type="rgb"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JSeparator" name="sepCinemaRoomDecision5">
+                          <Properties>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="f4" green="e8" red="ef" type="rgb"/>
+                            </Property>
+                          </Properties>
+                        </Component>
                       </SubComponents>
                     </Container>
                     <Container class="javax.swing.JPanel" name="panListClientDecision">
@@ -5432,8 +5492,8 @@
                             <DimensionLayout dim="1">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jScrollPane1" max="32767" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jScrollPane1" min="-2" pref="292" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="273" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -5471,10 +5531,14 @@
                                   <Layout>
                                     <DimensionLayout dim="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="btnListClientDecision1" alignment="0" pref="701" max="32767" attributes="0"/>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="btnListClientDecision2" min="-2" pref="680" max="-2" attributes="0"/>
-                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="btnListClientDecision2" alignment="0" min="-2" pref="662" max="-2" attributes="0"/>
+                                                  <Component id="btnListClientDecision1" alignment="0" min="-2" pref="662" max="-2" attributes="0"/>
+                                                  <Component id="btnListClientDecision3" alignment="0" min="-2" pref="662" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace pref="16" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                     </DimensionLayout>
@@ -5482,10 +5546,12 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="btnListClientDecision1" min="-2" pref="57" max="-2" attributes="0"/>
+                                              <Component id="btnListClientDecision3" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                                              <Component id="btnListClientDecision2" min="-2" pref="69" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="btnListClientDecision2" min="-2" pref="59" max="-2" attributes="0"/>
-                                              <EmptySpace min="0" pref="414" max="32767" attributes="0"/>
+                                              <Component id="btnListClientDecision1" min="-2" pref="75" max="-2" attributes="0"/>
+                                              <EmptySpace min="0" pref="308" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                     </DimensionLayout>
@@ -5499,7 +5565,10 @@
                                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                           <Font name="Arial" size="12" style="0"/>
                                         </Property>
-                                        <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;&lt;FONT SIZE=4&gt;Listados de Clientes frecuentes&lt;/Font&gt;&lt;/b&gt;&lt;br&gt;&lt;p align=&#x2019;justify&#x2019;&gt;clientes frecuentes.&lt;/p&gt;&lt;/html&gt;"/>
+                                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                                          <Image iconType="3" name="/views/images/pase especial.png"/>
+                                        </Property>
+                                        <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;&lt;FONT SIZE=4&gt;Listados de Clientes que recibieron Pase Especial&lt;/Font&gt;&lt;/b&gt;&lt;br&gt;&lt;p align=&#x2019;justify&#x2019;&gt;Clientes frecuentes que recibieron a fin de mes un pase especial.&lt;/p&gt;&lt;/html&gt;"/>
                                         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                                           <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                                             <LineBorder>
@@ -5530,6 +5599,9 @@
                                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                           <Font name="Arial" size="12" style="0"/>
                                         </Property>
+                                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                                          <Image iconType="3" name="/views/images/montoGolosina.png"/>
+                                        </Property>
                                         <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;&lt;FONT SIZE=4&gt;Listados de clientes golosinas&lt;/Font&gt;&lt;/b&gt;&lt;br&gt;&lt;p align=&#x2019;justify&#x2019;&gt;Los montos gastados por clientes en golosina.&lt;/p&gt;&lt;/html&gt;"/>
                                         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                                           <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -5544,6 +5616,40 @@
                                         <Property name="horizontalAlignment" type="int" value="2"/>
                                         <Property name="iconTextGap" type="int" value="25"/>
                                       </Properties>
+                                      <AuxValues>
+                                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                                      </AuxValues>
+                                    </Component>
+                                    <Component class="javax.swing.JButton" name="btnListClientDecision3">
+                                      <Properties>
+                                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                          <Color blue="f9" green="f9" red="f9" type="rgb"/>
+                                        </Property>
+                                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                          <Font name="Arial" size="12" style="0"/>
+                                        </Property>
+                                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                                          <Image iconType="3" name="/views/images/client frecuente.png"/>
+                                        </Property>
+                                        <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;&lt;FONT SIZE=4&gt;Listados de Clientes frecuentes&lt;/Font&gt;&lt;/b&gt;&lt;br&gt;&lt;p align=&#x2019;justify&#x2019;&gt;clientes frecuentes.&lt;/p&gt;&lt;/html&gt;"/>
+                                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                                            <LineBorder>
+                                              <Color PropertyName="color" blue="f4" green="e8" red="ef" type="rgb"/>
+                                            </LineBorder>
+                                          </Border>
+                                        </Property>
+                                        <Property name="borderPainted" type="boolean" value="false"/>
+                                        <Property name="contentAreaFilled" type="boolean" value="false"/>
+                                        <Property name="focusPainted" type="boolean" value="false"/>
+                                        <Property name="horizontalAlignment" type="int" value="2"/>
+                                        <Property name="iconTextGap" type="int" value="25"/>
+                                      </Properties>
+                                      <Events>
+                                        <EventHandler event="mouseMoved" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="btnListClientDecision3MouseMoved"/>
+                                        <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnListClientDecision3MouseExited"/>
+                                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnListClientDecision3ActionPerformed"/>
+                                      </Events>
                                       <AuxValues>
                                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                                       </AuxValues>

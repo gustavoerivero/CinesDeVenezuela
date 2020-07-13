@@ -152,7 +152,7 @@ public class MainPage extends javax.swing.JFrame {
         btnFilmDecision.addActionListener(evt);
         btnCandyDecisionCL.addActionListener(evt);
         btnClientDecision.addActionListener(evt);
-        
+        btnListClientDecision3.addActionListener(evt);
     }
    
     /**
@@ -497,6 +497,10 @@ public class MainPage extends javax.swing.JFrame {
         btnListEmployeeDecision = new javax.swing.JButton();
         panCapsuleListOtherDecision = new javax.swing.JPanel();
         btnListOtherDecision = new javax.swing.JButton();
+        sepBranchDecision3 = new javax.swing.JSeparator();
+        sepCinemaRoomDecision3 = new javax.swing.JSeparator();
+        sepCinemaRoomDecision4 = new javax.swing.JSeparator();
+        sepCinemaRoomDecision5 = new javax.swing.JSeparator();
         panListClientDecision = new javax.swing.JPanel();
         lblTittleOption5 = new javax.swing.JLabel();
         sepTittleOption4 = new javax.swing.JSeparator();
@@ -505,6 +509,7 @@ public class MainPage extends javax.swing.JFrame {
         panListClientDecision1 = new javax.swing.JPanel();
         btnListClientDecision1 = new javax.swing.JButton();
         btnListClientDecision2 = new javax.swing.JButton();
+        btnListClientDecision3 = new javax.swing.JButton();
         panOption4 = new javax.swing.JPanel();
         panDecisionOption4 = new javax.swing.JPanel();
         lblEmployeeeDecision = new javax.swing.JLabel();
@@ -3263,6 +3268,7 @@ public class MainPage extends javax.swing.JFrame {
 
         btnListClientDecision.setBackground(new java.awt.Color(249, 249, 249));
         btnListClientDecision.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnListClientDecision.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/client.png"))); // NOI18N
         btnListClientDecision.setText("<html><b><FONT SIZE=4>Listados relacionados con clientes</Font></b><br><p align=’justify’>Generar los listados relacionados con los clientes.</p></html>");
         btnListClientDecision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 232, 244)));
         btnListClientDecision.setBorderPainted(false);
@@ -3300,6 +3306,7 @@ public class MainPage extends javax.swing.JFrame {
 
         btnListEmployeeDecision.setBackground(new java.awt.Color(249, 249, 249));
         btnListEmployeeDecision.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnListEmployeeDecision.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/employee.png"))); // NOI18N
         btnListEmployeeDecision.setText("<html><b><FONT SIZE=4>Listados relacionados con empleados</Font></b><br><p align=’justify’>Generar los listados relacionados con empleados.</p></html>");
         btnListEmployeeDecision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 232, 244)));
         btnListEmployeeDecision.setBorderPainted(false);
@@ -3342,6 +3349,7 @@ public class MainPage extends javax.swing.JFrame {
 
         btnListOtherDecision.setBackground(new java.awt.Color(249, 249, 249));
         btnListOtherDecision.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnListOtherDecision.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/ticketGolosina.png"))); // NOI18N
         btnListOtherDecision.setText("<html><b><FONT SIZE=4>Tickets para golosinas</Font></b><br><p align=’justify’>Gestiona la venta de las golosinas por medio de tickets únicos y personalizados para cada cliente.</p></html>");
         btnListOtherDecision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 232, 244)));
         btnListOtherDecision.setBorderPainted(false);
@@ -3373,6 +3381,14 @@ public class MainPage extends javax.swing.JFrame {
                 .addComponent(btnListOtherDecision, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
+        sepBranchDecision3.setForeground(new java.awt.Color(239, 232, 244));
+
+        sepCinemaRoomDecision3.setForeground(new java.awt.Color(239, 232, 244));
+
+        sepCinemaRoomDecision4.setForeground(new java.awt.Color(239, 232, 244));
+
+        sepCinemaRoomDecision5.setForeground(new java.awt.Color(239, 232, 244));
+
         javax.swing.GroupLayout panDecisionOption3Layout = new javax.swing.GroupLayout(panDecisionOption3);
         panDecisionOption3.setLayout(panDecisionOption3Layout);
         panDecisionOption3Layout.setHorizontalGroup(
@@ -3387,8 +3403,16 @@ public class MainPage extends javax.swing.JFrame {
                 .addGroup(panDecisionOption3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panCapsuleListClientDecision, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panCapsuleListEmployeeDecision, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panCapsuleListOtherDecision, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(panCapsuleListOtherDecision, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(sepCinemaRoomDecision3, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(sepCinemaRoomDecision4)
+                    .addComponent(sepCinemaRoomDecision5))
                 .addContainerGap())
+            .addGroup(panDecisionOption3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panDecisionOption3Layout.createSequentialGroup()
+                    .addGap(2, 2, 2)
+                    .addComponent(sepBranchDecision3)
+                    .addGap(3, 3, 3)))
         );
         panDecisionOption3Layout.setVerticalGroup(
             panDecisionOption3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3399,11 +3423,22 @@ public class MainPage extends javax.swing.JFrame {
                 .addComponent(sepTittleOption3, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panCapsuleListClientDecision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(1, 1, 1)
+                .addComponent(sepCinemaRoomDecision3, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panCapsuleListEmployeeDecision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(4, 4, 4)
+                .addComponent(sepCinemaRoomDecision4, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(9, 9, 9)
                 .addComponent(panCapsuleListOtherDecision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(263, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sepCinemaRoomDecision5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(256, Short.MAX_VALUE))
+            .addGroup(panDecisionOption3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panDecisionOption3Layout.createSequentialGroup()
+                    .addGap(308, 308, 308)
+                    .addComponent(sepBranchDecision3, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(268, Short.MAX_VALUE)))
         );
 
         panOption3.add(panDecisionOption3, "card4");
@@ -3428,7 +3463,8 @@ public class MainPage extends javax.swing.JFrame {
 
         btnListClientDecision1.setBackground(new java.awt.Color(249, 249, 249));
         btnListClientDecision1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        btnListClientDecision1.setText("<html><b><FONT SIZE=4>Listados de Clientes frecuentes</Font></b><br><p align=’justify’>clientes frecuentes.</p></html>");
+        btnListClientDecision1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/pase especial.png"))); // NOI18N
+        btnListClientDecision1.setText("<html><b><FONT SIZE=4>Listados de Clientes que recibieron Pase Especial</Font></b><br><p align=’justify’>Clientes frecuentes que recibieron a fin de mes un pase especial.</p></html>");
         btnListClientDecision1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 232, 244)));
         btnListClientDecision1.setBorderPainted(false);
         btnListClientDecision1.setContentAreaFilled(false);
@@ -3453,6 +3489,7 @@ public class MainPage extends javax.swing.JFrame {
 
         btnListClientDecision2.setBackground(new java.awt.Color(249, 249, 249));
         btnListClientDecision2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnListClientDecision2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/montoGolosina.png"))); // NOI18N
         btnListClientDecision2.setText("<html><b><FONT SIZE=4>Listados de clientes golosinas</Font></b><br><p align=’justify’>Los montos gastados por clientes en golosina.</p></html>");
         btnListClientDecision2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 232, 244)));
         btnListClientDecision2.setBorderPainted(false);
@@ -3461,23 +3498,54 @@ public class MainPage extends javax.swing.JFrame {
         btnListClientDecision2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnListClientDecision2.setIconTextGap(25);
 
+        btnListClientDecision3.setBackground(new java.awt.Color(249, 249, 249));
+        btnListClientDecision3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnListClientDecision3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/client frecuente.png"))); // NOI18N
+        btnListClientDecision3.setText("<html><b><FONT SIZE=4>Listados de Clientes frecuentes</Font></b><br><p align=’justify’>clientes frecuentes.</p></html>");
+        btnListClientDecision3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 232, 244)));
+        btnListClientDecision3.setBorderPainted(false);
+        btnListClientDecision3.setContentAreaFilled(false);
+        btnListClientDecision3.setFocusPainted(false);
+        btnListClientDecision3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnListClientDecision3.setIconTextGap(25);
+        btnListClientDecision3.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnListClientDecision3MouseMoved(evt);
+            }
+        });
+        btnListClientDecision3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnListClientDecision3MouseExited(evt);
+            }
+        });
+        btnListClientDecision3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListClientDecision3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panListClientDecision1Layout = new javax.swing.GroupLayout(panListClientDecision1);
         panListClientDecision1.setLayout(panListClientDecision1Layout);
         panListClientDecision1Layout.setHorizontalGroup(
             panListClientDecision1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnListClientDecision1, javax.swing.GroupLayout.DEFAULT_SIZE, 701, Short.MAX_VALUE)
             .addGroup(panListClientDecision1Layout.createSequentialGroup()
-                .addComponent(btnListClientDecision2, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(panListClientDecision1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnListClientDecision2, javax.swing.GroupLayout.PREFERRED_SIZE, 662, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnListClientDecision1, javax.swing.GroupLayout.PREFERRED_SIZE, 662, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnListClientDecision3, javax.swing.GroupLayout.PREFERRED_SIZE, 662, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         panListClientDecision1Layout.setVerticalGroup(
             panListClientDecision1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panListClientDecision1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnListClientDecision1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnListClientDecision3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(btnListClientDecision2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnListClientDecision2, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 414, Short.MAX_VALUE))
+                .addComponent(btnListClientDecision1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 308, Short.MAX_VALUE))
         );
 
         jScrollPane1.setViewportView(panListClientDecision1);
@@ -3491,8 +3559,8 @@ public class MainPage extends javax.swing.JFrame {
         panButtonListClientLayout.setVerticalGroup(
             panButtonListClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panButtonListClientLayout.createSequentialGroup()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 273, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panListClientDecisionLayout = new javax.swing.GroupLayout(panListClientDecision);
@@ -3878,9 +3946,9 @@ public class MainPage extends javax.swing.JFrame {
                         .addGap(9, 9, 9))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panDecisionOption5Layout.createSequentialGroup()
                         .addGroup(panDecisionOption5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(panCapsuleBranchDecision, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 669, Short.MAX_VALUE)
-                            .addComponent(panCapsuleEnterpriseDecision, javax.swing.GroupLayout.DEFAULT_SIZE, 669, Short.MAX_VALUE)
-                            .addComponent(panCapsuleCinemaRoomDecision, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 669, Short.MAX_VALUE))
+                            .addComponent(panCapsuleBranchDecision, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 666, Short.MAX_VALUE)
+                            .addComponent(panCapsuleEnterpriseDecision, javax.swing.GroupLayout.DEFAULT_SIZE, 666, Short.MAX_VALUE)
+                            .addComponent(panCapsuleCinemaRoomDecision, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 666, Short.MAX_VALUE))
                         .addContainerGap())
                     .addComponent(sepBranchDecision, javax.swing.GroupLayout.Alignment.TRAILING)))
         );
@@ -3904,7 +3972,7 @@ public class MainPage extends javax.swing.JFrame {
                 .addGroup(panDecisionOption5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(sepEnterpriseDecision, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(panCapsuleCandyInventory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(228, Short.MAX_VALUE))
+                .addContainerGap(232, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panOption5Layout = new javax.swing.GroupLayout(panOption5);
@@ -4780,6 +4848,14 @@ public class MainPage extends javax.swing.JFrame {
         btnMinusCinemaTickets4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
     }//GEN-LAST:event_btnMinusCinemaTickets4MouseExited
 
+    private void btnCandyInventoryMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCandyInventoryMouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCandyInventoryMouseMoved
+
+    private void btnCandyInventoryMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCandyInventoryMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCandyInventoryMouseExited
+
     private void btnListClientDecisionMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnListClientDecisionMouseMoved
         panCapsuleCandyDecision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
     }//GEN-LAST:event_btnListClientDecisionMouseMoved
@@ -4820,13 +4896,17 @@ public class MainPage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnListClientDecision1ActionPerformed
 
-    private void btnCandyInventoryMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCandyInventoryMouseMoved
+    private void btnListClientDecision3MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnListClientDecision3MouseMoved
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnCandyInventoryMouseMoved
+    }//GEN-LAST:event_btnListClientDecision3MouseMoved
 
-    private void btnCandyInventoryMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCandyInventoryMouseExited
+    private void btnListClientDecision3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnListClientDecision3MouseExited
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnCandyInventoryMouseExited
+    }//GEN-LAST:event_btnListClientDecision3MouseExited
+
+    private void btnListClientDecision3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListClientDecision3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnListClientDecision3ActionPerformed
 
     //</editor-fold>
     
@@ -4909,6 +4989,7 @@ public class MainPage extends javax.swing.JFrame {
     public javax.swing.JButton btnListClientDecision;
     public javax.swing.JButton btnListClientDecision1;
     public javax.swing.JButton btnListClientDecision2;
+    public javax.swing.JButton btnListClientDecision3;
     public javax.swing.JButton btnListEmployeeDecision;
     public javax.swing.JButton btnListOtherDecision;
     public javax.swing.JButton btnMin;
@@ -5097,12 +5178,16 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JSeparator sepBranchDecision;
     private javax.swing.JSeparator sepBranchDecision1;
     private javax.swing.JSeparator sepBranchDecision2;
+    private javax.swing.JSeparator sepBranchDecision3;
     private javax.swing.JSeparator sepCandyDecision;
     private javax.swing.JSeparator sepCandySellTittle;
     private javax.swing.JSeparator sepCinemaDecision;
     private javax.swing.JSeparator sepCinemaRoomDecision;
     private javax.swing.JSeparator sepCinemaRoomDecision1;
     private javax.swing.JSeparator sepCinemaRoomDecision2;
+    private javax.swing.JSeparator sepCinemaRoomDecision3;
+    private javax.swing.JSeparator sepCinemaRoomDecision4;
+    private javax.swing.JSeparator sepCinemaRoomDecision5;
     private javax.swing.JSeparator sepCinemaSellTittle;
     private javax.swing.JSeparator sepClientCinemaTicket;
     private javax.swing.JSeparator sepEnterpriseDecision;

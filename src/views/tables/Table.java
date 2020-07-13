@@ -568,7 +568,39 @@ public class Table {
         
     }
     
-    //</editor-fold>
+        
+        
+public void buildFunctionTable(javax.swing.JTable table, Object[][] matrix){
+        
+        table.setDefaultRenderer(Object.class, new Render());
+               
+        DefaultTableModel filmTableModel = new  DefaultTableModel(
+            matrix,
+            new Object[]{
+                "Sucursal", "Película", "Inicio", "Fin","Sala","Fecha",
+                "Modificar", "Eliminar"
+            }
+        )
+        {
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        };
+        
+        table.setModel(filmTableModel);
+        
+        table.setPreferredScrollableViewportSize(table.getPreferredSize());
+             
+        table.setRowHeight(32);
+        
+        if (table.getColumnModel().getColumnCount() > 0) {
+            table.getColumnModel().getColumn(6).setResizable(false);
+            table.getColumnModel().getColumn(6).setPreferredWidth(40);
+            table.getColumnModel().getColumn(7).setResizable(false);
+            table.getColumnModel().getColumn(7).setPreferredWidth(40);
+        }
+        
+    }    //</editor-fold>
     
     
         public static void setCellsAlignment(JTable table, int alignment)

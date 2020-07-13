@@ -63,6 +63,16 @@ initComponents();
     } 
      //</editor-fold>
     
+        //<editor-fold defaultstate="collapsed" desc=" Listado 3">
+   public JTable getTblListSpecialPass()
+   {       
+        return tblListSpecialPass;
+    }
+    public void setTblListSpecialPass(JTable tblListSpecialPass) {
+        this.tblListSpecialPass = tblListSpecialPass;
+    } 
+     //</editor-fold>
+    
     //<editor-fold defaultstate="collapsed" desc=" Listeners ">
     
     /**
@@ -80,8 +90,12 @@ initComponents();
         btnMin.addActionListener(evt);
         
         // Search
-        btnSearchBranch.addActionListener(evt);
-        btnClearSearchBranch.addActionListener(evt);
+        btnSearchClient.addActionListener(evt);
+        btnClearFiltro.addActionListener(evt);
+        btnSearchClient1.addActionListener(evt);
+        btnClearFiltro1.addActionListener(evt);
+        btnSearchClient2.addActionListener(evt);
+        btnClearFiltro2.addActionListener(evt);
         
         // CRUD        
     }
@@ -108,32 +122,40 @@ initComponents();
         panListClientsFrequent = new javax.swing.JPanel();
         panSearch = new javax.swing.JPanel();
         panSearchAdmin = new javax.swing.JPanel();
-        txtSearchIdBranch = new javax.swing.JTextField();
-        dchBirthClient = new com.toedter.calendar.JDateChooser();
-        dchBirthClient1 = new com.toedter.calendar.JDateChooser();
-        sepSearchIdBranch = new javax.swing.JSeparator();
+        dchdate1Client = new com.toedter.calendar.JDateChooser();
+        dchdate2Client = new com.toedter.calendar.JDateChooser();
         sepSearchIdBranch1 = new javax.swing.JSeparator();
         sepSearchIdBranch2 = new javax.swing.JSeparator();
-        cmbSearchCity = new javax.swing.JComboBox<>();
-        btnSearchBranch = new javax.swing.JButton();
-        btnClearSearchBranch = new javax.swing.JButton();
-        panSearchGerentte = new javax.swing.JPanel();
-        dchBirthClient2 = new com.toedter.calendar.JDateChooser();
-        dchBirthClient3 = new com.toedter.calendar.JDateChooser();
-        cmbSearchCity1 = new javax.swing.JComboBox<>();
-        btnSearchBranch1 = new javax.swing.JButton();
-        btnClearSearchBranch1 = new javax.swing.JButton();
-        sepSearchIdBranch3 = new javax.swing.JSeparator();
-        sepSearchIdBranch4 = new javax.swing.JSeparator();
+        btnSearchClient = new javax.swing.JButton();
+        btnClearFiltro = new javax.swing.JButton();
         panList = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblListClientsFrequent = new javax.swing.JTable();
         panListCandyExpenseClient = new javax.swing.JPanel();
         panSearch1 = new javax.swing.JPanel();
         panSearchAdmin1 = new javax.swing.JPanel();
+        cmbOrderMonto = new javax.swing.JComboBox<>();
+        cmbOrderCant = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        btnSearchClient2 = new javax.swing.JButton();
+        btnClearFiltro2 = new javax.swing.JButton();
+        sepSearchIdBranch3 = new javax.swing.JSeparator();
+        sepSearchIdBranch4 = new javax.swing.JSeparator();
         panList1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblListCandyExpenseClient = new javax.swing.JTable();
+        panListSpecialPass = new javax.swing.JPanel();
+        panSearch2 = new javax.swing.JPanel();
+        panSearchAdmin2 = new javax.swing.JPanel();
+        cmbSelecMes = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        btnSearchClient1 = new javax.swing.JButton();
+        btnClearFiltro1 = new javax.swing.JButton();
+        sepSearchIdBranch6 = new javax.swing.JSeparator();
+        panList2 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblListSpecialPass = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -243,35 +265,17 @@ initComponents();
 
         panSearchAdmin.setBackground(new java.awt.Color(249, 249, 249));
 
-        txtSearchIdBranch.setBackground(new java.awt.Color(249, 249, 249));
-        txtSearchIdBranch.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        txtSearchIdBranch.setText("Codigo de la sucursal");
-        txtSearchIdBranch.setBorder(null);
-        txtSearchIdBranch.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtSearchIdBranchMouseClicked(evt);
-            }
-        });
-        txtSearchIdBranch.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtSearchIdBranchKeyTyped(evt);
-            }
-        });
+        dchdate1Client.setBackground(new java.awt.Color(249, 249, 249));
+        dchdate1Client.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249, 249, 249)));
+        dchdate1Client.setDateFormatString("yyyy-MM-dd");
+        dchdate1Client.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        dchdate1Client.setOpaque(false);
 
-        dchBirthClient.setBackground(new java.awt.Color(249, 249, 249));
-        dchBirthClient.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249, 249, 249)));
-        dchBirthClient.setDateFormatString("yyyy-MM-dd");
-        dchBirthClient.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        dchBirthClient.setOpaque(false);
-
-        dchBirthClient1.setBackground(new java.awt.Color(249, 249, 249));
-        dchBirthClient1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249, 249, 249)));
-        dchBirthClient1.setDateFormatString("yyyy-MM-dd");
-        dchBirthClient1.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        dchBirthClient1.setOpaque(false);
-
-        sepSearchIdBranch.setBackground(new java.awt.Color(249, 249, 249));
-        sepSearchIdBranch.setForeground(new java.awt.Color(75, 0, 145));
+        dchdate2Client.setBackground(new java.awt.Color(249, 249, 249));
+        dchdate2Client.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249, 249, 249)));
+        dchdate2Client.setDateFormatString("yyyy-MM-dd");
+        dchdate2Client.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        dchdate2Client.setOpaque(false);
 
         sepSearchIdBranch1.setBackground(new java.awt.Color(249, 249, 249));
         sepSearchIdBranch1.setForeground(new java.awt.Color(75, 0, 145));
@@ -279,47 +283,41 @@ initComponents();
         sepSearchIdBranch2.setBackground(new java.awt.Color(249, 249, 249));
         sepSearchIdBranch2.setForeground(new java.awt.Color(75, 0, 145));
 
-        cmbSearchCity.setBackground(new java.awt.Color(249, 249, 249));
-        cmbSearchCity.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        cmbSearchCity.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "- Seleccionar una ciudad -", "Barquisimeto", "Caracas", "Maracaibo", "Punto Fijo", "Valencia" }));
-        cmbSearchCity.setBorder(null);
-        cmbSearchCity.setLightWeightPopupEnabled(false);
-
-        btnSearchBranch.setBackground(new java.awt.Color(249, 249, 249));
-        btnSearchBranch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/findUserIcon.png"))); // NOI18N
-        btnSearchBranch.setToolTipText(" Buscar");
-        btnSearchBranch.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(249, 249, 249), 1, true));
-        btnSearchBranch.setContentAreaFilled(false);
-        btnSearchBranch.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnSearchBranch.setFocusPainted(false);
-        btnSearchBranch.setPreferredSize(new java.awt.Dimension(50, 50));
-        btnSearchBranch.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+        btnSearchClient.setBackground(new java.awt.Color(249, 249, 249));
+        btnSearchClient.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/findUserIcon.png"))); // NOI18N
+        btnSearchClient.setToolTipText(" Buscar");
+        btnSearchClient.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(249, 249, 249), 1, true));
+        btnSearchClient.setContentAreaFilled(false);
+        btnSearchClient.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSearchClient.setFocusPainted(false);
+        btnSearchClient.setPreferredSize(new java.awt.Dimension(50, 50));
+        btnSearchClient.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
-                btnSearchBranchMouseMoved(evt);
+                btnSearchClientMouseMoved(evt);
             }
         });
-        btnSearchBranch.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnSearchClient.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnSearchBranchMouseExited(evt);
+                btnSearchClientMouseExited(evt);
             }
         });
 
-        btnClearSearchBranch.setBackground(new java.awt.Color(249, 249, 249));
-        btnClearSearchBranch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/searchIcon.png"))); // NOI18N
-        btnClearSearchBranch.setToolTipText("Limpiar");
-        btnClearSearchBranch.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(249, 249, 249), 1, true));
-        btnClearSearchBranch.setContentAreaFilled(false);
-        btnClearSearchBranch.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnClearSearchBranch.setFocusPainted(false);
-        btnClearSearchBranch.setPreferredSize(new java.awt.Dimension(50, 50));
-        btnClearSearchBranch.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+        btnClearFiltro.setBackground(new java.awt.Color(249, 249, 249));
+        btnClearFiltro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/searchIcon.png"))); // NOI18N
+        btnClearFiltro.setToolTipText("Limpiar");
+        btnClearFiltro.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(249, 249, 249), 1, true));
+        btnClearFiltro.setContentAreaFilled(false);
+        btnClearFiltro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnClearFiltro.setFocusPainted(false);
+        btnClearFiltro.setPreferredSize(new java.awt.Dimension(50, 50));
+        btnClearFiltro.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
-                btnClearSearchBranchMouseMoved(evt);
+                btnClearFiltroMouseMoved(evt);
             }
         });
-        btnClearSearchBranch.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnClearFiltro.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnClearSearchBranchMouseExited(evt);
+                btnClearFiltroMouseExited(evt);
             }
         });
 
@@ -328,161 +326,40 @@ initComponents();
         panSearchAdminLayout.setHorizontalGroup(
             panSearchAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panSearchAdminLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panSearchAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtSearchIdBranch, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sepSearchIdBranch, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addContainerGap(104, Short.MAX_VALUE)
                 .addGroup(panSearchAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(sepSearchIdBranch1)
+                    .addComponent(dchdate1Client, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE))
+                .addGap(37, 37, 37)
+                .addGroup(panSearchAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(sepSearchIdBranch2, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panSearchAdminLayout.createSequentialGroup()
-                        .addComponent(dchBirthClient, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(dchdate2Client, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(52, 52, 52)
+                        .addComponent(btnSearchClient, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dchBirthClient1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panSearchAdminLayout.createSequentialGroup()
-                        .addComponent(sepSearchIdBranch1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(sepSearchIdBranch2)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cmbSearchCity, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnSearchBranch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnClearSearchBranch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(48, Short.MAX_VALUE))
+                        .addComponent(btnClearFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(189, Short.MAX_VALUE))
         );
         panSearchAdminLayout.setVerticalGroup(
             panSearchAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panSearchAdminLayout.createSequentialGroup()
-                .addGap(3, 3, 3)
-                .addGroup(panSearchAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(btnClearSearchBranch, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panSearchAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(dchBirthClient1, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
-                        .addComponent(dchBirthClient, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
-                        .addComponent(cmbSearchCity)
-                        .addComponent(txtSearchIdBranch))
-                    .addComponent(btnSearchBranch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(panSearchAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panSearchAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(btnClearFiltro, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
+                        .addComponent(btnSearchClient, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(panSearchAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(dchdate1Client, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(dchdate2Client, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panSearchAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(sepSearchIdBranch1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(sepSearchIdBranch, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(sepSearchIdBranch2))
+                .addGroup(panSearchAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(sepSearchIdBranch1, javax.swing.GroupLayout.DEFAULT_SIZE, 1, Short.MAX_VALUE)
+                    .addComponent(sepSearchIdBranch2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(0, 0, 0))
         );
 
         panSearch.add(panSearchAdmin, "card2");
-
-        panSearchGerentte.setBackground(new java.awt.Color(249, 249, 249));
-
-        dchBirthClient2.setBackground(new java.awt.Color(249, 249, 249));
-        dchBirthClient2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249, 249, 249)));
-        dchBirthClient2.setDateFormatString("yyyy-MM-dd");
-        dchBirthClient2.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        dchBirthClient2.setOpaque(false);
-
-        dchBirthClient3.setBackground(new java.awt.Color(249, 249, 249));
-        dchBirthClient3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249, 249, 249)));
-        dchBirthClient3.setDateFormatString("yyyy-MM-dd");
-        dchBirthClient3.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        dchBirthClient3.setOpaque(false);
-
-        cmbSearchCity1.setBackground(new java.awt.Color(249, 249, 249));
-        cmbSearchCity1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        cmbSearchCity1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "- Seleccionar una ciudad -", "Barquisimeto", "Caracas", "Maracaibo", "Punto Fijo", "Valencia" }));
-        cmbSearchCity1.setBorder(null);
-        cmbSearchCity1.setLightWeightPopupEnabled(false);
-
-        btnSearchBranch1.setBackground(new java.awt.Color(249, 249, 249));
-        btnSearchBranch1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/findUserIcon.png"))); // NOI18N
-        btnSearchBranch1.setToolTipText(" Buscar");
-        btnSearchBranch1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(249, 249, 249), 1, true));
-        btnSearchBranch1.setContentAreaFilled(false);
-        btnSearchBranch1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnSearchBranch1.setFocusPainted(false);
-        btnSearchBranch1.setPreferredSize(new java.awt.Dimension(50, 50));
-        btnSearchBranch1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                btnSearchBranch1MouseMoved(evt);
-            }
-        });
-        btnSearchBranch1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnSearchBranch1MouseExited(evt);
-            }
-        });
-        btnSearchBranch1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearchBranch1ActionPerformed(evt);
-            }
-        });
-
-        btnClearSearchBranch1.setBackground(new java.awt.Color(249, 249, 249));
-        btnClearSearchBranch1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/searchIcon.png"))); // NOI18N
-        btnClearSearchBranch1.setToolTipText("Limpiar");
-        btnClearSearchBranch1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(249, 249, 249), 1, true));
-        btnClearSearchBranch1.setContentAreaFilled(false);
-        btnClearSearchBranch1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnClearSearchBranch1.setFocusPainted(false);
-        btnClearSearchBranch1.setPreferredSize(new java.awt.Dimension(50, 50));
-        btnClearSearchBranch1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                btnClearSearchBranch1MouseMoved(evt);
-            }
-        });
-        btnClearSearchBranch1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnClearSearchBranch1MouseExited(evt);
-            }
-        });
-
-        sepSearchIdBranch3.setBackground(new java.awt.Color(249, 249, 249));
-        sepSearchIdBranch3.setForeground(new java.awt.Color(75, 0, 145));
-
-        sepSearchIdBranch4.setBackground(new java.awt.Color(249, 249, 249));
-        sepSearchIdBranch4.setForeground(new java.awt.Color(75, 0, 145));
-
-        javax.swing.GroupLayout panSearchGerentteLayout = new javax.swing.GroupLayout(panSearchGerentte);
-        panSearchGerentte.setLayout(panSearchGerentteLayout);
-        panSearchGerentteLayout.setHorizontalGroup(
-            panSearchGerentteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panSearchGerentteLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(panSearchGerentteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(dchBirthClient2, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
-                    .addComponent(sepSearchIdBranch3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panSearchGerentteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(dchBirthClient3, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
-                    .addComponent(sepSearchIdBranch4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cmbSearchCity1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnSearchBranch1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                .addComponent(btnClearSearchBranch1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(70, Short.MAX_VALUE))
-        );
-        panSearchGerentteLayout.setVerticalGroup(
-            panSearchGerentteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panSearchGerentteLayout.createSequentialGroup()
-                .addGroup(panSearchGerentteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panSearchGerentteLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(panSearchGerentteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cmbSearchCity1)
-                            .addComponent(dchBirthClient2, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-                            .addComponent(dchBirthClient3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panSearchGerentteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(sepSearchIdBranch3)
-                            .addComponent(sepSearchIdBranch4)))
-                    .addGroup(panSearchGerentteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(btnClearSearchBranch1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
-                        .addComponent(btnSearchBranch1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        panSearch.add(panSearchGerentte, "card3");
 
         tblListClientsFrequent.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         tblListClientsFrequent.setModel(new javax.swing.table.DefaultTableModel(
@@ -545,22 +422,113 @@ initComponents();
 
         panSearchAdmin1.setBackground(new java.awt.Color(249, 249, 249));
 
+        cmbOrderMonto.setBackground(new java.awt.Color(249, 249, 249));
+        cmbOrderMonto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        cmbOrderMonto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "         - Seleccionar -", "Mayor a menor", "Menor a mayor" }));
+        cmbOrderMonto.setBorder(null);
+        cmbOrderMonto.setLightWeightPopupEnabled(false);
+
+        cmbOrderCant.setBackground(new java.awt.Color(249, 249, 249));
+        cmbOrderCant.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        cmbOrderCant.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "         - Seleccionar -", "Mayor a menor", "Menor a mayor" }));
+        cmbOrderCant.setBorder(null);
+        cmbOrderCant.setLightWeightPopupEnabled(false);
+
+        jLabel1.setText("Ordenar Monto Gastado de:");
+
+        jLabel2.setText("Ordenar Cantidad de Compras de:");
+
+        btnSearchClient2.setBackground(new java.awt.Color(249, 249, 249));
+        btnSearchClient2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/findUserIcon.png"))); // NOI18N
+        btnSearchClient2.setToolTipText(" Buscar");
+        btnSearchClient2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(249, 249, 249), 1, true));
+        btnSearchClient2.setContentAreaFilled(false);
+        btnSearchClient2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSearchClient2.setFocusPainted(false);
+        btnSearchClient2.setPreferredSize(new java.awt.Dimension(50, 50));
+        btnSearchClient2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnSearchClient2MouseMoved(evt);
+            }
+        });
+        btnSearchClient2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnSearchClient2MouseExited(evt);
+            }
+        });
+
+        btnClearFiltro2.setBackground(new java.awt.Color(249, 249, 249));
+        btnClearFiltro2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/searchIcon.png"))); // NOI18N
+        btnClearFiltro2.setToolTipText("Limpiar");
+        btnClearFiltro2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(249, 249, 249), 1, true));
+        btnClearFiltro2.setContentAreaFilled(false);
+        btnClearFiltro2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnClearFiltro2.setFocusPainted(false);
+        btnClearFiltro2.setPreferredSize(new java.awt.Dimension(50, 50));
+        btnClearFiltro2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnClearFiltro2MouseMoved(evt);
+            }
+        });
+        btnClearFiltro2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnClearFiltro2MouseExited(evt);
+            }
+        });
+
+        sepSearchIdBranch3.setBackground(new java.awt.Color(249, 249, 249));
+        sepSearchIdBranch3.setForeground(new java.awt.Color(75, 0, 145));
+
+        sepSearchIdBranch4.setBackground(new java.awt.Color(249, 249, 249));
+        sepSearchIdBranch4.setForeground(new java.awt.Color(75, 0, 145));
+
         javax.swing.GroupLayout panSearchAdmin1Layout = new javax.swing.GroupLayout(panSearchAdmin1);
         panSearchAdmin1.setLayout(panSearchAdmin1Layout);
         panSearchAdmin1Layout.setHorizontalGroup(
             panSearchAdmin1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 914, Short.MAX_VALUE)
+            .addGroup(panSearchAdmin1Layout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panSearchAdmin1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(sepSearchIdBranch3)
+                    .addComponent(cmbOrderMonto, 0, 202, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panSearchAdmin1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(sepSearchIdBranch4)
+                    .addComponent(cmbOrderCant, 0, 194, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnSearchClient2, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnClearFiltro2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(42, Short.MAX_VALUE))
         );
         panSearchAdmin1Layout.setVerticalGroup(
             panSearchAdmin1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 61, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panSearchAdmin1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(panSearchAdmin1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnClearFiltro2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearchClient2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panSearchAdmin1Layout.createSequentialGroup()
+                        .addGroup(panSearchAdmin1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cmbOrderCant, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
+                            .addComponent(cmbOrderMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addGap(6, 6, 6)
+                        .addGroup(panSearchAdmin1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(sepSearchIdBranch3)
+                            .addComponent(sepSearchIdBranch4))))
+                .addGap(23, 23, 23))
         );
 
         panSearch1.add(panSearchAdmin1, "card2");
 
         panList1.setBackground(new java.awt.Color(249, 249, 249));
 
-        tblListCandyExpenseClient.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         tblListCandyExpenseClient.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -586,14 +554,14 @@ initComponents();
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panList1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 854, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32))
+                .addGap(64, 64, 64))
         );
         panList1Layout.setVerticalGroup(
             panList1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panList1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(20, 20, 20))
         );
 
         javax.swing.GroupLayout panListCandyExpenseClientLayout = new javax.swing.GroupLayout(panListCandyExpenseClient);
@@ -614,13 +582,159 @@ initComponents();
 
         panContent.add(panListCandyExpenseClient, "card3");
 
+        panListSpecialPass.setBackground(new java.awt.Color(249, 249, 249));
+
+        panSearch2.setBackground(new java.awt.Color(249, 249, 249));
+        panSearch2.setLayout(new java.awt.CardLayout());
+
+        panSearchAdmin2.setBackground(new java.awt.Color(249, 249, 249));
+
+        cmbSelecMes.setBackground(new java.awt.Color(249, 249, 249));
+        cmbSelecMes.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        cmbSelecMes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "                - Seleccionar -", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" }));
+        cmbSelecMes.setBorder(null);
+        cmbSelecMes.setLightWeightPopupEnabled(false);
+
+        jLabel4.setText("Seleccione Mes:");
+
+        btnSearchClient1.setBackground(new java.awt.Color(249, 249, 249));
+        btnSearchClient1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/findUserIcon.png"))); // NOI18N
+        btnSearchClient1.setToolTipText(" Buscar");
+        btnSearchClient1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(249, 249, 249), 1, true));
+        btnSearchClient1.setContentAreaFilled(false);
+        btnSearchClient1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSearchClient1.setFocusPainted(false);
+        btnSearchClient1.setPreferredSize(new java.awt.Dimension(50, 50));
+        btnSearchClient1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnSearchClient1MouseMoved(evt);
+            }
+        });
+        btnSearchClient1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnSearchClient1MouseExited(evt);
+            }
+        });
+
+        btnClearFiltro1.setBackground(new java.awt.Color(249, 249, 249));
+        btnClearFiltro1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/searchIcon.png"))); // NOI18N
+        btnClearFiltro1.setToolTipText("Limpiar");
+        btnClearFiltro1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(249, 249, 249), 1, true));
+        btnClearFiltro1.setContentAreaFilled(false);
+        btnClearFiltro1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnClearFiltro1.setFocusPainted(false);
+        btnClearFiltro1.setPreferredSize(new java.awt.Dimension(50, 50));
+        btnClearFiltro1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnClearFiltro1MouseMoved(evt);
+            }
+        });
+        btnClearFiltro1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnClearFiltro1MouseExited(evt);
+            }
+        });
+
+        sepSearchIdBranch6.setBackground(new java.awt.Color(249, 249, 249));
+        sepSearchIdBranch6.setForeground(new java.awt.Color(75, 0, 145));
+
+        javax.swing.GroupLayout panSearchAdmin2Layout = new javax.swing.GroupLayout(panSearchAdmin2);
+        panSearchAdmin2.setLayout(panSearchAdmin2Layout);
+        panSearchAdmin2Layout.setHorizontalGroup(
+            panSearchAdmin2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panSearchAdmin2Layout.createSequentialGroup()
+                .addGap(373, 373, 373)
+                .addComponent(jLabel4)
+                .addGap(18, 18, 18)
+                .addGroup(panSearchAdmin2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(sepSearchIdBranch6)
+                    .addComponent(cmbSelecMes, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
+                .addComponent(btnSearchClient1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnClearFiltro1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(104, Short.MAX_VALUE))
+        );
+        panSearchAdmin2Layout.setVerticalGroup(
+            panSearchAdmin2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panSearchAdmin2Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(panSearchAdmin2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(panSearchAdmin2Layout.createSequentialGroup()
+                        .addGroup(panSearchAdmin2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cmbSelecMes, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(sepSearchIdBranch6))
+                    .addComponent(btnClearFiltro1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearchClient1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31))
+        );
+
+        panSearch2.add(panSearchAdmin2, "card2");
+
+        panList2.setBackground(new java.awt.Color(249, 249, 249));
+
+        tblListSpecialPass.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Cedula", "Nombre", "Apellido", "Telefono"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(tblListSpecialPass);
+
+        javax.swing.GroupLayout panList2Layout = new javax.swing.GroupLayout(panList2);
+        panList2.setLayout(panList2Layout);
+        panList2Layout.setHorizontalGroup(
+            panList2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panList2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 854, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(64, 64, 64))
+        );
+        panList2Layout.setVerticalGroup(
+            panList2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panList2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE)
+                .addGap(20, 20, 20))
+        );
+
+        javax.swing.GroupLayout panListSpecialPassLayout = new javax.swing.GroupLayout(panListSpecialPass);
+        panListSpecialPass.setLayout(panListSpecialPassLayout);
+        panListSpecialPassLayout.setHorizontalGroup(
+            panListSpecialPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panSearch2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panList2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        panListSpecialPassLayout.setVerticalGroup(
+            panListSpecialPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panListSpecialPassLayout.createSequentialGroup()
+                .addComponent(panSearch2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panList2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        panContent.add(panListSpecialPass, "card3");
+
         javax.swing.GroupLayout panReportLayout = new javax.swing.GroupLayout(panReport);
         panReport.setLayout(panReportLayout);
         panReportLayout.setHorizontalGroup(
             panReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panButtonsTopBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(panContent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(panInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 914, Short.MAX_VALUE)
+            .addComponent(panInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 989, Short.MAX_VALUE)
         );
         panReportLayout.setVerticalGroup(
             panReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -636,7 +750,7 @@ initComponents();
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 914, Short.MAX_VALUE)
+            .addGap(0, 989, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -645,7 +759,7 @@ initComponents();
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 638, Short.MAX_VALUE)
+            .addGap(0, 639, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -708,52 +822,53 @@ initComponents();
         setOpacity((float)1.0);
     }//GEN-LAST:event_panButtonsTopBarMouseReleased
 
-    private void txtSearchIdBranchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSearchIdBranchMouseClicked
-        txtSearchIdBranch.setText("");
-    }//GEN-LAST:event_txtSearchIdBranchMouseClicked
+    private void btnSearchClientMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchClientMouseMoved
+        btnSearchClient.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
+    }//GEN-LAST:event_btnSearchClientMouseMoved
 
-    private void txtSearchIdBranchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchIdBranchKeyTyped
-        /*if(txtSearchIdEmployee.getText().length() < 10)
-        support.integerPositiveKeyTyped(evt);
-        else
-        evt.consume();*/
-    }//GEN-LAST:event_txtSearchIdBranchKeyTyped
+    private void btnSearchClientMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchClientMouseExited
+        btnSearchClient.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
+    }//GEN-LAST:event_btnSearchClientMouseExited
 
-    private void btnSearchBranchMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchBranchMouseMoved
-        btnSearchBranch.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
-    }//GEN-LAST:event_btnSearchBranchMouseMoved
+    private void btnClearFiltroMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClearFiltroMouseMoved
+        btnClearFiltro.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
+    }//GEN-LAST:event_btnClearFiltroMouseMoved
 
-    private void btnSearchBranchMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchBranchMouseExited
-        btnSearchBranch.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
-    }//GEN-LAST:event_btnSearchBranchMouseExited
+    private void btnClearFiltroMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClearFiltroMouseExited
+        btnClearFiltro.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
+    }//GEN-LAST:event_btnClearFiltroMouseExited
 
-    private void btnClearSearchBranchMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClearSearchBranchMouseMoved
-        btnClearSearchBranch.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
-    }//GEN-LAST:event_btnClearSearchBranchMouseMoved
-
-    private void btnClearSearchBranchMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClearSearchBranchMouseExited
-        btnClearSearchBranch.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
-    }//GEN-LAST:event_btnClearSearchBranchMouseExited
-
-    private void btnSearchBranch1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchBranch1MouseMoved
+    private void btnSearchClient2MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchClient2MouseMoved
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnSearchBranch1MouseMoved
+    }//GEN-LAST:event_btnSearchClient2MouseMoved
 
-    private void btnSearchBranch1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchBranch1MouseExited
+    private void btnSearchClient2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchClient2MouseExited
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnSearchBranch1MouseExited
+    }//GEN-LAST:event_btnSearchClient2MouseExited
 
-    private void btnSearchBranch1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchBranch1ActionPerformed
+    private void btnClearFiltro2MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClearFiltro2MouseMoved
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnSearchBranch1ActionPerformed
+    }//GEN-LAST:event_btnClearFiltro2MouseMoved
 
-    private void btnClearSearchBranch1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClearSearchBranch1MouseMoved
+    private void btnClearFiltro2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClearFiltro2MouseExited
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnClearSearchBranch1MouseMoved
+    }//GEN-LAST:event_btnClearFiltro2MouseExited
 
-    private void btnClearSearchBranch1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClearSearchBranch1MouseExited
+    private void btnSearchClient1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchClient1MouseMoved
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnClearSearchBranch1MouseExited
+    }//GEN-LAST:event_btnSearchClient1MouseMoved
+
+    private void btnSearchClient1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchClient1MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSearchClient1MouseExited
+
+    private void btnClearFiltro1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClearFiltro1MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnClearFiltro1MouseMoved
+
+    private void btnClearFiltro1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClearFiltro1MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnClearFiltro1MouseExited
 
     /**
      * @param args the command line arguments
@@ -761,46 +876,50 @@ initComponents();
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton btnClearSearchBranch;
-    public javax.swing.JButton btnClearSearchBranch1;
+    public javax.swing.JButton btnClearFiltro;
+    public javax.swing.JButton btnClearFiltro1;
+    public javax.swing.JButton btnClearFiltro2;
     public javax.swing.JButton btnExit;
-    public javax.swing.JButton btnExit1;
     public javax.swing.JButton btnMin;
-    public javax.swing.JButton btnMin1;
-    public javax.swing.JButton btnSearchBranch;
-    public javax.swing.JButton btnSearchBranch1;
-    public javax.swing.JComboBox<String> cmbSearchCity;
-    public javax.swing.JComboBox<String> cmbSearchCity1;
-    public com.toedter.calendar.JDateChooser dchBirthClient;
-    public com.toedter.calendar.JDateChooser dchBirthClient1;
-    public com.toedter.calendar.JDateChooser dchBirthClient2;
-    public com.toedter.calendar.JDateChooser dchBirthClient3;
+    public javax.swing.JButton btnSearchClient;
+    public javax.swing.JButton btnSearchClient1;
+    public javax.swing.JButton btnSearchClient2;
+    public javax.swing.JComboBox<String> cmbOrderCant;
+    public javax.swing.JComboBox<String> cmbOrderMonto;
+    public javax.swing.JComboBox<String> cmbSelecMes;
+    public com.toedter.calendar.JDateChooser dchdate1Client;
+    public com.toedter.calendar.JDateChooser dchdate2Client;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     public javax.swing.JLabel lblSucursalName1;
     public javax.swing.JLabel lblTittle1;
     private javax.swing.JPanel panButtonsTopBar;
-    private javax.swing.JPanel panButtonsTopBar1;
     public javax.swing.JPanel panContent;
     public javax.swing.JPanel panInfo;
     private javax.swing.JPanel panList;
     private javax.swing.JPanel panList1;
+    private javax.swing.JPanel panList2;
     public javax.swing.JPanel panListCandyExpenseClient;
     public javax.swing.JPanel panListClientsFrequent;
+    public javax.swing.JPanel panListSpecialPass;
     private javax.swing.JPanel panReport;
-    private javax.swing.JPanel panReport1;
     public javax.swing.JPanel panSearch;
     public javax.swing.JPanel panSearch1;
+    public javax.swing.JPanel panSearch2;
     public javax.swing.JPanel panSearchAdmin;
     public javax.swing.JPanel panSearchAdmin1;
-    private javax.swing.JPanel panSearchGerentte;
-    private javax.swing.JSeparator sepSearchIdBranch;
+    public javax.swing.JPanel panSearchAdmin2;
     private javax.swing.JSeparator sepSearchIdBranch1;
     private javax.swing.JSeparator sepSearchIdBranch2;
     private javax.swing.JSeparator sepSearchIdBranch3;
     private javax.swing.JSeparator sepSearchIdBranch4;
+    private javax.swing.JSeparator sepSearchIdBranch6;
     public javax.swing.JTable tblListCandyExpenseClient;
     public javax.swing.JTable tblListClientsFrequent;
-    public javax.swing.JTextField txtSearchIdBranch;
+    public javax.swing.JTable tblListSpecialPass;
     // End of variables declaration//GEN-END:variables
 }
