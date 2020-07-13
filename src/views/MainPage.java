@@ -3638,6 +3638,7 @@ public class MainPage extends javax.swing.JFrame {
 
         btnListPelculasGeneral.setBackground(new java.awt.Color(249, 249, 249));
         btnListPelculasGeneral.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnListPelculasGeneral.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/video.png"))); // NOI18N
         btnListPelculasGeneral.setText("<html><b><FONT SIZE=4>Listados de General de Peliculas</Font></b><br><p align=’justify’>Información de Peliculas .</p></html>");
         btnListPelculasGeneral.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 232, 244)));
         btnListPelculasGeneral.setBorderPainted(false);
@@ -3663,6 +3664,7 @@ public class MainPage extends javax.swing.JFrame {
 
         btnListPeliculasXmes.setBackground(new java.awt.Color(249, 249, 249));
         btnListPeliculasXmes.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnListPeliculasXmes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/cinema (1).png"))); // NOI18N
         btnListPeliculasXmes.setText("<html><b><FONT SIZE=4>Listados de Peliculas por Mes</Font></b><br><p align=’justify’>Detalles de Peliculas Proyectadas.</p></html>");
         btnListPeliculasXmes.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 232, 244)));
         btnListPeliculasXmes.setBorderPainted(false);
