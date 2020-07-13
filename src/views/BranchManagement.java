@@ -561,7 +561,7 @@ public class BranchManagement extends javax.swing.JFrame {
 
         cmbEnterpriseBranch.setBackground(new java.awt.Color(249, 249, 249));
         cmbEnterpriseBranch.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        cmbEnterpriseBranch.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "- Seleccionar una Empresa -", "Cines de Venezuela" }));
+        cmbEnterpriseBranch.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "- Seleccionar una Empresa -", "CINES DE VENEZUELA, C.A." }));
         cmbEnterpriseBranch.setBorder(null);
         cmbEnterpriseBranch.setLightWeightPopupEnabled(false);
 

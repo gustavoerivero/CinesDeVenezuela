@@ -13,11 +13,16 @@ package models;
  */
 public class User {
     
-    private String email, pass;
+    private String email, 
+                   employee_id,
+                   role_id,
+                   pass;
     private char status;
 
-    public User(String email, String pass, char status) {
+    public User(String email, String employee_id, String role_id, String pass, char status) {
         this.email = email;
+        this.employee_id=employee_id;
+        this.role_id=role_id;
         this.pass = pass;
         this.status = status;
     }
@@ -28,6 +33,22 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getEmployee_id() {
+        return employee_id;
+    }
+
+    public void setEmployee_id(String employee_id) {
+        this.employee_id = employee_id;
+    }
+
+    public String getRole_id() {
+        return role_id;
+    }
+
+    public void setRole_id(String role_id) {
+        this.role_id = role_id;
     }
 
     public String getPass() {

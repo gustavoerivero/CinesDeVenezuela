@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
 package controllers;
 
@@ -75,7 +80,7 @@ public class ControllerEnterpriseManagement implements ActionListener, MouseList
     public ControllerEnterpriseManagement(String rolUser, String nameUser, String branchUser){
         
         // Declarar la variable de las clases instanciadas.
-        enterManagement = new EnterpriseManagement();
+        enterManagement   = new EnterpriseManagement();
         support         = new SupportFunctions();
         
         // Se inicializan las variables.
@@ -84,20 +89,22 @@ public class ControllerEnterpriseManagement implements ActionListener, MouseList
         this.branchUser = branchUser;
         
         // Se muestra la primera pantalla.
-        support.cardSelection(enterManagement.panContainerEnterprise, enterManagement.panConsultList);
+        support.cardSelection(enterManagement.panContainerEnterprise, enterManagement.panCRUD);
         
         // Se cargan las empresas.
-        loadEnterpriseTable();
+        //loadEnterpriseTable();
+        loadEnterprise();
+        
         
         // Se habilitan o deshabilitan los botónes según tipo de usuario.
         //enabledButtons(this.rolUser);
         
         // Se inicializan las variables.
-        clearVariables();
+      //  clearVariables();
         
         // Activamos los eventos por las views.
         enterManagement.addEvents(this);
-        enterManagement.addMouseEvents(this);
+       // enterManagement.addMouseEvents(this);
         
     }
   /**
@@ -119,7 +126,46 @@ public class ControllerEnterpriseManagement implements ActionListener, MouseList
         
         // Salir de la aplicación.
         else if(evt.getSource() == enterManagement.btnExit){
-            enterManagement.dispose();
+            //enterManagement.dispose();
+            
+            // Se validan todos los campos.
+            if(!enterManagement.txtIdEnterprise.getText().equals("Codigo de la empresa") && 
+                    !enterManagement.txtIdEnterprise.getText().equals("") &&
+                    !enterManagement.txtNameEnterprise.getText().equals("Nombre de la empresa") &&
+                    !enterManagement.txtNameEnterprise.getText().equals("") &&
+                    !enterManagement.txtDescriptionEnterprise.getText().equals("Descripcion de la empresa") &&
+                    !enterManagement.txtDescriptionEnterprise.getText().equals("") &&
+                    !enterManagement.txtEmailEnterprise.getText().equals("Correo electronico de la empresa") &&
+                    !enterManagement.txtEmailEnterprise.getText().equals("") &&
+                    !enterManagement.txtPriceTicketEnterprise.getText().equals("Precio base boleto de funciones") &&
+                    !enterManagement.txtPriceTicketEnterprise.getText().equals("") ){
+                
+                // Se pregunta al usuario si desea abandonar la consulta.
+                SelectOption select = new SelectOption(enterManagement, true, 1, 
+                        "¿Está seguro que desea abandonar la consulta?", "Si", "No");
+                
+                // Si la respuesta es afirmativa.
+                if(select.getOpc()){
+                    
+                    enterManagement.dispose();
+                    // Se inicializan las variables.
+                    clearVariables();
+                                        
+                }    
+                   
+            }
+            
+            // Si no hay campos modificados.
+            else{
+                
+                enterManagement.dispose();
+                // Se inicializan las variables.
+                clearVariables();
+                
+            }
+            
+            
+            
         } 
         
         //</editor-fold>
@@ -150,7 +196,7 @@ public class ControllerEnterpriseManagement implements ActionListener, MouseList
      //<editor-fold defaultstate="collapsed" desc=" Enterprise Search ">
         
         // Buscar a una empresa.
-        else if(evt.getSource() == enterManagement.btnSearchEnterprise){
+     /*   else if(evt.getSource() == enterManagement.btnSearchEnterprise){
             
             // Si no se ingresó información para filtrar.
             if  ((enterManagement.txtSearchIdEnterprise.getText().equals("") || 
@@ -165,27 +211,27 @@ public class ControllerEnterpriseManagement implements ActionListener, MouseList
             else
                 loadEnterpriseTable();
                 
-        }
+        }*/
         
         //</editor-fold>
     
      //<editor-fold defaultstate="collapsed" desc=" Enterprise Table Clear ">
         
         // Limpiar el consultar listado.
-        else if(evt.getSource() == enterManagement.btnClearSearchEnterprise){
+      /*  else if(evt.getSource() == enterManagement.btnClearSearchEnterprise){
             
             enterManagement.clearEnterpriseSearch();
             
             loadEnterpriseTable();
             
-        }
+        }*/
         
         //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc=" Back to Consult List ">
         
         // Para volver a la view de consulta.
-        else if(evt.getSource() == enterManagement.btnBackEnterprise){
+        /*else if(evt.getSource() == enterManagement.btnBackEnterprise){
             
             // Se validan todos los campos.
             if(!enterManagement.txtIdEnterprise.getText().equals("Codigo de la empresa") && 
@@ -233,7 +279,7 @@ public class ControllerEnterpriseManagement implements ActionListener, MouseList
                 
             }
                 
-        }
+        }*/
         
         //</editor-fold>
     
@@ -242,7 +288,7 @@ public class ControllerEnterpriseManagement implements ActionListener, MouseList
         // Si se desea limpiar un empleado.
         else if(evt.getSource() == enterManagement.btnClearEnterprise){
             
-            if(id.equals(""))
+           /*if(id.equals(""))
                 enterManagement.clearView();
             else{
                 
@@ -255,8 +301,20 @@ public class ControllerEnterpriseManagement implements ActionListener, MouseList
                 enterManagement.txtPriceTicketEnterprise.setText(String.valueOf(priceticket));
                 
                 
-            }
+           }*/
+
                 
+                // Se muestran los datos obtenidos.
+                enterManagement.txtIdEnterprise.setText(id);
+                //enterManagement.cmbBranchEmployee.setSelectedItem(branch);
+                enterManagement.txtNameEnterprise.setText(name);
+                enterManagement.txtDescriptionEnterprise.setText(description);
+                enterManagement.txtEmailEnterprise.setText(enteremail);
+                enterManagement.txtPriceTicketEnterprise.setText(String.valueOf(priceticket));
+                
+                
+           
+            
         }
         
         //</editor-fold>      
@@ -266,86 +324,12 @@ public class ControllerEnterpriseManagement implements ActionListener, MouseList
         // Registro o Modificación de empleado.
         else if(evt.getSource() == enterManagement.btnRegisterModifyEnterprise){
             
-            /**
-             * Si la variable global 'id' se encuentra vacía, se tiene que el caso
-             * es un registro.
-             */
-            if(id.equals("")){
-                
-                
-                // De no haber campos vacíos.
-                if( !enterManagement.txtIdEnterprise.getText().equals("") && 
-                    !enterManagement.txtIdEnterprise.getText().equals("Codigo de la empresa") && 
-                    !enterManagement.txtNameEnterprise.getText().equals("") &&
-                    !enterManagement.txtNameEnterprise.getText().equals("Nombre de la empresa") &&
-                    !enterManagement.txtDescriptionEnterprise.getText().equals("") &&
-                    !enterManagement.txtDescriptionEnterprise.getText().equals("Descripcion de la empresa") &&
-                    !enterManagement.txtEmailEnterprise.getText().equals("") &&
-                    !enterManagement.txtEmailEnterprise.getText().equals("Correo electronico de la empresa") &&
-                    !enterManagement.txtPriceTicketEnterprise.getText().equals("") &&
-                    !enterManagement.txtPriceTicketEnterprise.getText().equals("Precio base boleto de funciones")){
-                
-                        // Se confirma que se desea eliminar el registro.
-                        SelectOption select = new SelectOption(enterManagement, true, 2, 
-                                "¿Desea registrar a esta empresa?", "Si", "No");
-
-                        // Si se confirma el registro.
-                        if(select.getOpc()){
-
-                            // Si el empleado ya existe pero se encuentra inactivo.
-                            if(enterCRUD.enterpriseExist(enterManagement.txtIdEnterprise.getText(), 'I')){
-                                
-                                // Se cambia el estado del empleado a activo.
-                                enterCRUD.DeleteEnterprise(enterManagement.txtIdEnterprise.getText(), 1);
-                                
-                                // Se actualiza la información del empleado.
-                                updateEnterpriseData(enterManagement.txtIdEnterprise.getText());
-                                
-                                // Se muestra la vista del CRUD.
-                                support.cardSelection(enterManagement.panContainerEnterprise, enterManagement.panConsultList);
-
-                                // Se cargan los empleados.
-                                loadEnterpriseTable();
-
-                                // Se inicializan las variables.
-                                clearVariables();
-                                
-                            }
-                            
-                            // Si el usuario no existe.
-                            else{
-                            
-                                // Se ejecuta el registro de información.
-                                registerEnterpriseData();
-                                
-                                // Se muestra la vista del CRUD.
-                                support.cardSelection(enterManagement.panContainerEnterprise, enterManagement.panConsultList);
-
-                                // Se cargan los empleados.
-                                loadEnterpriseTable();
-
-                                // Se inicializan las variables.
-                                clearVariables();
-                                
-                            }
-                        }
-                    
-                }
-                
-                // Si hay campos vacíos.
-                else
-                    // Se muestra mensaje solicitando datos.
-                    popup = new PopupMessage(enterManagement, true, 1, 
-                            "Debe ingresar datos en los campos solicitados.");
-      
-                
-            }
-            
+        
             /**
              * Si la variable global 'id' posee algún dato, se tiene el caso de modificación
              * de un registro.
              */
-            else{
+            
                 
                 // De no haber campos vacíos.
                 if( !enterManagement.txtIdEnterprise.getText().equals("") && 
@@ -367,13 +351,14 @@ public class ControllerEnterpriseManagement implements ActionListener, MouseList
                         if(select.getOpc()){
 
                             // Se ejecuta la actualización de información.
-                            updateEnterpriseData(id);
+                            updateEnterpriseData();
                             
                             // Se muestra la vista del CRUD.
-                            support.cardSelection(enterManagement.panContainerEnterprise, enterManagement.panConsultList);
+                           // support.cardSelection(enterManagement.panContainerEnterprise, enterManagement.panConsultList);
 
                             // Se cargan los empleados.
-                            loadEnterpriseTable();
+                            //loadEnterpriseTable();
+                            loadEnterprise();
 
                             // Se inicializan las variables.
                             clearVariables();
@@ -388,7 +373,7 @@ public class ControllerEnterpriseManagement implements ActionListener, MouseList
                     popup = new PopupMessage(enterManagement, true, 1, 
                             "Debe ingresar datos en los campos solicitados.");
                                     
-            }
+            
             
         }
         
@@ -397,7 +382,7 @@ public class ControllerEnterpriseManagement implements ActionListener, MouseList
     //<editor-fold defaultstate="collapsed" desc=" Delete Enterprise ">
         
         // Eliminación de una empresa.
-        else if(evt.getSource() == enterManagement.btnDeleteEnterprise){
+      /*  else if(evt.getSource() == enterManagement.btnDeleteEnterprise){
             
             // Se pregunta al usuario si desea realmente eliminar al empleado.
             SelectOption select = new SelectOption(enterManagement, true, 2, 
@@ -423,7 +408,7 @@ public class ControllerEnterpriseManagement implements ActionListener, MouseList
                 
             }
             
-        }
+        }*/
         
         //</editor-fold>
     
@@ -436,7 +421,7 @@ public class ControllerEnterpriseManagement implements ActionListener, MouseList
     public void mouseClicked(MouseEvent evt) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
    // Si se hace click sobre la tabla de empresas.
-        if(evt.getSource() == enterManagement.tblEnterpriseList){
+      /*  if(evt.getSource() == enterManagement.tblEnterpriseList){
                                               
             // Se obtienen los valores de la fila y columna seleccionada.
             int column = enterManagement.getColumnTable(), row = enterManagement.getRowTable();
@@ -470,7 +455,7 @@ public class ControllerEnterpriseManagement implements ActionListener, MouseList
                         String idEnterprise = dtm.getValueAt(row, 0).toString();
                         
                         // Se buscan los datos de la empresa.
-                        loadEnterprise(idEnterprise);
+                        loadEnterprise(idEnterprise);*/
                         
                         /*// Se crea la variable de formato de fechas.
                         SimpleDateFormat sdt = new SimpleDateFormat("yyyy-MM-dd");
@@ -490,7 +475,7 @@ public class ControllerEnterpriseManagement implements ActionListener, MouseList
                             empManagement.cmbBranchEmployee.addItem(namesBranch.get(i));*/
                                                     
                         // Se muestra la vista del CRUD.
-                        support.cardSelection(enterManagement.panContainerEnterprise, enterManagement.panCRUD);
+                       /* support.cardSelection(enterManagement.panContainerEnterprise, enterManagement.panCRUD);
                         
                         // Se bloquea el botón de 'eliminar'.
                         enterManagement.btnDeleteEnterprise.setEnabled(true);
@@ -548,7 +533,7 @@ public class ControllerEnterpriseManagement implements ActionListener, MouseList
 
             }
 
-        } 
+        } */
     
     }
     
@@ -586,7 +571,7 @@ public class ControllerEnterpriseManagement implements ActionListener, MouseList
      * Método para cargar todas las empresas.
      * @return Listado de nombres de empresas.
      */
-    private void loadEnterprise(String idEnterprise){
+    private void loadEnterprise(){
         
         // Se instancia la clase a utilizar.
         enterCRUD = new EnterpriseCRUD();
@@ -595,7 +580,7 @@ public class ControllerEnterpriseManagement implements ActionListener, MouseList
         java.sql.ResultSet result;
                 
         try {
-            result = enterCRUD.readEnterpriseData(idEnterprise);
+            result = enterCRUD.readEnterpriseData();
             while(result.next()){
                 id = result.getString("codigo");
                 name = result.getString("nombre");
@@ -604,6 +589,22 @@ public class ControllerEnterpriseManagement implements ActionListener, MouseList
                 priceticket = result.getDouble("precio_boleto");
                 
             }
+            
+            // Se configura el texto del botón.
+                        enterManagement.btnRegisterModifyEnterprise.setText("Modificar");
+                        
+                        // Se limpian todos los aspectos visuales.
+                        enterManagement.clearView();
+                                                
+                        // Se muestran los datos obtenidos.
+                        enterManagement.txtIdEnterprise.setText(id);
+                        enterManagement.txtNameEnterprise.setText(name);
+                        enterManagement.txtDescriptionEnterprise.setText(description);
+                        enterManagement.txtEmailEnterprise.setText(enteremail);
+                        enterManagement.txtPriceTicketEnterprise.setText(String.valueOf(priceticket));
+                        
+                        // Se bloquea el campo de codigo.
+                        enterManagement.txtIdEnterprise.setEnabled(false);
             
             System.out.println("Éxito.");
                         
@@ -718,7 +719,7 @@ public class ControllerEnterpriseManagement implements ActionListener, MouseList
      * Método para construir la sentencia de búsqueda del empleado.
      * @return Sentencia SQL.
      */
-    private String buildSentenceSQL(){
+   /* private String buildSentenceSQL(){
         
         // Se declaran e inicializan las variables que servirán para buscar empleados.
         String  initSQL     = "SELECT \"codigo\", \"nombre\", \"descripcion\", \"correo\", \"precio_boleto\""      
@@ -743,7 +744,7 @@ public class ControllerEnterpriseManagement implements ActionListener, MouseList
         // Si se ingresó el nombre de la empresa.
         if(!enterManagement.txtSearchNameEnterprise.getText().equals("") &&
                 !enterManagement.txtSearchNameEnterprise.getText().equals("Nombre de la empresa"))
-            SQL += idSQL + "'" + enterManagement.txtSearchNameEnterprise.getText() + "'";       
+            SQL += idSQL + "'" + enterManagement.txtSearchNameEnterprise.getText() + "'"; */      
            /*
             // Se fragmenta el dato proporcionado.
             String[] names = empManagement.txtSearchNameEmployee.getText().split(" ");
@@ -768,15 +769,15 @@ public class ControllerEnterpriseManagement implements ActionListener, MouseList
             SQL += jobSQL + "'" + empManagement.cmbSearchJobEmployee.getSelectedItem().toString() + "'";*/
           
         // Se culmina la sentencia.
-        return SQL += finalSQL;
+      /*  return SQL += finalSQL;
         
-    }
+    }*/
     
     /**
      * Método para cargar la información de la empresa.
      * @return listado con la información de la empresa.
      */
-    private void loadEnterpriseTable(){
+   /* private void loadEnterpriseTable(){
                 
         // Se instancia la clase a utilizar.
         enterCRUD = new EnterpriseCRUD();
@@ -872,12 +873,12 @@ public class ControllerEnterpriseManagement implements ActionListener, MouseList
             
         }
         
-    }
+    }*/
     
     /**
      * Método para registrar a una nueva empresa.
      */
-    private void registerEnterpriseData(){
+    /*private void registerEnterpriseData(){
                         
         // Se carga la nueva información del empleado.
         Enterprise enter = new Enterprise(
@@ -886,25 +887,25 @@ public class ControllerEnterpriseManagement implements ActionListener, MouseList
                                     enterManagement.txtDescriptionEnterprise.getText(),
                                     enterManagement.txtEmailEnterprise.getText(),
                                     Double.valueOf(enterManagement.txtPriceTicketEnterprise.getText()), 
-                                    'A' 
+                                    'A' */
                                     /*loadBranch(empManagement.cmbBranchEmployee.getSelectedItem().toString()), 
                                     empManagement.cmbJobEmployee.getSelectedItem().toString(),    
-                                    empManagement.dchEntranceDateEmployee.getDate()*/ );
+                                   empManagement.dchEntranceDateEmployee.getDate());*/
         
         // Se ejecuta el registro de datos.
-        enterCRUD.registerEnterprise(enter);
+       /* enterCRUD.registerEnterprise(enter);
         
         // Se muestra mensaje de éxito.
         popup = new PopupMessage(enterManagement, true, 4, 
                 "La empresa se ha registrado con éxito");
         
-    }
+    }*/
     
     /**
      * Método para actualizar la información de una empresa.
      * @param id cédula del empleado a actualizar.
      */
-    private void updateEnterpriseData(String id){
+    private void updateEnterpriseData(){
                         
         // Se carga la nueva información del empleado.
         Enterprise enter = new Enterprise(
@@ -919,11 +920,11 @@ public class ControllerEnterpriseManagement implements ActionListener, MouseList
                                     empManagement.dchEntranceDateEmployee.getDate()*/ );
         
         // Se ejecuta la actualización de datos.
-        enterCRUD.UpdateEnterprise(enter, id);
+        enterCRUD.UpdateEnterprise(enter);
         
         // Se muestra mensaje de éxito.
         popup = new PopupMessage(enterManagement, true, 4, 
-                "Los datos del empleados se han actualizado con éxito.");
+                "Los datos de la empresa se han actualizado con éxito.");
         
     }
     

@@ -40,10 +40,11 @@ public class ControllerClientManagement implements ActionListener, MouseListener
     
     // Models
     private Client cli;
-        // Models.database
-        private ClientCRUD cliCRUD;
-        private BranchCRUD braCRUD;
-        private CityCRUD citCRUD;
+    
+    // Models.database
+    private ClientCRUD cliCRUD;
+    private BranchCRUD braCRUD;
+    private CityCRUD citCRUD;
     
     // Views
     private ClientManagement cliManagement;
@@ -69,6 +70,7 @@ public class ControllerClientManagement implements ActionListener, MouseListener
                     email,
                     type;
     
+    
     private long    phone;
     
     private Date    birth;
@@ -82,9 +84,10 @@ public class ControllerClientManagement implements ActionListener, MouseListener
      * @param nameUser Nombre del usuario que ha ingresado al sistema.
      * @param branchUser Nombre de la sucursal del usuario que ha ingresado al sistema.
      */
-    public ControllerClientManagement(String rolUser, String nameUser, String branchUser){
-        
-        // Declarar la variable de las clases instanciadas.
+    public ControllerClientManagement(String rolUser, String nameUser, String branchUser,int opc){
+        if(opc==1)
+        {
+                    // Declarar la variable de las clases instanciadas.
         cliManagement   = new ClientManagement();
         support         = new SupportFunctions();
         
@@ -98,16 +101,40 @@ public class ControllerClientManagement implements ActionListener, MouseListener
         
         // Se cargan los clientes.
         loadClientTable();
-        
-        // Se habilitan o deshabilitan los botónes según tipo de usuario.
-        enabledButtons(this.rolUser);
-        
+                
         // Se inicializan las variables.
         clearVariables();
         
         // Activamos los eventos por las views.
         cliManagement.addEvents(this);
         cliManagement.addMouseEvents(this);
+        }
+        else if(opc==2)
+        {
+            cliManagement   = new ClientManagement();
+        support         = new SupportFunctions();
+        
+        // Se inicializan las variables.
+        this.rolUser    = rolUser;
+        this.nameUser   = nameUser;
+        this.branchUser = branchUser;
+            // Se muestra la vista del CRUD.
+                        support.cardSelection(cliManagement.panContainerClient, cliManagement.panCRUD);
+                        
+                        // Se bloquea el botón de 'eliminar'.
+                        cliManagement.btnDeleteClient.setEnabled(false);
+                        
+                        // Se configura el texto del botón.
+                        cliManagement.btnRegisterModifyClient.setText("Registrar");
+                        
+                        // Se limpian todos los aspectos visuales.
+                        cliManagement.clearView();
+                        cliManagement.txtIdClient.setEnabled(true);
+                        // Se limpian las variables
+                        clearVariables();
+                        cliManagement.addEvents(this);
+        cliManagement.addMouseEvents(this);
+        }
         }
     
     
@@ -136,13 +163,13 @@ public class ControllerClientManagement implements ActionListener, MouseListener
         //<editor-fold defaultstate="collapsed" desc=" Branch Change ">
         
         // Cambiar de sucursal a gestionar
-        else if(evt.getSource() == cliManagement.btnChangeBranch){
+      /*  else if(evt.getSource() == cliManagement.btnChangeBranch){
             
             ArrayList<String>   cityNames   = loadCityNames(),
                                 cityBranch  = new ArrayList<>(),
                                 branchNames = new ArrayList<>();
             
-            /*loadBranch(cityBranch, branchNames);*/
+            loadBranch(cityBranch, branchNames);
                         
             // Instanciar la clase
             changeBranch = new ChangeBranch(cliManagement, true, cityNames, cityBranch, branchNames, rolUser);
@@ -152,7 +179,7 @@ public class ControllerClientManagement implements ActionListener, MouseListener
                         
             changeBranch.dispose();
             
-        }
+        }*/
         
         //</editor-fold>
         
@@ -165,8 +192,9 @@ public class ControllerClientManagement implements ActionListener, MouseListener
             if  ((cliManagement.txtSearchIdClient.getText().equals("") || 
                     cliManagement.txtSearchIdClient.getText().equals("Cédula del cliente")) &&
                 (cliManagement.txtSearchNameClient.getText().equals("") ||
-                    cliManagement.txtSearchNameClient.getText().equals("Nombre y apellido del cliente")));
-            
+                    cliManagement.txtSearchNameClient.getText().equals("Nombre y apellido del cliente")))
+                 popup = new PopupMessage(cliManagement, true, 1, "Debe ingresar al menos un dato para filtrar.");
+                 
             // Si al menos se ingresó algún dato para filtrar.
             else
                 loadClientTable();   
@@ -215,7 +243,7 @@ public class ControllerClientManagement implements ActionListener, MouseListener
                     
                     // Se muestra la vista del CRUD.
                     support.cardSelection(cliManagement.panContainerClient, cliManagement.panConsultList);
-                    
+                    cliManagement.clearClientSearch();
                     // Se cargan los empleados.
                     loadClientTable();
                     
@@ -231,7 +259,7 @@ public class ControllerClientManagement implements ActionListener, MouseListener
                 
                 // Se muestra la vista del CRUD.
                 support.cardSelection(cliManagement.panContainerClient, cliManagement.panConsultList);
-                    
+                cliManagement.clearClientSearch();
                 // Se cargan los empleados.
                 loadClientTable();
                 
@@ -427,7 +455,7 @@ public class ControllerClientManagement implements ActionListener, MouseListener
                 
                 // Se muestra la vista del CRUD.
                 support.cardSelection(cliManagement.panContainerClient, cliManagement.panConsultList);
-                    
+            cliManagement.clearClientSearch();
                 // Se cargan los empleados.
                 loadClientTable();
                     
@@ -482,7 +510,7 @@ public class ControllerClientManagement implements ActionListener, MouseListener
                         // Se obtiene el id del empleado en cuestión.
                         String idClient = dtm.getValueAt(row, 0).toString();
                         
-                        // Se buscan los datos del empleado.
+                        // Se buscan los datos del cliente.
                         loadClient(idClient);
                         
                         // Se crea la variable de formato de fechas.
@@ -492,7 +520,7 @@ public class ControllerClientManagement implements ActionListener, MouseListener
                         support.cardSelection(cliManagement.panContainerClient, cliManagement.panCRUD);
                         
                         // Se bloquea el botón de 'eliminar'.
-                        cliManagement.btnDeleteClient.setEnabled(false);
+                        cliManagement.btnDeleteClient.setEnabled(true);
                         
                         // Se configura el texto del botón.
                         cliManagement.btnRegisterModifyClient.setText("Actualizar");
@@ -528,19 +556,17 @@ public class ControllerClientManagement implements ActionListener, MouseListener
                         support.cardSelection(cliManagement.panContainerClient, cliManagement.panCRUD);
                         
                         // Se bloquea el botón de 'eliminar'.
-                        cliManagement.btnDeleteClient.setEnabled(true);
+                        cliManagement.btnDeleteClient.setEnabled(false);
                         
                         // Se configura el texto del botón.
                         cliManagement.btnRegisterModifyClient.setText("Registrar");
                         
                         // Se limpian todos los aspectos visuales.
                         cliManagement.clearView();
-                        
+                        cliManagement.txtIdClient.setEnabled(true);
                         // Se limpian las variables
                         clearVariables();
-                        
-                        
-                        
+                       
                     }
                         
                     //</editor-fold>
@@ -554,35 +580,9 @@ public class ControllerClientManagement implements ActionListener, MouseListener
     }
     
     
-    //<editor-fold defaultstate="collapsed" desc=" Métodos para el funcionamiento del Controller ">
+     //<editor-fold defaultstate="collapsed" desc=" Métodos para el funcionamiento del Controller ">
     
-    /**
-     * Método para habilitar o deshabilitar botónes según tipo de usuario.
-     * @param rol Rol del usuario que ha ingresado al sistema.
-     */
-    private void enabledButtons(String rol){
-        
-        switch(rol){
-            
-            // Rol: Administrador
-            case "ROL-01":
-                
-                cliManagement.btnChangeBranch.setEnabled(true);
-                cliManagement.lblSucursalName.setText(branchUser);
-                
-                break;
-                
-            // Rol: Gerente
-            case "ROL-02":
-                
-                cliManagement.btnChangeBranch.setEnabled(false);
-                cliManagement.lblSucursalName.setText(branchUser);
-                
-                break;
-            
-        }
-        
-    }
+   
     
     /**
      * Método para cargar todos los clientes.
@@ -606,6 +606,7 @@ public class ControllerClientManagement implements ActionListener, MouseListener
                 email = result.getString("correo");
                 phone = result.getLong("telefono");
                 type = result.getString("tipo");
+                birth = result.getDate("fecha_nacimiento");
             }
             
             System.out.println("Éxito.");
@@ -618,6 +619,36 @@ public class ControllerClientManagement implements ActionListener, MouseListener
                 
     }
         
+    /**
+     * Método para cargar sucursales.
+     * @param firstList Primer listado con los nombres de ciudades.
+     * @param secondList Segundo listado con los nombres de sucursales.
+     */
+    private void loadBranch(ArrayList<String> firstList, ArrayList<String> secondList){
+        
+        // Se instancia la clase a utilizar.
+        braCRUD = new BranchCRUD();
+        
+        // Se declara la variable que devuelve el resultado.
+        java.sql.ResultSet result;
+        
+        try {
+            result = braCRUD.readBranchForCity();
+            while(result.next()){
+                firstList.add(result.getString("NombreCiudad"));
+                secondList.add(result.getString("NombreSucursal"));
+            }
+                        
+            System.out.println("Éxito.");
+                                    
+        } catch (java.sql.SQLException e) {
+            
+            System.out.println("Error: " + e);
+            
+        }
+        
+    }
+    
     /**
      * Método para cargar todas ciudades.
      * @return Listado de nombres de ciudades.
@@ -680,7 +711,7 @@ public class ControllerClientManagement implements ActionListener, MouseListener
                 
         // Si se ingresó el nombre y apellido de un cliente.
         if(!cliManagement.txtSearchNameClient.getText().equals("") &&
-                !cliManagement.txtSearchNameClient.getText().equals("Nombre y apellido del cliente")){
+           !cliManagement.txtSearchNameClient.getText().equals("Nombre y apellido del cliente")){
                    
             // Se fragmenta el dato proporcionado.
             String[] names = cliManagement.txtSearchNameClient.getText().split(" ");
@@ -730,7 +761,7 @@ public class ControllerClientManagement implements ActionListener, MouseListener
                 directionClient.add(result.getString("direccion"));
                 emailClient.add(result.getString("correo"));
                 phoneClient.add(result.getString("telefono"));
-                typeClient.add(result.getString("tipo"));
+                typeClient .add(result.getString("tipo"));
                                    
             }
             
@@ -799,7 +830,7 @@ public class ControllerClientManagement implements ActionListener, MouseListener
      * Método para registrar a un nuevo empleado.
      */
     private void registerClientData(){
-    /*                 
+                        
         // Se carga la nueva información del empleado.
         Client cli = new Client(cliManagement.txtIdClient.getText(), 
                                     cliManagement.txtNameClient.getText(), 
@@ -807,10 +838,10 @@ public class ControllerClientManagement implements ActionListener, MouseListener
                                     Long.valueOf(cliManagement.txtPhoneClient.getText()),  
                                     cliManagement.txtDirectionClient.getText(), 
                                     cliManagement.dchBirthClient.getDate(),
-                                    "R",
+                                    cliManagement.txtEmailClient.getText(),
                                     'A',
-                                    cliManagement.txtEmailClient.getText());
-        */
+                                    "R");
+        
         // Se ejecuta el registro de datos.
         cliCRUD.registerClient(cli);
         
@@ -825,7 +856,7 @@ public class ControllerClientManagement implements ActionListener, MouseListener
      * @param id cédula del empleado a actualizar.
      */
     private void updateClientData(String id){
-        /*                
+                        
         // Se carga la nueva información del empleado.
         Client cli = new Client(cliManagement.txtIdClient.getText(), 
                                     cliManagement.txtNameClient.getText(), 
@@ -833,10 +864,10 @@ public class ControllerClientManagement implements ActionListener, MouseListener
                                     Long.valueOf(cliManagement.txtPhoneClient.getText()),  
                                     cliManagement.txtDirectionClient.getText(), 
                                     cliManagement.dchBirthClient.getDate(),
-                                    "R",
+                                    cliManagement.txtEmailClient.getText(),
                                     'A',
-                                    cliManagement.txtEmailClient.getText());
-        */
+                                    "R");
+        
         // Se ejecuta la actualización de datos.
         cliCRUD.UpdateClient(cli, id);
         
@@ -858,7 +889,7 @@ public class ControllerClientManagement implements ActionListener, MouseListener
         email       = "";
         phone       = 0;
         birth       = null;
-        type        = "";
+        type        ="";
         
     }
     
@@ -883,5 +914,7 @@ public class ControllerClientManagement implements ActionListener, MouseListener
     }
     
     //</editor-fold>
-        
+    
+    
+    
 }

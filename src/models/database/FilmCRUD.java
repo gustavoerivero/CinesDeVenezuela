@@ -150,15 +150,22 @@ public class FilmCRUD {
      */
     public void UpdateFilm(Film fi, String id) {
 
-        // Se declara la sentencia SQL.
-        String  SQL = "UPDATE \"pelicula\" SET "
+        // Se declara la sentencia SQL. NO MODIFICA NADA
+       /* String  SQL = "UPDATE \"pelicula\" SET "
                 + "\"nombre\" = '" + fi.getName() + "',"
                 +  "\"sinopsis\" = '" + fi.getSynopsis()+ "',"
                 +  "\"duracion\" = '" + fi.getDuration()+ "',"
                 +  "\"clasificacion\" = " + fi.getClassification()+ ","
                 +  "\"fecha_estreno\" = " + fi.getPremiere()+ ","
                 +  "\"genero\" = " + fi.getType()+ ","
-                +  " WHERE \"codigo\" = '" + id + "';";
+                +  " WHERE \"codigo\" = '" + id + "';";*/
+        
+        //SI MODIFICA LA BD PERO QUEDA DESORDENADO
+        String  SQL = "UPDATE \"pelicula\" SET nombre = '" + fi.getName() + "', sinopsis = '" + fi.getSynopsis()+ "', duracion = '" + fi.getDuration()+ "', clasificacion = '" + fi.getClassification()+ "',fecha_estreno = '" + fi.getPremiere()+ "', genero = '" + fi.getType()+ "' WHERE codigo = '" + id + "';";
+        
+        
+        
+        
 
         // Se instancia y se establece una conexión con la BD.
         con = new ConnectionDB();
