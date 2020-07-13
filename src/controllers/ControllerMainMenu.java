@@ -61,6 +61,8 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         private ControllerCandyInventoryManagement  ctrCandyIManagement;
         private ControllerFilmManagement contFilmManagement;
         private ControllerFunctionManagement ctrFunctionManagement;
+        private ControllerListReportsMovie ctrlReportMovie;
+        private ControllerListReportsEmployee ctrlReportsEmployee;
         // Views
         private MainPage        mainPage;
         private PopupMessage    popup;
@@ -80,11 +82,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
     
     private String  rolUser,
                     nameUser,
-                    nameBranch,
-                    film;
-    
-    private int     seats, 
-                    freeSeats;
+                    nameBranch;
     
     //</editor-fold>
     
@@ -246,8 +244,8 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
             support.cardSelection(mainPage.panOption2, mainPage.panCandySell);
             
             mainPage.clearCandySell();
-            
-            loadCandy(nameBranch);
+           //* 
+            loadCandy(mainPage.lblSucursalNameCandySell.getText());
             
             loadEmployeeOnComboBox(nameBranch, mainPage.cmbCandySeller, 1);
             
@@ -264,6 +262,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         
         // Volver para la sección anterior
         else if(evt.getSource() == mainPage.btnBackToTicketDecision1){
+            mainPage.lblClientCedulaCandySell.setText("");
             mainPage.btnBackToTicketDecision1.setBackground(new java.awt.Color(249,249,249));
             
             support.cardSelection(mainPage.panOption2, mainPage.panDecisionOption2);
@@ -310,7 +309,8 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
             else
                 mainPage.cmbCandySeller.setEnabled(true);
                         
-            changeBranch.dispose();
+            changeBranch.dispose();//*
+            loadCandy(mainPage.lblSucursalNameCandySell.getText());
             
         }
         
@@ -337,10 +337,22 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
                         // Se muestra un mensaje emergente de "Cliente Encontrado".
                         popup = new PopupMessage(mainPage, true, 4, 
                                 "Cliente Encontrado");
+                        mainPage.lblClientCedulaCandySell.setText(/*"Cedula del Cliente: "+*/mainPage.txtIdClientCandySell.getText());
                  } else{
                       // Se muestra un mensaje emergente de "Cliente no encontrado".
                         popup = new PopupMessage(mainPage, true, 1, 
                                 "Cliente no Encontrado.");
+                        // Se confirma que desea registrar un cliente
+                        SelectOption select = new SelectOption(mainPage, true, 2, 
+                                "¿Desea registrar el cliente?", "Si", "No");
+
+                        // Si se confirma el registro.
+                        if(select.getOpc())
+                        {
+                            //<editor-fold defaultstate="collapsed" desc=" CRUD Client "> 
+                            ctrClientManagement = new ControllerClientManagement(rolUser, nameUser, nameBranch,2);
+                            //</editor-fold>
+                        }
                         
                       //SI NO SE ENCUENTRA, REGISTRAR
                  }
@@ -355,7 +367,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
             if(mainPage.cmbCandySelection.getSelectedIndex() == 0)
                 // Se muestra un mensaje de que la venta fue generada con éxito.
                 popup = new PopupMessage(mainPage, true,
-                                         1, "Ingrese alguna cantidad de golosinas.");
+                                         1, "Seleccione alguna golosina.");
             
             // Si no se ha indicado una cantidad de golosina a agregar.
             else if((int) mainPage.spnCantCandySell.getValue() == 0)
@@ -365,8 +377,11 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
             
             // Si se seleccionó una golosina y se indicó la cantidad a agregar.
             else{
-                
-                // Se debe restructurar esta sección con métodos y datos obtenidos de la BD
+                if(canCRUD.corretCandyOrder(loadCodeCandy(mainPage.cmbCandySelection.getSelectedItem().toString())
+                        ,(int) mainPage.spnCantCandySell.getValue(),
+                        loadCodeBranch(mainPage.lblSucursalNameCandySell.getText())))
+                {
+                                    // Se debe restructurar esta sección con métodos y datos obtenidos de la BD
                 
                 DefaultTableModel dtm = (DefaultTableModel) mainPage.tblCandy.getModel();
                 
@@ -416,6 +431,11 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
                     
                     popup = new PopupMessage(mainPage, true, 1, "Ya la golosina ha sido ingresada.");
                                         
+                }
+                }
+                else
+                {
+                    popup = new PopupMessage(mainPage, true, 1, "La cantidad ingresada es mayor que el stock actual.");
                 }
                                             
             }
@@ -642,6 +662,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
             mainPage.btnBackToTicketDecision2.setBackground(new java.awt.Color(249,249,249));
                         
             support.cardSelection(mainPage.panOption2, mainPage.panDecisionOption2);
+            
             
         }
         
@@ -1391,7 +1412,34 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
             support.cardSelection(mainPage.panOption3, mainPage.panListClientDecision);
             //ctrlFilmManagement = new ControllerFilmManagement(rolUser, nameUser, nameBranch);
              
-        }        
+        }   
+        else if(evt.getSource() == mainPage.btnListPeliculasDecision){
+            // Se instancia y se declara la clase.
+            support.cardSelection(mainPage.panOption3, mainPage.panListPeliculaDecision);
+            //ctrlFilmManagement = new ControllerFilmManagement(rolUser, nameUser, nameBranch);
+        }  
+
+        
+        //<editor-fold defaultstate="collapsed" desc=" Peliculas General "> 
+ 
+        else if(evt.getSource() == mainPage.btnListPelculasGeneral){
+            // Se instancia y se declara la clase.
+            ctrlReportMovie = new ControllerListReportsMovie(rolUser, nameUser, nameBranch,3);
+            //ctrlFilmManagement = new ControllerFilmManagement(rolUser, nameUser, nameBranch);
+        }
+        
+        //</editor-fold>
+        
+        //<editor-fold defaultstate="collapsed" desc=" Peliculas por Mes "> 
+ 
+        else if(evt.getSource() == mainPage.btnListPeliculasXmes){
+            // Se instancia y se declara la clase.
+            ctrlReportMovie = new ControllerListReportsMovie(rolUser, nameUser, nameBranch,4);
+            //ctrlFilmManagement = new ControllerFilmManagement(rolUser, nameUser, nameBranch);
+        }
+        
+        //</editor-fold>
+        
         //<editor-fold defaultstate="collapsed" desc=" Clientes frecuentes "> 
         
         else if(evt.getSource() == mainPage.btnListClientDecision3){
@@ -1402,6 +1450,38 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         }
         
         //</editor-fold>
+        
+                
+        //<editor-fold defaultstate="collapsed" desc=" Report employee "> 
+        
+        else if(evt.getSource() == mainPage.btnListEmployeeDecision){
+            // Se instancia y se declara la clase.
+            support.cardSelection(mainPage.panOption3, mainPage.panListEmployeeDecision);
+            //ctrlFilmManagement = new ControllerFilmManagement(rolUser, nameUser, nameBranch);
+             
+        }        
+        //</editor-fold>
+        
+        //<editor-fold defaultstate="collapsed" desc=" empleados que vendieron golosinas por semana "> 
+        
+        else if(evt.getSource() == mainPage.btnListEmployeeDecision1){
+            // Se instancia y se declara la clase.
+            ctrlReportsEmployee = new ControllerListReportsEmployee(rolUser, nameUser, nameBranch,1);
+            //ctrlFilmManagement = new ControllerFilmManagement(rolUser, nameUser, nameBranch);
+             
+        }
+        
+        //</editor-fold>
+        
+         //<editor-fold defaultstate="collapsed" desc=" empleados que vendieron mas golosinas un mes "> 
+        
+        else if(evt.getSource() == mainPage.btnListEmployeeDecision2){
+            // Se instancia y se declara la clase.
+            ctrlReportsEmployee = new ControllerListReportsEmployee(rolUser, nameUser, nameBranch,2);
+            //ctrlFilmManagement = new ControllerFilmManagement(rolUser, nameUser, nameBranch);
+             
+        }
+        //</editor-fold>   
         
         //<editor-fold defaultstate="collapsed" desc=" Gastos de clientes en golosina "> 
         
@@ -1559,7 +1639,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         else if(evt.getSource() == mainPage.btnClientDecision){
             
             // Se instancia y se declara la clase.
-            ctrClientManagement = new ControllerClientManagement(rolUser, nameUser, nameBranch);
+            ctrClientManagement = new ControllerClientManagement(rolUser, nameUser, nameBranch,1);
              
         }
          
@@ -1700,12 +1780,9 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
             
                         System.out.println("Click en el boton eliminar en la celda: " + row + ";" + column);
                         
-                        DefaultTableModel dtmF = (DefaultTableModel) mainPage.tblFunctionSelector.getModel();
-                        DefaultTableModel dtmM = (DefaultTableModel) mainPage.tblMovieSelector.getModel();
+                        DefaultTableModel dtm = (DefaultTableModel) mainPage.tblFunctionSelector.getModel();
                         
-                        film = String.valueOf(dtmM.getValueAt(row, 1));
-                        
-                        showFunctions(film, mainPage.lblSucursalNameCinemaTickets.getText());
+                        showFunctions(null);
                         
                         mainPage.pgrCinemaTickets.setIndeterminate(true);
                         
@@ -2085,67 +2162,45 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
             
         lbl2.setIcon(icon2);
         
-        // Se instancia la clase a utilizar.
-        FilmCRUD filmCRUD = new FilmCRUD();
+        String  name        = "The Greatest Showman",
+                synopsis    = "Un musical en un circo we.",
+                gender      = "Musical",
+                censorship  = "A";
+            
+        String  name2        = "Mulan",
+                synopsis2    = "Reboot de Mulan.",
+                gender2      = "Acción / Aventura",
+                censorship2  = "A";
         
-        // Se declara la variable que devuelve el resultado.
-        java.sql.ResultSet result;
+        JButton btn = new JButton();
+                        
+        table.addOkButton(btn);
+                    
+        dtm.addRow(new Object[]{
+            lbl, 
+            "<html><p align='left'>" + name + "</p></html>",
+            "<html><p align='left'>" + synopsis + "</p></html>",
+            "<html><p align='left'>" + gender + "</p></html>",
+            "<html><p align='left'>" + censorship + "</p></html>",
+            btn
+        });
         
-        // Se declaran los listados que obtendrán la información.
-        ArrayList<String>   nameFilm        = new ArrayList<>(),
-                            sinopsisFilm    = new ArrayList<>(),
-                            genderFilm      = new ArrayList<>(),
-                            classFilm       = new ArrayList<>();
+        dtm.addRow(new Object[]{
+            lbl2, 
+            "<html><p align='left'>" + name2 + "</p></html>",
+            "<html><p align='left'>" + synopsis2 + "</p></html>",
+            "<html><p align='left'>" + gender2 + "</p></html>",
+            "<html><p align='left'>" + censorship2 + "</p></html>",
+            btn
+        });
         
-        try {
-            
-            result = filmCRUD.readFilms();
-            
-            while(result.next()){
-                nameFilm.add(result.getString("nombre"));
-                sinopsisFilm.add(result.getString("sinopsis"));
-                genderFilm.add(result.getString("genero"));
-                classFilm.add(result.getString("clasificacion"));
-            }
-            
-            System.out.println("Éxito.");
-            
-        } catch (java.sql.SQLException e) {
-            
-            System.out.println("Error: " + e);
-            
-        }
-        
-        for(int i = 0; i < nameFilm.size(); i++){
-            
-            String  name        = nameFilm.get(i),
-                    synopsis    = sinopsisFilm.get(i),
-                    gender      = genderFilm.get(i),
-                    censorship  = classFilm.get(i);
-            
-            
-            JButton btn = new JButton();
-
-            table.addOkButton(btn);
-            
-            dtm.addRow(new Object[]{
-                null, 
-                "<html><p align='left'>" + name + "</p></html>",
-                "<html><p align='left'>" + synopsis + "</p></html>",
-                "<html><p align='left'>" + gender + "</p></html>",
-                "<html><p align='left'>" + censorship + "</p></html>",
-                btn
-            });
-            
-        }
-                
     }
     
     /**
      * Método para mostrar las funciones correspondentes a una película.
      * @param idMovie Código de la película de la que se van a buscar sus funciones.
      */
-    private void showFunctions(String idMovie, String branch){
+    private void showFunctions(String idMovie){
         
         mainPage.clearFunctionSelectorTable(mainPage.tblFunctionSelector);
         
@@ -2157,37 +2212,21 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
                         
         table.addOkButton(btn);
         
-        // Se instancia la clase a utilizar.
-        FunctionCRUD functionCRUD = new FunctionCRUD();
+        String  date        = "13/06/2020",
+                cinemaRoom  = "D",
+                hour        = "5:45 p.m.",
+                seats       = "64",
+                freeSeats   = "32";
         
-        // Se declara la variable que devuelve el resultado.
-        java.sql.ResultSet result;
-                        
-        try {
-            
-            result = functionCRUD.readFunctions(idMovie, branch);
-            
-            while(result.next()){
-                
-                dtm.addRow(new Object[]{
-                    result.getDate("dia"),
-                    result.getString("sala"),
-                    result.getString("hora"),
-                    result.getInt("asientos"),
-                    result.getInt("disponibles"),
-                    btn
-                });
-                                
-            }
-            
-            System.out.println("Éxito.");
-            
-        } catch (java.sql.SQLException e) {
-            
-            System.out.println("Error: " + e);
-            
-        }
-                                
+        dtm.addRow(new Object[]{
+            date,
+            cinemaRoom,
+            hour,
+            seats,
+            freeSeats,
+            btn
+        });
+        
     }
     
     /**
@@ -2552,11 +2591,11 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         java.sql.ResultSet result;
         
         try {
-            
-            if(!rolUser.equals("ROL-01") && !rolUser.equals("ROL-02"))
+                result = canCRUD.ReadAllCandy(branch);
+            /*if(!rolUser.equals("ROL-01") && !rolUser.equals("ROL-02"))
                 result = canCRUD.ReadAllCandy(branch);
             else
-                result = canCRUD.ReadAllCandy();
+                result = canCRUD.ReadAllCandy();*/
             
             mainPage.cmbCandySelection.removeAllItems();
             mainPage.cmbCandySelection.addItem(" - Seleccione - ");
@@ -2932,9 +2971,70 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         
     }
     
+    //<editor-fold defaultstate="collapsed" desc="loadCodeBranch - Método para buscar el codigo de la sucursal ">    
+    /**
+     * Método para buscar el código de una sucursal.
+     * @param branchName Nombre de la sucursal.
+     * @return Devuelve el código de la sucursal.
+     */
+    private String loadCodeBranch(String branchName){
+        // Se instancia la clase a utilizar.
+        braCRUD = new BranchCRUD();
+        // Se declara la variable que devuelve el resultado.
+        java.sql.ResultSet result;
+        // Variable de soporte.
+        String codex="";
+        try 
+        {
+            result = braCRUD.readOnlyBranch(branchName);
+            while(result.next())
+            {
+                codex = result.getString("codigo");
+            }
+            System.out.println("Éxito.");
+            return codex;            
+        } 
+        catch (java.sql.SQLException e) 
+        {
+            System.out.println("Error: " + e);
+        }
+        return codex;
+    }
+    //</editor-fold>
     
+    //<editor-fold defaultstate="collapsed" desc="loadCodeCandy - Método para buscar el codigo de una golosina ">    
+    /**
+     * Método para buscar el código de una golosina.
+     * @param candyName Nombre de la golosina.
+     * @return Devuelve el código de la golosina.
+     */
+    private String loadCodeCandy(String candyName){
+        // Se instancia la clase a utilizar.
+        canCRUD = new CandyCRUD();
+        // Se declara la variable que devuelve el resultado.
+        java.sql.ResultSet result;
+        // Variable de soporte.
+        String codex="";
+        try 
+        {
+            result = canCRUD.readOnlyCandy(candyName);
+            while(result.next())
+            {
+                codex = result.getString("codigo");
+            }
+            System.out.println("Éxito.");
+            return codex;            
+        } 
+        catch (java.sql.SQLException e) 
+        {
+            System.out.println("Error: " + e);
+        }
+        return codex;
+    }
+    //</editor-fold>
     
     //</editor-fold>
+    
 
     //<editor-fold defaultstate="collapsed" desc=" PROHIBIDO TOCAR ">
     

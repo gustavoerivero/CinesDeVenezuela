@@ -21,7 +21,7 @@ public class ConnectionDB {
     // Se declaran las variables que indican la Base de Datos, el usuario y la contraseña.
     private final String url = "jdbc:postgresql://localhost:5432/cinesV",
                         user = "postgres",
-                        pass = "1234";
+                        pass = "daMurq.15";
     
     // Se instancia la clase de Connection.
     private Connection con;

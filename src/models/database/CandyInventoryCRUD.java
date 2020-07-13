@@ -85,7 +85,7 @@ public class CandyInventoryCRUD
     }   
     
     /**
-     * MÃ©todo para obtener los datos de un empleado.
+     * Método para obtener los datos de un inventario y su golosina.
      * @return Devuelve consulta.
      */
     public ResultSet readCandyData(String idCandy){

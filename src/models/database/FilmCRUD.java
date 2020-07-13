@@ -163,6 +163,10 @@ public class FilmCRUD {
         //SI MODIFICA LA BD PERO QUEDA DESORDENADO
         String  SQL = "UPDATE \"pelicula\" SET nombre = '" + fi.getName() + "', sinopsis = '" + fi.getSynopsis()+ "', duracion = '" + fi.getDuration()+ "', clasificacion = '" + fi.getClassification()+ "',fecha_estreno = '" + fi.getPremiere()+ "', genero = '" + fi.getType()+ "' WHERE codigo = '" + id + "';";
         
+        
+        
+        
+
         // Se instancia y se establece una conexión con la BD.
         con = new ConnectionDB();
         con.conectar();
@@ -284,36 +288,8 @@ public class FilmCRUD {
         
     }
 
-    /**
-     * Método para devolver las películas recientes
-     * @return Consulta.
-     */
-    public ResultSet readFilms(){
-        
-        // Se declara una variable de tipo 'ResultSet' para realizar la consulta.
-        ResultSet result;
-        
-        // Se declara una variable String que posea la sentencia SQL.
-        String SQL  = "SELECT * FROM \"pelicula\" WHERE "
-                //+ "((extract(month from current_date) - extract(month from fecha_estreno)) < 2)"
-                //    + " AND ((extract(year from current_date) - extract(year from fecha_estreno)) = 0) AND "
-                + "estado = 'A';";
-                
-        // Se instancia y se establece una conexión con la BD.
-        con = new ConnectionDB();
-        con.conectar();
-        
-        // Se realiza y se recibe la consulta.
-        result = con.queryConsultar(SQL);
-        
-        System.out.println("La consulta se realizó con éxito.");
-        
-        // Se desconecta la BD.
-        con.desconectar();
-        
-        // Retorna consulta.
-        return result;        
-        
-    }
+
+
+
 
 }

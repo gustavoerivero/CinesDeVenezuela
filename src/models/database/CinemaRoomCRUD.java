@@ -24,6 +24,33 @@ public class CinemaRoomCRUD {
     //Constructor    
     public CinemaRoomCRUD(){}
     
+    //<editor-fold defaultstate="collapsed" desc="readAllCinemaRoomOnBranchId - Obtener todas las salas de una sucursal ">
+    /**
+     * Método para obtener todas las Salas de una sucursal.
+     * @param IdBranch Codigo de la sucursal.
+     * @return Devuelve consulta.
+     */
+    public ResultSet readAllCinemaRoomOnBranchId(String IdBranch){
+        // Se declara una variable de tipo 'ResultSet' para realizar la consulta.
+        ResultSet result;
+        
+        // Se define la sentencia SQL a aplicar en la BD.
+        String SQL = "SELECT sala.\"codigo\" "
+                + " FROM \"sala\", \"sucursal\" WHERE sucursal.\"codigo\" = \"sucursal_codigo\""
+                + " AND sucursal.\"codigo\" = '" + IdBranch + "' AND sala.\"estado\" = 'A' "
+                + "AND sucursal.\"estado\" = 'A';";
+        // Se instancia y se establece una conexión con la BD.
+        con = new ConnectionDB();
+        con.conectar();
+        // Se realiza y se recibe la consulta.
+        result = con.queryConsultar(SQL);
+        System.out.println("La consulta se realizó con éxito.");
+        // Se desconecta la BD.
+        con.desconectar();
+        // Retorna consulta.
+        return result;
+    }
+    
      /**
      * Método para obtener los datos de una sala.
      * @return Devuelve consulta.
