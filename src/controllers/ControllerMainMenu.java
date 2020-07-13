@@ -80,7 +80,11 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
     
     private String  rolUser,
                     nameUser,
-                    nameBranch;
+                    nameBranch,
+                    film;
+    
+    private int     seats, 
+                    freeSeats;
     
     //</editor-fold>
     
@@ -638,7 +642,6 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
             mainPage.btnBackToTicketDecision2.setBackground(new java.awt.Color(249,249,249));
                         
             support.cardSelection(mainPage.panOption2, mainPage.panDecisionOption2);
-            
             
         }
         
@@ -1697,9 +1700,12 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
             
                         System.out.println("Click en el boton eliminar en la celda: " + row + ";" + column);
                         
-                        DefaultTableModel dtm = (DefaultTableModel) mainPage.tblFunctionSelector.getModel();
+                        DefaultTableModel dtmF = (DefaultTableModel) mainPage.tblFunctionSelector.getModel();
+                        DefaultTableModel dtmM = (DefaultTableModel) mainPage.tblMovieSelector.getModel();
                         
-                        showFunctions(null);
+                        film = String.valueOf(dtmM.getValueAt(row, 1));
+                        
+                        showFunctions(film, mainPage.lblSucursalNameCinemaTickets.getText());
                         
                         mainPage.pgrCinemaTickets.setIndeterminate(true);
                         
@@ -2079,45 +2085,67 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
             
         lbl2.setIcon(icon2);
         
-        String  name        = "The Greatest Showman",
-                synopsis    = "Un musical en un circo we.",
-                gender      = "Musical",
-                censorship  = "A";
+        // Se instancia la clase a utilizar.
+        FilmCRUD filmCRUD = new FilmCRUD();
+        
+        // Se declara la variable que devuelve el resultado.
+        java.sql.ResultSet result;
+        
+        // Se declaran los listados que obtendrán la información.
+        ArrayList<String>   nameFilm        = new ArrayList<>(),
+                            sinopsisFilm    = new ArrayList<>(),
+                            genderFilm      = new ArrayList<>(),
+                            classFilm       = new ArrayList<>();
+        
+        try {
             
-        String  name2        = "Mulan",
-                synopsis2    = "Reboot de Mulan.",
-                gender2      = "Acción / Aventura",
-                censorship2  = "A";
+            result = filmCRUD.readFilms();
+            
+            while(result.next()){
+                nameFilm.add(result.getString("nombre"));
+                sinopsisFilm.add(result.getString("sinopsis"));
+                genderFilm.add(result.getString("genero"));
+                classFilm.add(result.getString("clasificacion"));
+            }
+            
+            System.out.println("Éxito.");
+            
+        } catch (java.sql.SQLException e) {
+            
+            System.out.println("Error: " + e);
+            
+        }
         
-        JButton btn = new JButton();
-                        
-        table.addOkButton(btn);
-                    
-        dtm.addRow(new Object[]{
-            lbl, 
-            "<html><p align='left'>" + name + "</p></html>",
-            "<html><p align='left'>" + synopsis + "</p></html>",
-            "<html><p align='left'>" + gender + "</p></html>",
-            "<html><p align='left'>" + censorship + "</p></html>",
-            btn
-        });
-        
-        dtm.addRow(new Object[]{
-            lbl2, 
-            "<html><p align='left'>" + name2 + "</p></html>",
-            "<html><p align='left'>" + synopsis2 + "</p></html>",
-            "<html><p align='left'>" + gender2 + "</p></html>",
-            "<html><p align='left'>" + censorship2 + "</p></html>",
-            btn
-        });
-        
+        for(int i = 0; i < nameFilm.size(); i++){
+            
+            String  name        = nameFilm.get(i),
+                    synopsis    = sinopsisFilm.get(i),
+                    gender      = genderFilm.get(i),
+                    censorship  = classFilm.get(i);
+            
+            
+            JButton btn = new JButton();
+
+            table.addOkButton(btn);
+            
+            dtm.addRow(new Object[]{
+                null, 
+                "<html><p align='left'>" + name + "</p></html>",
+                "<html><p align='left'>" + synopsis + "</p></html>",
+                "<html><p align='left'>" + gender + "</p></html>",
+                "<html><p align='left'>" + censorship + "</p></html>",
+                btn
+            });
+            
+        }
+                
     }
     
     /**
      * Método para mostrar las funciones correspondentes a una película.
      * @param idMovie Código de la película de la que se van a buscar sus funciones.
      */
-    private void showFunctions(String idMovie){
+    private void showFunctions(String idMovie, String branch){
         
         mainPage.clearFunctionSelectorTable(mainPage.tblFunctionSelector);
         
@@ -2129,21 +2157,37 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
                         
         table.addOkButton(btn);
         
-        String  date        = "13/06/2020",
-                cinemaRoom  = "D",
-                hour        = "5:45 p.m.",
-                seats       = "64",
-                freeSeats   = "32";
+        // Se instancia la clase a utilizar.
+        FunctionCRUD functionCRUD = new FunctionCRUD();
         
-        dtm.addRow(new Object[]{
-            date,
-            cinemaRoom,
-            hour,
-            seats,
-            freeSeats,
-            btn
-        });
-        
+        // Se declara la variable que devuelve el resultado.
+        java.sql.ResultSet result;
+                        
+        try {
+            
+            result = functionCRUD.readFunctions(idMovie, branch);
+            
+            while(result.next()){
+                
+                dtm.addRow(new Object[]{
+                    result.getDate("dia"),
+                    result.getString("sala"),
+                    result.getString("hora"),
+                    result.getInt("asientos"),
+                    result.getInt("disponibles"),
+                    btn
+                });
+                                
+            }
+            
+            System.out.println("Éxito.");
+            
+        } catch (java.sql.SQLException e) {
+            
+            System.out.println("Error: " + e);
+            
+        }
+                                
     }
     
     /**
@@ -2887,6 +2931,8 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         return null;
         
     }
+    
+    
     
     //</editor-fold>
 
