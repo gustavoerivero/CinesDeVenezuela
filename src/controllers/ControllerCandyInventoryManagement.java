@@ -482,8 +482,8 @@ public void mouseClicked(MouseEvent evt) {
         return codex;
     }
     
-        /**
-     * MÃ©todo para cargar todas ciudades.
+    /**
+     * Método para cargar todas ciudades.
      * @return Listado de nombres de ciudades.
      */
     private ArrayList<String> loadCityNames(){
@@ -548,8 +548,7 @@ public void mouseClicked(MouseEvent evt) {
     }
     
     /**
-     * MÃ©todo para buscar una sucursal
-     * @return Listado de nombres de ciudades.
+     * Método para buscar un inventario de golosinas
      */
     private void loadCandy(String id){
         // Se instancia la clase a utilizar.

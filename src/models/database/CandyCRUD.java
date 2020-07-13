@@ -142,7 +142,6 @@ public class CandyCRUD {
      * @return Devuelve consulta.
      */
     public ResultSet ReadAllCandy(String branch){
-        
         // Se declara una variable de tipo 'ResultSet' para realizar la consulta.
         ResultSet result;
         
@@ -166,7 +165,6 @@ public class CandyCRUD {
         
         // Retorna consulta.
         return result;
-        
     }
     
      /**
@@ -318,6 +316,60 @@ public class CandyCRUD {
         con.desconectar();
         // Retorna consulta.
         return rs;
+    }
+        
+        
+        
+    public boolean corretCandyOrder(String idCandy, int stock,String idBranch){
+        //boolean t=
+        try{
+            
+            // Se instancia la clase de conexión con BD y se establece una conexión.
+            con = new ConnectionDB();
+            con.conectar();
+          
+            // Se declara una sentencia SQL.
+            String SQL =    "SELECT inventario_golosina.\"Codigo\" FROM \"inventario_golosina\", \"golosinas\" "
+                            + "WHERE \"GolosinaCodigo\"='"+ idCandy +"' AND \"SucursarCodigo\" = '"
+                            + idBranch + "' AND \"Stock\" >= '"+ stock +"' "
+                            + "AND golosinas.\"estado\" = 'A' AND inventario_golosina.\"Estado\" = 'A';";
+            // Se realiza la consulta y se obtiene el resultado.
+            java.sql.ResultSet rs = con.queryConsultar(SQL);
+
+            // Se desconecta la BD.
+            con.desconectar();
+            System.out.println( idCandy+" "+stock+idBranch+" "+rs.next() );
+
+            return rs.next();
+            
+            
+        } catch (java.sql.SQLException ex){
+            System.out.println("No se pudo encontrar la sucursal. Error: " + ex);
+        }
+        
+        return false;
+        
+    }
+    
+    /**
+     * Método para buscar una sucursal.
+     * @return devuelve consulta de la BD.
+     */
+    public ResultSet readOnlyCandy(String candyName){
+        // Se declara una variable de tipo 'ResultSet' para realizar la consulta.
+        ResultSet result;
+        // Se define la sentencia SQL a aplicar en la BD.
+        String SQL  = "SELECT * FROM \"golosinas\" WHERE \"nombre\" = '" + candyName + "' "
+                    + "AND \"estado\" = 'A';";
+        // Se instancia y se establece una conexión con la BD.
+        con = new ConnectionDB();
+        con.conectar();
+        // Se realiza y se recibe la consulta.
+        result = con.queryConsultar(SQL);
+        // Se desconecta la BD.
+        con.desconectar();
+        // Retorna consulta.
+        return result;
     }
     
 }

@@ -61,6 +61,8 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         private ControllerCandyInventoryManagement  ctrCandyIManagement;
         private ControllerFilmManagement contFilmManagement;
         private ControllerFunctionManagement ctrFunctionManagement;
+        private ControllerListReportsMovie ctrlReportMovie;
+        private ControllerListReportsEmployee ctrlReportsEmployee;
         // Views
         private MainPage        mainPage;
         private PopupMessage    popup;
@@ -242,8 +244,8 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
             support.cardSelection(mainPage.panOption2, mainPage.panCandySell);
             
             mainPage.clearCandySell();
-            
-            loadCandy(nameBranch);
+           //* 
+            loadCandy(mainPage.lblSucursalNameCandySell.getText());
             
             loadEmployeeOnComboBox(nameBranch, mainPage.cmbCandySeller, 1);
             
@@ -260,6 +262,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         
         // Volver para la sección anterior
         else if(evt.getSource() == mainPage.btnBackToTicketDecision1){
+            mainPage.lblClientCedulaCandySell.setText("");
             mainPage.btnBackToTicketDecision1.setBackground(new java.awt.Color(249,249,249));
             
             support.cardSelection(mainPage.panOption2, mainPage.panDecisionOption2);
@@ -306,7 +309,8 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
             else
                 mainPage.cmbCandySeller.setEnabled(true);
                         
-            changeBranch.dispose();
+            changeBranch.dispose();//*
+            loadCandy(mainPage.lblSucursalNameCandySell.getText());
             
         }
         
@@ -333,10 +337,12 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
                         // Se muestra un mensaje emergente de "Cliente Encontrado".
                         popup = new PopupMessage(mainPage, true, 4, 
                                 "Cliente Encontrado");
+                        mainPage.lblClientCedulaCandySell.setText("Cedula del Cliente: "+mainPage.txtIdClientCandySell.getText());
                  } else{
                       // Se muestra un mensaje emergente de "Cliente no encontrado".
                         popup = new PopupMessage(mainPage, true, 1, 
                                 "Cliente no Encontrado.");
+                        
                         
                       //SI NO SE ENCUENTRA, REGISTRAR
                  }
@@ -351,7 +357,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
             if(mainPage.cmbCandySelection.getSelectedIndex() == 0)
                 // Se muestra un mensaje de que la venta fue generada con éxito.
                 popup = new PopupMessage(mainPage, true,
-                                         1, "Ingrese alguna cantidad de golosinas.");
+                                         1, "Seleccione alguna golosina.");
             
             // Si no se ha indicado una cantidad de golosina a agregar.
             else if((int) mainPage.spnCantCandySell.getValue() == 0)
@@ -361,8 +367,11 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
             
             // Si se seleccionó una golosina y se indicó la cantidad a agregar.
             else{
-                
-                // Se debe restructurar esta sección con métodos y datos obtenidos de la BD
+                if(canCRUD.corretCandyOrder(loadCodeCandy(mainPage.cmbCandySelection.getSelectedItem().toString())
+                        ,(int) mainPage.spnCantCandySell.getValue(),
+                        loadCodeBranch(mainPage.lblSucursalNameCandySell.getText())))
+                {
+                                    // Se debe restructurar esta sección con métodos y datos obtenidos de la BD
                 
                 DefaultTableModel dtm = (DefaultTableModel) mainPage.tblCandy.getModel();
                 
@@ -412,6 +421,11 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
                     
                     popup = new PopupMessage(mainPage, true, 1, "Ya la golosina ha sido ingresada.");
                                         
+                }
+                }
+                else
+                {
+                    popup = new PopupMessage(mainPage, true, 1, "La cantidad ingresada es mayor que el stock actual.");
                 }
                                             
             }
@@ -1388,7 +1402,34 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
             support.cardSelection(mainPage.panOption3, mainPage.panListClientDecision);
             //ctrlFilmManagement = new ControllerFilmManagement(rolUser, nameUser, nameBranch);
              
-        }        
+        }   
+        else if(evt.getSource() == mainPage.btnListPeliculasDecision){
+            // Se instancia y se declara la clase.
+            support.cardSelection(mainPage.panOption3, mainPage.panListPeliculaDecision);
+            //ctrlFilmManagement = new ControllerFilmManagement(rolUser, nameUser, nameBranch);
+        }  
+
+        
+        //<editor-fold defaultstate="collapsed" desc=" Peliculas General "> 
+ 
+        else if(evt.getSource() == mainPage.btnListPelculasGeneral){
+            // Se instancia y se declara la clase.
+            ctrlReportMovie = new ControllerListReportsMovie(rolUser, nameUser, nameBranch,3);
+            //ctrlFilmManagement = new ControllerFilmManagement(rolUser, nameUser, nameBranch);
+        }
+        
+        //</editor-fold>
+        
+        //<editor-fold defaultstate="collapsed" desc=" Peliculas por Mes "> 
+ 
+        else if(evt.getSource() == mainPage.btnListPeliculasXmes){
+            // Se instancia y se declara la clase.
+            ctrlReportMovie = new ControllerListReportsMovie(rolUser, nameUser, nameBranch,4);
+            //ctrlFilmManagement = new ControllerFilmManagement(rolUser, nameUser, nameBranch);
+        }
+        
+        //</editor-fold>
+        
         //<editor-fold defaultstate="collapsed" desc=" Clientes frecuentes "> 
         
         else if(evt.getSource() == mainPage.btnListClientDecision3){
@@ -1399,6 +1440,38 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         }
         
         //</editor-fold>
+        
+                
+        //<editor-fold defaultstate="collapsed" desc=" Report employee "> 
+        
+        else if(evt.getSource() == mainPage.btnListEmployeeDecision){
+            // Se instancia y se declara la clase.
+            support.cardSelection(mainPage.panOption3, mainPage.panListEmployeeDecision);
+            //ctrlFilmManagement = new ControllerFilmManagement(rolUser, nameUser, nameBranch);
+             
+        }        
+        //</editor-fold>
+        
+        //<editor-fold defaultstate="collapsed" desc=" empleados que vendieron golosinas por semana "> 
+        
+        else if(evt.getSource() == mainPage.btnListEmployeeDecision1){
+            // Se instancia y se declara la clase.
+            ctrlReportsEmployee = new ControllerListReportsEmployee(rolUser, nameUser, nameBranch,1);
+            //ctrlFilmManagement = new ControllerFilmManagement(rolUser, nameUser, nameBranch);
+             
+        }
+        
+        //</editor-fold>
+        
+         //<editor-fold defaultstate="collapsed" desc=" empleados que vendieron mas golosinas un mes "> 
+        
+        else if(evt.getSource() == mainPage.btnListEmployeeDecision2){
+            // Se instancia y se declara la clase.
+            ctrlReportsEmployee = new ControllerListReportsEmployee(rolUser, nameUser, nameBranch,2);
+            //ctrlFilmManagement = new ControllerFilmManagement(rolUser, nameUser, nameBranch);
+             
+        }
+        //</editor-fold>   
         
         //<editor-fold defaultstate="collapsed" desc=" Gastos de clientes en golosina "> 
         
@@ -2508,11 +2581,11 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         java.sql.ResultSet result;
         
         try {
-            
-            if(!rolUser.equals("ROL-01") && !rolUser.equals("ROL-02"))
+                result = canCRUD.ReadAllCandy(branch);
+            /*if(!rolUser.equals("ROL-01") && !rolUser.equals("ROL-02"))
                 result = canCRUD.ReadAllCandy(branch);
             else
-                result = canCRUD.ReadAllCandy();
+                result = canCRUD.ReadAllCandy();*/
             
             mainPage.cmbCandySelection.removeAllItems();
             mainPage.cmbCandySelection.addItem(" - Seleccione - ");
@@ -2888,7 +2961,70 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         
     }
     
+    //<editor-fold defaultstate="collapsed" desc="loadCodeBranch - Método para buscar el codigo de la sucursal ">    
+    /**
+     * Método para buscar el código de una sucursal.
+     * @param branchName Nombre de la sucursal.
+     * @return Devuelve el código de la sucursal.
+     */
+    private String loadCodeBranch(String branchName){
+        // Se instancia la clase a utilizar.
+        braCRUD = new BranchCRUD();
+        // Se declara la variable que devuelve el resultado.
+        java.sql.ResultSet result;
+        // Variable de soporte.
+        String codex="";
+        try 
+        {
+            result = braCRUD.readOnlyBranch(branchName);
+            while(result.next())
+            {
+                codex = result.getString("codigo");
+            }
+            System.out.println("Éxito.");
+            return codex;            
+        } 
+        catch (java.sql.SQLException e) 
+        {
+            System.out.println("Error: " + e);
+        }
+        return codex;
+    }
     //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="loadCodeCandy - Método para buscar el codigo de una golosina ">    
+    /**
+     * Método para buscar el código de una golosina.
+     * @param candyName Nombre de la golosina.
+     * @return Devuelve el código de la golosina.
+     */
+    private String loadCodeCandy(String candyName){
+        // Se instancia la clase a utilizar.
+        canCRUD = new CandyCRUD();
+        // Se declara la variable que devuelve el resultado.
+        java.sql.ResultSet result;
+        // Variable de soporte.
+        String codex="";
+        try 
+        {
+            result = canCRUD.readOnlyCandy(candyName);
+            while(result.next())
+            {
+                codex = result.getString("codigo");
+            }
+            System.out.println("Éxito.");
+            return codex;            
+        } 
+        catch (java.sql.SQLException e) 
+        {
+            System.out.println("Error: " + e);
+        }
+        return codex;
+    }
+    //</editor-fold>
+    
+    //</editor-fold>
+    
 
     //<editor-fold defaultstate="collapsed" desc=" PROHIBIDO TOCAR ">
     

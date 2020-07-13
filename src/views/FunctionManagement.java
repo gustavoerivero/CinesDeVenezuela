@@ -60,12 +60,6 @@ public class FunctionManagement extends javax.swing.JFrame {
         panConsultList = new javax.swing.JPanel();
         scpFunctionList = new javax.swing.JScrollPane();
         tblFunctionList = new javax.swing.JTable();
-        txtSearchIdEmployee = new javax.swing.JTextField();
-        sepSearchIdEmployee = new javax.swing.JSeparator();
-        txtSearchNameEmployee = new javax.swing.JTextField();
-        btnSearchEmployee = new javax.swing.JButton();
-        sepSearchNameEmployee = new javax.swing.JSeparator();
-        btnClearSearchEmployee = new javax.swing.JButton();
         panAddFunction = new javax.swing.JPanel();
         panAddFunction1 = new javax.swing.JPanel();
         txtIdMovieSelected = new javax.swing.JTextField();
@@ -200,6 +194,7 @@ public class FunctionManagement extends javax.swing.JFrame {
         lblSucursalName.setText("Sucursal ");
 
         btnChangeBranch.setBackground(new java.awt.Color(249, 249, 249));
+        btnChangeBranch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/shopIcon.png"))); // NOI18N
         btnChangeBranch.setToolTipText("Cambiar Sucursal");
         btnChangeBranch.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(249, 249, 249), 1, true));
         btnChangeBranch.setContentAreaFilled(false);
@@ -249,80 +244,10 @@ public class FunctionManagement extends javax.swing.JFrame {
         });
         scpFunctionList.setViewportView(tblFunctionList);
 
-        txtSearchIdEmployee.setBackground(new java.awt.Color(249, 249, 249));
-        txtSearchIdEmployee.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        txtSearchIdEmployee.setText("Cédula del empleado");
-        txtSearchIdEmployee.setBorder(null);
-        txtSearchIdEmployee.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtSearchIdEmployeeMouseClicked(evt);
-            }
-        });
-        txtSearchIdEmployee.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtSearchIdEmployeeKeyTyped(evt);
-            }
-        });
-
-        sepSearchIdEmployee.setBackground(new java.awt.Color(249, 249, 249));
-        sepSearchIdEmployee.setForeground(new java.awt.Color(75, 0, 145));
-
-        txtSearchNameEmployee.setBackground(new java.awt.Color(249, 249, 249));
-        txtSearchNameEmployee.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        txtSearchNameEmployee.setText("Nombre y apellido del empleado");
-        txtSearchNameEmployee.setBorder(null);
-        txtSearchNameEmployee.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtSearchNameEmployeeMouseClicked(evt);
-            }
-        });
-        txtSearchNameEmployee.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtSearchNameEmployeeKeyTyped(evt);
-            }
-        });
-
-        btnSearchEmployee.setBackground(new java.awt.Color(249, 249, 249));
-        btnSearchEmployee.setToolTipText(" Buscar");
-        btnSearchEmployee.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(249, 249, 249), 1, true));
-        btnSearchEmployee.setContentAreaFilled(false);
-        btnSearchEmployee.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnSearchEmployee.setFocusPainted(false);
-        btnSearchEmployee.setPreferredSize(new java.awt.Dimension(50, 50));
-        btnSearchEmployee.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                btnSearchEmployeeMouseMoved(evt);
-            }
-        });
-        btnSearchEmployee.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnSearchEmployeeMouseExited(evt);
-            }
-        });
-
-        sepSearchNameEmployee.setBackground(new java.awt.Color(249, 249, 249));
-        sepSearchNameEmployee.setForeground(new java.awt.Color(75, 0, 145));
-
-        btnClearSearchEmployee.setBackground(new java.awt.Color(249, 249, 249));
-        btnClearSearchEmployee.setToolTipText("Limpiar");
-        btnClearSearchEmployee.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(249, 249, 249), 1, true));
-        btnClearSearchEmployee.setContentAreaFilled(false);
-        btnClearSearchEmployee.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnClearSearchEmployee.setFocusPainted(false);
-        btnClearSearchEmployee.setPreferredSize(new java.awt.Dimension(50, 50));
-        btnClearSearchEmployee.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                btnClearSearchEmployeeMouseMoved(evt);
-            }
-        });
-        btnClearSearchEmployee.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnClearSearchEmployeeMouseExited(evt);
-            }
-        });
-
         panAddFunction.setBackground(new java.awt.Color(249, 249, 249));
         panAddFunction.setLayout(new java.awt.CardLayout());
+
+        panAddFunction1.setBackground(new java.awt.Color(249, 249, 249));
 
         txtIdMovieSelected.setBackground(new java.awt.Color(249, 249, 249));
         txtIdMovieSelected.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -354,7 +279,9 @@ public class FunctionManagement extends javax.swing.JFrame {
         ftxtStartTime.setText("                                  ");
         ftxtStartTime.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
-        btnAdd.setText("jButton1");
+        btnAdd.setBackground(new java.awt.Color(249, 249, 249));
+        btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/incorporateIcon-small.png"))); // NOI18N
+        btnAdd.setBorder(null);
 
         cmbCinemaRoom.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         cmbCinemaRoom.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " - Seleccionar - " }));
@@ -400,23 +327,25 @@ public class FunctionManagement extends javax.swing.JFrame {
         );
         panAddFunction1Layout.setVerticalGroup(
             panAddFunction1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panAddFunction1Layout.createSequentialGroup()
-                .addGroup(panAddFunction1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panAddFunction1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtIdMovieSelected, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblIdMovie, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblStartTime, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(ftxtStartTime, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cmbCinemaRoom, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE))
-                    .addComponent(dchDateSelected, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
-                    .addComponent(lblDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panAddFunction1Layout.createSequentialGroup()
+                .addGroup(panAddFunction1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnClean, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panAddFunction1Layout.createSequentialGroup()
+                .addGroup(panAddFunction1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(dchDateSelected, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblDate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtIdMovieSelected, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ftxtStartTime, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cmbCinemaRoom)
+                    .addComponent(lblStartTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblIdMovie, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panAddFunction1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(sepIdMovie, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(sepSearchIdEmployee2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(sepSearchIdEmployee3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnClean, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         panAddFunction.add(panAddFunction1, "card2");
@@ -427,48 +356,16 @@ public class FunctionManagement extends javax.swing.JFrame {
             panConsultListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panConsultListLayout.createSequentialGroup()
                 .addGroup(panConsultListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(panAddFunction, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panAddFunction, javax.swing.GroupLayout.DEFAULT_SIZE, 933, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panConsultListLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(scpFunctionList))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panConsultListLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(panConsultListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(sepSearchIdEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtSearchIdEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(31, 31, 31)
-                        .addGroup(panConsultListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(sepSearchNameEmployee, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
-                            .addComponent(txtSearchNameEmployee))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnSearchEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnClearSearchEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(scpFunctionList)))
                 .addContainerGap())
         );
         panConsultListLayout.setVerticalGroup(
             panConsultListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panConsultListLayout.createSequentialGroup()
-                .addGroup(panConsultListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panConsultListLayout.createSequentialGroup()
-                        .addGroup(panConsultListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panConsultListLayout.createSequentialGroup()
-                                .addComponent(txtSearchNameEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                            .addGroup(panConsultListLayout.createSequentialGroup()
-                                .addGap(17, 17, 17)
-                                .addComponent(txtSearchIdEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(8, 8, 8)))
-                        .addGroup(panConsultListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(sepSearchIdEmployee)
-                            .addComponent(sepSearchNameEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(panConsultListLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(panConsultListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnSearchEmployee, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnClearSearchEmployee, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(74, Short.MAX_VALUE)
                 .addComponent(panAddFunction, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scpFunctionList, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -661,11 +558,11 @@ public class FunctionManagement extends javax.swing.JFrame {
         panGeneratedCode.add(panGeneratedCode1, "card2");
 
         jFormattedTextField1.setBorder(null);
-        jFormattedTextField1.setText("jFormattedTextField1");
+        jFormattedTextField1.setText("                                 ");
         jFormattedTextField1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
         jFormattedTextField2.setBorder(null);
-        jFormattedTextField2.setText("jFormattedTextField1");
+        jFormattedTextField2.setText("                                     ");
         jFormattedTextField2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout panCRUDLayout = new javax.swing.GroupLayout(panCRUD);
@@ -888,8 +785,8 @@ public class FunctionManagement extends javax.swing.JFrame {
         
         // Search
         btnChangeBranch.addActionListener(evt);
-        btnSearchEmployee.addActionListener(evt);
-        btnClearSearchEmployee.addActionListener(evt);
+      //  btnSearchEmployee.addActionListener(evt);
+      //  btnClearSearchEmployee.addActionListener(evt);
         
         // CRUD
         btnBackFunction.addActionListener(evt);
@@ -909,7 +806,30 @@ public class FunctionManagement extends javax.swing.JFrame {
     
     //</editor-fold>
     
-    
+    public void clearView(){
+               
+        btnBackFunction.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
+        btnBackFunction.setForeground(new java.awt.Color(0,0,0));
+        btnBackFunction.setBackground(new java.awt.Color(239,232,244));
+                        
+       /* btnClearSearchEmployee.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
+        btnClearSearchEmployee.setForeground(new java.awt.Color(0,0,0));
+        btnClearSearchEmployee.setBackground(new java.awt.Color(239,232,244));*/
+                
+        btnRegisterModifyFunction.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
+        btnRegisterModifyFunction.setForeground(new java.awt.Color(0,0,0));
+        btnRegisterModifyFunction.setBackground(new java.awt.Color(239,232,244));
+        
+       /* btnSearchEmployee.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
+        btnSearchEmployee.setForeground(new java.awt.Color(0,0,0));
+        btnSearchEmployee.setBackground(new java.awt.Color(239,232,244)); */       
+        
+        // Registro
+        txtIdMovieSelected.setText("Código de la película");
+        cmbCinemaRoom.setSelectedIndex(0);
+        //ftxtStartTime.setText("");
+        //dchDateSelected
+    }
     
     private void btnMinMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinMouseMoved
         btnMin.setBackground(new java.awt.Color(239,232,244));
@@ -984,41 +904,6 @@ public class FunctionManagement extends javax.swing.JFrame {
         setRowTable(evt.getY()/tblFunctionList.getRowHeight());
     }//GEN-LAST:event_tblFunctionListMouseClicked
 
-    private void txtSearchIdEmployeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSearchIdEmployeeMouseClicked
-        txtSearchIdEmployee.setText("");
-    }//GEN-LAST:event_txtSearchIdEmployeeMouseClicked
-
-    private void txtSearchIdEmployeeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchIdEmployeeKeyTyped
-        /*if(txtSearchIdEmployee.getText().length() < 10)
-        support.integerPositiveKeyTyped(evt);
-        else
-        evt.consume();*/
-    }//GEN-LAST:event_txtSearchIdEmployeeKeyTyped
-
-    private void txtSearchNameEmployeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSearchNameEmployeeMouseClicked
-        txtSearchNameEmployee.setText("");
-    }//GEN-LAST:event_txtSearchNameEmployeeMouseClicked
-
-    private void txtSearchNameEmployeeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchNameEmployeeKeyTyped
-        //support.alphabetKeyTyped(evt);
-    }//GEN-LAST:event_txtSearchNameEmployeeKeyTyped
-
-    private void btnSearchEmployeeMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchEmployeeMouseMoved
-        btnSearchEmployee.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
-    }//GEN-LAST:event_btnSearchEmployeeMouseMoved
-
-    private void btnSearchEmployeeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchEmployeeMouseExited
-        btnSearchEmployee.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
-    }//GEN-LAST:event_btnSearchEmployeeMouseExited
-
-    private void btnClearSearchEmployeeMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClearSearchEmployeeMouseMoved
-        btnClearSearchEmployee.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
-    }//GEN-LAST:event_btnClearSearchEmployeeMouseMoved
-
-    private void btnClearSearchEmployeeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClearSearchEmployeeMouseExited
-        btnClearSearchEmployee.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
-    }//GEN-LAST:event_btnClearSearchEmployeeMouseExited
-
     private void txtIdMovieSelectedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtIdMovieSelectedMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIdMovieSelectedMouseClicked
@@ -1070,12 +955,10 @@ public class FunctionManagement extends javax.swing.JFrame {
     public javax.swing.JButton btnChangeBranch;
     public javax.swing.JButton btnClean;
     public javax.swing.JButton btnClearFunciton;
-    public javax.swing.JButton btnClearSearchEmployee;
     public javax.swing.JButton btnExit;
     public javax.swing.JButton btnMin;
     public javax.swing.JButton btnRegisterModifyFunction;
     public javax.swing.JButton btnReset;
-    public javax.swing.JButton btnSearchEmployee;
     public javax.swing.JComboBox<String> cmbCinemaRoom;
     public com.toedter.calendar.JDateChooser dchDateSelected;
     public com.toedter.calendar.JDateChooser dchFunctionDate;
@@ -1103,14 +986,12 @@ public class FunctionManagement extends javax.swing.JFrame {
     public javax.swing.JPanel panConsultList;
     public javax.swing.JPanel panContainerFunction;
     private javax.swing.JPanel panFunctionManagement;
-    private javax.swing.JPanel panGeneratedCode;
-    private javax.swing.JPanel panGeneratedCode1;
+    public javax.swing.JPanel panGeneratedCode;
+    public javax.swing.JPanel panGeneratedCode1;
     private javax.swing.JScrollPane scpFunctionList;
     private javax.swing.JSeparator sepIdMovie;
-    private javax.swing.JSeparator sepSearchIdEmployee;
     private javax.swing.JSeparator sepSearchIdEmployee2;
     private javax.swing.JSeparator sepSearchIdEmployee3;
-    private javax.swing.JSeparator sepSearchNameEmployee;
     private javax.swing.JSeparator sepTittle;
     public javax.swing.JTable tblFunctionList;
     public javax.swing.JTextField txtIdBlock;
@@ -1119,7 +1000,5 @@ public class FunctionManagement extends javax.swing.JFrame {
     public javax.swing.JTextField txtIdMovieS;
     public javax.swing.JTextField txtIdMovieSelected;
     public javax.swing.JTextField txtIdSchedule;
-    public javax.swing.JTextField txtSearchIdEmployee;
-    public javax.swing.JTextField txtSearchNameEmployee;
     // End of variables declaration//GEN-END:variables
 }

@@ -328,5 +328,26 @@ public class InvoiceCRUD {
         // Retorna consulta.
         return result;
     }
+    public ResultSet ReportePelicula2(String SQL){
+        
+        // Se declara una variable de tipo 'ResultSet' para realizar la consulta.
+        ResultSet result;
+      
+        // Se instancia y se establece una conexión con la BD.
+        con = new ConnectionDB();
+        con.conectar();
+        
+        // Se realiza y se recibe la consulta.
+        result = con.queryConsultar(SQL);
+        
+        System.out.println("La consulta se realizó con éxito.");
+        
+        // Se desconecta la BD.
+        con.desconectar();
+        
+        // Retorna consulta.
+        return result;
+        
+    }
     
 }
