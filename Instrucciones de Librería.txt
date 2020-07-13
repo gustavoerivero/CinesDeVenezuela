@@ -1,0 +1,7 @@
+/**
+
+ * Descomprimir el archivo de extensión '.rar' y colocar los archivos obtenidos
+
+ * de extensión '.jar' en la carpeta 'src/lib/'.
+
+ */
