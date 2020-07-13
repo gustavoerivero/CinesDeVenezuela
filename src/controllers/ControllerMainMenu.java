@@ -1390,14 +1390,15 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         }        
         //<editor-fold defaultstate="collapsed" desc=" Clientes frecuentes "> 
         
-        else if(evt.getSource() == mainPage.btnListClientDecision1){
+        else if(evt.getSource() == mainPage.btnListClientDecision3){
             // Se instancia y se declara la clase.
             ctrlReport = new ControllerListReport(rolUser, nameUser, nameBranch,1);
-            //ctrlFilmManagement = new ControllerFilmManagement(rolUser, nameUser, nameBranch);
+            //ctrlFilmManagement = new ControllerFilmManagement(rlUser, nameUser, nameBranch);
              
         }
         
         //</editor-fold>
+        
         //<editor-fold defaultstate="collapsed" desc=" Gastos de clientes en golosina "> 
         
         else if(evt.getSource() == mainPage.btnListClientDecision2){
@@ -1407,7 +1408,20 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
              
         }
         
-        //</editor-fold>   
+        //</editor-fold> 
+        
+        //<editor-fold defaultstate="collapsed" desc=" Clientes frecuentes que recibieron pase especial"> 
+        
+        else if (evt.getSource() == mainPage.btnListClientDecision1){
+            // Se instancia y se declara la clase.
+            ctrlReport = new ControllerListReport(rolUser, nameUser, nameBranch,3);
+            //ctrlFilmManagement = new ControllerFilmManagement(rolUser, nameUser, nameBranch);
+          
+        }
+        
+        
+        //</editor-fold>
+        
         //</editor-fold>   
         //</editor-fold>
         

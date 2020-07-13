@@ -15,48 +15,109 @@ import java.util.Date;
  */
 public class Schedule {
     private String
-            id,
-            hour, branch_id;
-    private Date day_id;
+            id,idBlock,idCinema,idTypeDay;
+    private Date day;
+    private char status;
     
-    public Schedule(String id, Date day_id,String hour, String branch_id){
+    public Schedule(String id,String idBlock,String idCinema,String idTypeDay, Date day,char status)
+    {
         this.id=id;
-        this.day_id=day_id;
-        this.hour=hour;
-        this.branch_id=branch_id;
+        this.idBlock=idBlock;
+        this.idCinema=idCinema;
+        this.idTypeDay=idTypeDay;
+        this.status=status;
+        this.day=day;
+    }
+    public Schedule(String id,String idBlock,String idCinema, Date day,char status)
+    {
+        this.id=id;
+        this.idBlock=idBlock;
+        this.idCinema=idCinema;
+        this.status=status;
+        this.day=day;
     }
 
+    /**
+     * @return the id
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * @param id the id to set
+     */
     public void setId(String id) {
         this.id = id;
     }
 
-    public Date getDay_id() {
-        return day_id;
+    /**
+     * @return the idBlock
+     */
+    public String getIdBlock() {
+        return idBlock;
     }
 
-    public void setDay_id(Date day_id) {
-        this.day_id = day_id;
+    /**
+     * @param idBlock the idBlock to set
+     */
+    public void setIdBlock(String idBlock) {
+        this.idBlock = idBlock;
     }
 
-    public String getHour() {
-        return hour;
+    /**
+     * @return the idCinema
+     */
+    public String getIdCinema() {
+        return idCinema;
     }
 
-    public void setHour(String hour) {
-        this.hour = hour;
+    /**
+     * @param idCinema the idCinema to set
+     */
+    public void setIdCinema(String idCinema) {
+        this.idCinema = idCinema;
     }
 
-    public String getBranch_id() {
-        return branch_id;
+    /**
+     * @return the idTypeDay
+     */
+    public String getIdTypeDay() {
+        return idTypeDay;
     }
 
-    public void setBranch_id(String branch_id) {
-        this.branch_id = branch_id;
+    /**
+     * @param idTypeDay the idTypeDay to set
+     */
+    public void setIdTypeDay(String idTypeDay) {
+        this.idTypeDay = idTypeDay;
     }
-    
-    
+
+    /**
+     * @return the day
+     */
+    public Date getDay() {
+        return day;
+    }
+
+    /**
+     * @param day the day to set
+     */
+    public void setDay(Date day) {
+        this.day = day;
+    }
+
+    /**
+     * @return the status
+     */
+    public char getStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(char status) {
+        this.status = status;
+    }
 }

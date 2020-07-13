@@ -103,7 +103,7 @@ public class ControllerCandyInventoryManagement implements ActionListener, Mouse
         generateCode();
     }
     
-       /**
+     /**
      * Método que determina las acciones a realizar por la aplicación según el 
      * botón presionado.
      * @param evt indica los eventos posibles a ocurrir (click en botónes).
