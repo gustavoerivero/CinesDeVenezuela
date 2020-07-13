@@ -200,9 +200,7 @@ public class ControllerListReportsMovie implements ActionListener, MouseListener
     //metodos para reporte General
     
     public String BuscarPelicula(){
-        
-      
-        
+                /*
         String initSQL = "SELECT pelicula.\"nombre\" as \"nombrepelicula\", sucursal.\"nombre\" as \"nombresucursal\","
                                     + "funcion.\"codigo\" as \"funcion\", sala.\"codigo\" as \"sala\" , "
                                     + "horario.\"fecha\" as \"fecha\" , bloque.\"horainicio\" as \"hora\", "
@@ -266,7 +264,69 @@ public class ControllerListReportsMovie implements ActionListener, MouseListener
                                     + "GROUP BY pelicula.\"nombre\", sucursal.\"nombre\" , funcion.\"codigo\"," 
                                     + "sala.\"codigo\", horario.\"fecha\", bloque.\"horainicio\" ",
                 
+                */
+      String initSQL = "SELECT pelicula.\"nombre\" as \"nombrepelicula\", sucursal.\"nombre\" as \"nombresucursal\","
+                                    + "funcion.\"codigo\" as \"funcion\", sala.\"codigo\" as \"sala\" , "
+                                    + "horario.\"fecha\" as \"fecha\" , bloque.\"horainicio\" as \"hora\", "
+                                    + "COUNT(ticket_funcion.\"Codigo\") as \"cantidadBoletos\","
                 
+                
+                
+               
+                                    + "(SELECT SUM(factura.\"monto\" + factura.\"iva\") "
+                          + "from \"pelicula\",\"sala\",\"funcion\",\"horario\", "
+                          + " \"ticket\",\"ticket_funcion\",\"bloque\",\"sucursal\", "
+                          + " \"factura\",\"empresa\",\"tipo_dia\", "
+                          + "((SELECT cliente.\"cedula\" from \"cliente\", \"factura\",\"ticket\" "
+                          + " WHERE cliente.\"cedula\" =  factura.\"cliente_cedula\" "
+                          + "AND ticket.\"factura_codigo\" = factura.\"codigo\" "
+                          + "AND ticket.\"tipo\" = '1') AS TABLA1 "
+                          + "INNER JOIN(SELECT factura.\"cliente_cedula\" from \"cliente\", \"factura\",\"ticket\", "
+                          + "\"ticket_funcion\", \"horario\""
+                          + "WHERE cliente.\"cedula\" =  factura.\"cliente_cedula\" "
+                          + "AND ticket.\"factura_codigo\" = factura.\"codigo\" "
+                          + "AND ticket.\"codigo\" = ticket_funcion.\"TicketCodigo\" "
+                          + "AND funcion.\"codigo\"= ticket_funcion.\"FuncionCodigo\" "
+                          + "and funcion.\"horario_codigo\" = horario.\"codigo\" "
+                          + "AND ticket.\"tipo\" = '2')"
+                          + "AS TABLA2 ON TABLA2.\"cliente_cedula\" = TABLA1.\"cedula\") as NewCli "
+                          + "WHERE NewCli.\"cedula\" = factura.\"cliente_cedula\""
+                          + "AND factura.\"codigo\" = ticket.\"factura_codigo\" "
+                          + "and factura.\"fecha_compra\" = horario.\"fecha\""
+                          + "AND ticket.\"codigo\" = ticket_funcion.\" TicketCodigo \""
+                          + "AND funcion.\"codigo\" = ticket_funcion.\" FuncionCodigo \""
+                          + "and funcion.\"horario_codigo\" = horario.\"codigo\" "
+                          + "and pelicula.\"codigo\"= funcion.\"pelicula_codigo\""
+                          + "AND funcion.\"horario_codigo\" = horario.\"codigo\" "
+                          + "AND horario.\"sala_codigo\"= sala.\"codigo\""
+                          + "AND horario.\"tipo_dia_codigo\"= tipo_dia.\"codigo\""
+                          + "AND sala.\"sucursal_codigo\" = sucursal.\"codigo\""
+                          + "AND empresa.\"codigo\" = sucursal.\"empresa_codigo\") as \"Golosinas\""
+ 
+                
+     
+                
+                                    + " From \"sala\",\"pelicula\",\"funcion\",\"horario\","
+                                    + "\"ticket\",\"ticket_funcion\", \"bloque\", \"sucursal\" ,\"factura\" "
+                
+                                    + "WHERE pelicula.\"codigo\" = funcion.\"pelicula_codigo\" "
+                
+                                    + "AND funcion.\"horario_codigo\" = horario.\"codigo\" "
+                
+                                   + "AND funcion.\"horario_codigo\" = horario.\"codigo\" "
+                                   + "AND horario.\"sala_codigo\" = sala.\"codigo\" "
+                                   + "AND bloque.\"codigo\" = horario.\"bloque_codigo\" "
+                                   + "AND sala.\"sucursal_codigo\" = sucursal.\"codigo\" "
+                                   + "AND funcion.\"codigo\" = ticket_funcion.\"FuncionCodigo\" "
+                                   + "AND ticket_funcion.\"TicketCodigo\" = ticket.\"codigo\" "
+                                   + "AND ticket.\"factura_codigo\" = factura.\"codigo\" "
+                                    + "AND funcion.\"estado\" = 'A' AND ticket.\"estado\" = 'A'"
+                                    + "AND factura.\"estado\" = 'A' AND pelicula.\"estado\" = 'A'"
+                                    + "AND bloque.\"estado\" = 'A' AND sucursal.\"estado\" = 'A'"
+                                    + "AND horario.\"estado\" = 'A' AND sala.\"estado\" = 'A'"
+                                    + "GROUP BY pelicula.\"nombre\", sucursal.\"nombre\" , funcion.\"codigo\"," 
+                                    + "sala.\"codigo\", horario.\"fecha\", bloque.\"horainicio\" ",
+
                // groupby     =  "GROUP BY pelicula.\"nombre\", sucursal.\"nombre\" , funcion.\"codigo\"," 
                                //+ "sala.\"codigo\", horario.\"fecha\", bloque.\"horainicio\" ",
                 finalSQL    = ";",

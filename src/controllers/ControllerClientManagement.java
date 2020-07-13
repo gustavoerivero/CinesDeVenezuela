@@ -84,9 +84,10 @@ public class ControllerClientManagement implements ActionListener, MouseListener
      * @param nameUser Nombre del usuario que ha ingresado al sistema.
      * @param branchUser Nombre de la sucursal del usuario que ha ingresado al sistema.
      */
-    public ControllerClientManagement(String rolUser, String nameUser, String branchUser){
-        
-        // Declarar la variable de las clases instanciadas.
+    public ControllerClientManagement(String rolUser, String nameUser, String branchUser,int opc){
+        if(opc==1)
+        {
+                    // Declarar la variable de las clases instanciadas.
         cliManagement   = new ClientManagement();
         support         = new SupportFunctions();
         
@@ -107,6 +108,33 @@ public class ControllerClientManagement implements ActionListener, MouseListener
         // Activamos los eventos por las views.
         cliManagement.addEvents(this);
         cliManagement.addMouseEvents(this);
+        }
+        else if(opc==2)
+        {
+            cliManagement   = new ClientManagement();
+        support         = new SupportFunctions();
+        
+        // Se inicializan las variables.
+        this.rolUser    = rolUser;
+        this.nameUser   = nameUser;
+        this.branchUser = branchUser;
+            // Se muestra la vista del CRUD.
+                        support.cardSelection(cliManagement.panContainerClient, cliManagement.panCRUD);
+                        
+                        // Se bloquea el botón de 'eliminar'.
+                        cliManagement.btnDeleteClient.setEnabled(false);
+                        
+                        // Se configura el texto del botón.
+                        cliManagement.btnRegisterModifyClient.setText("Registrar");
+                        
+                        // Se limpian todos los aspectos visuales.
+                        cliManagement.clearView();
+                        cliManagement.txtIdClient.setEnabled(true);
+                        // Se limpian las variables
+                        clearVariables();
+                        cliManagement.addEvents(this);
+        cliManagement.addMouseEvents(this);
+        }
         }
     
     

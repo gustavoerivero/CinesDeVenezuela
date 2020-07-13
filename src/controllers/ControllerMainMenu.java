@@ -337,12 +337,22 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
                         // Se muestra un mensaje emergente de "Cliente Encontrado".
                         popup = new PopupMessage(mainPage, true, 4, 
                                 "Cliente Encontrado");
-                        mainPage.lblClientCedulaCandySell.setText("Cedula del Cliente: "+mainPage.txtIdClientCandySell.getText());
+                        mainPage.lblClientCedulaCandySell.setText(/*"Cedula del Cliente: "+*/mainPage.txtIdClientCandySell.getText());
                  } else{
                       // Se muestra un mensaje emergente de "Cliente no encontrado".
                         popup = new PopupMessage(mainPage, true, 1, 
                                 "Cliente no Encontrado.");
-                        
+                        // Se confirma que desea registrar un cliente
+                        SelectOption select = new SelectOption(mainPage, true, 2, 
+                                "¿Desea registrar el cliente?", "Si", "No");
+
+                        // Si se confirma el registro.
+                        if(select.getOpc())
+                        {
+                            //<editor-fold defaultstate="collapsed" desc=" CRUD Client "> 
+                            ctrClientManagement = new ControllerClientManagement(rolUser, nameUser, nameBranch,2);
+                            //</editor-fold>
+                        }
                         
                       //SI NO SE ENCUENTRA, REGISTRAR
                  }
@@ -1629,7 +1639,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         else if(evt.getSource() == mainPage.btnClientDecision){
             
             // Se instancia y se declara la clase.
-            ctrClientManagement = new ControllerClientManagement(rolUser, nameUser, nameBranch);
+            ctrClientManagement = new ControllerClientManagement(rolUser, nameUser, nameBranch,1);
              
         }
          
