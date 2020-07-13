@@ -1,6 +1,6 @@
 
 package models;
-
+import java.util.Date;
 /**
  *  Materia: Laboratorio I
  *  Sección: 1
@@ -17,12 +17,15 @@ public class Film {
             name,
             synopsis,
             duration,
-            type;
+            type,
+            classification;
     private char
-            classification,
+            //classification,
             estatus;
+    private Date premiere;
+    
     public Film(String id,String name, String synopsis, String duration,
-            String type, char classification, char estatus){
+            String type, String classification, char estatus, Date premiere){
         this.id=id;
         this.name=name;
         this.synopsis=synopsis;
@@ -30,9 +33,19 @@ public class Film {
         this.type=type;
         this.classification=classification;
         this.estatus=estatus;
+        this.premiere=premiere;
         
     }
 
+    public String getClassification() {
+        return classification;
+    }
+
+    public void setClassification(String classification) {
+        this.classification = classification;
+    }
+
+ 
     public String getId() {
         return id;
     }
@@ -73,13 +86,13 @@ public class Film {
         this.type = type;
     }
 
-    public int getClassification() {
+    /*public int getClassification() {
         return classification;
     }
 
     public void setClassification(char classification) {
         this.classification = classification;
-    }
+    }*/
 
     public int getEstatus() {
         return estatus;
@@ -88,6 +101,13 @@ public class Film {
     public void setEstatus(char estatus) {
         this.estatus = estatus;
     }
-    
+      public Date getPremiere() {
+        return premiere;
+    }
+
+    public void setPremiere(Date premiere) {
+        this.premiere = premiere;
+    }
+ 
     
 }

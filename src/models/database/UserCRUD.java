@@ -108,7 +108,7 @@ public class UserCRUD {
             con.conectar();
           
             // Se declara una sentencia SQL.
-            String SQL =    "SELECT * FROM \"usuario\" WHERE \"email\" = '"
+            String SQL =    "SELECT * FROM \"usuario\" WHERE \"correo\" = '"
                             + email + "' AND \"estado\" = '" + estatus + "';";
             
             // Se realiza la consulta y se obtiene el resultado.
@@ -199,9 +199,9 @@ public class UserCRUD {
         ResultSet result;
         
         // Se define la sentencia SQL a aplicar en la BD.
-        String SQL = "SELECT usuario.\"correo\", empleado.\"nombre\" as \"Nombre\", "
-                   + "empleado.\"apellido\" as \"Apellido\", rol.\"nombre\" as \"rol\", "
-                   + "usuario.\"clave\" FROM \"usuario\", \"empleado\", \"rol\" "
+        String SQL = "SELECT usuario.\"correo\", empleado.\"cedula\" as cedula, "
+                   + "rol.\"nombre\" as rol, "
+                   + "usuario.\"clave\" as clave FROM \"usuario\", \"empleado\", \"rol\" "
                    + "WHERE usuario.\"correo\" = '" + email + "' and \"empleado_cedula\" = empleado.\"cedula\" "
                    + "and \"rol_codigo\" = rol.\"codigo\" and usuario.\"estado\" = 'A' "
                    + "and empleado.\"estado\" = 'A' and rol.\"estado\" = 'A';";
@@ -232,16 +232,19 @@ public class UserCRUD {
             con.conectar();
           
             // Se descrie la sentencia SQL.
-    String SQL = "INSERT INTO \"usuario\" (\"correo\", \"empleado_cedula\", "
-            + "\"rol_codigo\", \"clave\") "
+    String SQL = "INSERT INTO \"usuario\" (\"correo\",\"empleado_cedula\","
+            + "\"rol_codigo\",\"clave\", \"estado\" ) "
             + "values ("
             + "'" + us.getEmail() + "', "
             + "'" + us.getEmployee_id() + "', "
             + "'" + us.getRole_id() + "', "
-            + "'" + us.getPass() + "');";
+            + "'" + us.getPass() + "', 'A');";
     
-     con.queryInsert(SQL);
+            con.queryInsert(SQL);
      
+            // Se muestra mensaje de éxito.
+            System.out.println("El registro se realizó con éxito.");
+        
             // Se desconecta la BD.
             con.desconectar();
     }
@@ -256,11 +259,11 @@ public class UserCRUD {
             con.conectar(); 
 
             // Se descrie la sentencia SQL.
-            String SQL = "UPDATE \"usuario\" SET \"empleado_cedula\" = "
-                       + "'" + us.getEmployee_id() + "', "
+            String SQL = "UPDATE \"usuario\" SET "
+                       +  "\"empleado_cedula\" = '" + us.getEmployee_id() + "', "
                        +  "\"rol_codigo\" = '" + us.getRole_id() + "', "
-                       +  "\"clave\" = '" + us.getPass() + "', "
-                       +  " WHERE \"correo\" = '" + us.getEmail() + "';";
+                       +  "\"clave\" = '" + us.getPass() + "' "
+                       +  "WHERE \"correo\" = '" + email + "';";
             
             con.queryInsert(SQL);
             

@@ -125,7 +125,8 @@ public class ClientCRUD {
           
             // Se descrie la sentencia SQL.
     String SQL = "INSERT INTO \"cliente\" (\"cedula\", \"nombre\", "
-            + "\"apellido\", \"direccion\", \"correo\", \"telefono\", \"fecha_nacimiento\" ) "
+            + "\"apellido\", \"direccion\", \"correo\", \"telefono\", \"fecha_nacimiento\", "
+            + "\"tipo\", \"estado\" ) "
             + "values ("
             + "'" + cli.getId()+ "', "
             + "'" + cli.getName() + "', "
@@ -133,7 +134,9 @@ public class ClientCRUD {
             + "'" + cli.getDirection() + "', "
             + "'" + cli.getEmail() + "', "
             + "'" + cli.getPhone() +"', "
-            + "'" + cli.getBirth_date()+"' );";
+            + "'" + cli.getBirth_date()+"', "
+            + "'" + cli.getType()+"', "
+            + "'A');";
     
      con.queryInsert(SQL);
      
@@ -157,8 +160,8 @@ public class ClientCRUD {
                        +  "\"correo\" = '" + cli.getEmail() + "',"
                        +  "\"telefono\" = '" + cli.getPhone() + "',"
                        +  "\"fecha_nacimiento\" = '" + cli.getBirth_date() + "',"
-                       +  "\"tipo\" = '" + cli.getType() + "',"
-                       +  " WHERE \"Cedula\" = '" + cli.getId() + "',";
+                       +  "\"tipo\" = '" + cli.getType() + "'"
+                       +  " WHERE \"cedula\" = '" + cli.getId() + "';";
             
             con.queryInsert(SQL);
             
@@ -264,9 +267,11 @@ public class ClientCRUD {
         
         // Se define la sentencia SQL a aplicar en la BD.
         String SQL = "SELECT \"cedula\", \"nombre\", \"apellido\", \"direccion\","
-                + " \"correo\",\"telefono\",\" tipo\" FROM\" cliente\" WHERE"
-                + "\" cedula\" = '"+ idClient +"' \" AND \"estado\" = 'A';";
-        
+                + " \"correo\",\"telefono\",\"tipo\",\"fecha_nacimiento\"  FROM \"cliente\" WHERE "
+                + "\"cedula\" = '"+ idClient+"' AND \"estado\" = 'A';";
+       // "SELECT \"cedula\", \"nombre\", \"apellido\", "
+       //         + "\"direccion\", \"correo\", \"telefono\", \"tipo\" "
+        //        + "FROM \"cliente\" WHERE \"estado\" = 'A'"
         // Se instancia y se establece una conexión con la BD.
         con = new ConnectionDB();
         con.conectar();

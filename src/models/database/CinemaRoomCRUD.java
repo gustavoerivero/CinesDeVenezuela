@@ -248,15 +248,14 @@ public class CinemaRoomCRUD {
             con.conectar();
           
             // Se declara una sentencia SQL.
-            String SQL =    "SELECT * FROM \"sala\" WHERE \"codigo\" = '" + id + "' "
-                       + "AND \"estado\" = 'A';";
+            String SQL =    "SELECT * FROM \"sala\" WHERE \"codigo\" = '" 
+                    + id + "' AND \"estado\" = 'A';";
             
             // Se realiza la consulta y se obtiene el resultado.
             java.sql.ResultSet rs = con.queryConsultar(SQL);
             
             // Se desconecta la BD.
             con.desconectar();
-            
             // Si la sala existe (que debe ser única) retorna 'true'.
             return rs.next();
             
@@ -276,34 +275,42 @@ public class CinemaRoomCRUD {
      * @param estatus de la Sala a buscar.
      * @return variable booleana.
      */
-    public boolean CinemaRoomExist(String id, char estatus){
-        
-        try{
+    public boolean CinemaRoomExistt(String id, char estatus){
+        boolean val = true;
+        try
+        {
             
             // Se instancia la clase de conexión con BD y se establece una conexión.
             con = new ConnectionDB();
             con.conectar();
           
             // Se declara una sentencia SQL.
-            String SQL =    "SELECT * FROM \"sala\" WHERE \"cedula\" = '" + id + "' "
-                    + "AND \"estado\" = '" + estatus + "';";
+            String SQL =    "SELECT * FROM \"sala\" WHERE \"codigo\" = '" 
+                    + id + "' AND \"estado\" = '" + estatus + "';";
             
             // Se realiza la consulta y se obtiene el resultado.
             java.sql.ResultSet rs = con.queryConsultar(SQL);
             
             // Se desconecta la BD.
             con.desconectar();
-            
             // Si la sala existe (que debe ser única) retorna 'true'.
-            return rs.next();
+            
+            val = rs.next();
+            System.out.println(val);
+
+            return val;
             
             
-        } catch (java.sql.SQLException ex){
+        } 
+        catch (java.sql.SQLException ex)
+        {
             System.out.println("No se pudo encontrar la sala. Error: " + ex);
+                   return false;
+
         }
         
         // Si el usuario no existe, retorna 'false'.
-        return false;
+        //return false;
         
     }
     

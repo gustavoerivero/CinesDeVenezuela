@@ -3,7 +3,7 @@ package views;
 
 // Se importan las librerías a utilizar.
 import views.tables.*;
-import lib.SupportFunctions;  
+import lib.SupportFunctions;
 
 /**
  *  Materia: Laboratorio I
@@ -72,7 +72,7 @@ public class EmployeeManagement extends javax.swing.JFrame {
         txtSearchNameEmployee = new javax.swing.JTextField();
         btnSearchEmployee = new javax.swing.JButton();
         sepSearchNameEmployee = new javax.swing.JSeparator();
-        cmbSearchJobEmployee = new javax.swing.JComboBox<String>();
+        cmbSearchJobEmployee = new javax.swing.JComboBox<>();
         btnClearSearchEmployee = new javax.swing.JButton();
         panCRUD = new javax.swing.JPanel();
         lblTittle1 = new javax.swing.JLabel();
@@ -96,8 +96,8 @@ public class EmployeeManagement extends javax.swing.JFrame {
         txtDirectionEmployee = new javax.swing.JTextField();
         txtPhoneEmployee = new javax.swing.JTextField();
         txtEmailEmployee = new javax.swing.JTextField();
-        cmbJobEmployee = new javax.swing.JComboBox<String>();
-        cmbBranchEmployee = new javax.swing.JComboBox<String>();
+        cmbJobEmployee = new javax.swing.JComboBox<>();
+        cmbBranchEmployee = new javax.swing.JComboBox<>();
         btnChargePicture = new javax.swing.JButton();
         btnClearPicture = new javax.swing.JButton();
         btnClearEmployee = new javax.swing.JButton();
@@ -312,7 +312,7 @@ public class EmployeeManagement extends javax.swing.JFrame {
 
         cmbSearchJobEmployee.setBackground(new java.awt.Color(249, 249, 249));
         cmbSearchJobEmployee.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        cmbSearchJobEmployee.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Seleccionar un cargo -", "Gerente", "Coordinador de áreas comúnes", "Vendedor de golosinas", "Vendedor de boletos", "Personal de limpieza" }));
+        cmbSearchJobEmployee.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "- Seleccionar un cargo -", "Administrador", "Gerente", "Coordinador de áreas comúnes", "Vendedor de golosinas", "Vendedor de boletos", "Personal de limpieza" }));
         cmbSearchJobEmployee.setBorder(null);
         cmbSearchJobEmployee.setLightWeightPopupEnabled(false);
 
@@ -502,18 +502,13 @@ public class EmployeeManagement extends javax.swing.JFrame {
 
         cmbJobEmployee.setBackground(new java.awt.Color(249, 249, 249));
         cmbJobEmployee.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        cmbJobEmployee.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " - Seleccionar un cargo - ", "Gerente", "Coordinador de áreas comúnes", "Vendedor de golosinas", "Vendedor de boletos", "Personal de limpieza" }));
+        cmbJobEmployee.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " - Seleccionar un cargo - ", "Administrador", "Gerente", "Coordinador de áreas comúnes", "Vendedor de golosinas", "Vendedor de boletos", "Personal de limpieza" }));
         cmbJobEmployee.setBorder(null);
         cmbJobEmployee.setLightWeightPopupEnabled(false);
-        cmbJobEmployee.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbJobEmployeeActionPerformed(evt);
-            }
-        });
 
         cmbBranchEmployee.setBackground(new java.awt.Color(249, 249, 249));
         cmbBranchEmployee.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        cmbBranchEmployee.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " - Seleccionar una Sucursal - ", "Cines de Venezuela" }));
+        cmbBranchEmployee.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " - Seleccionar una Sucursal - ", "Cines de Venezuela" }));
         cmbBranchEmployee.setBorder(null);
         cmbBranchEmployee.setLightWeightPopupEnabled(false);
 
@@ -1157,10 +1152,6 @@ public class EmployeeManagement extends javax.swing.JFrame {
         setColumnTable(tblEmployeeList.getColumnModel().getColumnIndexAtX(evt.getX()));
         setRowTable(evt.getY()/tblEmployeeList.getRowHeight());
     }//GEN-LAST:event_tblEmployeeListMouseClicked
-
-    private void cmbJobEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbJobEmployeeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbJobEmployeeActionPerformed
 
     //</editor-fold>
     

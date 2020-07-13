@@ -150,10 +150,16 @@ public class ControllerCinemaRoomManagement implements ActionListener, MouseList
             changeBranch = new ChangeBranch(ciRoomManagement, true, cityNames, cityBranch, branchNames, rolUser);
             
             // Se ubica el nombre de la sucursal.
+         //   if(!changeBranch.getId_Sucursal().equals(""))
+         //   {
             ciRoomManagement.lblSucursalName.setText(changeBranch.getId_Sucursal());
-                        
             changeBranch.dispose();
-            
+            loadCinemaRoomTable();
+         //   }
+          /*  else
+            {
+            changeBranch.dispose();
+            }     */
         }
         
         //</editor-fold>
@@ -212,7 +218,7 @@ public class ControllerCinemaRoomManagement implements ActionListener, MouseList
                     
                     // Se muestra la vista del CRUD.
                     support.cardSelection(ciRoomManagement.panContainerCinemaRoom, ciRoomManagement.panConsultList);
-                    
+                    ciRoomManagement.clearCinemaRoomSearch();
                     // Se cargan las Salas.
                     loadCinemaRoomTable();
                     
@@ -228,7 +234,7 @@ public class ControllerCinemaRoomManagement implements ActionListener, MouseList
                 
                 // Se muestra la vista del CRUD.
                 support.cardSelection(ciRoomManagement.panContainerCinemaRoom, ciRoomManagement.panConsultList);
-                    
+                ciRoomManagement.clearCinemaRoomSearch();
                 // Se cargan los empleados.
                 loadCinemaRoomTable();
                 
@@ -291,10 +297,10 @@ public class ControllerCinemaRoomManagement implements ActionListener, MouseList
                         if(select.getOpc()){
 
                             // Si la sala ya existe pero se encuentra inactivo.
-                            if(ciRoomCRUD.CinemaRoomExist(ciRoomManagement.txtIdCinemaRoom.getText(), 'I')){
-                                
+                            if(ciRoomCRUD.CinemaRoomExistt(ciRoomManagement.txtIdCinemaRoom.getText(), 'I')){
+                                System.out.println("AquÍ  2 ");
                                 // Se cambia el estado de la sala a activa.
-                                ciRoomCRUD.DeleteCinemaRoom(ciRoomManagement.txtIdCinemaRoom.getText(), 1);
+                                ciRoomCRUD.DeleteCinemaRoom(ciRoomManagement.txtIdCinemaRoom.getText(),1);
                                 
                                 // Se actualiza la información de la sala.
                                 updateCinemaRoomData(ciRoomManagement.txtIdCinemaRoom.getText());
@@ -303,6 +309,7 @@ public class ControllerCinemaRoomManagement implements ActionListener, MouseList
                                 support.cardSelection(ciRoomManagement.panContainerCinemaRoom, ciRoomManagement.panConsultList);
 
                                 // Se cargan las salas.
+                                ciRoomManagement.clearCinemaRoomSearch();
                                 loadCinemaRoomTable();
 
                                 // Se inicializan las variables.
@@ -310,9 +317,9 @@ public class ControllerCinemaRoomManagement implements ActionListener, MouseList
                                 
                             }
                             
-                            // Si la sala no existe.
+                            // Si la sala no e.xiste.
                             else{
-                            
+                            System.out.println("AquÍ");
                                 // Se ejecuta el registro de información.
                                 registerCinemaRoomData();
                                 
@@ -320,10 +327,12 @@ public class ControllerCinemaRoomManagement implements ActionListener, MouseList
                                 support.cardSelection(ciRoomManagement.panContainerCinemaRoom, ciRoomManagement.panConsultList);
 
                                 // Se cargan las salas.
+                                ciRoomManagement.clearCinemaRoomSearch();
                                 loadCinemaRoomTable();
 
                                 // Se inicializan las variables.
                                 clearVariables();
+
                                 
                             }
                         }
@@ -368,6 +377,7 @@ public class ControllerCinemaRoomManagement implements ActionListener, MouseList
                             support.cardSelection(ciRoomManagement.panContainerCinemaRoom, ciRoomManagement.panConsultList);
 
                             // Se cargan las salas.
+                            ciRoomManagement.clearCinemaRoomSearch();
                             loadCinemaRoomTable();
 
                             // Se inicializan las variables.
@@ -409,7 +419,7 @@ public class ControllerCinemaRoomManagement implements ActionListener, MouseList
                 
                 // Se muestra la vista del CRUD.
                 support.cardSelection(ciRoomManagement.panContainerCinemaRoom, ciRoomManagement.panConsultList);
-                    
+                ciRoomManagement.clearCinemaRoomSearch();
                 // Se cargan las salas.
                 loadCinemaRoomTable();
                     
@@ -498,7 +508,7 @@ public class ControllerCinemaRoomManagement implements ActionListener, MouseList
                         ciRoomManagement.txtIdCinemaRoom.setText(id);
                         ciRoomManagement.cmbBranchCinemaRoom.setSelectedItem(branch);
                         ciRoomManagement.txtFilaCinemaRoom.setText(String.valueOf(fila));
-                        ciRoomManagement.txtColumnCinemaRoom.setText(String.valueOf(column));
+                        ciRoomManagement.txtColumnCinemaRoom.setText(String.valueOf(this.column));
                         
                         // Se bloquea el campo del codigo.
                         ciRoomManagement.txtIdCinemaRoom.setEnabled(false);
@@ -770,8 +780,8 @@ public class ControllerCinemaRoomManagement implements ActionListener, MouseList
         // Se declaran los arreglos a utilizar
         ArrayList<String>   idCinemaRoom     = new ArrayList<>(),
                             branchCinemaRoom  = new ArrayList<>();
-        ArrayList<Integer>  fila    = new ArrayList<>(),
-                            column   = new ArrayList<>();
+        ArrayList<Integer>  filas    = new ArrayList<>(),
+                            columns   = new ArrayList<>();
                 
         // Se declara la variable que devuelve el resultado.
         java.sql.ResultSet result;
@@ -786,8 +796,8 @@ public class ControllerCinemaRoomManagement implements ActionListener, MouseList
                 
                 idCinemaRoom.add(result.getString("codigo"));
                 branchCinemaRoom.add(result.getString("nombreSucursal"));
-                fila.add(result.getInt("fila"));
-                column.add(result.getInt("columna"));
+                filas.add(result.getInt("fila"));
+                columns.add(result.getInt("columna"));
                                    
             }
             
@@ -827,8 +837,8 @@ public class ControllerCinemaRoomManagement implements ActionListener, MouseList
                     dtm.addRow(new Object[]{
                         idCinemaRoom.get(i),
                         branchCinemaRoom.get(i),
-                        fila.get(i),
-                        column.get(i),
+                        filas.get(i),
+                        columns.get(i),
                         btnR
                     });
 
@@ -854,14 +864,14 @@ public class ControllerCinemaRoomManagement implements ActionListener, MouseList
     private void registerCinemaRoomData(){
                         
         // Se carga la nueva información de la sala.
-        CinemaRoom ciRoom= new CinemaRoom(ciRoomManagement.txtIdCinemaRoom.getText(), 
+        CinemaRoom ciR= new CinemaRoom(ciRoomManagement.txtIdCinemaRoom.getText(), 
                                     loadBranch(ciRoomManagement.cmbBranchCinemaRoom.getSelectedItem().toString()), 
                                     Integer.valueOf(ciRoomManagement.txtFilaCinemaRoom.getText()),
                                     Integer.valueOf(ciRoomManagement.txtColumnCinemaRoom.getText()),
                                     'A');
         
         // Se ejecuta el registro de datos.
-        ciRoomCRUD.registerCinemaRoom(ciRoom);
+        ciRoomCRUD.registerCinemaRoom(ciR);
         
         // Se muestra mensaje de éxito.
         popup = new PopupMessage(ciRoomManagement, true, 4, 
@@ -876,7 +886,7 @@ public class ControllerCinemaRoomManagement implements ActionListener, MouseList
     private void updateCinemaRoomData(String id){
                         
         // Se carga la nueva información de la sala.
-        CinemaRoom ciRoom= new CinemaRoom(ciRoomManagement.txtIdCinemaRoom.getText(), 
+        ciRoom= new CinemaRoom(ciRoomManagement.txtIdCinemaRoom.getText(), 
                                     loadBranch(ciRoomManagement.cmbBranchCinemaRoom.getSelectedItem().toString()), 
                                     Integer.valueOf(ciRoomManagement.txtFilaCinemaRoom.getText()),
                                     Integer.valueOf(ciRoomManagement.txtColumnCinemaRoom.getText()),

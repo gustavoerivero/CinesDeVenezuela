@@ -1,7 +1,8 @@
+
 package views;
 
+// Se importa las librerías de soporte.
 import views.tables.Table;
-
 import lib.SupportFunctions;
 
 /**
@@ -119,7 +120,7 @@ public class MainPage extends javax.swing.JFrame {
                 btnAddCinemaTickets4.addActionListener(evt);
                 btnMinusCinemaTickets4.addActionListener(evt);
             
-            // -> Third Step
+                // -> Third Step
                 btnSeatsClear.addActionListener(evt);
                 btnBackToCantCinemaTickets.addActionListener(evt);
                 btnFourthStepCinemaTickets.addActionListener(evt);
@@ -129,16 +130,29 @@ public class MainPage extends javax.swing.JFrame {
                 btnCinemaSellBackStep.addActionListener(evt);
                 btnCinemaSell.addActionListener(evt);
                 
+        // Eventos de la opción 3 -> Reportes
+        btnListClientDecision.addActionListener(evt);
+        btnListEmployeeDecision.addActionListener(evt);
+        btnListOtherDecision.addActionListener(evt);
+            // Eventos de la opción 3.1 -> Listados relacionados con clientes
+            btnListClientDecision1.addActionListener(evt);
+            btnListClientDecision2.addActionListener(evt);
+                
         // Eventos de la opción 4 -> Empleados
         btnEmployeeDecision.addActionListener(evt);
         btnUserDecision.addActionListener(evt);
         
-        // Eventos de la opción 4 -> Empleados
+        // Eventos de la opción 5 -> Sucursales
+        btnBranchDecision.addActionListener(evt);
         btnCinemaRoomDecision.addActionListener(evt);
+        btnEnterpriseDecision.addActionListener(evt);
+        btnCandyInventory.addActionListener(evt);
         
-        //Evenetos de la opcion 6 -> Clientes
+        // Eventos de la opción 6 -> Configuración
+        btnFilmDecision.addActionListener(evt);
+        btnCandyDecisionCL.addActionListener(evt);
         btnClientDecision.addActionListener(evt);
-        
+        btnListClientDecision3.addActionListener(evt);
     }
    
     /**
@@ -474,8 +488,28 @@ public class MainPage extends javax.swing.JFrame {
         btnCinemaSellBackStep = new javax.swing.JButton();
         btnCinemaSell = new javax.swing.JButton();
         panOption3 = new javax.swing.JPanel();
-        lblTittleOption3 = new javax.swing.JLabel();
+        panDecisionOption3 = new javax.swing.JPanel();
+        lblTittleOption4 = new javax.swing.JLabel();
         sepTittleOption3 = new javax.swing.JSeparator();
+        panCapsuleListClientDecision = new javax.swing.JPanel();
+        btnListClientDecision = new javax.swing.JButton();
+        panCapsuleListEmployeeDecision = new javax.swing.JPanel();
+        btnListEmployeeDecision = new javax.swing.JButton();
+        panCapsuleListOtherDecision = new javax.swing.JPanel();
+        btnListOtherDecision = new javax.swing.JButton();
+        sepBranchDecision3 = new javax.swing.JSeparator();
+        sepCinemaRoomDecision3 = new javax.swing.JSeparator();
+        sepCinemaRoomDecision4 = new javax.swing.JSeparator();
+        sepCinemaRoomDecision5 = new javax.swing.JSeparator();
+        panListClientDecision = new javax.swing.JPanel();
+        lblTittleOption5 = new javax.swing.JLabel();
+        sepTittleOption4 = new javax.swing.JSeparator();
+        panButtonListClient = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        panListClientDecision1 = new javax.swing.JPanel();
+        btnListClientDecision1 = new javax.swing.JButton();
+        btnListClientDecision2 = new javax.swing.JButton();
+        btnListClientDecision3 = new javax.swing.JButton();
         panOption4 = new javax.swing.JPanel();
         panDecisionOption4 = new javax.swing.JPanel();
         lblEmployeeeDecision = new javax.swing.JLabel();
@@ -499,6 +533,8 @@ public class MainPage extends javax.swing.JFrame {
         panCapsuleEnterpriseDecision = new javax.swing.JPanel();
         btnEnterpriseDecision = new javax.swing.JButton();
         sepEnterpriseDecision = new javax.swing.JSeparator();
+        panCapsuleCandyInventory = new javax.swing.JPanel();
+        btnCandyInventory = new javax.swing.JButton();
         panOption6 = new javax.swing.JPanel();
         panDecisionOption6 = new javax.swing.JPanel();
         lblTittleOption8 = new javax.swing.JLabel();
@@ -1417,7 +1453,7 @@ public class MainPage extends javax.swing.JFrame {
                 .addComponent(panCapsuleCinemaDecision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(sepCinemaDecision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(366, Short.MAX_VALUE))
+                .addContainerGap(351, Short.MAX_VALUE))
         );
 
         panOption2.add(panDecisionOption2, "card2");
@@ -1634,7 +1670,6 @@ public class MainPage extends javax.swing.JFrame {
 
         btnCandySellClear.setBackground(new java.awt.Color(245, 245, 245));
         btnCandySellClear.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnCandySellClear.setForeground(new java.awt.Color(0, 0, 0));
         btnCandySellClear.setText("Limpiar");
         btnCandySellClear.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnCandySellClear.setBorderPainted(false);
@@ -1671,7 +1706,6 @@ public class MainPage extends javax.swing.JFrame {
 
         btnCandySell.setBackground(new java.awt.Color(245, 245, 245));
         btnCandySell.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnCandySell.setForeground(new java.awt.Color(0, 0, 0));
         btnCandySell.setText("Vender");
         btnCandySell.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnCandySell.setBorderPainted(false);
@@ -1953,7 +1987,6 @@ public class MainPage extends javax.swing.JFrame {
 
         pgrCinemaTickets.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         pgrCinemaTickets.setForeground(new java.awt.Color(75, 0, 145));
-        pgrCinemaTickets.setBorder(null);
         pgrCinemaTickets.setBorderPainted(false);
         pgrCinemaTickets.setStringPainted(true);
 
@@ -2080,7 +2113,7 @@ public class MainPage extends javax.swing.JFrame {
                 .addComponent(lblFunctionSelector, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scpFunctionSelector, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
 
         panStepsCinemaTickets.add(panFirstStepCinemaTickets, "card2");
@@ -2232,7 +2265,6 @@ public class MainPage extends javax.swing.JFrame {
 
         btnBackToSelectorMovie.setBackground(new java.awt.Color(245, 245, 245));
         btnBackToSelectorMovie.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnBackToSelectorMovie.setForeground(new java.awt.Color(0, 0, 0));
         btnBackToSelectorMovie.setText("Atrás");
         btnBackToSelectorMovie.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnBackToSelectorMovie.setBorderPainted(false);
@@ -2254,9 +2286,7 @@ public class MainPage extends javax.swing.JFrame {
         panButtonBackToSelectorMovie.setLayout(panButtonBackToSelectorMovieLayout);
         panButtonBackToSelectorMovieLayout.setHorizontalGroup(
             panButtonBackToSelectorMovieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panButtonBackToSelectorMovieLayout.createSequentialGroup()
-                .addComponent(btnBackToSelectorMovie, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 24, Short.MAX_VALUE))
+            .addComponent(btnBackToSelectorMovie, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
         );
         panButtonBackToSelectorMovieLayout.setVerticalGroup(
             panButtonBackToSelectorMovieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2279,7 +2309,6 @@ public class MainPage extends javax.swing.JFrame {
 
         btnNextStepBuyTicket.setBackground(new java.awt.Color(245, 245, 245));
         btnNextStepBuyTicket.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnNextStepBuyTicket.setForeground(new java.awt.Color(0, 0, 0));
         btnNextStepBuyTicket.setText("Siguiente");
         btnNextStepBuyTicket.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnNextStepBuyTicket.setBorderPainted(false);
@@ -2301,9 +2330,7 @@ public class MainPage extends javax.swing.JFrame {
         panButtonNextStepBuyTicket.setLayout(panButtonNextStepBuyTicketLayout);
         panButtonNextStepBuyTicketLayout.setHorizontalGroup(
             panButtonNextStepBuyTicketLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panButtonNextStepBuyTicketLayout.createSequentialGroup()
-                .addComponent(btnNextStepBuyTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 32, Short.MAX_VALUE))
+            .addComponent(btnNextStepBuyTicket, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
         );
         panButtonNextStepBuyTicketLayout.setVerticalGroup(
             panButtonNextStepBuyTicketLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2354,11 +2381,6 @@ public class MainPage extends javax.swing.JFrame {
         btnMinusCinemaTickets1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnMinusCinemaTickets1MouseExited(evt);
-            }
-        });
-        btnMinusCinemaTickets1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMinusCinemaTickets1ActionPerformed(evt);
             }
         });
 
@@ -2488,55 +2510,44 @@ public class MainPage extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addGroup(panSecondStepCinemaTicketsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panSecondStepCinemaTicketsLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
                         .addComponent(panButtonBackToSelectorMovie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(panButtonNextStepBuyTicket, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(panSecondStepCinemaTicketsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panSecondStepCinemaTicketsLayout.createSequentialGroup()
-                                .addComponent(lblTotalTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(lblTotalAmountTicket, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panSecondStepCinemaTicketsLayout.createSequentialGroup()
-                                .addComponent(lblIVATicket, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(44, 44, 44)
-                                .addComponent(lblIVAAmountTicket, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panSecondStepCinemaTicketsLayout.createSequentialGroup()
-                                .addComponent(lblSubtotalTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(44, 44, 44)
-                                .addComponent(lblSubtotalAmountTicket, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(11, 11, 11))
-                    .addGroup(panSecondStepCinemaTicketsLayout.createSequentialGroup()
                         .addGroup(panSecondStepCinemaTicketsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblDescAdultTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(lblDescOldTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(lblDescChildTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(lblDescKinderTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addGroup(panSecondStepCinemaTicketsLayout.createSequentialGroup()
-                                .addComponent(lblAmountAdultTicket, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(lblPriceTicketAdult, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panSecondStepCinemaTicketsLayout.createSequentialGroup()
-                                .addComponent(lblAmountKinderTicket, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(lblPriceTicketKinder, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panSecondStepCinemaTicketsLayout.createSequentialGroup()
-                                .addComponent(lblAmountChildTicket, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(lblPriceTicketChild, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(lblSubtotalTicket)
+                            .addComponent(lblIVATicket, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblTotalTicket, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE))
+                        .addGap(38, 38, 38)
+                        .addGroup(panSecondStepCinemaTicketsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTotalAmountTicket, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblIVAAmountTicket, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblSubtotalAmountTicket, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())
+                    .addGroup(panSecondStepCinemaTicketsLayout.createSequentialGroup()
+                        .addGroup(panSecondStepCinemaTicketsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(panSecondStepCinemaTicketsLayout.createSequentialGroup()
                                 .addComponent(lblAmountOldTicket, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(lblPriceTicketOld, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(lblPriceTicketOld, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panSecondStepCinemaTicketsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(lblDescAdultTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addComponent(lblDescOldTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addComponent(lblDescChildTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addComponent(lblDescKinderTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addGroup(panSecondStepCinemaTicketsLayout.createSequentialGroup()
+                                    .addComponent(lblAmountAdultTicket, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(lblPriceTicketAdult, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(panSecondStepCinemaTicketsLayout.createSequentialGroup()
+                                    .addComponent(lblAmountKinderTicket, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(lblPriceTicketKinder, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(panSecondStepCinemaTicketsLayout.createSequentialGroup()
+                                    .addComponent(lblAmountChildTicket, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(lblPriceTicketChild, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGroup(panSecondStepCinemaTicketsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panSecondStepCinemaTicketsLayout.createSequentialGroup()
-                                .addGap(152, 152, 152)
-                                .addGroup(panSecondStepCinemaTicketsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblTotalKinderTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblSubtotalKinderTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblIVAKinderTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(panSecondStepCinemaTicketsLayout.createSequentialGroup()
                                 .addGap(16, 16, 16)
                                 .addGroup(panSecondStepCinemaTicketsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2551,7 +2562,7 @@ public class MainPage extends javax.swing.JFrame {
                                         .addGap(2, 2, 2)
                                         .addGroup(panSecondStepCinemaTicketsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(lblSubtotalChildTicket)
-                                            .addComponent(lblIVAChildTicket, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+                                            .addComponent(lblIVAChildTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
                                             .addComponent(lblTotalChildTicket)))
                                     .addComponent(lblIVAAdultTicket)
                                     .addComponent(lblTotalAdultTicket)
@@ -2577,31 +2588,39 @@ public class MainPage extends javax.swing.JFrame {
                                     .addComponent(lblTotalAmountOldTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(11, 11, 11))
                             .addGroup(panSecondStepCinemaTicketsLayout.createSequentialGroup()
-                                .addGap(16, 16, 16)
                                 .addGroup(panSecondStepCinemaTicketsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(panSecondStepCinemaTicketsLayout.createSequentialGroup()
+                                        .addGap(152, 152, 152)
+                                        .addGroup(panSecondStepCinemaTicketsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblTotalKinderTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lblSubtotalKinderTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lblIVAKinderTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(panSecondStepCinemaTicketsLayout.createSequentialGroup()
+                                        .addGap(16, 16, 16)
                                         .addGroup(panSecondStepCinemaTicketsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(panSecondStepCinemaTicketsLayout.createSequentialGroup()
+                                                .addGroup(panSecondStepCinemaTicketsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addGroup(panSecondStepCinemaTicketsLayout.createSequentialGroup()
+                                                        .addGap(2, 2, 2)
+                                                        .addComponent(btnMinusCinemaTickets2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                    .addComponent(btnAddCinemaTickets2))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(lblCantCinemaTickets2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(panSecondStepCinemaTicketsLayout.createSequentialGroup()
                                                 .addGap(2, 2, 2)
-                                                .addComponent(btnMinusCinemaTickets2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(btnAddCinemaTickets2))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(lblCantCinemaTickets2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(panSecondStepCinemaTicketsLayout.createSequentialGroup()
-                                        .addGap(2, 2, 2)
-                                        .addGroup(panSecondStepCinemaTicketsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(btnMinusCinemaTickets3, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(btnAddCinemaTickets3, javax.swing.GroupLayout.Alignment.LEADING))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(lblCantCinemaTickets3, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(panSecondStepCinemaTicketsLayout.createSequentialGroup()
-                                        .addGroup(panSecondStepCinemaTicketsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(btnMinusCinemaTickets4)
-                                            .addComponent(btnAddCinemaTickets4))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(lblCantCinemaTickets4, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(73, 227, Short.MAX_VALUE)))))
-                .addGap(19, 19, 19))
+                                                .addGroup(panSecondStepCinemaTicketsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(btnMinusCinemaTickets3, javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(btnAddCinemaTickets3, javax.swing.GroupLayout.Alignment.LEADING))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(lblCantCinemaTickets3, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(panSecondStepCinemaTicketsLayout.createSequentialGroup()
+                                                .addGroup(panSecondStepCinemaTicketsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(btnMinusCinemaTickets4)
+                                                    .addComponent(btnAddCinemaTickets4))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(lblCantCinemaTickets4, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(19, 19, 19))))
         );
         panSecondStepCinemaTicketsLayout.setVerticalGroup(
             panSecondStepCinemaTicketsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2702,10 +2721,10 @@ public class MainPage extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnMinusCinemaTickets4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lblCantCinemaTickets4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panSecondStepCinemaTicketsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblAmountOldTicket, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPriceTicketOld))
+                    .addComponent(lblPriceTicketOld)
+                    .addComponent(lblAmountOldTicket, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panSecondStepCinemaTicketsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(panButtonNextStepBuyTicket, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2722,7 +2741,7 @@ public class MainPage extends javax.swing.JFrame {
                         .addGroup(panSecondStepCinemaTicketsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblTotalTicket, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblTotalAmountTicket))))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         panStepsCinemaTickets.add(panSecondStepCinemaTickets, "card3");
@@ -2748,7 +2767,7 @@ public class MainPage extends javax.swing.JFrame {
         panSelectorSeats.setLayout(panSelectorSeatsLayout);
         panSelectorSeatsLayout.setHorizontalGroup(
             panSelectorSeatsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 479, Short.MAX_VALUE)
+            .addGap(0, 411, Short.MAX_VALUE)
             .addGroup(panSelectorSeatsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panSelectorSeatsLayout.createSequentialGroup()
                     .addContainerGap()
@@ -2757,7 +2776,7 @@ public class MainPage extends javax.swing.JFrame {
         );
         panSelectorSeatsLayout.setVerticalGroup(
             panSelectorSeatsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 406, Short.MAX_VALUE)
+            .addGap(0, 416, Short.MAX_VALUE)
             .addGroup(panSelectorSeatsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panSelectorSeatsLayout.createSequentialGroup()
                     .addContainerGap()
@@ -2767,7 +2786,6 @@ public class MainPage extends javax.swing.JFrame {
 
         btnSeatsClear.setBackground(new java.awt.Color(239, 232, 244));
         btnSeatsClear.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnSeatsClear.setForeground(new java.awt.Color(0, 0, 0));
         btnSeatsClear.setText("Limpiar");
         btnSeatsClear.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnSeatsClear.setBorderPainted(false);
@@ -2791,7 +2809,6 @@ public class MainPage extends javax.swing.JFrame {
 
         btnBackToCantCinemaTickets.setBackground(new java.awt.Color(239, 232, 244));
         btnBackToCantCinemaTickets.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnBackToCantCinemaTickets.setForeground(new java.awt.Color(0, 0, 0));
         btnBackToCantCinemaTickets.setText("Atrás");
         btnBackToCantCinemaTickets.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnBackToCantCinemaTickets.setBorderPainted(false);
@@ -2815,7 +2832,6 @@ public class MainPage extends javax.swing.JFrame {
 
         btnFourthStepCinemaTickets.setBackground(new java.awt.Color(239, 232, 244));
         btnFourthStepCinemaTickets.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnFourthStepCinemaTickets.setForeground(new java.awt.Color(0, 0, 0));
         btnFourthStepCinemaTickets.setText("Aceptar");
         btnFourthStepCinemaTickets.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnFourthStepCinemaTickets.setBorderPainted(false);
@@ -3048,7 +3064,6 @@ public class MainPage extends javax.swing.JFrame {
 
         btnCinemaSellBackStep.setBackground(new java.awt.Color(245, 245, 245));
         btnCinemaSellBackStep.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnCinemaSellBackStep.setForeground(new java.awt.Color(0, 0, 0));
         btnCinemaSellBackStep.setText("Atrás");
         btnCinemaSellBackStep.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnCinemaSellBackStep.setBorderPainted(false);
@@ -3069,7 +3084,6 @@ public class MainPage extends javax.swing.JFrame {
 
         btnCinemaSell.setBackground(new java.awt.Color(245, 245, 245));
         btnCinemaSell.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnCinemaSell.setForeground(new java.awt.Color(0, 0, 0));
         btnCinemaSell.setText("Vender");
         btnCinemaSell.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnCinemaSell.setBorderPainted(false);
@@ -3134,7 +3148,7 @@ public class MainPage extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblMovieTicketSell, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(scpCinemaTicketsTable))))
-                .addContainerGap(87, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         panFourthStepCinemaTicketsLayout.setVerticalGroup(
             panFourthStepCinemaTicketsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3180,7 +3194,7 @@ public class MainPage extends javax.swing.JFrame {
                             .addComponent(lblIVACinemaSell, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(txtTotalCinema, javax.swing.GroupLayout.Alignment.LEADING))
                     .addComponent(txtSubTotalCinema, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addGroup(panFourthStepCinemaTicketsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnCinemaSell, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
                     .addComponent(btnCinemaSellBackStep, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -3226,7 +3240,7 @@ public class MainPage extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(pgrCinemaTickets, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panStepsCinemaTickets, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
+                .addComponent(panStepsCinemaTickets, javax.swing.GroupLayout.PREFERRED_SIZE, 492, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -3236,35 +3250,344 @@ public class MainPage extends javax.swing.JFrame {
 
         panOption3.setBackground(new java.awt.Color(249, 249, 249));
         panOption3.setPreferredSize(new java.awt.Dimension(685, 620));
+        panOption3.setLayout(new java.awt.CardLayout());
 
-        lblTittleOption3.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        lblTittleOption3.setForeground(new java.awt.Color(28, 0, 63));
-        lblTittleOption3.setText("Reportes");
-        lblTittleOption3.setToolTipText("");
+        panDecisionOption3.setBackground(new java.awt.Color(249, 249, 249));
+
+        lblTittleOption4.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        lblTittleOption4.setForeground(new java.awt.Color(28, 0, 63));
+        lblTittleOption4.setText("Reportes");
+        lblTittleOption4.setToolTipText("");
 
         sepTittleOption3.setBackground(new java.awt.Color(249, 249, 249));
         sepTittleOption3.setForeground(new java.awt.Color(239, 232, 244));
 
-        javax.swing.GroupLayout panOption3Layout = new javax.swing.GroupLayout(panOption3);
-        panOption3.setLayout(panOption3Layout);
-        panOption3Layout.setHorizontalGroup(
-            panOption3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panOption3Layout.createSequentialGroup()
-                .addContainerGap(44, Short.MAX_VALUE)
-                .addComponent(lblTittleOption3, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addComponent(sepTittleOption3)
+        panCapsuleListClientDecision.setBackground(new java.awt.Color(249, 249, 249));
+        panCapsuleListClientDecision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 232, 244)));
+        panCapsuleListClientDecision.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        btnListClientDecision.setBackground(new java.awt.Color(249, 249, 249));
+        btnListClientDecision.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnListClientDecision.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/client.png"))); // NOI18N
+        btnListClientDecision.setText("<html><b><FONT SIZE=4>Listados relacionados con clientes</Font></b><br><p align=’justify’>Generar los listados relacionados con los clientes.</p></html>");
+        btnListClientDecision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 232, 244)));
+        btnListClientDecision.setBorderPainted(false);
+        btnListClientDecision.setContentAreaFilled(false);
+        btnListClientDecision.setFocusPainted(false);
+        btnListClientDecision.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnListClientDecision.setIconTextGap(25);
+        btnListClientDecision.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnListClientDecisionMouseMoved(evt);
+            }
+        });
+        btnListClientDecision.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnListClientDecisionMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panCapsuleListClientDecisionLayout = new javax.swing.GroupLayout(panCapsuleListClientDecision);
+        panCapsuleListClientDecision.setLayout(panCapsuleListClientDecisionLayout);
+        panCapsuleListClientDecisionLayout.setHorizontalGroup(
+            panCapsuleListClientDecisionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btnListClientDecision)
         );
-        panOption3Layout.setVerticalGroup(
-            panOption3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panOption3Layout.createSequentialGroup()
-                .addComponent(lblTittleOption3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sepTittleOption3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 559, Short.MAX_VALUE))
+        panCapsuleListClientDecisionLayout.setVerticalGroup(
+            panCapsuleListClientDecisionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panCapsuleListClientDecisionLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnListClientDecision, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        panContent.add(panOption3, "card2");
+        panCapsuleListEmployeeDecision.setBackground(new java.awt.Color(249, 249, 249));
+        panCapsuleListEmployeeDecision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 232, 244)));
+        panCapsuleListEmployeeDecision.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        btnListEmployeeDecision.setBackground(new java.awt.Color(249, 249, 249));
+        btnListEmployeeDecision.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnListEmployeeDecision.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/employee.png"))); // NOI18N
+        btnListEmployeeDecision.setText("<html><b><FONT SIZE=4>Listados relacionados con empleados</Font></b><br><p align=’justify’>Generar los listados relacionados con empleados.</p></html>");
+        btnListEmployeeDecision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 232, 244)));
+        btnListEmployeeDecision.setBorderPainted(false);
+        btnListEmployeeDecision.setContentAreaFilled(false);
+        btnListEmployeeDecision.setFocusPainted(false);
+        btnListEmployeeDecision.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnListEmployeeDecision.setIconTextGap(25);
+        btnListEmployeeDecision.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnListEmployeeDecisionMouseMoved(evt);
+            }
+        });
+        btnListEmployeeDecision.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnListEmployeeDecisionMouseExited(evt);
+            }
+        });
+        btnListEmployeeDecision.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListEmployeeDecisionActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panCapsuleListEmployeeDecisionLayout = new javax.swing.GroupLayout(panCapsuleListEmployeeDecision);
+        panCapsuleListEmployeeDecision.setLayout(panCapsuleListEmployeeDecisionLayout);
+        panCapsuleListEmployeeDecisionLayout.setHorizontalGroup(
+            panCapsuleListEmployeeDecisionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btnListEmployeeDecision)
+        );
+        panCapsuleListEmployeeDecisionLayout.setVerticalGroup(
+            panCapsuleListEmployeeDecisionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panCapsuleListEmployeeDecisionLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnListEmployeeDecision, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        panCapsuleListOtherDecision.setBackground(new java.awt.Color(249, 249, 249));
+        panCapsuleListOtherDecision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 232, 244)));
+        panCapsuleListOtherDecision.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        btnListOtherDecision.setBackground(new java.awt.Color(249, 249, 249));
+        btnListOtherDecision.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnListOtherDecision.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/ticketGolosina.png"))); // NOI18N
+        btnListOtherDecision.setText("<html><b><FONT SIZE=4>Tickets para golosinas</Font></b><br><p align=’justify’>Gestiona la venta de las golosinas por medio de tickets únicos y personalizados para cada cliente.</p></html>");
+        btnListOtherDecision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 232, 244)));
+        btnListOtherDecision.setBorderPainted(false);
+        btnListOtherDecision.setContentAreaFilled(false);
+        btnListOtherDecision.setFocusPainted(false);
+        btnListOtherDecision.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnListOtherDecision.setIconTextGap(25);
+        btnListOtherDecision.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnListOtherDecisionMouseMoved(evt);
+            }
+        });
+        btnListOtherDecision.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnListOtherDecisionMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panCapsuleListOtherDecisionLayout = new javax.swing.GroupLayout(panCapsuleListOtherDecision);
+        panCapsuleListOtherDecision.setLayout(panCapsuleListOtherDecisionLayout);
+        panCapsuleListOtherDecisionLayout.setHorizontalGroup(
+            panCapsuleListOtherDecisionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btnListOtherDecision, javax.swing.GroupLayout.DEFAULT_SIZE, 663, Short.MAX_VALUE)
+        );
+        panCapsuleListOtherDecisionLayout.setVerticalGroup(
+            panCapsuleListOtherDecisionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panCapsuleListOtherDecisionLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnListOtherDecision, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        sepBranchDecision3.setForeground(new java.awt.Color(239, 232, 244));
+
+        sepCinemaRoomDecision3.setForeground(new java.awt.Color(239, 232, 244));
+
+        sepCinemaRoomDecision4.setForeground(new java.awt.Color(239, 232, 244));
+
+        sepCinemaRoomDecision5.setForeground(new java.awt.Color(239, 232, 244));
+
+        javax.swing.GroupLayout panDecisionOption3Layout = new javax.swing.GroupLayout(panDecisionOption3);
+        panDecisionOption3.setLayout(panDecisionOption3Layout);
+        panDecisionOption3Layout.setHorizontalGroup(
+            panDecisionOption3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(sepTittleOption3)
+            .addGroup(panDecisionOption3Layout.createSequentialGroup()
+                .addGap(73, 73, 73)
+                .addComponent(lblTittleOption4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(panDecisionOption3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panDecisionOption3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panCapsuleListClientDecision, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panCapsuleListEmployeeDecision, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panCapsuleListOtherDecision, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(sepCinemaRoomDecision3, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(sepCinemaRoomDecision4)
+                    .addComponent(sepCinemaRoomDecision5))
+                .addContainerGap())
+            .addGroup(panDecisionOption3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panDecisionOption3Layout.createSequentialGroup()
+                    .addGap(2, 2, 2)
+                    .addComponent(sepBranchDecision3)
+                    .addGap(3, 3, 3)))
+        );
+        panDecisionOption3Layout.setVerticalGroup(
+            panDecisionOption3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panDecisionOption3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTittleOption4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sepTittleOption3, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panCapsuleListClientDecision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addComponent(sepCinemaRoomDecision3, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(panCapsuleListEmployeeDecision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addComponent(sepCinemaRoomDecision4, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(9, 9, 9)
+                .addComponent(panCapsuleListOtherDecision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sepCinemaRoomDecision5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(256, Short.MAX_VALUE))
+            .addGroup(panDecisionOption3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panDecisionOption3Layout.createSequentialGroup()
+                    .addGap(308, 308, 308)
+                    .addComponent(sepBranchDecision3, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(268, Short.MAX_VALUE)))
+        );
+
+        panOption3.add(panDecisionOption3, "card4");
+
+        panListClientDecision.setBackground(new java.awt.Color(249, 249, 249));
+
+        lblTittleOption5.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        lblTittleOption5.setForeground(new java.awt.Color(28, 0, 63));
+        lblTittleOption5.setText("Listados relacionados con clientes");
+        lblTittleOption5.setToolTipText("");
+
+        sepTittleOption4.setBackground(new java.awt.Color(249, 249, 249));
+        sepTittleOption4.setForeground(new java.awt.Color(239, 232, 244));
+
+        panButtonListClient.setBackground(new java.awt.Color(249, 249, 249));
+
+        jScrollPane1.setBackground(new java.awt.Color(249, 249, 249));
+
+        panListClientDecision1.setBackground(new java.awt.Color(249, 249, 249));
+        panListClientDecision1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 232, 244)));
+        panListClientDecision1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        btnListClientDecision1.setBackground(new java.awt.Color(249, 249, 249));
+        btnListClientDecision1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnListClientDecision1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/pase especial.png"))); // NOI18N
+        btnListClientDecision1.setText("<html><b><FONT SIZE=4>Listados de Clientes que recibieron Pase Especial</Font></b><br><p align=’justify’>Clientes frecuentes que recibieron a fin de mes un pase especial.</p></html>");
+        btnListClientDecision1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 232, 244)));
+        btnListClientDecision1.setBorderPainted(false);
+        btnListClientDecision1.setContentAreaFilled(false);
+        btnListClientDecision1.setFocusPainted(false);
+        btnListClientDecision1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnListClientDecision1.setIconTextGap(25);
+        btnListClientDecision1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnListClientDecision1MouseMoved(evt);
+            }
+        });
+        btnListClientDecision1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnListClientDecision1MouseExited(evt);
+            }
+        });
+        btnListClientDecision1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListClientDecision1ActionPerformed(evt);
+            }
+        });
+
+        btnListClientDecision2.setBackground(new java.awt.Color(249, 249, 249));
+        btnListClientDecision2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnListClientDecision2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/montoGolosina.png"))); // NOI18N
+        btnListClientDecision2.setText("<html><b><FONT SIZE=4>Listados de clientes golosinas</Font></b><br><p align=’justify’>Los montos gastados por clientes en golosina.</p></html>");
+        btnListClientDecision2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 232, 244)));
+        btnListClientDecision2.setBorderPainted(false);
+        btnListClientDecision2.setContentAreaFilled(false);
+        btnListClientDecision2.setFocusPainted(false);
+        btnListClientDecision2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnListClientDecision2.setIconTextGap(25);
+
+        btnListClientDecision3.setBackground(new java.awt.Color(249, 249, 249));
+        btnListClientDecision3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnListClientDecision3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/client frecuente.png"))); // NOI18N
+        btnListClientDecision3.setText("<html><b><FONT SIZE=4>Listados de Clientes frecuentes</Font></b><br><p align=’justify’>clientes frecuentes.</p></html>");
+        btnListClientDecision3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 232, 244)));
+        btnListClientDecision3.setBorderPainted(false);
+        btnListClientDecision3.setContentAreaFilled(false);
+        btnListClientDecision3.setFocusPainted(false);
+        btnListClientDecision3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnListClientDecision3.setIconTextGap(25);
+        btnListClientDecision3.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnListClientDecision3MouseMoved(evt);
+            }
+        });
+        btnListClientDecision3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnListClientDecision3MouseExited(evt);
+            }
+        });
+        btnListClientDecision3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListClientDecision3ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panListClientDecision1Layout = new javax.swing.GroupLayout(panListClientDecision1);
+        panListClientDecision1.setLayout(panListClientDecision1Layout);
+        panListClientDecision1Layout.setHorizontalGroup(
+            panListClientDecision1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panListClientDecision1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panListClientDecision1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnListClientDecision2, javax.swing.GroupLayout.PREFERRED_SIZE, 662, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnListClientDecision1, javax.swing.GroupLayout.PREFERRED_SIZE, 662, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnListClientDecision3, javax.swing.GroupLayout.PREFERRED_SIZE, 662, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+        panListClientDecision1Layout.setVerticalGroup(
+            panListClientDecision1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panListClientDecision1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnListClientDecision3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(btnListClientDecision2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnListClientDecision1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 308, Short.MAX_VALUE))
+        );
+
+        jScrollPane1.setViewportView(panListClientDecision1);
+
+        javax.swing.GroupLayout panButtonListClientLayout = new javax.swing.GroupLayout(panButtonListClient);
+        panButtonListClient.setLayout(panButtonListClientLayout);
+        panButtonListClientLayout.setHorizontalGroup(
+            panButtonListClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 685, Short.MAX_VALUE)
+        );
+        panButtonListClientLayout.setVerticalGroup(
+            panButtonListClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panButtonListClientLayout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 273, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout panListClientDecisionLayout = new javax.swing.GroupLayout(panListClientDecision);
+        panListClientDecision.setLayout(panListClientDecisionLayout);
+        panListClientDecisionLayout.setHorizontalGroup(
+            panListClientDecisionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panListClientDecisionLayout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addComponent(lblTittleOption5)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(sepTittleOption4)
+            .addComponent(panButtonListClient, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        panListClientDecisionLayout.setVerticalGroup(
+            panListClientDecisionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panListClientDecisionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTittleOption5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sepTittleOption4, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panButtonListClient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        panOption3.add(panListClientDecision, "card5");
+
+        panContent.add(panOption3, "card7");
 
         panOption4.setBackground(new java.awt.Color(249, 249, 249));
         panOption4.setPreferredSize(new java.awt.Dimension(685, 620));
@@ -3373,11 +3696,11 @@ public class MainPage extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panDecisionOption4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panDecisionOption4Layout.createSequentialGroup()
-                        .addComponent(panCapsuleUserDecision, javax.swing.GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE)
+                        .addComponent(panCapsuleUserDecision, javax.swing.GroupLayout.DEFAULT_SIZE, 666, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panDecisionOption4Layout.createSequentialGroup()
                         .addGroup(panDecisionOption4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(panCapsuleEmployeeDecision, javax.swing.GroupLayout.DEFAULT_SIZE, 671, Short.MAX_VALUE)
+                            .addComponent(panCapsuleEmployeeDecision, javax.swing.GroupLayout.DEFAULT_SIZE, 667, Short.MAX_VALUE)
                             .addGroup(panDecisionOption4Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(lblEmployeeeDecision, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -3563,30 +3886,71 @@ public class MainPage extends javax.swing.JFrame {
 
         sepEnterpriseDecision.setForeground(new java.awt.Color(239, 232, 244));
 
+        panCapsuleCandyInventory.setBackground(new java.awt.Color(249, 249, 249));
+        panCapsuleCandyInventory.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 232, 244)));
+        panCapsuleCandyInventory.setPreferredSize(new java.awt.Dimension(619, 74));
+
+        btnCandyInventory.setBackground(new java.awt.Color(249, 249, 249));
+        btnCandyInventory.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnCandyInventory.setText("<html><b><FONT SIZE=4>Inventario de Golosina</Font></b><br><p align=’justify’>Gestionar los inventarios de golosina</p></html>");
+        btnCandyInventory.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 232, 244)));
+        btnCandyInventory.setBorderPainted(false);
+        btnCandyInventory.setContentAreaFilled(false);
+        btnCandyInventory.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCandyInventory.setFocusPainted(false);
+        btnCandyInventory.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnCandyInventory.setIconTextGap(25);
+        btnCandyInventory.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnCandyInventoryMouseMoved(evt);
+            }
+        });
+        btnCandyInventory.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCandyInventoryMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panCapsuleCandyInventoryLayout = new javax.swing.GroupLayout(panCapsuleCandyInventory);
+        panCapsuleCandyInventory.setLayout(panCapsuleCandyInventoryLayout);
+        panCapsuleCandyInventoryLayout.setHorizontalGroup(
+            panCapsuleCandyInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btnCandyInventory)
+        );
+        panCapsuleCandyInventoryLayout.setVerticalGroup(
+            panCapsuleCandyInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panCapsuleCandyInventoryLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnCandyInventory, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
         javax.swing.GroupLayout panDecisionOption5Layout = new javax.swing.GroupLayout(panDecisionOption5);
         panDecisionOption5.setLayout(panDecisionOption5Layout);
         panDecisionOption5Layout.setHorizontalGroup(
             panDecisionOption5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panDecisionOption5Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(panDecisionOption5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(panDecisionOption5Layout.createSequentialGroup()
+                        .addComponent(panCapsuleCandyInventory, javax.swing.GroupLayout.DEFAULT_SIZE, 679, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(sepEnterpriseDecision))
+                    .addComponent(sepCinemaRoomDecision)
+                    .addComponent(sepTittleOption8, javax.swing.GroupLayout.DEFAULT_SIZE, 686, Short.MAX_VALUE)))
+            .addGroup(panDecisionOption5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panDecisionOption5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panDecisionOption5Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 39, Short.MAX_VALUE)
                         .addComponent(lblTittleOption7, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(9, 9, 9))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panDecisionOption5Layout.createSequentialGroup()
                         .addGroup(panDecisionOption5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(panCapsuleBranchDecision, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE)
-                            .addComponent(panCapsuleEnterpriseDecision, javax.swing.GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE)
-                            .addComponent(panCapsuleCinemaRoomDecision, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE))
+                            .addComponent(panCapsuleBranchDecision, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 666, Short.MAX_VALUE)
+                            .addComponent(panCapsuleEnterpriseDecision, javax.swing.GroupLayout.DEFAULT_SIZE, 666, Short.MAX_VALUE)
+                            .addComponent(panCapsuleCinemaRoomDecision, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 666, Short.MAX_VALUE))
                         .addContainerGap())
                     .addComponent(sepBranchDecision, javax.swing.GroupLayout.Alignment.TRAILING)))
-            .addGroup(panDecisionOption5Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(panDecisionOption5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(sepEnterpriseDecision, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(sepCinemaRoomDecision)
-                    .addComponent(sepTittleOption8, javax.swing.GroupLayout.DEFAULT_SIZE, 686, Short.MAX_VALUE)))
         );
         panDecisionOption5Layout.setVerticalGroup(
             panDecisionOption5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3605,8 +3969,10 @@ public class MainPage extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panCapsuleEnterpriseDecision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sepEnterpriseDecision, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(296, Short.MAX_VALUE))
+                .addGroup(panDecisionOption5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(sepEnterpriseDecision, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panCapsuleCandyInventory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(232, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panOption5Layout = new javax.swing.GroupLayout(panOption5);
@@ -3780,9 +4146,9 @@ public class MainPage extends javax.swing.JFrame {
                         .addGap(9, 9, 9))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panDecisionOption6Layout.createSequentialGroup()
                         .addGroup(panDecisionOption6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(panCapsuleFilmDecision, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE)
-                            .addComponent(panCapsuleClientDecision, javax.swing.GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE)
-                            .addComponent(panCapsuleCandyDecisionCL, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE))
+                            .addComponent(panCapsuleFilmDecision, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 666, Short.MAX_VALUE)
+                            .addComponent(panCapsuleClientDecision, javax.swing.GroupLayout.DEFAULT_SIZE, 666, Short.MAX_VALUE)
+                            .addComponent(panCapsuleCandyDecisionCL, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 666, Short.MAX_VALUE))
                         .addContainerGap())))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panDecisionOption6Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -4187,7 +4553,7 @@ public class MainPage extends javax.swing.JFrame {
 
     //</editor-fold>
     
-    //<editor-fold defaultstate="collapsed" desc=" Main Menu -> Option 2 (Cinema Tickets)">
+    //<editor-fold defaultstate="collapsed" desc=" Main Menu -> Option 2 (Cinema Tickets) ">
     
     private void btnBackToTicketDecision2MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackToTicketDecision2MouseMoved
         btnBackToTicketDecision2.setBackground(new java.awt.Color(245,245,245));
@@ -4217,10 +4583,159 @@ public class MainPage extends javax.swing.JFrame {
         setRowTable(evt.getY()/tblFunctionSelector.getRowHeight());
     }//GEN-LAST:event_tblFunctionSelectorMouseClicked
 
+    private void btnSeatsClearMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSeatsClearMouseMoved
+        btnSeatsClear.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
+        btnSeatsClear.setForeground(new java.awt.Color(255,255,255));
+        btnSeatsClear.setBackground(new java.awt.Color(66,0,124));
+    }//GEN-LAST:event_btnSeatsClearMouseMoved
+
+    private void btnSeatsClearMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSeatsClearMouseExited
+        btnSeatsClear.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
+        btnSeatsClear.setForeground(new java.awt.Color(0,0,0));
+        btnSeatsClear.setBackground(new java.awt.Color(239,232,244));
+    }//GEN-LAST:event_btnSeatsClearMouseExited
+
+    private void btnBackToCantCinemaTicketsMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackToCantCinemaTicketsMouseMoved
+        btnBackToCantCinemaTickets.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
+        btnBackToCantCinemaTickets.setForeground(new java.awt.Color(255,255,255));
+        btnBackToCantCinemaTickets.setBackground(new java.awt.Color(66,0,124));
+    }//GEN-LAST:event_btnBackToCantCinemaTicketsMouseMoved
+
+    private void btnBackToCantCinemaTicketsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackToCantCinemaTicketsMouseExited
+        btnBackToCantCinemaTickets.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
+        btnBackToCantCinemaTickets.setForeground(new java.awt.Color(0,0,0));
+        btnBackToCantCinemaTickets.setBackground(new java.awt.Color(239,232,244));
+    }//GEN-LAST:event_btnBackToCantCinemaTicketsMouseExited
+
+    private void btnFourthStepCinemaTicketsMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFourthStepCinemaTicketsMouseMoved
+        btnFourthStepCinemaTickets.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
+        btnFourthStepCinemaTickets.setForeground(new java.awt.Color(255,255,255));
+        btnFourthStepCinemaTickets.setBackground(new java.awt.Color(66,0,124));
+    }//GEN-LAST:event_btnFourthStepCinemaTicketsMouseMoved
+
+    private void btnFourthStepCinemaTicketsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFourthStepCinemaTicketsMouseExited
+        btnFourthStepCinemaTickets.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
+        btnFourthStepCinemaTickets.setForeground(new java.awt.Color(0,0,0));
+        btnFourthStepCinemaTickets.setBackground(new java.awt.Color(239,232,244));
+    }//GEN-LAST:event_btnFourthStepCinemaTicketsMouseExited
+
+    private void txtIdClientCinemaSellMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtIdClientCinemaSellMouseClicked
+        txtIdClientCinemaSell.setText("");
+    }//GEN-LAST:event_txtIdClientCinemaSellMouseClicked
+
+    private void txtIdClientCinemaSellKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdClientCinemaSellKeyTyped
+        if(txtIdClientCinemaSell.getText().length() < 10)
+        support.integerPositiveKeyTyped(evt);
+        else
+        evt.consume();
+    }//GEN-LAST:event_txtIdClientCinemaSellKeyTyped
+
+    private void btnSearchClientCinemaSellMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchClientCinemaSellMouseMoved
+        btnSearchClientCinemaSell.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
+    }//GEN-LAST:event_btnSearchClientCinemaSellMouseMoved
+
+    private void btnSearchClientCinemaSellMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchClientCinemaSellMouseExited
+        btnSearchClientCinemaSell.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
+    }//GEN-LAST:event_btnSearchClientCinemaSellMouseExited
+
+    private void btnCinemaSellBackStepMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCinemaSellBackStepMouseMoved
+        btnCinemaSellBackStep.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
+        btnCinemaSellBackStep.setForeground(new java.awt.Color(255,255,255));
+        btnCinemaSellBackStep.setBackground(new java.awt.Color(66,0,124));
+    }//GEN-LAST:event_btnCinemaSellBackStepMouseMoved
+
+    private void btnCinemaSellBackStepMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCinemaSellBackStepMouseExited
+        btnCinemaSellBackStep.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
+        btnCinemaSellBackStep.setForeground(new java.awt.Color(0,0,0));
+        btnCinemaSellBackStep.setBackground(new java.awt.Color(239,232,244));
+    }//GEN-LAST:event_btnCinemaSellBackStepMouseExited
+
+    private void btnCinemaSellMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCinemaSellMouseMoved
+        btnCinemaSell.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
+        btnCinemaSell.setForeground(new java.awt.Color(255,255,255));
+        btnCinemaSell.setBackground(new java.awt.Color(66,0,124));
+    }//GEN-LAST:event_btnCinemaSellMouseMoved
+
+    private void btnCinemaSellMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCinemaSellMouseExited
+        btnCinemaSell.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
+        btnCinemaSell.setForeground(new java.awt.Color(0,0,0));
+        btnCinemaSell.setBackground(new java.awt.Color(239,232,244));
+    }//GEN-LAST:event_btnCinemaSellMouseExited
+
     //</editor-fold>
     
-    //<editor-fold defaultstate="collapsed" desc=" Second Step ">
-      
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc=" Main Menu -> Bordes de las opciones en el MainPage ">
+    
+    private void btnUserDecisionMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUserDecisionMouseMoved
+        panCapsuleUserDecision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
+    }//GEN-LAST:event_btnUserDecisionMouseMoved
+
+    private void btnUserDecisionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUserDecisionMouseExited
+        panCapsuleUserDecision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
+    }//GEN-LAST:event_btnUserDecisionMouseExited
+
+    private void btnBranchDecisionMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBranchDecisionMouseMoved
+        panCapsuleBranchDecision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
+    }//GEN-LAST:event_btnBranchDecisionMouseMoved
+
+    private void btnBranchDecisionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBranchDecisionMouseExited
+        panCapsuleBranchDecision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239,232,244)));
+    }//GEN-LAST:event_btnBranchDecisionMouseExited
+
+    private void btnCinemaRoomDecisionMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCinemaRoomDecisionMouseMoved
+        panCapsuleCinemaRoomDecision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
+    }//GEN-LAST:event_btnCinemaRoomDecisionMouseMoved
+
+    private void btnCinemaRoomDecisionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCinemaRoomDecisionMouseExited
+        panCapsuleCinemaRoomDecision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239,232,244)));
+    }//GEN-LAST:event_btnCinemaRoomDecisionMouseExited
+
+    private void btnEnterpriseDecisionMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnterpriseDecisionMouseMoved
+        panCapsuleEnterpriseDecision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
+    }//GEN-LAST:event_btnEnterpriseDecisionMouseMoved
+
+    private void btnEnterpriseDecisionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnterpriseDecisionMouseExited
+        panCapsuleEnterpriseDecision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239,232,244)));
+    }//GEN-LAST:event_btnEnterpriseDecisionMouseExited
+
+    private void btnFilmDecisionMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFilmDecisionMouseMoved
+        panCapsuleFilmDecision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
+    }//GEN-LAST:event_btnFilmDecisionMouseMoved
+
+    private void btnFilmDecisionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFilmDecisionMouseExited
+        panCapsuleFilmDecision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239,232,244)));
+    }//GEN-LAST:event_btnFilmDecisionMouseExited
+
+    private void btnCandyDecisionCLMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCandyDecisionCLMouseMoved
+        panCapsuleCandyDecisionCL.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
+    }//GEN-LAST:event_btnCandyDecisionCLMouseMoved
+
+    private void btnCandyDecisionCLMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCandyDecisionCLMouseExited
+        panCapsuleCandyDecisionCL.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239,232,244)));
+    }//GEN-LAST:event_btnCandyDecisionCLMouseExited
+
+    private void btnClientDecisionMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClientDecisionMouseMoved
+        panCapsuleClientDecision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
+    }//GEN-LAST:event_btnClientDecisionMouseMoved
+
+    private void btnClientDecisionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClientDecisionMouseExited
+        panCapsuleClientDecision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239,232,244)));
+    }//GEN-LAST:event_btnClientDecisionMouseExited
+
+    private void btnEmployeeDecisionMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEmployeeDecisionMouseMoved
+        panCapsuleEmployeeDecision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
+    }//GEN-LAST:event_btnEmployeeDecisionMouseMoved
+
+    private void btnEmployeeDecisionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEmployeeDecisionMouseExited
+        panCapsuleEmployeeDecision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239,232,244)));
+    }//GEN-LAST:event_btnEmployeeDecisionMouseExited
+
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc=" Second Step Cinema Tickets ">
+    
     private void btnBackToSelectorMovieMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackToSelectorMovieMouseMoved
         panButtonBackToSelectorMovie.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
         btnBackToSelectorMovie.setForeground(new java.awt.Color(255,255,255));
@@ -4314,7 +4829,7 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMinusCinemaTickets3MouseMoved
 
     private void btnMinusCinemaTickets3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinusCinemaTickets3MouseExited
-        btnMinusCinemaTickets3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));  
+        btnMinusCinemaTickets3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
     }//GEN-LAST:event_btnMinusCinemaTickets3MouseExited
 
     private void btnAddCinemaTickets4MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddCinemaTickets4MouseMoved
@@ -4330,156 +4845,71 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMinusCinemaTickets4MouseMoved
 
     private void btnMinusCinemaTickets4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinusCinemaTickets4MouseExited
-        btnMinusCinemaTickets4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));  
+        btnMinusCinemaTickets4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
     }//GEN-LAST:event_btnMinusCinemaTickets4MouseExited
 
-    private void btnSeatsClearMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSeatsClearMouseMoved
-        btnSeatsClear.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
-        btnSeatsClear.setForeground(new java.awt.Color(255,255,255));
-        btnSeatsClear.setBackground(new java.awt.Color(66,0,124));
-    }//GEN-LAST:event_btnSeatsClearMouseMoved
-
-    private void btnSeatsClearMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSeatsClearMouseExited
-        btnSeatsClear.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
-        btnSeatsClear.setForeground(new java.awt.Color(0,0,0));
-        btnSeatsClear.setBackground(new java.awt.Color(239,232,244));
-    }//GEN-LAST:event_btnSeatsClearMouseExited
-
-    private void btnBackToCantCinemaTicketsMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackToCantCinemaTicketsMouseMoved
-        btnBackToCantCinemaTickets.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
-        btnBackToCantCinemaTickets.setForeground(new java.awt.Color(255,255,255));
-        btnBackToCantCinemaTickets.setBackground(new java.awt.Color(66,0,124));
-    }//GEN-LAST:event_btnBackToCantCinemaTicketsMouseMoved
-
-    private void btnBackToCantCinemaTicketsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackToCantCinemaTicketsMouseExited
-        btnBackToCantCinemaTickets.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
-        btnBackToCantCinemaTickets.setForeground(new java.awt.Color(0,0,0));
-        btnBackToCantCinemaTickets.setBackground(new java.awt.Color(239,232,244));
-    }//GEN-LAST:event_btnBackToCantCinemaTicketsMouseExited
-
-    private void btnFourthStepCinemaTicketsMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFourthStepCinemaTicketsMouseMoved
-        btnFourthStepCinemaTickets.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
-        btnFourthStepCinemaTickets.setForeground(new java.awt.Color(255,255,255));
-        btnFourthStepCinemaTickets.setBackground(new java.awt.Color(66,0,124));
-    }//GEN-LAST:event_btnFourthStepCinemaTicketsMouseMoved
-
-    private void btnFourthStepCinemaTicketsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFourthStepCinemaTicketsMouseExited
-        btnFourthStepCinemaTickets.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
-        btnFourthStepCinemaTickets.setForeground(new java.awt.Color(0,0,0));
-        btnFourthStepCinemaTickets.setBackground(new java.awt.Color(239,232,244));
-    }//GEN-LAST:event_btnFourthStepCinemaTicketsMouseExited
-
-    private void txtIdClientCinemaSellMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtIdClientCinemaSellMouseClicked
-        txtIdClientCinemaSell.setText("");
-    }//GEN-LAST:event_txtIdClientCinemaSellMouseClicked
-
-    private void txtIdClientCinemaSellKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdClientCinemaSellKeyTyped
-        if(txtIdClientCinemaSell.getText().length() < 10)
-        support.integerPositiveKeyTyped(evt);
-        else
-        evt.consume();
-    }//GEN-LAST:event_txtIdClientCinemaSellKeyTyped
-
-    private void btnSearchClientCinemaSellMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchClientCinemaSellMouseMoved
-        btnSearchClientCinemaSell.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
-    }//GEN-LAST:event_btnSearchClientCinemaSellMouseMoved
-
-    private void btnSearchClientCinemaSellMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchClientCinemaSellMouseExited
-        btnSearchClientCinemaSell.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
-    }//GEN-LAST:event_btnSearchClientCinemaSellMouseExited
-
-    private void btnCinemaSellBackStepMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCinemaSellBackStepMouseMoved
-        btnCinemaSellBackStep.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
-        btnCinemaSellBackStep.setForeground(new java.awt.Color(255,255,255));
-        btnCinemaSellBackStep.setBackground(new java.awt.Color(66,0,124));
-    }//GEN-LAST:event_btnCinemaSellBackStepMouseMoved
-
-    private void btnCinemaSellBackStepMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCinemaSellBackStepMouseExited
-        btnCinemaSellBackStep.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
-        btnCinemaSellBackStep.setForeground(new java.awt.Color(0,0,0));
-        btnCinemaSellBackStep.setBackground(new java.awt.Color(239,232,244));
-    }//GEN-LAST:event_btnCinemaSellBackStepMouseExited
-
-    private void btnCinemaSellMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCinemaSellMouseMoved
-        btnCinemaSell.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
-        btnCinemaSell.setForeground(new java.awt.Color(255,255,255));
-        btnCinemaSell.setBackground(new java.awt.Color(66,0,124));
-    }//GEN-LAST:event_btnCinemaSellMouseMoved
-
-    private void btnCinemaSellMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCinemaSellMouseExited
-        btnCinemaSell.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
-        btnCinemaSell.setForeground(new java.awt.Color(0,0,0));
-        btnCinemaSell.setBackground(new java.awt.Color(239,232,244));
-    }//GEN-LAST:event_btnCinemaSellMouseExited
-
-    private void btnUserDecisionMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUserDecisionMouseMoved
-        panCapsuleUserDecision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
-    }//GEN-LAST:event_btnUserDecisionMouseMoved
-
-    private void btnUserDecisionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUserDecisionMouseExited
-        panCapsuleUserDecision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
-    }//GEN-LAST:event_btnUserDecisionMouseExited
-
-    private void btnBranchDecisionMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBranchDecisionMouseMoved
-        panCapsuleBranchDecision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
-    }//GEN-LAST:event_btnBranchDecisionMouseMoved
-
-    private void btnBranchDecisionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBranchDecisionMouseExited
-        panCapsuleBranchDecision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239,232,244)));
-    }//GEN-LAST:event_btnBranchDecisionMouseExited
-
-    private void btnCinemaRoomDecisionMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCinemaRoomDecisionMouseMoved
-        panCapsuleCinemaRoomDecision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
-    }//GEN-LAST:event_btnCinemaRoomDecisionMouseMoved
-
-    private void btnCinemaRoomDecisionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCinemaRoomDecisionMouseExited
-        panCapsuleCinemaRoomDecision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239,232,244)));
-    }//GEN-LAST:event_btnCinemaRoomDecisionMouseExited
-
-    private void btnEnterpriseDecisionMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnterpriseDecisionMouseMoved
-        panCapsuleEnterpriseDecision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
-    }//GEN-LAST:event_btnEnterpriseDecisionMouseMoved
-
-    private void btnEnterpriseDecisionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnterpriseDecisionMouseExited
-        panCapsuleEnterpriseDecision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239,232,244)));
-    }//GEN-LAST:event_btnEnterpriseDecisionMouseExited
-
-    private void btnFilmDecisionMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFilmDecisionMouseMoved
+    private void btnCandyInventoryMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCandyInventoryMouseMoved
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnFilmDecisionMouseMoved
+    }//GEN-LAST:event_btnCandyInventoryMouseMoved
 
-    private void btnFilmDecisionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFilmDecisionMouseExited
+    private void btnCandyInventoryMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCandyInventoryMouseExited
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnFilmDecisionMouseExited
+    }//GEN-LAST:event_btnCandyInventoryMouseExited
 
-    private void btnCandyDecisionCLMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCandyDecisionCLMouseMoved
+    private void btnListClientDecisionMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnListClientDecisionMouseMoved
+        panCapsuleCandyDecision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
+    }//GEN-LAST:event_btnListClientDecisionMouseMoved
+
+    private void btnListClientDecisionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnListClientDecisionMouseExited
+        panCapsuleCandyDecision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239,232,244)));
+    }//GEN-LAST:event_btnListClientDecisionMouseExited
+
+    private void btnListEmployeeDecisionMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnListEmployeeDecisionMouseMoved
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnCandyDecisionCLMouseMoved
+    }//GEN-LAST:event_btnListEmployeeDecisionMouseMoved
 
-    private void btnCandyDecisionCLMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCandyDecisionCLMouseExited
+    private void btnListEmployeeDecisionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnListEmployeeDecisionMouseExited
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnCandyDecisionCLMouseExited
+    }//GEN-LAST:event_btnListEmployeeDecisionMouseExited
 
-    private void btnClientDecisionMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClientDecisionMouseMoved
+    private void btnListEmployeeDecisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListEmployeeDecisionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnClientDecisionMouseMoved
+    }//GEN-LAST:event_btnListEmployeeDecisionActionPerformed
 
-    private void btnClientDecisionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClientDecisionMouseExited
+    private void btnListOtherDecisionMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnListOtherDecisionMouseMoved
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnClientDecisionMouseExited
+    }//GEN-LAST:event_btnListOtherDecisionMouseMoved
 
-    private void btnEmployeeDecisionMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEmployeeDecisionMouseMoved
-        panCapsuleEmployeeDecision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
-    }//GEN-LAST:event_btnEmployeeDecisionMouseMoved
-
-    private void btnEmployeeDecisionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEmployeeDecisionMouseExited
-        panCapsuleEmployeeDecision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239,232,244)));
-    }//GEN-LAST:event_btnEmployeeDecisionMouseExited
-
-    private void btnMinusCinemaTickets1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinusCinemaTickets1ActionPerformed
+    private void btnListOtherDecisionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnListOtherDecisionMouseExited
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnMinusCinemaTickets1ActionPerformed
+    }//GEN-LAST:event_btnListOtherDecisionMouseExited
 
+    private void btnListClientDecision1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnListClientDecision1MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnListClientDecision1MouseMoved
+
+    private void btnListClientDecision1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnListClientDecision1MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnListClientDecision1MouseExited
+
+    private void btnListClientDecision1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListClientDecision1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnListClientDecision1ActionPerformed
+
+    private void btnListClientDecision3MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnListClientDecision3MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnListClientDecision3MouseMoved
+
+    private void btnListClientDecision3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnListClientDecision3MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnListClientDecision3MouseExited
+
+    private void btnListClientDecision3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListClientDecision3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnListClientDecision3ActionPerformed
+
+    //</editor-fold>
+    
     /**
      * Método para retornar los valores gráficos de todos los botones de la
      * compra de tickets para funciones.
@@ -4519,16 +4949,7 @@ public class MainPage extends javax.swing.JFrame {
         btnFourthStepCinemaTickets.setBackground(new java.awt.Color(239,232,244));
         
     }
-    
-
-    
-    //<editor-fold defaultstate="collapsed" desc=" Third Step ">
-    
-    
-    
-    
-    //</editor-fold>
-    
+        
     //<editor-fold defaultstate="collapsed" desc=" Declaración de Variables ">
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnAddCandySell;
@@ -4550,6 +4971,7 @@ public class MainPage extends javax.swing.JFrame {
     public javax.swing.JButton btnBranchDecision;
     public javax.swing.JButton btnCandyDecision;
     public javax.swing.JButton btnCandyDecisionCL;
+    public javax.swing.JButton btnCandyInventory;
     public javax.swing.JButton btnCandySell;
     public javax.swing.JButton btnCandySellClear;
     public javax.swing.JButton btnChangeSucursalCandySell;
@@ -4564,6 +4986,12 @@ public class MainPage extends javax.swing.JFrame {
     public javax.swing.JButton btnExit;
     public javax.swing.JButton btnFilmDecision;
     public javax.swing.JButton btnFourthStepCinemaTickets;
+    public javax.swing.JButton btnListClientDecision;
+    public javax.swing.JButton btnListClientDecision1;
+    public javax.swing.JButton btnListClientDecision2;
+    public javax.swing.JButton btnListClientDecision3;
+    public javax.swing.JButton btnListEmployeeDecision;
+    public javax.swing.JButton btnListOtherDecision;
     public javax.swing.JButton btnMin;
     public javax.swing.JButton btnMinusCinemaTickets1;
     public javax.swing.JButton btnMinusCinemaTickets2;
@@ -4584,6 +5012,7 @@ public class MainPage extends javax.swing.JFrame {
     public javax.swing.JComboBox<String> cmbCandySelection;
     public javax.swing.JComboBox<String> cmbCandySeller;
     public javax.swing.JComboBox<String> cmbCinemaSeller;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblADCmark;
     private javax.swing.JLabel lblAmountAdultTicket;
@@ -4652,7 +5081,8 @@ public class MainPage extends javax.swing.JFrame {
     public javax.swing.JLabel lblSucursalNameCinemaTickets;
     private javax.swing.JLabel lblTittleOption1;
     private javax.swing.JLabel lblTittleOption2;
-    private javax.swing.JLabel lblTittleOption3;
+    private javax.swing.JLabel lblTittleOption4;
+    private javax.swing.JLabel lblTittleOption5;
     private javax.swing.JLabel lblTittleOption7;
     private javax.swing.JLabel lblTittleOption8;
     private javax.swing.JLabel lblTittleSelectorSeat;
@@ -4681,6 +5111,7 @@ public class MainPage extends javax.swing.JFrame {
     public javax.swing.JPanel panBodyOptions1;
     private javax.swing.JPanel panButtonBackToSelectorMovie;
     private javax.swing.JPanel panButtonCandySell;
+    private javax.swing.JPanel panButtonListClient;
     private javax.swing.JPanel panButtonNextStepBuyTicket;
     private javax.swing.JPanel panButtonsTopBar;
     public javax.swing.JPanel panCandySell;
@@ -4688,18 +5119,23 @@ public class MainPage extends javax.swing.JFrame {
     public javax.swing.JPanel panCapsuleBranchDecision;
     public javax.swing.JPanel panCapsuleCandyDecision;
     private javax.swing.JPanel panCapsuleCandyDecisionCL;
+    private javax.swing.JPanel panCapsuleCandyInventory;
     public javax.swing.JPanel panCapsuleCinemaDecision;
     private javax.swing.JPanel panCapsuleCinemaRoomDecision;
     private javax.swing.JPanel panCapsuleClientDecision;
     public javax.swing.JPanel panCapsuleEmployeeDecision;
     private javax.swing.JPanel panCapsuleEnterpriseDecision;
     public javax.swing.JPanel panCapsuleFilmDecision;
+    public javax.swing.JPanel panCapsuleListClientDecision;
+    public javax.swing.JPanel panCapsuleListEmployeeDecision;
+    public javax.swing.JPanel panCapsuleListOtherDecision;
     private javax.swing.JPanel panCapsuleUserDecision;
     private javax.swing.JPanel panChangeSucursalCandySell;
     private javax.swing.JPanel panChangeSucursalCinemaTickets;
     public javax.swing.JPanel panCinemaSell;
     public javax.swing.JPanel panContent;
     public javax.swing.JPanel panDecisionOption2;
+    public javax.swing.JPanel panDecisionOption3;
     public javax.swing.JPanel panDecisionOption4;
     public javax.swing.JPanel panDecisionOption5;
     public javax.swing.JPanel panDecisionOption6;
@@ -4707,6 +5143,8 @@ public class MainPage extends javax.swing.JFrame {
     public javax.swing.JPanel panFourthStepCinemaTickets;
     private javax.swing.JPanel panLateralMenu;
     private javax.swing.JPanel panLateralOptions;
+    public javax.swing.JPanel panListClientDecision;
+    public javax.swing.JPanel panListClientDecision1;
     private javax.swing.JPanel panMainMenu;
     private javax.swing.JPanel panMainPage;
     public javax.swing.JPanel panOption1;
@@ -4740,12 +5178,16 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JSeparator sepBranchDecision;
     private javax.swing.JSeparator sepBranchDecision1;
     private javax.swing.JSeparator sepBranchDecision2;
+    private javax.swing.JSeparator sepBranchDecision3;
     private javax.swing.JSeparator sepCandyDecision;
     private javax.swing.JSeparator sepCandySellTittle;
     private javax.swing.JSeparator sepCinemaDecision;
     private javax.swing.JSeparator sepCinemaRoomDecision;
     private javax.swing.JSeparator sepCinemaRoomDecision1;
     private javax.swing.JSeparator sepCinemaRoomDecision2;
+    private javax.swing.JSeparator sepCinemaRoomDecision3;
+    private javax.swing.JSeparator sepCinemaRoomDecision4;
+    private javax.swing.JSeparator sepCinemaRoomDecision5;
     private javax.swing.JSeparator sepCinemaSellTittle;
     private javax.swing.JSeparator sepClientCinemaTicket;
     private javax.swing.JSeparator sepEnterpriseDecision;
@@ -4754,6 +5196,7 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JSeparator sepTittleOption1;
     private javax.swing.JSeparator sepTittleOption2;
     private javax.swing.JSeparator sepTittleOption3;
+    private javax.swing.JSeparator sepTittleOption4;
     private javax.swing.JSeparator sepTittleOption7;
     private javax.swing.JSeparator sepTittleOption8;
     private javax.swing.JSeparator sepTittleOption9;

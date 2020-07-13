@@ -19,9 +19,9 @@ import java.sql.ResultSet;
 public class ConnectionDB {
     
     // Se declaran las variables que indican la Base de Datos, el usuario y la contraseña.
-    private final String url = "jdbc:postgresql://localhost:5432/cine",
+    private final String url = "jdbc:postgresql://localhost:5432/CinesV",
                         user = "postgres",
-                        pass = "daMurq.15";
+                        pass = "26120075";
     
     // Se instancia la clase de Connection.
     private Connection con;

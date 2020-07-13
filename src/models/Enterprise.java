@@ -17,14 +17,16 @@ public class Enterprise {
             name,
             descrip,
             email;
+    private double priceTicket;
     private char estatus;
     
     
-    public Enterprise(String id,String name,String descrip,String email, char estatus){
+    public Enterprise(String id,String name,String descrip,String email, double priceticket,char estatus){
         this.id=id;
         this.name=name;
         this.descrip=descrip;
         this.email=email;
+        this.priceTicket=priceticket;
         this.estatus=estatus;
         
     }
@@ -59,6 +61,14 @@ public class Enterprise {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public double getPriceTicket() {
+        return priceTicket;
+    }
+
+    public void setPriceTicket(double priceTicket) {
+        this.priceTicket = priceTicket;
     }
 
     public char getEstatus() {

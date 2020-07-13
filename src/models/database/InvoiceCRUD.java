@@ -2,6 +2,7 @@
 package models.database;
 
 import java.sql.ResultSet;
+import java.util.Calendar;
 import models.Invoice;
 
 /**
@@ -17,6 +18,42 @@ import models.Invoice;
 public class InvoiceCRUD {
     
     private ConnectionDB con;
+    
+    public ResultSet regularClient(String dma1, String dma2) {
+
+        // Se declara una variable de tipo 'ResultSet' para realizar la consulta.
+        ResultSet result;
+
+        String SQL
+                = "select "
+                + "cliente.\"cedula\", \"nombre\", \"apellido\", sum(\"monto\") as monto, "
+                + "sum(\"iva\") as iva, sum(\"monto\"+\"iva\") as total, (select count(\"codigo\") "
+                + "from \"factura\" where factura.\"cliente_cedula\"=cliente.\"cedula\" "
+                + "and factura.\"estado\"='A') as cantidad from \"cliente\", \"factura\" "
+                + "where factura.\"cliente_cedula\"=cliente.\"cedula\" and (select count(\"codigo\") "
+                + "from \"factura\" where factura.\"cliente_cedula\"=cliente.\"cedula\" and "
+                + "factura.\"estado\"='A')>1 and \"fecha_compra\">'" + dma1 + "' "
+                + "and \"fecha_compra\"<'" + dma2 + "' and cliente.\"estado\"='A' "
+                + "and factura.\"estado\"='A' "
+                + "group by cliente.\"cedula\";";
+
+        // la columna «cliente.cedula» debe aparecer en la cláusula GROUP BY o ser usada en una función de agregación
+        //michaelmontero.idb@gmail.com
+        // Se instancia y se establece una conexión con la BD.
+        con = new ConnectionDB();
+        con.conectar();
+
+        // Se realiza y se recibe la consulta.
+        result = con.queryConsultar(SQL);
+
+        System.out.println("La consulta se realizó con éxito.");
+
+        // Se desconecta la BD.
+        con.desconectar();
+
+        // Retorna consulta.
+        return result;
+    }
     
     public ResultSet readCodexInvoice(){
         
@@ -61,5 +98,251 @@ public class InvoiceCRUD {
         
     }
     
+        public ResultSet invoiceClient(){
+        
+        // Se declara una variable de tipo 'ResultSet' para realizar la consulta.
+        ResultSet result;
+        
+        String SQL = "SELECT "
+                + "\"cliente_cedula\","
+                + "\"nombre\","
+                + "\"apellido\","
+                + " SUM(\"monto\") as \"montoGastado\","
+                + " SUM(\"iva\"),"
+                + " SUM(\"monto\"+\"iva\"),"
+                + " COUNT(\"cliente_cedula\")"
+                + "FROM \"factura\",\"cliente\" "
+                + "WHERE \"cedula\"=\"cliente_cedula\" AND factura.\"estado\" = 'A' "
+                + "AND cliente.\"estado\" = 'A'"
+                + "GROUP BY \"cliente_cedula\", \"nombre\",\"apellido\" "
+                + " ;";
+        
+        // la columna «cliente.cedula» debe aparecer en la cláusula GROUP BY o ser usada en una función de agregación
+        //michaelmontero.idb@gmail.com
+        // Se instancia y se establece una conexión con la BD.
+        con = new ConnectionDB();
+        con.conectar();
+        
+        // Se realiza y se recibe la consulta.
+        result = con.queryConsultar(SQL);
+        
+        System.out.println("La consulta se realizó con éxito.");
+        
+        // Se desconecta la BD.
+        con.desconectar();
+        
+        // Retorna consulta.
+        return result;
+        
+    }
     
-}
+        
+    public ResultSet candyCostCustomer(){
+        
+        // Se declara una variable de tipo 'ResultSet' para realizar la consulta.
+        ResultSet result;
+        
+        /*String SQL = "SELECT "
+                + "\"cliente_cedula\","
+                + "cliente.\"nombre\","
+                + "cliente.\"apellido\","
+                + " SUM(\"cantidad\"*\"precio\"),"
+                + " COUNT(\"cliente_cedula\")"
+                + "FROM \"factura\",\"cliente\",\"ticket\",\"ticket_golosinas\","
+                + "\"inventario_golosina\",\"golosinas\" "
+                + "WHERE \"cedula\"=\"cliente_cedula\" AND "
+                + "factura.\"estado\" = 'A' AND "
+                + "\"factura_codigo\" = factura.\"codigo\" AND "
+                + "\"ticket_codigo\" = ticket.\"codigo\" AND "
+                + "inventario_golosina.\"Codigo\" = \"inventario_gcodigo\" AND "
+                + "golosinas.\"codigo\" = \"GolosinaCodigo\" "
+                + "AND cliente.\"estado\" = 'A'"
+                + "GROUP BY factura.\"cliente_cedula\", cliente.\"nombre\",cliente.\"apellido\" "
+                + " ;";*/
+        
+         String SQL = "SELECT "
+                 + "cliente.\"cedula\", \"nombre\", \"apellido\", SUM(\"monto\") as monto, "
+                 + "count(\"cliente_cedula\") as cantidad FROM \"cliente\", \"factura\", \"ticket\", "
+                 + "\"ticket_golosinas\" WHERE cliente.\"cedula\" = factura.\"cliente_cedula\" "
+                 + "AND ticket.\"factura_codigo\" = factura.\"codigo\" "
+                 + "AND ticket.\"codigo\" = ticket_golosinas.\"ticket_codigo\""
+                 + "GROUP BY cliente.\"cedula\" "
+                 + ";";
+        
+        
+        // la columna «cliente.cedula» debe aparecer en la cláusula GROUP BY o ser usada en una función de agregación
+        //michaelmontero.idb@gmail.com
+        // Se instancia y se establece una conexión con la BD.
+        con = new ConnectionDB();
+        con.conectar();
+        
+        // Se realiza y se recibe la consulta.
+        result = con.queryConsultar(SQL);
+        
+        System.out.println("La consulta se realizó con éxito.");
+        
+        // Se desconecta la BD.
+        con.desconectar();
+        
+        // Retorna consulta.
+        return result;
+        
+    }
+    
+    public ResultSet OrderMonto(String Order) {
+        
+        // Se declara una variable de tipo 'ResultSet' para realizar la consulta.
+        ResultSet result;
+        // Se define la sentencia SQL a aplicar en la BD.
+        String SQL = null;
+        
+        if (Order == "Mayor a menor")
+             SQL = "SELECT "
+                 + "cliente.\"cedula\", \"nombre\", \"apellido\", SUM(\"monto\") as monto, "
+                 + "count(\"cliente_cedula\") as cantidad FROM \"cliente\", \"factura\", \"ticket\", "
+                 + "\"ticket_golosinas\" WHERE cliente.\"cedula\" = factura.\"cliente_cedula\" "
+                 + "AND ticket.\"factura_codigo\" = factura.\"codigo\" "
+                 + "AND ticket.\"codigo\" = ticket_golosinas.\"ticket_codigo\""
+                 + "GROUP BY cliente.\"cedula\""
+                 + "ORDER BY SUM(\"monto\") DESC;";
+        
+        
+        else
+             SQL = "SELECT "
+                 + "cliente.\"cedula\", \"nombre\", \"apellido\", SUM(\"monto\") as monto, "
+                 + "count(\"cliente_cedula\") as cantidad FROM \"cliente\", \"factura\", \"ticket\", "
+                 + "\"ticket_golosinas\" WHERE cliente.\"cedula\" = factura.\"cliente_cedula\" "
+                 + "AND ticket.\"factura_codigo\" = factura.\"codigo\" "
+                 + "AND ticket.\"codigo\" = ticket_golosinas.\"ticket_codigo\""
+                 + "GROUP BY cliente.\"cedula\""
+                 + "ORDER BY SUM(\"monto\") ASC;";
+        
+        
+        // la columna «cliente.cedula» debe aparecer en la cláusula GROUP BY o ser usada en una función de agregación
+        //michaelmontero.idb@gmail.com
+        // Se instancia y se establece una conexión con la BD.
+        con = new ConnectionDB();
+        con.conectar();
+
+        // Se realiza y se recibe la consulta.
+        result = con.queryConsultar(SQL);
+
+        System.out.println("La consulta se realizó con éxito.");
+
+        // Se desconecta la BD.
+        con.desconectar();
+
+        // Retorna consulta.
+        return result;
+    }
+      
+      public ResultSet OrderCant(String order) {
+        
+        // Se declara una variable de tipo 'ResultSet' para realizar la consulta.
+        ResultSet result;
+        // Se define la sentencia SQL a aplicar en la BD.
+        String SQL = null;
+        
+        
+        if (order == "Mayor a menor")
+             SQL = "SELECT "
+                 + "cliente.\"cedula\", \"nombre\", \"apellido\", SUM(\"monto\") as monto, "
+                 + "count(\"cliente_cedula\") as cantidad FROM \"cliente\", \"factura\", \"ticket\", "
+                 + "\"ticket_golosinas\" WHERE cliente.\"cedula\" = factura.\"cliente_cedula\" "
+                 + "AND ticket.\"factura_codigo\" = factura.\"codigo\" "
+                 + "AND ticket.\"codigo\" = ticket_golosinas.\"ticket_codigo\""
+                 + "GROUP BY cliente.\"cedula\""
+                 + "ORDER BY count(\"cliente_cedula\") DESC;";
+        
+        
+        else
+             SQL = "SELECT "
+                 + "cliente.\"cedula\", \"nombre\", \"apellido\", SUM(\"monto\") as monto, "
+                 + "count(\"cliente_cedula\") as cantidad FROM \"cliente\", \"factura\", \"ticket\", "
+                 + "\"ticket_golosinas\" WHERE cliente.\"cedula\" = factura.\"cliente_cedula\" "
+                 + "AND ticket.\"factura_codigo\" = factura.\"codigo\" "
+                 + "AND ticket.\"codigo\" = ticket_golosinas.\"ticket_codigo\""
+                 + "GROUP BY cliente.\"cedula\""
+                 + "ORDER BY count(\"cliente_cedula\") ASC;";
+        
+        
+        // la columna «cliente.cedula» debe aparecer en la cláusula GROUP BY o ser usada en una función de agregación
+        //michaelmontero.idb@gmail.com
+        // Se instancia y se establece una conexión con la BD.
+        con = new ConnectionDB();
+        con.conectar();
+
+        // Se realiza y se recibe la consulta.
+        result = con.queryConsultar(SQL);
+
+        System.out.println("La consulta se realizó con éxito.");
+
+        // Se desconecta la BD.
+        con.desconectar();
+
+        // Retorna consulta.
+        return result;
+    }
+      
+    public ResultSet specialPassClient() {
+        
+        Calendar c = Calendar.getInstance();
+        int año = c.get(Calendar.YEAR);
+        int mes = c.get(Calendar.MONTH);  
+        String fecha1= 1 + "/" + mes + "/" + año;
+        
+        ResultSet result;
+        String SQL = null;
+        if ((mes==1) || (mes==3) || (mes==5) || (mes==7) || (mes==8) || (mes==10) || (mes==12)){
+            String fecha2= 31 + "/" + mes + "/" + año;
+            SQL = "select "
+                + "\"cedula\", \"nombre\", \"apellido\", \"telefono\" "
+                + "from \"cliente\", \"factura\" "
+                + "where factura.\"cliente_cedula\"=cliente.\"cedula\" and (select count(\"codigo\") "
+                + "from \"factura\" where factura.\"cliente_cedula\"=cliente.\"cedula\" and "
+                + "factura.\"estado\"='A')>1 "
+                + "and \"fecha_compra\">'" + fecha1 + "' "
+                + "and \"fecha_compra\"<'" + fecha2 + "' "
+                + "and cliente.\"estado\"='A' "
+                + "and factura.\"estado\"='A' "
+                + "group by \"cedula\";";
+        }
+        
+        else if ((mes==4) || (mes==6) || (mes==9) || (mes==11)){
+        String fecha2= 30 + "/" + mes + "/" + año;
+            SQL = "select "
+                + "\"cedula\", \"nombre\", \"apellido\", \"telefono\" "
+                + "from \"cliente\", \"factura\" "
+                + "where factura.\"cliente_cedula\"=cliente.\"cedula\" and (select count(\"codigo\") "
+                + "from \"factura\" where factura.\"cliente_cedula\"=cliente.\"cedula\" and "
+                + "factura.\"estado\"='A')>1 "
+                + "and \"fecha_compra\">'" + fecha1 + "' "
+                + "and \"fecha_compra\"<'" + fecha2 + "' "
+                + "and cliente.\"estado\"='A' "
+                + "and factura.\"estado\"='A' "
+                + "group by \"cedula\";";}
+        // la columna «cliente.cedula» debe aparecer en la cláusula GROUP BY o ser usada en una función de agregación
+ 
+        // Se instancia y se establece una conexión con la BD.
+        con = new ConnectionDB();
+        con.conectar();
+
+        // Se realiza y se recibe la consulta.
+        result = con.queryConsultar(SQL);
+
+        System.out.println("La consulta se realizó con éxito.");
+
+        // Se desconecta la BD.
+        con.desconectar();
+
+        // Retorna consulta.
+        return result;
+        }
+        
+
+        
+    }
+        
+    
+    
+

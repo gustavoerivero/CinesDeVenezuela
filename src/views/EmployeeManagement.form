@@ -530,13 +530,14 @@
                       <Font name="Arial" size="14" style="0"/>
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="6">
+                      <StringArray count="7">
                         <StringItem index="0" value="- Seleccionar un cargo -"/>
-                        <StringItem index="1" value="Gerente"/>
-                        <StringItem index="2" value="Coordinador de &#xe1;reas com&#xfa;nes"/>
-                        <StringItem index="3" value="Vendedor de golosinas"/>
-                        <StringItem index="4" value="Vendedor de boletos"/>
-                        <StringItem index="5" value="Personal de limpieza"/>
+                        <StringItem index="1" value="Administrador"/>
+                        <StringItem index="2" value="Gerente"/>
+                        <StringItem index="3" value="Coordinador de &#xe1;reas com&#xfa;nes"/>
+                        <StringItem index="4" value="Vendedor de golosinas"/>
+                        <StringItem index="5" value="Vendedor de boletos"/>
+                        <StringItem index="6" value="Personal de limpieza"/>
                       </StringArray>
                     </Property>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -1105,13 +1106,14 @@
                       <Font name="Arial" size="14" style="0"/>
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="6">
+                      <StringArray count="7">
                         <StringItem index="0" value=" - Seleccionar un cargo - "/>
-                        <StringItem index="1" value="Gerente"/>
-                        <StringItem index="2" value="Coordinador de &#xe1;reas com&#xfa;nes"/>
-                        <StringItem index="3" value="Vendedor de golosinas"/>
-                        <StringItem index="4" value="Vendedor de boletos"/>
-                        <StringItem index="5" value="Personal de limpieza"/>
+                        <StringItem index="1" value="Administrador"/>
+                        <StringItem index="2" value="Gerente"/>
+                        <StringItem index="3" value="Coordinador de &#xe1;reas com&#xfa;nes"/>
+                        <StringItem index="4" value="Vendedor de golosinas"/>
+                        <StringItem index="5" value="Vendedor de boletos"/>
+                        <StringItem index="6" value="Personal de limpieza"/>
                       </StringArray>
                     </Property>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -1119,9 +1121,6 @@
                     </Property>
                     <Property name="lightWeightPopupEnabled" type="boolean" value="false"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbJobEmployeeActionPerformed"/>
-                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

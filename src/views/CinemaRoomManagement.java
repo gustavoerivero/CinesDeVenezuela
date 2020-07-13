@@ -208,14 +208,14 @@ public class CinemaRoomManagement extends javax.swing.JFrame {
         tblCinemaRoomList.setBackground(new java.awt.Color(249, 249, 249));
         tblCinemaRoomList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null}
+                {null, null, null, null, null}
             },
             new String [] {
-                "Codigo", "Sucursal", "Flias", "Columnas"
+                "Codigo", "Sucursal", "Flias", "Columnas", "Consultar"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -386,7 +386,6 @@ public class CinemaRoomManagement extends javax.swing.JFrame {
 
         btnClearCinemaRoom.setBackground(new java.awt.Color(239, 232, 244));
         btnClearCinemaRoom.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnClearCinemaRoom.setForeground(new java.awt.Color(0, 0, 0));
         btnClearCinemaRoom.setText("Limpiar");
         btnClearCinemaRoom.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnClearCinemaRoom.setBorderPainted(false);
@@ -407,7 +406,6 @@ public class CinemaRoomManagement extends javax.swing.JFrame {
 
         btnRegisterModifyCinemaRoom.setBackground(new java.awt.Color(239, 232, 244));
         btnRegisterModifyCinemaRoom.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnRegisterModifyCinemaRoom.setForeground(new java.awt.Color(0, 0, 0));
         btnRegisterModifyCinemaRoom.setText("@Registrar/Actualizar");
         btnRegisterModifyCinemaRoom.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnRegisterModifyCinemaRoom.setBorderPainted(false);
@@ -428,7 +426,6 @@ public class CinemaRoomManagement extends javax.swing.JFrame {
 
         btnBackCinemaRoom.setBackground(new java.awt.Color(239, 232, 244));
         btnBackCinemaRoom.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnBackCinemaRoom.setForeground(new java.awt.Color(0, 0, 0));
         btnBackCinemaRoom.setText("Atrás");
         btnBackCinemaRoom.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnBackCinemaRoom.setBorderPainted(false);
@@ -449,7 +446,6 @@ public class CinemaRoomManagement extends javax.swing.JFrame {
 
         btnDeleteCinemaRoom.setBackground(new java.awt.Color(239, 232, 244));
         btnDeleteCinemaRoom.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnDeleteCinemaRoom.setForeground(new java.awt.Color(0, 0, 0));
         btnDeleteCinemaRoom.setText("Eliminar");
         btnDeleteCinemaRoom.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnDeleteCinemaRoom.setBorderPainted(false);
@@ -541,7 +537,7 @@ public class CinemaRoomManagement extends javax.swing.JFrame {
         panCinemaManagement.setLayout(panCinemaManagementLayout);
         panCinemaManagementLayout.setHorizontalGroup(
             panCinemaManagementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panButtonsTopBar, javax.swing.GroupLayout.DEFAULT_SIZE, 905, Short.MAX_VALUE)
+            .addComponent(panButtonsTopBar, javax.swing.GroupLayout.DEFAULT_SIZE, 921, Short.MAX_VALUE)
             .addComponent(sepTittle)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panCinemaManagementLayout.createSequentialGroup()
                 .addContainerGap()
@@ -721,7 +717,7 @@ public class CinemaRoomManagement extends javax.swing.JFrame {
         txtColumnCinemaRoom.setText("Columna de la sala");
         
         // Búsqueda
-        txtSearchIdCinemaRoom.setText("Cédula del cliente");
+        txtSearchIdCinemaRoom.setText("Codigo de la sala");
         
     }
     //</editor-fold>

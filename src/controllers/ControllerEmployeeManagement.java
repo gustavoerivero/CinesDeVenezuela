@@ -40,11 +40,10 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
     
     // Models
     private Employee employee;
-    
-    // Models.database
-    private EmployeeCRUD empCRUD;
-    private BranchCRUD braCRUD;
-    private CityCRUD citCRUD;
+        // Models.database
+        private EmployeeCRUD empCRUD;
+        private BranchCRUD braCRUD;
+        private CityCRUD citCRUD;
     
     // Views
     private EmployeeManagement empManagement;
@@ -98,7 +97,7 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
         
         // Se muestra la primera pantalla.
         support.cardSelection(empManagement.panContainerEmployee, empManagement.panConsultList);
-        
+        empManagement.lblSucursalName.setText(branchUser);
         // Se cargan los empleados.
         loadEmployeeTable();
         
@@ -155,6 +154,8 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
             empManagement.lblSucursalName.setText(changeBranch.getId_Sucursal());
                         
             changeBranch.dispose();
+            loadEmployeeTable();
+
             
         }
         
@@ -187,7 +188,7 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
         else if(evt.getSource() == empManagement.btnClearSearchEmployee){
             
             empManagement.clearEmployeeSearch();
-            
+            //se carga actualización
             loadEmployeeTable();
             
         }
@@ -226,7 +227,7 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                     support.cardSelection(empManagement.panContainerEmployee, empManagement.panConsultList);
                     
                     // Se cargan los empleados.
-                    loadEmployeeTable();
+                    //loadEmployeeTable();
                     
                     // Se inicializan las variables.
                     clearVariables();
@@ -242,7 +243,7 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                 support.cardSelection(empManagement.panContainerEmployee, empManagement.panConsultList);
                     
                 // Se cargan los empleados.
-                loadEmployeeTable();
+                //loadEmployeeTable();
                 
                 // Se inicializan las variables.
                 clearVariables();
@@ -307,7 +308,7 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                      empManagement.cmbBranchEmployee.getSelectedIndex() != 0 && 
                      empManagement.cmbJobEmployee.getSelectedIndex() != 0){
                 
-                        // Se confirma que se desea eliminar el registro.
+                        // Se confirma que se desea registrar el empleado.
                         SelectOption select = new SelectOption(empManagement, true, 2, 
                                 "¿Desea registrar a este empleado?", "Si", "No");
 
@@ -441,7 +442,8 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                 support.cardSelection(empManagement.panContainerEmployee, empManagement.panConsultList);
                     
                 // Se cargan los empleados.
-                loadEmployeeTable();
+                clearEmployeetable();
+                //loadEmployeeTable();
                     
                 // Se inicializan las variables.
                 clearVariables();
@@ -518,8 +520,8 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                         // Se muestra la vista del CRUD.
                         support.cardSelection(empManagement.panContainerEmployee, empManagement.panCRUD);
                         
-                        // Se bloquea el botón de 'eliminar'.
-                        empManagement.btnDeleteEmployee.setEnabled(false);
+                        // Se activa el botón de 'eliminar'.
+                        empManagement.btnDeleteEmployee.setEnabled(true);
                         
                         // Se configura el texto del botón.
                         empManagement.btnRegisterModifyEmployee.setText("Modificar");
@@ -563,9 +565,23 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                         // Se configura el texto del botón.
                         empManagement.btnRegisterModifyEmployee.setText("Registrar");
                         
+                        // Variables de apoyo para construir el comboBox de sucursales.
+                        ArrayList<String>   codexBranch = new ArrayList<>(),
+                                            namesBranch = new ArrayList<>();
+                        
+                        // Se obtienen los datos de las sucursales.
+                        loadBranch(codexBranch, namesBranch);
+                        
+                        // Se llena el combobox de las sucursales.
+                        empManagement.cmbBranchEmployee.removeAllItems();
+                        empManagement.cmbBranchEmployee.addItem(" - Seleccionar una Sucursal - ");
+                        
+                        for(int i = 0; i < codexBranch.size(); i++)
+                            empManagement.cmbBranchEmployee.addItem(namesBranch.get(i));
+                        
                         // Se limpian todos los aspectos visuales.
                         empManagement.clearView();
-                        
+                        empManagement.txtIdEmployee.setEnabled(true);
                         // Se limpian las variables
                         clearVariables();
                         
@@ -598,6 +614,7 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                 
                 empManagement.btnChangeBranch.setEnabled(true);
                 empManagement.lblSucursalName.setText(branchUser);
+                empManagement.btnDeleteEmployee.setEnabled(true);
                 
                 break;
                 
@@ -606,6 +623,7 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                 
                 empManagement.btnChangeBranch.setEnabled(false);
                 empManagement.lblSucursalName.setText(branchUser);
+                empManagement.btnDeleteEmployee.setEnabled(false);
                 
                 break;
             
@@ -687,31 +705,32 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
      */
     private String loadBranch(String branchName){
         
-                // Se instancia la clase a utilizar.
+        // Se instancia la clase a utilizar.
         braCRUD = new BranchCRUD();
         
         // Se declara la variable que devuelve el resultado.
         java.sql.ResultSet result;
         
         // Variable de soporte.
-        String codex;
+        String codex="";
         
-        try {
+        try 
+        {
             result = braCRUD.readOnlyBranch(branchName);
-            while(result.next()){
+            while(result.next())
+            {
                 codex = result.getString("codigo");
             }
-                        
             System.out.println("Éxito.");
-                                    
-        } catch (java.sql.SQLException e) {
+            return codex;            
+                    
+        } 
+        catch (java.sql.SQLException e) 
+        {
             
             System.out.println("Error: " + e);
-            
         }
-        
-        return null;
-        
+        return codex;
     }
     
     /**
@@ -757,7 +776,7 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
         
         // Se declaran e inicializan las variables que servirán para buscar empleados.
         String  initSQL     = "SELECT empleado.\"cedula\", empleado.\"nombre\", empleado.\"apellido\", "
-                                    + "sucursal.\"nombre\" as \"nombreSucursal\", \"cargo\" "
+                                    + "sucursal.\"nombre\" as \"nombreSucursal\", empleado.\"cargo\" "
                                     + "FROM \"empleado\", \"sucursal\" WHERE \"sucursal_codigo\" = sucursal.\"codigo\" "
                                     + "AND empleado.\"estado\" = 'A' AND sucursal.\"estado\" = 'A'",
                 finalSQL    = ";",
@@ -808,8 +827,8 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
     }
     
     /**
-     * Método para cargar la información de la empresa.
-     * @return listado con la información de la empresa.
+     * Método para cargar la información del empleado
+     * @return listado con la información del empleado.
      */
     private void loadEmployeeTable(){
                 
@@ -951,6 +970,21 @@ public class ControllerEmployeeManagement implements ActionListener, MouseListen
                 "Los datos del empleados se han actualizado con éxito.");
         
     }
+    
+     /**
+     * Método para actualizar la información de un empleado.
+     * @param id cédula del empleado a actualizar.
+     */
+    private void clearEmployeetable(){
+                        
+        // Se limpia el panel
+        empManagement.clearEmployeeSearch();
+        //se carga actualización
+        loadEmployeeTable();
+        
+    }
+    
+   
     
     /**
      * Método para limpiar las variables.

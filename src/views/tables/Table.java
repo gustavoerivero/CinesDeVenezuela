@@ -1,8 +1,11 @@
 
 package views.tables;
 
+// Se importan las librerías a utilizar.
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableModel;
 
 /**
  *  Materia: Laboratorio I
@@ -295,10 +298,46 @@ public class Table {
             table.getColumnModel().getColumn(4).setResizable(false);
             table.getColumnModel().getColumn(4).setPreferredWidth(32);
         }
+    }
+    
+    /**
+     * Método para construir una JTable con formato de Sucursal.
+     * @param table JTable que se le dará formato.
+     * @param matrix Datos que se van a incorporar a la JTable.
+     */
+    public void buildBranchTable(javax.swing.JTable table, Object[][] matrix){
+        
+        table.setDefaultRenderer(Object.class, new Render());
+               
+        DefaultTableModel branchTableModel = new  DefaultTableModel(
+            matrix,
+            new Object[]{
+                            "Codigo", "Nombre", "Ciudad", 
+                            "Dirección", "Telefono", "Consultar"
+            }
+        )
+        {
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        };
+        
+        table.setModel(branchTableModel);
+        
+        table.setPreferredScrollableViewportSize(table.getPreferredSize());
+             
+        table.setRowHeight(32);
+        
+        if (table.getColumnModel().getColumnCount() > 0) {
+            table.getColumnModel().getColumn(5).setResizable(false);
+            table.getColumnModel().getColumn(5).setPreferredWidth(32);
+            
         }
         
-        /**
-     * MÃ©todo para construir una JTable con formato para la busqueda de clientes.
+    }
+    
+    /**
+     * Método para construir una JTable con formato para la busqueda de clientes.
      * @param table JTable que se le dará formato.
      * @param matrix Datos que se van a incorporar a la JTable.
      */
@@ -332,8 +371,8 @@ public class Table {
 }
         
         
-         /**
-     * MÃ©todo para construir una JTable con formato para la busqueda de usuarios.
+    /**
+     * Método para construir una JTable con formato para la busqueda de usuarios.
      * @param table JTable que se le dará formato.
      * @param matrix Datos que se van a incorporar a la JTable.
      */
@@ -365,8 +404,12 @@ public class Table {
         }
         }
 
-        
-        public void buildCinemaRoomTable(javax.swing.JTable table, Object[][] matrix){
+    /**
+     * Método para construir una JTable con formato para la busqueda de salas de cine.
+     * @param table JTable que se le dará formato.
+     * @param matrix Datos que se van a incorporar a la JTable.
+     */
+            public void buildCinemaRoomTable(javax.swing.JTable table, Object[][] matrix){
         
         table.setDefaultRenderer(Object.class, new Render());
                
@@ -396,6 +439,184 @@ public class Table {
         
     }
     
-    //</editor-fold>
+    /**
+     * Método para construir una JTable con formato para la búsqueda de empresas.
+     * @param table JTable que se le dará formato.
+     * @param matrix Datos que se van a incorporar a la JTable.
+     */
+    public void buildEnterpriseTable(javax.swing.JTable table, Object[][] matrix){
+        
+        table.setDefaultRenderer(Object.class, new Render());
+               
+        DefaultTableModel enterpriseTableModel = new  DefaultTableModel(
+            matrix,
+            new Object[]{
+                "Codigo", "Nombre", "Descripcion", "Correo", "Precio Boleto","Consultar"
+            }
+        )
+        {
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        };
+        
+        table.setModel(enterpriseTableModel);
+        
+        table.setPreferredScrollableViewportSize(table.getPreferredSize());
+             
+        table.setRowHeight(32);
+        
+        if (table.getColumnModel().getColumnCount() > 0) {
+            table.getColumnModel().getColumn(5).setResizable(false);
+            table.getColumnModel().getColumn(5).setPreferredWidth(32);
+        }
+        
+    }
     
+  /**
+     * Método para construir una JTable con formato para la búsqueda de peliculas.
+     * @param table JTable que se le dará formato.
+     * @param matrix Datos que se van a incorporar a la JTable.
+     */
+    public void buildFilmTable(javax.swing.JTable table, Object[][] matrix){
+        
+        table.setDefaultRenderer(Object.class, new Render());
+               
+        DefaultTableModel filmTableModel = new  DefaultTableModel(
+            matrix,
+            new Object[]{
+                "Codigo", "Nombre", "Sinopsis", "Durarion", "Clasificacion", "Fecha de estreno", "Genero","Consultar"
+            }
+        )
+        {
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        };
+        
+        table.setModel(filmTableModel);
+        
+        table.setPreferredScrollableViewportSize(table.getPreferredSize());
+             
+        table.setRowHeight(32);
+        
+        if (table.getColumnModel().getColumnCount() > 0) {
+            table.getColumnModel().getColumn(7).setResizable(false);
+            table.getColumnModel().getColumn(7).setPreferredWidth(32);
+        }
+        
+    }
+   
+    public void buildCandyCRUDTable(javax.swing.JTable table, Object[][] matrix){
+        
+        table.setDefaultRenderer(Object.class, new Render());
+               
+        DefaultTableModel filmTableModel = new  DefaultTableModel(
+            matrix,
+            new Object[]{
+                "Codigo", "Nombre", "Descripción", "Precio", "Consultar"
+            }
+        )
+        {
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        };
+        
+        table.setModel(filmTableModel);
+        
+        table.setPreferredScrollableViewportSize(table.getPreferredSize());
+             
+        table.setRowHeight(32);
+        
+        if (table.getColumnModel().getColumnCount() > 0) {
+            table.getColumnModel().getColumn(4).setResizable(false);
+            table.getColumnModel().getColumn(4).setPreferredWidth(32);
+        }
+        
+    }
+    
+        public void buildInventoryCandyCRUDTable(javax.swing.JTable table, Object[][] matrix){
+        
+        table.setDefaultRenderer(Object.class, new Render());
+               
+        DefaultTableModel filmTableModel = new  DefaultTableModel(
+            matrix,
+            new Object[]{
+                "Código", "Sucursal", "Golosina", "Precio(unitario)","Stock",
+                "Modificar", "Eliminar"
+            }
+        )
+        {
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        };
+        
+        table.setModel(filmTableModel);
+        
+        table.setPreferredScrollableViewportSize(table.getPreferredSize());
+             
+        table.setRowHeight(32);
+        
+        if (table.getColumnModel().getColumnCount() > 0) {
+            table.getColumnModel().getColumn(5).setResizable(false);
+            table.getColumnModel().getColumn(5).setPreferredWidth(40);
+            table.getColumnModel().getColumn(6).setResizable(false);
+            table.getColumnModel().getColumn(6).setPreferredWidth(40);
+        }
+        
+    }
+    
+        
+        
+public void buildFunctionTable(javax.swing.JTable table, Object[][] matrix){
+        
+        table.setDefaultRenderer(Object.class, new Render());
+               
+        DefaultTableModel filmTableModel = new  DefaultTableModel(
+            matrix,
+            new Object[]{
+                "Sucursal", "Película", "Inicio", "Fin","Sala","Fecha",
+                "Modificar", "Eliminar"
+            }
+        )
+        {
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        };
+        
+        table.setModel(filmTableModel);
+        
+        table.setPreferredScrollableViewportSize(table.getPreferredSize());
+             
+        table.setRowHeight(32);
+        
+        if (table.getColumnModel().getColumnCount() > 0) {
+            table.getColumnModel().getColumn(6).setResizable(false);
+            table.getColumnModel().getColumn(6).setPreferredWidth(40);
+            table.getColumnModel().getColumn(7).setResizable(false);
+            table.getColumnModel().getColumn(7).setPreferredWidth(40);
+        }
+        
+    }    //</editor-fold>
+    
+    
+        public static void setCellsAlignment(JTable table, int alignment)
+    {
+        DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
+        rightRenderer.setHorizontalAlignment(alignment);
+
+        TableModel tableModel = table.getModel();
+
+        for (int columnIndex = 0; columnIndex < tableModel.getColumnCount(); columnIndex++)
+        {
+            table.getColumnModel().getColumn(columnIndex).setCellRenderer(rightRenderer);
+            table.getColumnModel().getColumn(columnIndex).setResizable(false);
+            table.getColumnModel().getColumn(columnIndex).setPreferredWidth(32);
+        }
+    }
+
+   
 }

@@ -58,7 +58,6 @@ public class ClientManagement extends javax.swing.JFrame {
         lblTittle = new javax.swing.JLabel();
         sepTittle = new javax.swing.JSeparator();
         lblSucursalName = new javax.swing.JLabel();
-        btnChangeBranch = new javax.swing.JButton();
         panContainerClient = new javax.swing.JPanel();
         panCRUD = new javax.swing.JPanel();
         lblTittle1 = new javax.swing.JLabel();
@@ -185,30 +184,6 @@ public class ClientManagement extends javax.swing.JFrame {
         lblSucursalName.setForeground(new java.awt.Color(75, 0, 145));
         lblSucursalName.setText("Sucursal ");
 
-        btnChangeBranch.setBackground(new java.awt.Color(249, 249, 249));
-        btnChangeBranch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/shopIcon.png"))); // NOI18N
-        btnChangeBranch.setToolTipText("Cambiar Sucursal");
-        btnChangeBranch.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(249, 249, 249), 1, true));
-        btnChangeBranch.setContentAreaFilled(false);
-        btnChangeBranch.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnChangeBranch.setFocusPainted(false);
-        btnChangeBranch.setPreferredSize(new java.awt.Dimension(50, 50));
-        btnChangeBranch.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                btnChangeBranchMouseMoved(evt);
-            }
-        });
-        btnChangeBranch.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnChangeBranchMouseExited(evt);
-            }
-        });
-        btnChangeBranch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnChangeBranchActionPerformed(evt);
-            }
-        });
-
         panContainerClient.setBackground(new java.awt.Color(249, 249, 249));
         panContainerClient.setLayout(new java.awt.CardLayout());
 
@@ -292,7 +267,6 @@ public class ClientManagement extends javax.swing.JFrame {
 
         btnClearClient.setBackground(new java.awt.Color(239, 232, 244));
         btnClearClient.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnClearClient.setForeground(new java.awt.Color(0, 0, 0));
         btnClearClient.setText("Limpiar");
         btnClearClient.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnClearClient.setBorderPainted(false);
@@ -318,7 +292,6 @@ public class ClientManagement extends javax.swing.JFrame {
 
         btnRegisterModifyClient.setBackground(new java.awt.Color(239, 232, 244));
         btnRegisterModifyClient.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnRegisterModifyClient.setForeground(new java.awt.Color(0, 0, 0));
         btnRegisterModifyClient.setText("@Registrar/Actualizar");
         btnRegisterModifyClient.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnRegisterModifyClient.setBorderPainted(false);
@@ -339,7 +312,6 @@ public class ClientManagement extends javax.swing.JFrame {
 
         btnBackClient.setBackground(new java.awt.Color(239, 232, 244));
         btnBackClient.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnBackClient.setForeground(new java.awt.Color(0, 0, 0));
         btnBackClient.setText("Atrás");
         btnBackClient.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnBackClient.setBorderPainted(false);
@@ -360,7 +332,6 @@ public class ClientManagement extends javax.swing.JFrame {
 
         btnDeleteClient.setBackground(new java.awt.Color(239, 232, 244));
         btnDeleteClient.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnDeleteClient.setForeground(new java.awt.Color(0, 0, 0));
         btnDeleteClient.setText("Eliminar");
         btnDeleteClient.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnDeleteClient.setBorderPainted(false);
@@ -643,7 +614,7 @@ public class ClientManagement extends javax.swing.JFrame {
         panClientManagement.setLayout(panClientManagementLayout);
         panClientManagementLayout.setHorizontalGroup(
             panClientManagementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panButtonsTopBar, javax.swing.GroupLayout.DEFAULT_SIZE, 911, Short.MAX_VALUE)
+            .addComponent(panButtonsTopBar, javax.swing.GroupLayout.DEFAULT_SIZE, 919, Short.MAX_VALUE)
             .addComponent(sepTittle)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panClientManagementLayout.createSequentialGroup()
                 .addContainerGap()
@@ -654,9 +625,7 @@ public class ClientManagement extends javax.swing.JFrame {
                         .addComponent(lblTittle, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblSucursalName, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnChangeBranch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)))
+                        .addGap(64, 64, 64)))
                 .addContainerGap())
         );
         panClientManagementLayout.setVerticalGroup(
@@ -664,11 +633,9 @@ public class ClientManagement extends javax.swing.JFrame {
             .addGroup(panClientManagementLayout.createSequentialGroup()
                 .addComponent(panButtonsTopBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panClientManagementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panClientManagementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblTittle, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblSucursalName, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnChangeBranch, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panClientManagementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTittle, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblSucursalName, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(sepTittle, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -707,7 +674,6 @@ public class ClientManagement extends javax.swing.JFrame {
         btnMin.addActionListener(evt);
         
         // Search
-        btnChangeBranch.addActionListener(evt);
         btnSearchClient.addActionListener(evt);
         btnClearSearchClient.addActionListener(evt);
         
@@ -792,11 +758,7 @@ public class ClientManagement extends javax.swing.JFrame {
         btnBackClient.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
         btnBackClient.setForeground(new java.awt.Color(0,0,0));
         btnBackClient.setBackground(new java.awt.Color(239,232,244));
-        
-        btnChangeBranch.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
-        btnChangeBranch.setForeground(new java.awt.Color(0,0,0));
-        btnChangeBranch.setBackground(new java.awt.Color(239,232,244));
-        
+                
         btnClearClient.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
         btnClearClient.setForeground(new java.awt.Color(0,0,0));
         btnClearClient.setBackground(new java.awt.Color(239,232,244));
@@ -894,14 +856,6 @@ public class ClientManagement extends javax.swing.JFrame {
         //</editor-fold>
         setOpacity((float)1.0);
     }//GEN-LAST:event_panButtonsTopBarMouseReleased
-
-    private void btnChangeBranchMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChangeBranchMouseMoved
-        btnChangeBranch.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
-    }//GEN-LAST:event_btnChangeBranchMouseMoved
-
-    private void btnChangeBranchMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChangeBranchMouseExited
-        btnChangeBranch.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
-    }//GEN-LAST:event_btnChangeBranchMouseExited
     //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc=" Search Employee ">
@@ -1002,51 +956,11 @@ public class ClientManagement extends javax.swing.JFrame {
     private void btnClearClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearClientActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnClearClientActionPerformed
-
-    private void btnChangeBranchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeBranchActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnChangeBranchActionPerformed
     //</editor-fold>
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ClientManagement.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ClientManagement.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ClientManagement.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ClientManagement.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ClientManagement().setVisible(true);
-            }
-        });
-    }
-
+ 
     //<editor-fold defaultstate="collapsed" desc=" Declaración de variables ">
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnBackClient;
-    public javax.swing.JButton btnChangeBranch;
     public javax.swing.JButton btnClearClient;
     public javax.swing.JButton btnClearSearchClient;
     public javax.swing.JButton btnDeleteClient;

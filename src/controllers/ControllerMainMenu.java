@@ -6,7 +6,7 @@ import views.*;
 import views.tables.Table;
 
 // Se importan los models que se van a utilizar
-import models.*;
+import models.Invoice;
 import models.database.*;
 
 // Se importan las clases de soporte a utilizar
@@ -31,7 +31,7 @@ import javax.swing.table.DefaultTableModel;
  *          @author Rivero, Gustavo         C.I: 26.772.857
  *          @author Torrealba, Luis         C.I: 26.121.249
  */
-public class ControllerMainMenu implements ActionListener, MouseListener, ItemListener{
+public class ControllerMainMenu implements ActionListener, MouseListener{
     
     //<editor-fold defaultstate="collapsed" desc=" Declaración de variables ">
                 
@@ -49,19 +49,23 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
             private BranchCRUD      braCRUD;
 
         // Controllers
-        private ControllerLogin ctrlLogin;
-        private ControllerClientManagement ctrClientManagement;
-        private ControllerUserManagement ctrUserManagement;
-        private ControllerCinemaRoomManagement CiRoomManagement;
-        
+        private ControllerLogin                 ctrlLogin;
+        private ControllerEmployeeManagement    ctrlEmployeeManagement;
+        private ControllerBranchManagement      ctrlBM;
+        private ControllerCinemaRoomManagement  ctrlCiRoomManagement;
+        private ControllerClientManagement      ctrClientManagement;
+        private ControllerEnterpriseManagement  ctrlEnterpriseManagement;
+        private ControllerFilmManagement        ctrlFilmManagement;
+        private ControllerListReport        ctrlReport;
+        private ControllerCandyManagement ctrCandyManagement;
+        private ControllerCandyInventoryManagement  ctrCandyIManagement;
+        private ControllerFilmManagement contFilmManagement;
         // Views
         private MainPage        mainPage;
         private PopupMessage    popup;
         private SelectOption    select;
         private ChangeBranch    changeBranch;
         private ModifyCandy     modifyCandy;
-        private ConsultList     consulList;
-        private RegisterModify  registerModify;
         
         // Support Class
         private SupportFunctions support;
@@ -104,57 +108,9 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
         // Activamos los eventos por las views.
         mainPage.addEvents(this);
         mainPage.addMouseEvents(this);
-        mainPage.addItemEvents(this);
-                
-    }
-    
-    //<editor-fold defaultstate="collapsed" desc=" Cargar Tabla de EMPLEADO Funcional">
-     /*private void CargarEmpleados()
-    
-      {  
-          ResultSet resu;
-        try {
-            DefaultTableModel TablaEmployee = (DefaultTableModel) consulList.getTblEmployee().getModel();
-            resu = empCRUD.listaEmployee();
-            ResultSetMetaData rMd = resu.getMetaData();
-            int cantcolumnas = rMd.getColumnCount();
-            
-
-            while(resu.next()){
-                Object[] filas = new Object[cantcolumnas];
-                    for (int i = 0; i < cantcolumnas ; i++) 
-                    {
-                        filas[i] = resu.getObject(i+1);
-                    }
-                    TablaEmployee.addRow(filas);
-            }
-        } catch (Exception e) {
-        }
         
-    }*/
-      
-      
-       //</editor-fold>
-         
-         //<editor-fold defaultstate="collapsed" desc=" Cargar Tabla FINAL ">       
-   
-  //Metodo de Cargar Tabla super Comprimido
-   
-/*public ResultSet listaEmployee()
-    {
-   
-    ResultSet resu;
-    String sql = "SELECT * FROM \"Empleadito\""; 
-    ConnectionDB con = new ConnectionDB();
-    con.conectar();
-    resu = con.queryConsultar(sql);
-    con.desconectar();
-    return resu;
-}*/
-
- //</editor-fold>
-    
-    
+    }
+        
     /**
      * Método que determina las acciones a realizar por la aplicación según el 
      * botón presionado.
@@ -205,6 +161,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
         // Menú Lateral -> Reportes
         else if(evt.getSource() == mainPage.btnOptionLateral3){
             support.cardSelection(mainPage.panContent, mainPage.panOption3);
+            support.cardSelection(mainPage.panOption3, mainPage.panDecisionOption3);
             
         }
         
@@ -1421,6 +1378,53 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
         
         //</editor-fold>
         
+        //<editor-fold defaultstate="collapsed" desc=" Botones del MainPage Option 3 ">
+        
+        //<editor-fold defaultstate="collapsed" desc=" Report "> 
+        
+        else if(evt.getSource() == mainPage.btnListClientDecision){
+            // Se instancia y se declara la clase.
+            support.cardSelection(mainPage.panOption3, mainPage.panListClientDecision);
+            //ctrlFilmManagement = new ControllerFilmManagement(rolUser, nameUser, nameBranch);
+             
+        }        
+        //<editor-fold defaultstate="collapsed" desc=" Clientes frecuentes "> 
+        
+        else if(evt.getSource() == mainPage.btnListClientDecision3){
+            // Se instancia y se declara la clase.
+            ctrlReport = new ControllerListReport(rolUser, nameUser, nameBranch,1);
+            //ctrlFilmManagement = new ControllerFilmManagement(rlUser, nameUser, nameBranch);
+             
+        }
+        
+        //</editor-fold>
+        
+        //<editor-fold defaultstate="collapsed" desc=" Gastos de clientes en golosina "> 
+        
+        else if(evt.getSource() == mainPage.btnListClientDecision2){
+            // Se instancia y se declara la clase.
+            ctrlReport = new ControllerListReport(rolUser, nameUser, nameBranch,2);
+            //ctrlFilmManagement = new ControllerFilmManagement(rolUser, nameUser, nameBranch);
+             
+        }
+        
+        //</editor-fold> 
+        
+        //<editor-fold defaultstate="collapsed" desc=" Clientes frecuentes que recibieron pase especial"> 
+        
+        else if (evt.getSource() == mainPage.btnListClientDecision1){
+            // Se instancia y se declara la clase.
+            ctrlReport = new ControllerListReport(rolUser, nameUser, nameBranch,3);
+            //ctrlFilmManagement = new ControllerFilmManagement(rolUser, nameUser, nameBranch);
+          
+        }
+        
+        
+        //</editor-fold>
+        
+        //</editor-fold>   
+        //</editor-fold>
+        
         //<editor-fold defaultstate="collapsed" desc=" Botones del MainPage Option 4 ">
         
         //<editor-fold defaultstate="collapsed" desc=" CRUD Employee "> 
@@ -1430,24 +1434,11 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
         {
             
             // Se instancia y se declara la clase.
-            ControllerEmployeeManagement contEmployeeManagement = 
-                    new ControllerEmployeeManagement(rolUser, nameUser, nameBranch);
+            ctrlEmployeeManagement = new ControllerEmployeeManagement(rolUser, nameUser, nameBranch);
              
         }
-
-         //Añadir Empleado
-        /* else if((evt.getSource() == consulList.btnAdd)&&("Empleado".equals(consulList.lblEntityName.getText())))
-         {
-               registerModify = new RegisterModify();
-               registerModify.lblModifyRegistrer.setText("Registrar Empleado");
-               support.cardSelection(registerModify.panButtonsModifyRegister, registerModify.panButtonRegister);    
-               support.cardSelection(registerModify.panData, registerModify.panDataEmployee); 
-               registerModify.addEvents(this);
-
-        }*/
-         
         //</editor-fold>
-        
+         
         //<editor-fold defaultstate="collapsed" desc=" CRUD User "> 
         
         //Consultar listado ->  User
@@ -1480,86 +1471,99 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
         }*/
          
         //</editor-fold>
-         
+        
         //</editor-fold>
                  
         //<editor-fold defaultstate="collapsed" desc=" Botones del MainPage Option 5 ">
+          
+        //<editor-fold defaultstate="collapsed" desc=" CRUD Branch ">
         
-        //<editor-fold defaultstate="collapsed" desc=" CRUD Branch ">    
-        
+        //
+        else if(evt.getSource() == mainPage.btnBranchDecision){
+            
+            // Se instancia y se declara la clase.
+            ctrlBM  =  new ControllerBranchManagement(rolUser, nameUser, nameBranch);
+            
+        }
+
         //</editor-fold>
-         
+        
         //<editor-fold defaultstate="collapsed" desc=" CRUD CinemaRoom "> 
         
         //Consultar listado ->  Sala
-        else if(evt.getSource() == mainPage.btnCinemaRoomDecision)
-        {
+        else if(evt.getSource() == mainPage.btnCinemaRoomDecision){
             
             // Se instancia y se declara la clase.
-            CiRoomManagement= new ControllerCinemaRoomManagement(rolUser, nameUser, nameBranch);
-             
+            ctrlCiRoomManagement = new ControllerCinemaRoomManagement(rolUser, nameUser, nameBranch);
+            
         }
          
         //</editor-fold>
         
         //<editor-fold defaultstate="collapsed" desc=" CRUD Enterprise ">
 
+         //Consultar listado ->  Empresa
+         else if(evt.getSource() == mainPage.btnEnterpriseDecision){
+             // Se instancia y se declara la clase.
+            ctrlEnterpriseManagement = new ControllerEnterpriseManagement(rolUser, nameUser, nameBranch);
+            
+        }
         
         //</editor-fold>
 
+         //<editor-fold defaultstate="collapsed" desc=" CRUD Inventory Candy ">
+
+         //Consultar listado ->  Empresa
+         else if(evt.getSource() == mainPage.btnCandyInventory){
+             // Se instancia y se declara la clase.
+            ctrCandyIManagement = new ControllerCandyInventoryManagement(rolUser, nameUser, nameBranch);
+            
+        }
+        
         //</editor-fold>
          
+        //</editor-fold>
+       
         //<editor-fold defaultstate="collapsed" desc=" Botones del MainPage Option 6 ">
-        
-        //<editor-fold defaultstate="collapsed" desc=" CRUD Client "> 
+         
+         //<editor-fold defaultstate="collapsed" desc=" CRUD Candy "> 
         
         //Consultar listado ->  Cliente
-        else if(evt.getSource() == mainPage.btnClientDecision)
-        {
+        else if(evt.getSource() == mainPage.btnCandyDecisionCL){
             
             // Se instancia y se declara la clase.
-            ctrClientManagement= new ControllerClientManagement(rolUser, nameUser, nameBranch);
+            ctrCandyManagement = new ControllerCandyManagement(rolUser, nameUser, nameBranch);
              
         }
          
         //</editor-fold>
-
-        //</editor-fold>
-                  
-        //<editor-fold defaultstate="collapsed" desc=" minimizar y salir del consult list ">
-
-         // Minimizar aplicación.
-         else if(evt.getSource() == consulList.btnMin)
-        {
-            consulList.setExtendedState(java.awt.Frame.ICONIFIED);
-            consulList.btnMin.setBackground(new java.awt.Color(249,249,249));
-        } 
         
-        // Salir de la aplicación.
-        else if(evt.getSource() == consulList.btnExit)
-        {
-            consulList.dispose();
-        } 
-        //</editor-fold>
+        //<editor-fold defaultstate="collapsed" desc=" CRUD Client "> 
+        
+        //Consultar listado ->  Cliente
+        else if(evt.getSource() == mainPage.btnClientDecision){
+            
+            // Se instancia y se declara la clase.
+            ctrClientManagement = new ControllerClientManagement(rolUser, nameUser, nameBranch);
+             
+        }
          
-        //<editor-fold defaultstate="collapsed" desc=" minimizar y salir del formulario ">
-
-         // Minimizar aplicación.
-         else if(evt.getSource() == registerModify.btnMin)
-        {
-            registerModify.setExtendedState(java.awt.Frame.ICONIFIED);
-            registerModify.btnMin.setBackground(new java.awt.Color(249,249,249));
-        } 
-        
-        // Salir de la aplicación.
-        else if(evt.getSource() == registerModify.btnExitt)
-        {
-            registerModify.dispose();
-        } 
         //</editor-fold>
-
+        
+        //<editor-fold defaultstate="collapsed" desc=" CRUD Film "> 
+        
+         else if(evt.getSource() == mainPage.btnFilmDecision)
+         {
+             // Se instancia y se declara la clase.
+            contFilmManagement = 
+                    new ControllerFilmManagement(rolUser, nameUser, nameBranch);
+         }
+        
+        //</editor-fold>
+        
+        //</editor-fold>
+        
     }
-    
     
     /**
      * Eventos provocados por el escuchador de Mouse (MouseListener)
@@ -2744,10 +2748,9 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
                  clientData.add(result.getString("cedula"));
                  clientData.add(result.getString("nombre"));
                  clientData.add(result.getString("apellido"));
+                 clientData.add(result.getString("telefono"));
                  clientData.add(result.getString("direccion"));
                  clientData.add(result.getString("correo"));
-                 clientData.add(result.getString("telefono"));
-                 clientData.add(result.getString("tipo"));
             }
             
             System.out.println("Éxito.");
@@ -2898,10 +2901,5 @@ public class ControllerMainMenu implements ActionListener, MouseListener, ItemLi
     }
     
     //</editor-fold>
-
-    @Override
-    public void itemStateChanged(ItemEvent e) {
-        
-    }
     
 }

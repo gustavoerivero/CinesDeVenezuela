@@ -49,6 +49,7 @@ public class ControllerUserManagement implements ActionListener, MouseListener{
     private UserCRUD usCRUD;
     private BranchCRUD braCRUD;
     private CityCRUD citCRUD;
+    private RoleCRUD rCRUD;
     
     // Views
     private UserManagement usManagement;
@@ -463,36 +464,35 @@ public class ControllerUserManagement implements ActionListener, MouseListener{
                         
                         // Se buscan los datos del empleado.
                         loadUser(emailUser);
-                                       
-                        /*// Variables de apoyo para construir el comboBox de sucursales.
-                        ArrayList<String>   codexBranch = new ArrayList<>(),
-                                            namesBranch = new ArrayList<>();
+                                  
+                        // Se activa el botón de 'eliminar'.
+                        usManagement.btnDeleteUser.setEnabled(true);
                         
-                        // Se obtienen los datos de las sucursales.
-                        loadBranch(codexBranch, namesBranch);
-                        
-                        // Se llena el combobox de las sucursales.
-                        usManagement.cmbBranchUse.removeAllItems();
-                        empManagement.cmbBranchEmployee.addItem(" - Seleccionar una Sucursal - ");
-                        
-                        for(int i = 0; i < codexBranch.size(); i++)
-                            empManagement.cmbBranchEmployee.addItem(namesBranch.get(i));*/
-                                                    
-                        // Se muestra la vista del CRUD.
-                        support.cardSelection(usManagement.panContainerUser, usManagement.panCRUD);
-                        
-                        // Se bloquea el botón de 'eliminar'.
-                        usManagement.btnDeleteUser.setEnabled(false);
+                        ArrayList<String>  codexRole = new ArrayList<>(),
+                                           namesRole = new ArrayList<>();
                         
                         // Se configura el texto del botón.
                         usManagement.btnRegisterModifyUser.setText("Modificar");
                         
+                        loadRoles(codexRole,namesRole);
+                        
+                        // Se llena el combobox de las sucursales.
+                        usManagement.cmbRoleUser.removeAllItems();
+                        usManagement.cmbRoleUser.addItem(" - Seleccionar un rol - ");
+                        
+                         for(int i = 0; i < codexRole.size(); i++)
+                            usManagement.cmbRoleUser.addItem(namesRole.get(i));
+                         
+                         // Se muestra la vista del CRUD.
+                        support.cardSelection(usManagement.panContainerUser, usManagement.panCRUD);
+                        
+                        
                         // Se limpian todos los aspectos visuales.
-                        usManagement.clearView();
+                        //usManagement.clearView();
                                                 
                         // Se muestran los datos obtenidos.
                         usManagement.txtEmailUser.setText(email);
-                        usManagement.cmbRoleUser.setSelectedItem(role_id);
+                        usManagement.cmbRoleUser.setSelectedItem(nameRol);
                         usManagement.txtIdUser.setText(employee_id);
                         usManagement.txtPasswordUser.setText(password);
                         
@@ -572,6 +572,74 @@ public class ControllerUserManagement implements ActionListener, MouseListener{
         
     }
     
+      /**
+     * Método para buscar el código de un rol.
+     * @param nameRol Nombre del rol.
+     * @return Devuelve el código del rol.
+     */
+    private String loadRole(String nameRole){
+        
+                // Se instancia la clase a utilizar.
+        rCRUD  = new RoleCRUD();
+        
+        // Se declara la variable que devuelve el resultado.
+        java.sql.ResultSet result;
+        
+        // Variable de soporte.
+        String codex="";
+        
+        try {
+            result = rCRUD.readOnlyRole(nameRole);
+            while(result.next()){
+                codex = result.getString("codigo");
+            }
+                        
+            System.out.println("Éxito.");
+                                    
+        } catch (java.sql.SQLException e) {
+            
+            System.out.println("Error: " + e);
+            
+        }
+        
+        return codex;
+        
+    }
+    
+    //<editor-fold defaultstate="collapsed" desc=" Métodos para cargar el combox de empresa  ">
+    /**
+     * Método para cargar empresa.
+     * @param firstList Primer listado con los codigo de empresa.
+     * @param secondList Segundo listado con los nombres de las empresas.
+     */
+    private void loadRoles(ArrayList<String> firstList, ArrayList<String> secondList){
+        
+        // Se instancia la clase a utilizar.
+        rCRUD = new RoleCRUD();
+        
+        // Se declara la variable que devuelve el resultado.
+        java.sql.ResultSet result;
+        
+        try {
+            result = rCRUD.readRoleCN();
+            while(result.next()){
+                firstList.add(result.getString("codigo"));
+                secondList.add(result.getString("nombre"));
+            }
+                        
+            System.out.println("Éxito.");
+                                    
+        } catch (java.sql.SQLException e) {
+            
+            System.out.println("Error: " + e);
+            
+        }
+        
+    }
+    
+    
+    
+    
     /**
      * Método para cargar todas ciudades.
      * @return Listado de nombres de ciudades.
@@ -588,8 +656,7 @@ public class ControllerUserManagement implements ActionListener, MouseListener{
             result = usCRUD.readUserData(emailUser);
             while(result.next()){
                 email = result.getString("correo");
-                nameEmployee= result.getString("Nombre");
-                lastNameEmployee= result.getString("Apellido");
+                employee_id = result.getString("cedula");
                 nameRol= result.getString("rol");
                 password = result.getString("clave");
             }
@@ -799,6 +866,7 @@ public class ControllerUserManagement implements ActionListener, MouseListener{
                     " . . . ",
                     " . . . ",
                     " . . . ",
+                    " . . . ",
                     btnI
                 });
                 
@@ -819,8 +887,8 @@ public class ControllerUserManagement implements ActionListener, MouseListener{
             }
             
             // No se obtuvo ningún resultado.
-            else
-                popup = new PopupMessage(usManagement, true, 1, "No se encontraron usuarios.");
+            /*else
+                popup = new PopupMessage(usManagement, true, 1, "No se encontraron usuarios.");*/
                             
         } catch (java.sql.SQLException e) {
             
@@ -838,7 +906,7 @@ public class ControllerUserManagement implements ActionListener, MouseListener{
         // Se carga la nueva información del usuario.
         User us = new User(usManagement.txtEmailUser.getText(), 
                                     usManagement.txtIdUser.getText(), 
-                                    usManagement.cmbRoleUser.getSelectedItem().toString(),
+                                    loadRole(usManagement.cmbRoleUser.getSelectedItem().toString()),
                                     usManagement.txtPasswordUser.getText(),  
                                     'A');
         
@@ -860,7 +928,7 @@ public class ControllerUserManagement implements ActionListener, MouseListener{
         // Se carga la nueva información del usuario.
         User us = new User(usManagement.txtEmailUser.getText(), 
                                     usManagement.txtIdUser.getText(), 
-                                    usManagement.cmbRoleUser.getSelectedItem().toString(),
+                                    loadRole(usManagement.cmbRoleUser.getSelectedItem().toString()),
                                     usManagement.txtPasswordUser.getText(),  
                                     'A');
         
