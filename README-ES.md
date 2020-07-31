@@ -13,7 +13,6 @@ Proyecto que corresponde a la asignatura Laboratorio I de Ingeniería en Inform�
 
 ## Características:
 
-* En el primer inicio se importan los datos desde un archivo de texto.
 * La venta de boletos y golosinas es realizada por medio de tickets personalizados.
 * El cliente con más visitas en un mes en una sucursal tiene una promoción de descuento en la compra de boletos.
 * Se gestionan las ventas de tickets tanto para los boletos como para las golosinas.
