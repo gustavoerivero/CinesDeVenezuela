@@ -9,7 +9,7 @@ import javax.swing.*;
 
 /**
  *
- * @author Gustavo
+ * @author Gustavo Rivero
  */
 public class TheaterSeatingChart {
     

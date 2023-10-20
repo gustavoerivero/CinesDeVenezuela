@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author Gustavo
+ * @author Gustavo Rivero
  */
 public class SupportFunctions {
         
